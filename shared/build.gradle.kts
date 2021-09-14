@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
-    kotlin("plugin.serialization")
+    id("kotlinx-serialization")
 }
 
 // Use version for cocoaPod
@@ -30,31 +30,43 @@ kotlin {
     }
     
     sourceSets {
+        all {
+            languageSettings.apply {
+                optIn("kotlin.RequiresOptIn")
+                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+            }
+        }
         val commonMain by getting {
             dependencies {
-                //Network
-                implementation("io.ktor:ktor-client-core:${findProperty("version.ktor")}")
-                implementation("io.ktor:ktor-client-logging:${findProperty("version.ktor")}")
-                //Coroutines
+                // Network
+                implementation(Deps.Ktor.commonCore)
+                implementation(Deps.Ktor.commonJson)
+                implementation(Deps.Ktor.commonLogging)
+                implementation(Deps.Ktor.commonSerialization)
+
+                // Coroutines
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty("version.kotlinx.coroutines")}")
-                //Logger
-                implementation("io.github.aakira:napier:2.1.0")
-                //JSON
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${findProperty("version.kotlinx.serialization")}")
-                //Key-Value storage
+                // Logger
+                api(Deps.kermit)
+                // Key-Value storage
                 implementation("com.russhwolf:multiplatform-settings:0.8")
+                // Injection
+                implementation(Deps.koinCore)
+                // Date-time
+                implementation(Deps.kotlinxDateTime)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                implementation(Deps.koinTest)
             }
         }
         val androidMain by getting {
             dependencies {
-                //Network
-                implementation("io.ktor:ktor-client-okhttp:${findProperty("version.ktor")}")
+                // Network
+                implementation(Deps.Ktor.androidCore)
             }
         }
         val androidTest by getting {
@@ -65,8 +77,8 @@ kotlin {
         }
         val iosMain by getting {
             dependencies {
-                //Network
-                implementation("io.ktor:ktor-client-ios:${findProperty("version.ktor")}")
+                // Network
+                implementation(Deps.Ktor.ios)
             }
         }
         val iosTest by getting
