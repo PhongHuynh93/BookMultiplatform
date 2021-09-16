@@ -13,29 +13,23 @@ version = "1.0"
 kotlin {
     android()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-        else -> ::iosX64
-    }
+    // Revert to just ios() when gradle plugin can properly resolve it
+//    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
+//    if (onPhone) {
+//        iosArm64("ios")
+//    } else {
+//        iosX64("ios")
+//    }
 
-    iosTarget("ios") {}
-
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        ios.deploymentTarget = "14.1"
-        frameworkName = "shared"
-        podfile = project.file("../iosApp/Podfile")
-    }
+//    cocoapods {
+//        summary = "Common library for the BookMultiplatform"
+//        homepage = "https://github.com/PhongHuynh93/BookMultiplatform"
+//        ios.deploymentTarget = "14.1"
+//        frameworkName = "shared"
+//        podfile = project.file("../iosApp/Podfile")
+//    }
     
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.RequiresOptIn")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-            }
-        }
         val commonMain by getting {
             dependencies {
                 // Network
@@ -45,11 +39,11 @@ kotlin {
                 implementation(Deps.Ktor.commonSerialization)
 
                 // Coroutines
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty("version.kotlinx.coroutines")}")
+                implementation(Deps.Coroutines.common)
                 // Logger
                 api(Deps.kermit)
                 // Key-Value storage
-                implementation("com.russhwolf:multiplatform-settings:0.8")
+                implementation(Deps.multiplatformSettings)
                 // Injection
                 implementation(Deps.koinCore)
                 // Date-time
@@ -61,27 +55,38 @@ kotlin {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
                 implementation(Deps.koinTest)
+                implementation(Deps.multiplatformSettingsTest)
             }
         }
         val androidMain by getting {
             dependencies {
                 // Network
                 implementation(Deps.Ktor.androidCore)
+                // Coroutines
+                implementation(Deps.Coroutines.android)
             }
         }
         val androidTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13.2")
+                // Coroutines
+                implementation(Deps.Coroutines.test)
             }
         }
-        val iosMain by getting {
-            dependencies {
-                // Network
-                implementation(Deps.Ktor.ios)
-            }
-        }
-        val iosTest by getting
+//        val iosMain by getting {
+//            dependencies {
+//                // Network
+//                implementation(Deps.Ktor.ios)
+//                // Coroutines
+//                implementation(Deps.Coroutines.common) {
+//                    version {
+//                        strictly(Versions.coroutines)
+//                    }
+//                }
+//            }
+//        }
+//        val iosTest by getting
     }
 }
 
@@ -93,9 +98,4 @@ android {
         targetSdk = (findProperty("android.targetSdk") as String).toInt()
     }
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-
-    lint {
-        isWarningsAsErrors = true
-        isAbortOnError = true
-    }
 }
