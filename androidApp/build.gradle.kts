@@ -1,7 +1,10 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
+    id(Plugins.androidApplication)
+    id(Plugins.serialization)
+    kotlin(Plugins.kotlinAndroid)
+    id(Plugins.kotlinParcel)
+    kotlin(Plugins.kapt)
+    id(Plugins.safeArgs)
 }
 
 android {
@@ -42,26 +45,34 @@ dependencies {
     implementation(project(":shared"))
 
     // UI
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("androidx.core:core-ktx:1.6.0")
+    implementation(Deps.AndroidX.appCompat)
+    implementation(Deps.AndroidX.material)
+    implementation(Deps.AndroidX.recyclerView)
+    implementation(Deps.AndroidX.swipeToRefresh)
+    implementation(Deps.AndroidX.constraint)
+    implementation(Deps.AndroidX.viewPager)
+    implementation(Deps.AndroidX.core)
+    implementation(Deps.AndroidX.fragment)
+    implementation(Deps.AndroidX.activity)
+    implementation(Deps.AndroidX.lifeCycle)
+    implementation(Deps.AndroidX.viewModel)
+    implementation(Deps.AndroidX.lifeCycleCommon)
+    implementation(Deps.AndroidX.navFragment)
+    implementation(Deps.AndroidX.navUI)
 
     // Coroutines
-    val coroutinesVersion = properties["version.kotlinx.coroutines"]
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation(Deps.Coroutines.common)
+    implementation(Deps.Coroutines.android)
 
     // DI
     implementation(Deps.koinCore)
     implementation(Deps.koinAndroid)
 
     // Image load
-    implementation("com.github.bumptech.glide:glide:4.12.0")
-    kapt("com.github.bumptech.glide:compiler:4.12.0")
-
-    // Injection
-    implementation(Deps.koinCore)
-    implementation(Deps.koinAndroid)
+    implementation(Deps.ImageLoader.core)
+    implementation(Deps.ImageLoader.transform)
+    kapt(Deps.ImageLoader.compiler)
+    implementation(Deps.ImageLoader.rcv) {
+        isTransitive = false
+    }
 }
