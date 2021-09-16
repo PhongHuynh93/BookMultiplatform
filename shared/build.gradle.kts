@@ -64,6 +64,8 @@ kotlin {
                 implementation(Deps.Ktor.androidCore)
                 // Coroutines
                 implementation(Deps.Coroutines.android)
+                // ViewModel
+                implementation(Deps.AndroidX.viewModel)
             }
         }
         val androidTest by getting {

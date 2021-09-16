@@ -1,7 +1,6 @@
 package com.wind.book.data.repository.book
 
 import com.wind.book.data.mapping.BookMapper
-import com.wind.book.data.model.dto.BookDto
 import com.wind.book.data.model.dto.BookListDto
 import com.wind.book.data.model.dto.SimpleRestDto
 import com.wind.book.data.util.Constant
@@ -11,27 +10,26 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 
 // Follow the CRUD name create-read-update-delete
-interface BookAPI {
-    suspend fun get(): List<Book>
+interface BestSellerAPI {
+    suspend fun get(listName: String): List<Book>
 }
 
-internal class BookAPIImpl(private val client: HttpClient): BookAPI {
+internal class BestSellerAPIImpl(private val client: HttpClient): BestSellerAPI {
     private val bookMapper = BookMapper()
 
-    override suspend fun get(): List<Book> {
+    override suspend fun get(listName: String): List<Book> {
         return client.get<SimpleRestDto<BookListDto>> {
-            bookPath("/lists/names.json")
+            url {
+                takeFrom(Constant.HOST)
+                path(Constant.BOOK_PATH, "current", "${listName}.json")
+                // FIXME: 16/09/2021 temporary get the first page
+                parameter(Constant.QUERY_OFFSET, 0.toString())
+                parameter(Constant.QUERY_API_KEY, Constant.API_KEY)
+            }
         }.results?.books?.mapNotNull {
             it?.let {
                 bookMapper.apply(it)
             }
         } ?: emptyList()
-    }
-}
-
-private fun HttpRequestBuilder.bookPath(path: String) {
-    url {
-        takeFrom("${Constant.HOST}${Constant.BOOK_PATH}")
-        encodedPath = path
     }
 }

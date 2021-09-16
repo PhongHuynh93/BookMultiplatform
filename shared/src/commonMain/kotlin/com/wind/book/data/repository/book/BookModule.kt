@@ -7,8 +7,8 @@ import com.wind.book.data.repository.book.datasource.RemoteBookDataSourceImpl
 import org.koin.dsl.module
 
 internal val bookModule = module {
-    single<BookAPI> {
-        BookAPIImpl(get())
+    single<BestSellerAPI> {
+        BestSellerAPIImpl(get())
     }
     single<LocalBookDataSource> {
         LocalBookDataSourceImpl()

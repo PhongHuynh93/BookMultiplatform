@@ -48,7 +48,10 @@ private val coreModule = module {
     single<HttpClient> {
         HttpClient {
             install(JsonFeature) {
-                serializer = KotlinxSerializer()
+                serializer = KotlinxSerializer(json = kotlinx.serialization.json.Json {
+                    isLenient = true
+                    ignoreUnknownKeys = true
+                })
             }
             install(Logging) {
                 logger = object : Logger {
