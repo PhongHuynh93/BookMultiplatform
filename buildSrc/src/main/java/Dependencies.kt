@@ -9,7 +9,7 @@ object Versions {
     val buildToolsVersion = "30.0.3"
     val coroutines = "1.5.0-native-mt"
     val kermit = "0.1.9"
-    val koin = "3.0.2"
+    val koin = "3.1.2"
     val ktlint_gradle_plugin = "10.0.0"
     val ktor = "1.6.0"
     val junit = "4.13.2"

@@ -3,6 +3,7 @@ package com.wind.book
 import co.touchlab.kermit.Kermit
 import com.wind.book.data.repository.book.BookAPI
 import com.wind.book.data.repository.book.BookAPIImpl
+import com.wind.book.data.repository.book.bookModule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.datetime.Clock
 import org.koin.core.KoinApplication
@@ -17,15 +18,16 @@ fun initKoin(appModule: Module): KoinApplication {
         modules(
             appModule,
             platformModule,
-            coreModule
+            coreModule,
+            bookModule
         )
     }
 
     // Dummy initialization logic, making use of appModule declarations for demonstration purposes.
     val koin = koinApplication.koin
-    val doOnStartup = koin.get<() -> Unit>() // doOnStartup is a lambda which is implemented in Swift on iOS side
-    doOnStartup.invoke()
-
+//    val doOnStartup = koin.get<() -> Unit>() // doOnStartup is a lambda which is implemented in Swift on iOS side
+//    doOnStartup.invoke()
+//
     val kermit = koin.get<Kermit> { parametersOf(null) }
     val appInfo = koin.get<AppInfo>() // AppInfo is a Kotlin interface with separate Android and iOS implementations
     kermit.v { "App Id ${appInfo.appId}" }
@@ -34,14 +36,12 @@ fun initKoin(appModule: Module): KoinApplication {
 }
 
 private val coreModule = module {
-    single<BookAPI> {
-        BookAPIImpl()
-    }
     single<Clock> {
         Clock.System
     }
 }
 
+// Used in kermit to inject tag
 internal inline fun <reified T> Scope.getWith(vararg params: Any?): T {
     return get(parameters = { parametersOf(*params) })
 }
