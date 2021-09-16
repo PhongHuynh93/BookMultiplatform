@@ -8,12 +8,15 @@ import org.koin.dsl.module
 
 internal val bookModule = module {
     single<BookAPI> {
-        BookAPIImpl()
+        BookAPIImpl(get())
     }
     single<LocalBookDataSource> {
         LocalBookDataSourceImpl()
     }
     single<RemoteBookDataSource> {
         RemoteBookDataSourceImpl(get())
+    }
+    single<BookRepository> {
+        BookRepositoryImpl(get(), get())
     }
 }
