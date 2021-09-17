@@ -5,7 +5,7 @@ import com.wind.book.domain.usecase.book.GetBookListUseCase
 import com.wind.book.model.Book
 import com.wind.book.viewmodel.LoadMoreVM
 
-class HomeViewModel(
+class BookViewModel(
     private val getBookListUseCase: GetBookListUseCase
 ) : LoadMoreVM<Book>() {
 

@@ -12,12 +12,12 @@ import com.wind.book.android.extension.launchAndCollectIn
 import com.wind.book.android.util.viewBinding
 import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.model.Book
-import com.wind.book.viewmodel.home.HomeViewModel
+import com.wind.book.viewmodel.home.BookViewModel
 import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment: Fragment(R.layout.list_view) {
-    private val vm: HomeViewModel by viewModel()
+class BookFragment: Fragment(R.layout.list_view) {
+    private val vm: BookViewModel by viewModel()
     private val binding by viewBinding(ListViewBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
