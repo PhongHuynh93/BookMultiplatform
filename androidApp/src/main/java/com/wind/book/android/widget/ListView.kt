@@ -14,7 +14,7 @@ import com.wind.book.android.extension.fadeIn
 import com.wind.book.android.extension.fadeOut
 import com.wind.book.android.extension.getColorAttr
 import com.wind.book.android.extension.inflater
-import com.wind.book.android.util.LoadState
+import com.wind.book.viewmodel.util.LoadState
 import com.wind.book.log
 
 class ListView @JvmOverloads constructor(

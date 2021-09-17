@@ -1,4 +1,4 @@
-package com.wind.book.android.util
+package com.wind.book.viewmodel.util
 
 sealed class LoadState(
     open val endOfPaginationReached: Boolean,

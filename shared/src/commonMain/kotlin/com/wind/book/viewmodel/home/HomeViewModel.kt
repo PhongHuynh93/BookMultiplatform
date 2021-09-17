@@ -1,30 +1,14 @@
 package com.wind.book.viewmodel.home
 
-import androidx.lifecycle.viewModelScope
 import com.wind.book.domain.usecase.book.GetBookListParam
 import com.wind.book.domain.usecase.book.GetBookListUseCase
-import com.wind.book.share.WhileViewSubscribed
-import com.wind.book.viewmodel.BaseViewModel
-import com.wind.book.viewmodel.toastError
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
+import com.wind.book.model.Book
+import com.wind.book.viewmodel.LoadMoreVM
 
-// TODO: 16/09/2021 handle paging
 class HomeViewModel(
     private val getBookListUseCase: GetBookListUseCase
-) : BaseViewModel() {
-    val bookList = flow {
-        // TODO: 16/09/2021 get list name first, not hard code here
-        getBookListUseCase(GetBookListParam("hardcover-fiction"))
-            .onSuccess {
-                emit(it)
-            }
-            .onFailure {
-                toastError.emit(it)
-            }
-    }.stateIn(
-        scope = viewModelScope,
-        started = WhileViewSubscribed,
-        initialValue = emptyList()
-    )
+) : LoadMoreVM<Book>() {
+    override suspend fun apiCall(currentPage: Int, pageSize: Int, isRefresh: Boolean): Result<List<Book>> {
+        return getBookListUseCase(GetBookListParam(currentPage = currentPage, listName = "hardcover-fiction"))
+    }
 }

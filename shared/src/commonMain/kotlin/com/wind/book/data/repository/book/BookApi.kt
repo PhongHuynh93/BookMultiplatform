@@ -11,19 +11,18 @@ import io.ktor.http.*
 
 // Follow the CRUD name create-read-update-delete
 interface BestSellerAPI {
-    suspend fun get(listName: String): List<Book>
+    suspend fun get(currentPage: Int, listName: String): List<Book>
 }
 
 internal class BestSellerAPIImpl(private val client: HttpClient): BestSellerAPI {
     private val bookMapper = BookMapper()
 
-    override suspend fun get(listName: String): List<Book> {
+    override suspend fun get(currentPage: Int, listName: String): List<Book> {
         return client.get<SimpleRestDto<BookListDto>> {
             url {
                 takeFrom(Constant.HOST)
                 path(Constant.BOOK_PATH, "current", "${listName}.json")
-                // FIXME: 16/09/2021 temporary get the first page
-                parameter(Constant.QUERY_OFFSET, 0.toString())
+                parameter(Constant.QUERY_OFFSET, currentPage.toString())
                 parameter(Constant.QUERY_API_KEY, Constant.API_KEY)
             }
         }.results?.books?.mapNotNull {

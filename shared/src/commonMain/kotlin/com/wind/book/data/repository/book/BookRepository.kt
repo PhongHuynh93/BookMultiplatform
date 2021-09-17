@@ -5,14 +5,14 @@ import com.wind.book.data.repository.book.datasource.RemoteBookDataSource
 import com.wind.book.model.Book
 
 interface BookRepository {
-    suspend fun getBookList(listName: String): List<Book>
+    suspend fun getBookList(currentPage: Int, listName: String): List<Book>
 }
 
 internal class BookRepositoryImpl(
     private val remoteSource: RemoteBookDataSource,
     private val localSource: LocalBookDataSource
 ) : BookRepository {
-    override suspend fun getBookList(listName: String): List<Book> {
-        return remoteSource.getBookList(listName)
+    override suspend fun getBookList(currentPage: Int, listName: String): List<Book> {
+        return remoteSource.getBookList(currentPage, listName)
     }
 }
