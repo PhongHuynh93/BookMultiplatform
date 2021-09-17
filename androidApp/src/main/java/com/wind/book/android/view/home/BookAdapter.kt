@@ -12,7 +12,7 @@ import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Book
 
 class BookAdapter(private val rm: RequestManager, private val callback: Callback) :
-    ListAdapter<Book, BookAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Book>() {
+    ListAdapter<Book, BookViewHolder>(object : DiffUtil.ItemCallback<Book>() {
         override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem.id == newItem.id
         }
@@ -26,32 +26,30 @@ class BookAdapter(private val rm: RequestManager, private val callback: Callback
         stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            BookItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        ).apply {
-            itemView.setOnClickListener { view ->
-                val pos = bindingAdapterPosition
-                if (pos >= 0) {
-                    getItem(pos)?.let {
-                        callback.onClick(view, pos, it)
-                    }
-                }
-            }
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+        return BookViewHolder(
+            BookItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), rm, callback
+        )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
     }
 
-    interface Callback {
+    interface Callback : BookViewHolder.Callback {
         fun onClick(view: View, pos: Int, item: Book)
     }
+}
 
-    inner class ViewHolder(val binding: BookItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Book) {
+class BookViewHolder(private val binding: BookItemBinding, private val rm: RequestManager, val callback: Callback) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(item: Book) {
+        binding.apply {
+            this.rm = this@BookViewHolder.rm
+            book = item
         }
     }
+
+    interface Callback
 }
