@@ -1,7 +1,24 @@
 package com.wind.book.data.model.dto
 
+import com.wind.book.data.util.BookSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
+// Book response dto
+@Serializable
+data class BookResDto(
+    @SerialName("copyright")
+    val copyright: String? = null,
+    @SerialName("last_modified")
+    val lastModified: String? = null,
+    @SerialName("num_results")
+    val numResults: Int? = null,
+    @Serializable(BookSerializer::class)
+    @SerialName("results")
+    val results: BookListDto? = null,
+    @SerialName("status")
+    val status: String? = null
+)
 
 @Serializable
 data class BookListDto(

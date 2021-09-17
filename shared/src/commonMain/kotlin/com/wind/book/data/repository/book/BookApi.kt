@@ -1,8 +1,7 @@
 package com.wind.book.data.repository.book
 
 import com.wind.book.data.mapping.BookMapper
-import com.wind.book.data.model.dto.BookListDto
-import com.wind.book.data.model.dto.SimpleRestDto
+import com.wind.book.data.model.dto.BookResDto
 import com.wind.book.data.util.Constant
 import com.wind.book.model.Book
 import io.ktor.client.*
@@ -18,7 +17,7 @@ internal class BestSellerAPIImpl(private val client: HttpClient): BestSellerAPI 
     private val bookMapper = BookMapper()
 
     override suspend fun get(currentPage: Int, listName: String): List<Book> {
-        return client.get<SimpleRestDto<BookListDto>> {
+        return client.get<BookResDto> {
             url {
                 takeFrom(Constant.HOST)
                 path(Constant.BOOK_PATH, "current", "${listName}.json")

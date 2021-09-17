@@ -41,6 +41,11 @@ fun initKoin(appModule: Module): KoinApplication {
     return koinApplication
 }
 
+val json = kotlinx.serialization.json.Json {
+    isLenient = true
+    ignoreUnknownKeys = true
+}
+
 private val coreModule = module {
     single<Clock> {
         Clock.System
@@ -48,10 +53,7 @@ private val coreModule = module {
     single<HttpClient> {
         HttpClient {
             install(JsonFeature) {
-                serializer = KotlinxSerializer(json = kotlinx.serialization.json.Json {
-                    isLenient = true
-                    ignoreUnknownKeys = true
-                })
+                serializer = KotlinxSerializer(json = json)
             }
             install(Logging) {
                 logger = object : Logger {
