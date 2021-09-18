@@ -1,4 +1,4 @@
-package com.wind.book.android.view.home
+package com.wind.book.android.view.book
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import com.bumptech.glide.Glide
 import com.wind.book.android.R
-import com.wind.book.android.databinding.ListViewBinding
+import com.wind.book.android.databinding.ToolbarListViewBinding
 import com.wind.book.android.extension.handleLoadMore
 import com.wind.book.android.extension.launchAndCollectIn
 import com.wind.book.android.util.viewBinding
@@ -16,12 +16,14 @@ import com.wind.book.viewmodel.home.BookViewModel
 import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class BookFragment: Fragment(R.layout.list_view) {
+class BookFragment : Fragment(R.layout.toolbar_list_view) {
     private val vm: BookViewModel by viewModel()
-    private val binding by viewBinding(ListViewBinding::bind)
+    private val binding by viewBinding(ToolbarListViewBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.setTitle(R.string.title_book)
+
         val list = binding.list
 
         val feedAdapter = BookAdapter(Glide.with(this), object : BookAdapter.Callback {

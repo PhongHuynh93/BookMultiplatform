@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.wind.book.android.view.home.BookFragment"
+        android:name="com.wind.book.android.view.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/list_view" />
+        tools:layout="@layout/home" />
 </navigation>
