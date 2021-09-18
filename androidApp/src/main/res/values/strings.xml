@@ -5,4 +5,5 @@
     <string name="title_book">Book</string>
     <string name="title_movie">Movie</string>
     <string name="title_audio">Audio Book</string>
+    <string name="app_name">Coca</string>
 </resources>
