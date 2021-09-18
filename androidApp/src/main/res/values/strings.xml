@@ -2,4 +2,7 @@
 <resources>
     <string name="no_data">No data</string>
     <string name="retry">Retry</string>
+    <string name="title_book">Book</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_audio">Audio Book</string>
 </resources>

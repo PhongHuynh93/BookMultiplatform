@@ -1,4 +1,4 @@
-package com.wind.book.android.view.home
+package com.wind.book.android.view.book
 
 import android.view.LayoutInflater
 import android.view.View

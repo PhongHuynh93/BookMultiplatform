@@ -1,6 +1,5 @@
 package com.wind.book.viewmodel
 
-import androidx.lifecycle.viewModelScope
 import com.wind.book.log
 import com.wind.book.viewmodel.util.Constant
 import com.wind.book.viewmodel.util.LoadState
@@ -43,7 +42,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
     init {
         // Because we have a case when we done loading data, but still support add/remove data realtime
         // trigger this method to update the empty state of UI
-        viewModelScope.launch {
+        clientScope.launch {
             _data.collectLatest {
                 updateDataState(it.isEmpty())
             }
@@ -122,7 +121,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
      * because need to wait the list finish calculating the diffutil
      */
     fun scrollToTop() {
-        viewModelScope.launch {
+        clientScope.launch {
             delay(300)
             _scrollToTop.emit(Unit)
         }
@@ -157,7 +156,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
         canNotLoad = true
         _loadState.value = LoadState.Error(exception, isEmpty)
         _refreshState.value = false
-        viewModelScope.launch {
+        clientScope.launch {
             toastError.emit(exception)
         }
     }
