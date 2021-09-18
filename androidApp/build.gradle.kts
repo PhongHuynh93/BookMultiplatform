@@ -8,11 +8,12 @@ plugins {
 }
 
 android {
-    compileSdk = (findProperty("android.compileSdk") as String).toInt()
+    compileSdk = Configs.compileSdk
+
     defaultConfig {
-        applicationId = "com.wind.book.android"
-        minSdk = (findProperty("android.minSdk") as String).toInt()
-        targetSdk = (findProperty("android.targetSdk") as String).toInt()
+        applicationId = Configs.androidApplicationId
+        minSdk = Configs.minSdk
+        targetSdk = Configs.targetSdk
         versionCode = 1
         versionName = "1.0"
     }

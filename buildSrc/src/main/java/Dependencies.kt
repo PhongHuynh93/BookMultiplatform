@@ -137,6 +137,14 @@ object Deps {
     }
 }
 
+object Configs {
+    const val minSdk = 23
+    const val compileSdk = 31
+    const val targetSdk = 31
+
+    const val androidApplicationId = "com.wind.book.android"
+}
+
 object Plugins {
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -14,20 +12,20 @@ kotlin {
     android()
 
     // Revert to just ios() when gradle plugin can properly resolve it
-//    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
-//    if (onPhone) {
-//        iosArm64("ios")
-//    } else {
-//        iosX64("ios")
-//    }
+    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
+    if (onPhone) {
+        iosArm64("ios")
+    } else {
+        iosX64("ios")
+    }
 
-//    cocoapods {
-//        summary = "Common library for the BookMultiplatform"
-//        homepage = "https://github.com/PhongHuynh93/BookMultiplatform"
-//        ios.deploymentTarget = "14.1"
-//        frameworkName = "shared"
-//        podfile = project.file("../iosApp/Podfile")
-//    }
+    cocoapods {
+        summary = "Common library for the BookMultiplatform"
+        homepage = "https://github.com/PhongHuynh93/BookMultiplatform"
+        ios.deploymentTarget = "14.1"
+        frameworkName = "shared"
+        podfile = project.file("../iosApp/Podfile")
+    }
     
     sourceSets {
         val commonMain by getting {
@@ -76,28 +74,28 @@ kotlin {
                 implementation(Deps.Coroutines.test)
             }
         }
-//        val iosMain by getting {
-//            dependencies {
-//                // Network
-//                implementation(Deps.Ktor.ios)
-//                // Coroutines
-//                implementation(Deps.Coroutines.common) {
-//                    version {
-//                        strictly(Versions.coroutines)
-//                    }
-//                }
-//            }
-//        }
-//        val iosTest by getting
+        val iosMain by getting {
+            dependencies {
+                // Network
+                implementation(Deps.Ktor.ios)
+                // Coroutines
+                implementation(Deps.Coroutines.common) {
+                    version {
+                        strictly(Versions.coroutines)
+                    }
+                }
+            }
+        }
+        val iosTest by getting
     }
 }
 
 android {
-    compileSdk = (findProperty("android.compileSdk") as String).toInt()
+    compileSdk = Configs.compileSdk
 
     defaultConfig {
-        minSdk = (findProperty("android.minSdk") as String).toInt()
-        targetSdk = (findProperty("android.targetSdk") as String).toInt()
+        minSdk = Configs.minSdk
+        targetSdk = Configs.targetSdk
     }
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 }
