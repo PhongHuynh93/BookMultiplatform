@@ -65,11 +65,11 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
             } else {
                 onLoading(cachedData.isEmpty())
             }
-            log.e { "start load more $currentPage isRefresh $isRefresh" }
+            log.v { "start load more $currentPage isRefresh $isRefresh" }
             apiCall(currentPage, pageSize, isRefresh)
                 .onSuccess { list ->
                     ensureActive()
-                    log.e { "return data current page $currentPage isRefresh $isRefresh data ${list.size}" }
+                    log.v { "return data current page $currentPage isRefresh $isRefresh data ${list.size}" }
 
                     val cachedData = if (isRefresh) {
                         scrollToTop()
@@ -83,8 +83,8 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
                         cachedData.contains(it)
                     }
                     cachedData.addAll(notDuplicatedData)
-                    log.e { "notDuplicatedData current page $currentPage isRefresh $isRefresh notDuplicatedData ${notDuplicatedData.size}" }
-                    log.e { "cachedComment current page $currentPage isRefresh $isRefresh cachedData ${cachedData.size}" }
+                    log.v { "notDuplicatedData current page $currentPage isRefresh $isRefresh notDuplicatedData ${notDuplicatedData.size}" }
+                    log.v { "cachedComment current page $currentPage isRefresh $isRefresh cachedData ${cachedData.size}" }
                     _data.value = cachedData
                     // increase the size to get the next page
                     currentPage += pageSize
@@ -93,7 +93,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
 
                     // auto load more if the data size < VISIBLE_THRESHOLD and we are not at the end of page
                     if (!endOfPage && cachedData.size < Constant.VISIBLE_THRESHOLD) {
-                        log.e { "Auto load more because the data size is less than VISIBLE_THRESHOLD" }
+                        log.v { "Auto load more because the data size is less than VISIBLE_THRESHOLD" }
                         loadMore()
                     }
                 }
@@ -105,12 +105,14 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
     }
 
     fun retry() {
+        log.v { "retry" }
         onRetry()
         loadMore()
     }
 
     fun refresh() {
         // cancel all the previous APIs
+        log.v { "Refresh" }
         loadAPIScope.coroutineContext.cancelChildren()
         onRefresh()
         loadMore(isRefresh = true)
@@ -121,6 +123,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
      * because need to wait the list finish calculating the diffutil
      */
     fun scrollToTop() {
+        log.v { "scrollToTop" }
         clientScope.launch {
             delay(300)
             _scrollToTop.emit(Unit)
@@ -134,13 +137,13 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
     }
 
     private fun onLoading(isEmpty: Boolean) {
-        log.e { "onLoading isEmpty $isEmpty" }
+        log.v { "onLoading isEmpty $isEmpty" }
         _loadState.value = LoadState.Loading(isEmpty)
         canNotLoad = true
     }
 
     private fun onSuccess(isEmpty: Boolean, endOfPage: Boolean) {
-        log.e { "onSuccessxxx isEmpty $isEmpty endOfPage $endOfPage" }
+        log.v { "onSuccessxxx isEmpty $isEmpty endOfPage $endOfPage" }
         if (endOfPage) {
             canNotLoad = true
             _loadState.value = LoadState.NotLoading.Complete(isEmpty)
@@ -152,7 +155,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
     }
 
     private fun onError(exception: Throwable, isEmpty: Boolean) {
-        log.e { "onError isEmpty $isEmpty ${exception.stackTraceToString()}" }
+        log.v { "onError isEmpty $isEmpty ${exception.stackTraceToString()}" }
         canNotLoad = true
         _loadState.value = LoadState.Error(exception, isEmpty)
         _refreshState.value = false
@@ -162,13 +165,13 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
     }
 
     private fun onRefresh() {
-        log.e { "onRefresh" }
+        log.v { "onRefresh" }
         canNotLoad = false
         _refreshState.value = true
     }
 
     private fun onRetry() {
-        log.e { "onRetry" }
+        log.v { "onRetry" }
         canNotLoad = false
     }
 
@@ -177,7 +180,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
      */
     protected fun updateDataState(isEmpty: Boolean) {
         val loadState = getLoadState()
-        log.e { "updateStateIfCompleted previous state $loadState" }
+        log.v { "updateStateIfCompleted previous state $loadState" }
         when (loadState) {
             is LoadState.Error -> LoadState.Error(loadState.error, isEmpty)
             is LoadState.Loading -> LoadState.Loading(isEmpty)
@@ -190,7 +193,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
             }
             null -> null
         }?.let {
-            log.e { "updateStateIfCompleted current state $it" }
+            log.v { "updateStateIfCompleted current state $it" }
             _loadState.value = it
         }
     }

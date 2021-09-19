@@ -38,9 +38,6 @@ fun initKoin(appModule: Module): KoinApplication {
     }
 
     val koin = koinApplication.koin
-    val doOnStartup = koin.get<() -> Unit>() // doOnStartup is a lambda which is implemented in Swift on iOS side
-    doOnStartup.invoke()
-
     log = koin.get<Kermit> { parametersOf(null) }
     val appInfo = koin.get<AppInfo>() // AppInfo is a Kotlin interface with separate Android and iOS implementations
     log.v { "App Id ${appInfo.appId}" }
