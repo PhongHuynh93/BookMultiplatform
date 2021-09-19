@@ -1,15 +1,10 @@
 object Versions {
-    const val min_sdk = 21
-    const val target_sdk = 30
-    const val compile_sdk = 30
-
     const val kotlin = "1.5.21"
     const val gradlePlugin = "4.2.0"
 
     const val coroutines = "1.5.0-native-mt"
     const val kermit = "0.1.9"
     const val koin = "3.1.2"
-    const val ktlint_gradle_plugin = "10.0.0"
     const val ktor = "1.6.0"
     const val junit = "4.13.2"
     const val material = "1.3.0"
