@@ -11,20 +11,19 @@ import shared
 
 final class BookObservable: ObservableObject {
     let bookVM: BookViewModel
-    private var closeable: Ktor_ioCloseable!
 //    @Published private(set) var data: [Book]
     
     init(viewModel: BookViewModel) {
-        KoinKt.log.e(withMessage: {"BookObservable init viewmodel "})
-        closeable = viewModel.observe(viewModel.data, onChange: { data in
-            KoinKt.log.e(withMessage: {"BookObservableVM \(String(describing: data)) "})
+        KoinKt.log.e(withMessage: {"BookObservable init viewmodel"})
+        viewModel.observe(viewModel.data, onChange: { data in
+//            KoinKt.log.e(withMessage: {"BookObservableVM \(String(describing: data)) "})
             // self.data = $0
         })
         self.bookVM = viewModel
     }
     
     deinit {
+        KoinKt.log.e(withMessage: {"BookObservable deinit"})
         bookVM.onCleared()
-        closeable.close()
     }
 }

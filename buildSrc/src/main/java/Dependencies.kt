@@ -1,11 +1,11 @@
 object Versions {
     const val kotlin = "1.5.21"
-    const val gradlePlugin = "4.2.0"
+    const val gradlePlugin = "7.0.2"
 
-    const val coroutines = "1.5.0-native-mt"
+    const val coroutines = "1.5.2-native-mt"
     const val kermit = "0.1.9"
     const val koin = "3.1.2"
-    const val ktor = "1.6.0"
+    const val ktor = "1.6.3"
     const val junit = "4.13.2"
     const val material = "1.3.0"
     const val multiplatformSettings = "0.7.7"

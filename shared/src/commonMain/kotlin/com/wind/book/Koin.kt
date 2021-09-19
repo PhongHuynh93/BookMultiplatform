@@ -38,9 +38,9 @@ fun initKoin(appModule: Module): KoinApplication {
     }
 
     val koin = koinApplication.koin
-//    val doOnStartup = koin.get<() -> Unit>() // doOnStartup is a lambda which is implemented in Swift on iOS side
-//    doOnStartup.invoke()
-//
+    val doOnStartup = koin.get<() -> Unit>() // doOnStartup is a lambda which is implemented in Swift on iOS side
+    doOnStartup.invoke()
+
     log = koin.get<Kermit> { parametersOf(null) }
     val appInfo = koin.get<AppInfo>() // AppInfo is a Kotlin interface with separate Android and iOS implementations
     log.v { "App Id ${appInfo.appId}" }
@@ -58,6 +58,7 @@ private val coreModule = module {
         Clock.System
     }
     single<HttpClient> {
+        log.v("Init core") { "init http client" }
         HttpClient {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(json = json)
