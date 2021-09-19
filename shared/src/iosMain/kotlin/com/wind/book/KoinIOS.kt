@@ -26,7 +26,7 @@ fun initKoinIos(
 )
 
 actual val platformModule = module {
-    val baseKermit = Kermit(NSLogLogger()).withTag("KampKit")
+    val baseKermit = Kermit(NSLogLogger()).withTag("Coca")
     factory { (tag: String?) -> if (tag != null) baseKermit.withTag(tag) else baseKermit }
 }
 
