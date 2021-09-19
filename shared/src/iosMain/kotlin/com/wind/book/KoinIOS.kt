@@ -4,6 +4,7 @@ import co.touchlab.kermit.Kermit
 import co.touchlab.kermit.NSLogLogger
 import com.russhwolf.settings.AppleSettings
 import com.russhwolf.settings.Settings
+import com.wind.book.viewmodel.BaseViewModel
 import kotlinx.cinterop.ObjCClass
 import kotlinx.cinterop.getOriginalKotlinClass
 import org.koin.core.Koin
@@ -11,6 +12,9 @@ import org.koin.core.KoinApplication
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.Qualifier
 import org.koin.dsl.module
+import org.koin.core.definition.Definition
+import org.koin.core.instance.InstanceFactory
+import org.koin.core.module.Module
 import platform.Foundation.NSUserDefaults
 
 fun initKoinIos(
@@ -44,3 +48,17 @@ fun Koin.get(objCClass: ObjCClass, qualifier: Qualifier?): Any {
     val kClazz = getOriginalKotlinClass(objCClass)!!
     return get(kClazz, qualifier, null)
 }
+
+fun <T> Koin.getDependency(objCClass: ObjCClass): T? = getOriginalKotlinClass(objCClass)?.let {
+    getDependency(it)
+}
+
+actual inline fun <reified T : BaseViewModel> Module.viewModelDefinition(
+    qualifier: Qualifier?,
+    createdAtStart: Boolean,
+    noinline definition: Definition<T>
+): Pair<Module, InstanceFactory<T>> = single(
+    qualifier = qualifier,
+    createdAtStart = createdAtStart,
+    definition = definition
+)

@@ -7,10 +7,19 @@
 //
 
 import SwiftUI
+import shared
 
 struct BookView: View {
+    @StateObject var observable: BookObservable = koin.get()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+//            List() { item in
+//
+//            }
+            Text("Text get books")
+            .navigationTitle("Book")
+        }
     }
 }
 

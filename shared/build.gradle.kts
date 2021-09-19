@@ -64,6 +64,7 @@ kotlin {
                 implementation(Deps.Coroutines.android)
                 // ViewModel
                 implementation(Deps.AndroidX.viewModel)
+                implementation(Deps.koinAndroid)
             }
         }
         val androidTest by getting {
