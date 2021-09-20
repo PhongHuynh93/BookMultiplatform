@@ -9,5 +9,19 @@
         android:id="@+id/homeFragment"
         android:name="com.wind.book.android.view.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/home" />
+        tools:layout="@layout/home">
+        <action
+            android:id="@+id/action_homeFragment_to_IABFragment"
+            app:destination="@id/IABFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/IABFragment"
+        android:name="com.wind.book.android.view.iab.IABFragment"
+        android:label="IABFragment"
+        tools:layout="@layout/iab" >
+        <argument
+            android:name="iabNav"
+            app:argType="com.wind.book.viewmodel.model.IABNav" />
+    </fragment>
 </navigation>

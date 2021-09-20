@@ -3,18 +3,22 @@ package com.wind.book.android.view.book
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.bumptech.glide.Glide
 import com.wind.book.android.R
 import com.wind.book.android.databinding.ToolbarListViewBinding
 import com.wind.book.android.extension.handleLoadMore
 import com.wind.book.android.extension.launchAndCollectIn
+import com.wind.book.android.extension.safeNavigate
 import com.wind.book.android.util.viewBinding
 import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.model.Book
 import com.wind.book.viewmodel.home.BookViewModel
 import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.wind.book.android.view.home.HomeFragmentDirections
+import com.wind.book.viewmodel.model.IABNav
 
 class BookFragment : Fragment(R.layout.toolbar_list_view) {
     private val vm: BookViewModel by viewModel()
@@ -27,8 +31,15 @@ class BookFragment : Fragment(R.layout.toolbar_list_view) {
         val list = binding.list
 
         val feedAdapter = BookAdapter(Glide.with(this), object : BookAdapter.Callback {
-            override fun onClick(view: View, pos: Int, item: Book) {
-                // TODO: 17/09/2021 handle on click book
+            override fun onClickBuyBtn(book: Book) {
+                findNavController().safeNavigate(
+                    HomeFragmentDirections.actionHomeFragmentToIABFragment(
+                        IABNav(
+                            title = book.title,
+                            url = book.amazonLink
+                        )
+                    )
+                )
             }
         })
         val footerLoadingAdapter = LoadingAdapter(object : LoadingAdapter.Callback {
@@ -38,7 +49,10 @@ class BookFragment : Fragment(R.layout.toolbar_list_view) {
         })
 
         val concatAdapter =
-            ConcatAdapter(ConcatAdapter.Config.Builder().setIsolateViewTypes(false).build(), feedAdapter)
+            ConcatAdapter(
+                ConcatAdapter.Config.Builder().setIsolateViewTypes(false).build(),
+                feedAdapter
+            )
         binding.list.binding.apply {
             rcv.apply {
                 adapter = concatAdapter

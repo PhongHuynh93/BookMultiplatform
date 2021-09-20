@@ -1,6 +1,7 @@
 package com.wind.book.android.extension
 
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import androidx.annotation.AttrRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.use
+import androidx.fragment.app.FragmentActivity
 import com.wind.book.android.R
 
 fun Context.dp() = resources.displayMetrics.density
@@ -49,4 +51,12 @@ fun Context.screenWidth() = resources.displayMetrics.widthPixels
 
 fun Context.getDrawableEx(drawableId: Int): Drawable {
     return ContextCompat.getDrawable(this, drawableId)!!
+}
+
+fun Context.unWrapContext(): FragmentActivity {
+    var context: Context? = this
+    while (context !is FragmentActivity && context is ContextWrapper) {
+        context = context.baseContext
+    }
+    return context as FragmentActivity
 }

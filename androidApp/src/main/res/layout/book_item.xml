@@ -14,11 +14,11 @@
             type="com.wind.book.model.Book" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/space_pretty_small"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/space_pretty_small">
 
         <com.wind.book.android.widget.AspectRatioImageView
             android:id="@+id/thumb"
@@ -26,23 +26,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_normal"
             android:scaleType="centerCrop"
-            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
             app:ari_aspectRatio="3:2"
             app:rm="@{rm}"
+            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
             app:url="@{book.thumb.url}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_normal"
-            android:layout_weight="1"
+            android:layout_toEndOf="@+id/thumb"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@{book.title}"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 tools:text="@tools:sample/lorem" />
@@ -63,12 +65,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_small"
                 android:ellipsize="end"
-                android:maxLines="4"
                 android:fontFamily="sans-serif-light"
+                android:maxLines="3"
                 android:text="@{book.description}"
                 android:textAppearance="?attr/textAppearanceBody1"
                 tools:text="@tools:sample/lorem/random" />
         </LinearLayout>
-    </LinearLayout>
+
+        <Button
+            android:id="@+id/buyBtn"
+            style="?attr/materialButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/thumb"
+            android:layout_marginStart="@dimen/space_normal"
+            android:layout_toEndOf="@+id/thumb"
+            android:text="@string/buy" />
+    </RelativeLayout>
 
 </layout>

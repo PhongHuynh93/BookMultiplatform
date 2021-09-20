@@ -15,6 +15,7 @@ object Versions {
     const val serialization = "1.2.1"
     const val kotlinxDateTime = "0.1.1"
     const val turbine = "0.5.2"
+    const val parcelable = "0.1.4"
 
     object AndroidX {
         const val supportLibrary: String = "1.2.0"
@@ -57,6 +58,7 @@ object Deps {
     const val stately = "co.touchlab:stately-common:${Versions.stately}"
     const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
     const val turbine = "app.cash.turbine:turbine:${Versions.turbine}"
+    const val parcelable = "com.arkivanov.essenty:parcelable:${Versions.parcelable}"
 
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.supportLibrary}"
