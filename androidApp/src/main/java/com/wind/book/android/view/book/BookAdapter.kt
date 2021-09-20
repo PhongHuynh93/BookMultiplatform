@@ -1,7 +1,6 @@
 package com.wind.book.android.view.book
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -37,19 +36,31 @@ class BookAdapter(private val rm: RequestManager, private val callback: Callback
         holder.bind(item)
     }
 
-    interface Callback : BookViewHolder.Callback {
-        fun onClick(view: View, pos: Int, item: Book)
-    }
+    interface Callback : BookViewHolder.Callback
 }
 
 class BookViewHolder(private val binding: BookItemBinding, private val rm: RequestManager, val callback: Callback) :
     RecyclerView.ViewHolder(binding.root) {
+    private lateinit var book: Book
+
+    init {
+        binding.buyBtn.setOnClickListener {
+            val pos = bindingAdapterPosition
+            if (pos >= 0) {
+                callback.onClickBuyBtn(book)
+            }
+        }
+    }
+
     fun bind(item: Book) {
+        this.book = item
         binding.apply {
             this.rm = this@BookViewHolder.rm
             book = item
         }
     }
 
-    interface Callback
+    interface Callback {
+        fun onClickBuyBtn(book: Book)
+    }
 }

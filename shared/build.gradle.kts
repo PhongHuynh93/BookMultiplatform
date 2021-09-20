@@ -3,6 +3,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("kotlinx-serialization")
+    id("kotlin-parcelize")
 }
 
 // Use version for cocoaPod
@@ -11,13 +12,14 @@ version = "1.0"
 kotlin {
     android()
 
+    // Temporary disable ios to fix red light in IDE
     // Revert to just ios() when gradle plugin can properly resolve it
-    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
-    if (onPhone) {
-        iosArm64("ios")
-    } else {
-        iosX64("ios")
-    }
+//    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
+//    if (onPhone) {
+//        iosArm64("ios")
+//    } else {
+//        iosX64("ios")
+//    }
 
     cocoapods {
         summary = "Common library for the BookMultiplatform"
@@ -46,6 +48,8 @@ kotlin {
                 implementation(Deps.koinCore)
                 // Date-time
                 implementation(Deps.kotlinxDateTime)
+                // Parcelable
+                implementation(Deps.parcelable)
             }
         }
         val commonTest by getting {
@@ -75,19 +79,20 @@ kotlin {
                 implementation(Deps.Coroutines.test)
             }
         }
-        val iosMain by getting {
-            dependencies {
-                // Network
-                implementation(Deps.Ktor.ios)
-                // Coroutines
-                implementation(Deps.Coroutines.common) {
-                    version {
-                        strictly(Versions.coroutines)
-                    }
-                }
-            }
-        }
-        val iosTest by getting
+        // Temporary disable ios to fix red light in IDE
+//        val iosMain by getting {
+//            dependencies {
+//                // Network
+//                implementation(Deps.Ktor.ios)
+//                // Coroutines
+//                implementation(Deps.Coroutines.common) {
+//                    version {
+//                        strictly(Versions.coroutines)
+//                    }
+//                }
+//            }
+//        }
+//        val iosTest by getting
     }
 }
 
