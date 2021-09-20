@@ -3,6 +3,8 @@ package com.wind.book
 import co.touchlab.kermit.Kermit
 import com.wind.book.data.repository.book.bookModule
 import com.wind.book.domain.domainModule
+import com.wind.book.viewmodel.BaseViewModel
+import com.wind.book.viewmodel.viewmodelModule
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -16,6 +18,10 @@ import org.koin.core.module.Module
 import org.koin.core.parameter.parametersOf
 import org.koin.core.scope.Scope
 import org.koin.dsl.module
+import org.koin.core.definition.Definition
+import org.koin.core.instance.InstanceFactory
+import org.koin.core.qualifier.Qualifier
+import kotlin.reflect.KClass
 
 lateinit var koin: Koin
 lateinit var log: Kermit
@@ -26,14 +32,12 @@ fun initKoin(appModule: Module): KoinApplication {
             platformModule,
             coreModule,
             domainModule,
+            viewmodelModule,
             bookModule
         )
     }
 
     val koin = koinApplication.koin
-//    val doOnStartup = koin.get<() -> Unit>() // doOnStartup is a lambda which is implemented in Swift on iOS side
-//    doOnStartup.invoke()
-//
     log = koin.get<Kermit> { parametersOf(null) }
     val appInfo = koin.get<AppInfo>() // AppInfo is a Kotlin interface with separate Android and iOS implementations
     log.v { "App Id ${appInfo.appId}" }
@@ -51,6 +55,7 @@ private val coreModule = module {
         Clock.System
     }
     single<HttpClient> {
+        log.v("Init core") { "init http client" }
         HttpClient {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(json = json)
@@ -79,3 +84,14 @@ internal inline fun <reified T> Scope.getWith(vararg params: Any?): T {
 }
 
 expect val platformModule: Module
+
+expect inline fun <reified T : BaseViewModel> Module.viewModelDefinition(
+    qualifier: Qualifier? = null,
+    createdAtStart: Boolean = false,
+    noinline definition: Definition<T>
+): Pair<Module, InstanceFactory<T>>
+
+@Suppress("UNCHECKED_CAST")
+fun <T> Koin.getDependency(clazz: KClass<*>): T {
+    return get(clazz, null) { parametersOf(clazz.simpleName) } as T
+}

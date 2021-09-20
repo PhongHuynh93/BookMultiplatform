@@ -5,11 +5,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.wind.book.AppInfo
 import com.wind.book.initKoin
-import com.wind.book.viewmodel.home.BookViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-class App: Application() {
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
         initKoin(
@@ -19,7 +17,6 @@ class App: Application() {
                     get<Context>().getSharedPreferences("BOOK_SETTINGS", MODE_PRIVATE)
                 }
                 single<AppInfo> { AndroidAppInfo }
-                viewModel { BookViewModel(get()) }
             },
         )
     }
