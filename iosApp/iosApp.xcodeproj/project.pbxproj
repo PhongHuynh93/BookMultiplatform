@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013FC26F70BD70016F5E6 /* BookView.swift */; };
 		71A013FF26F70C910016F5E6 /* AudioBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013FE26F70C910016F5E6 /* AudioBookView.swift */; };
 		71A0140626F72F860016F5E6 /* BookObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A0140526F72F860016F5E6 /* BookObservable.swift */; };
+		71FA47B126FA40E300F174F3 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B026FA40E300F174F3 /* Constant.swift */; };
+		71FA47B426FA439200F174F3 /* MyVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B226FA439200F174F3 /* MyVStack.swift */; };
+		71FA47B526FA439200F174F3 /* MyHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B326FA439200F174F3 /* MyHStack.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		D66927678FE0BED1F2F5ACF3 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33249BE0BCBCEAF6662DF57D /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -28,6 +31,9 @@
 		71A013FC26F70BD70016F5E6 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		71A013FE26F70C910016F5E6 /* AudioBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBookView.swift; sourceTree = "<group>"; };
 		71A0140526F72F860016F5E6 /* BookObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookObservable.swift; sourceTree = "<group>"; };
+		71FA47B026FA40E300F174F3 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		71FA47B226FA439200F174F3 /* MyVStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyVStack.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/MyVStack.swift; sourceTree = "<group>"; };
+		71FA47B326FA439200F174F3 /* MyHStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyHStack.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/MyHStack.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,6 +120,16 @@
 			path = observable;
 			sourceTree = "<group>";
 		};
+		71FA47AF26FA40CE00F174F3 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				71FA47B326FA439200F174F3 /* MyHStack.swift */,
+				71FA47B226FA439200F174F3 /* MyVStack.swift */,
+				71FA47B026FA40E300F174F3 /* Constant.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +151,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				71FA47AF26FA40CE00F174F3 /* util */,
 				71A0140026F710B10016F5E6 /* observable */,
 				71A013F726F70BB30016F5E6 /* view */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -259,12 +276,15 @@
 			files = (
 				71A013F926F70BC70016F5E6 /* MovieView.swift in Sources */,
 				71514E2826F6ED72009B5C67 /* Koin.swift in Sources */,
+				71FA47B126FA40E300F174F3 /* Constant.swift in Sources */,
 				71A013F326F70A590016F5E6 /* HomeView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				71FA47B526FA439200F174F3 /* MyHStack.swift in Sources */,
 				71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */,
 				71A0140626F72F860016F5E6 /* BookObservable.swift in Sources */,
 				71A013FF26F70C910016F5E6 /* AudioBookView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				71FA47B426FA439200F174F3 /* MyVStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
