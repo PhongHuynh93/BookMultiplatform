@@ -14,9 +14,9 @@ struct BookView: View {
     
     var body: some View {
         NavigationView {
-//            List() { item in
-//
-//            }
+            List(observable.data, id: \.id) { book in
+                
+            }
             Text("Text get books")
             .navigationTitle("Book")
         }

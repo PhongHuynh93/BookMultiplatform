@@ -11,15 +11,14 @@ import shared
 
 final class BookObservable: ObservableObject {
     let bookVM: BookViewModel
-//    @Published private(set) var data: [Book]
+    @Published private(set) var data: [Book] = []
     
     init(viewModel: BookViewModel) {
         KoinKt.log.e(withMessage: {"BookObservable init viewmodel"})
-        viewModel.observe(viewModel.data, onChange: { data in
-//            KoinKt.log.e(withMessage: {"BookObservableVM \(String(describing: data)) "})
-            // self.data = $0
-        })
         self.bookVM = viewModel
+        viewModel.observe(viewModel.data, onChange: {
+            self.data = $0 as! [Book]
+        })
     }
     
     deinit {
