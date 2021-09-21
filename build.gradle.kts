@@ -1,3 +1,8 @@
+plugins {
+    id("com.diffplug.spotless") version "5.14.3"
+    id("io.gitlab.arturbosch.detekt") version "1.18.1"
+}
+
 buildscript {
     repositories {
         google()
@@ -31,6 +36,27 @@ allprojects {
     }
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+subprojects {
+    apply(plugin = "com.diffplug.spotless")
+
+    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+        kotlin {
+            target("**/*.kt")
+            targetExclude("$buildDir/**/*.kt")
+            targetExclude("bin/**/*.kt")
+
+            ktlint("0.41.0")
+        }
+    }
+
+//    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
+//
+//        kotlinOptions {
+//            // Treat all Kotlin warnings as errors
+//            allWarningsAsErrors = true
+//
+//            // Set JVM target to 1.8
+//            jvmTarget = "1.8"
+//        }
+//    }
 }

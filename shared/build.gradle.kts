@@ -12,14 +12,13 @@ version = "1.0"
 kotlin {
     android()
 
-    // Temporary disable ios to fix red light in IDE
     // Revert to just ios() when gradle plugin can properly resolve it
-//    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
-//    if (onPhone) {
-//        iosArm64("ios")
-//    } else {
-//        iosX64("ios")
-//    }
+    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
+    if (onPhone) {
+        iosArm64("ios")
+    } else {
+        iosX64("ios")
+    }
 
     cocoapods {
         summary = "Common library for the BookMultiplatform"
@@ -30,6 +29,12 @@ kotlin {
     }
     
     sourceSets {
+        all {
+            languageSettings.apply {
+                optIn("kotlin.RequiresOptIn")
+                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+            }
+        }
         val commonMain by getting {
             dependencies {
                 // Network
@@ -64,8 +69,6 @@ kotlin {
             dependencies {
                 // Network
                 implementation(Deps.Ktor.androidCore)
-                // Coroutines
-                implementation(Deps.Coroutines.android)
                 // ViewModel
                 implementation(Deps.AndroidX.viewModel)
                 implementation(Deps.koinAndroid)
@@ -79,20 +82,13 @@ kotlin {
                 implementation(Deps.Coroutines.test)
             }
         }
-        // Temporary disable ios to fix red light in IDE
-//        val iosMain by getting {
-//            dependencies {
-//                // Network
-//                implementation(Deps.Ktor.ios)
-//                // Coroutines
-//                implementation(Deps.Coroutines.common) {
-//                    version {
-//                        strictly(Versions.coroutines)
-//                    }
-//                }
-//            }
-//        }
-//        val iosTest by getting
+        val iosMain by getting {
+            dependencies {
+                // Network
+                implementation(Deps.Ktor.ios)
+            }
+        }
+        val iosTest by getting
     }
 }
 
