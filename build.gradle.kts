@@ -1,5 +1,5 @@
 plugins {
-    id("com.diffplug.spotless") version "5.14.3"
+    id("org.jlleitschuh.gradle.ktlint") version Versions.ktlint
     id("io.gitlab.arturbosch.detekt") version "1.18.1"
 }
 
@@ -37,15 +37,19 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin = "com.diffplug.spotless")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
-    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
-        kotlin {
-            target("**/*.kt")
-            targetExclude("$buildDir/**/*.kt")
-            targetExclude("bin/**/*.kt")
+    ktlint {
+        verbose.set(true)
+        filter {
+            exclude { it.file.path.contains("build/") }
+        }
+        disabledRules.set(setOf("no-wildcard-imports", "experimental:annotation"))
+    }
 
-            ktlint("0.41.0")
+    afterEvaluate {
+        tasks.named("check").configure {
+            dependsOn(tasks.getByName("ktlintCheck"))
         }
     }
 

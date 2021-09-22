@@ -34,4 +34,4 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x ./gradlew
       - name: Check ktlint
-        run: ./gradlew spotlessCheck
+        run: ./gradlew ktlintCheck

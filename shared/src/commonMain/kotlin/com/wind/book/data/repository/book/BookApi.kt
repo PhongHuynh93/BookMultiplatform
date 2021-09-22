@@ -13,14 +13,14 @@ interface BestSellerAPI {
     suspend fun get(currentPage: Int, listName: String): List<Book>
 }
 
-internal class BestSellerAPIImpl(private val client: HttpClient): BestSellerAPI {
+internal class BestSellerAPIImpl(private val client: HttpClient) : BestSellerAPI {
     private val bookMapper = BookMapper()
 
     override suspend fun get(currentPage: Int, listName: String): List<Book> {
         return client.get<BookResDto> {
             url {
                 takeFrom(Constant.HOST)
-                path(Constant.BOOK_PATH, "current", "${listName}.json")
+                path(Constant.BOOK_PATH, "current", "$listName.json")
                 parameter(Constant.QUERY_OFFSET, currentPage.toString())
                 parameter(Constant.QUERY_API_KEY, Constant.API_KEY)
             }

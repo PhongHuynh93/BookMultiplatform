@@ -28,7 +28,7 @@ kotlin {
         frameworkName = "shared"
         podfile = project.file("../iosApp/Podfile")
     }
-    
+
     sourceSets {
         all {
             languageSettings.apply {

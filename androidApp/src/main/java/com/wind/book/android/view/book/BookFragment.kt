@@ -13,12 +13,12 @@ import com.wind.book.android.extension.launchAndCollectIn
 import com.wind.book.android.extension.safeNavigate
 import com.wind.book.android.util.viewBinding
 import com.wind.book.android.view.adapter.LoadingAdapter
+import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Book
 import com.wind.book.viewmodel.home.BookViewModel
+import com.wind.book.viewmodel.model.IABNav
 import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.wind.book.android.view.home.HomeFragmentDirections
-import com.wind.book.viewmodel.model.IABNav
 
 class BookFragment : Fragment(R.layout.toolbar_list_view) {
     private val vm: BookViewModel by viewModel()
@@ -30,18 +30,21 @@ class BookFragment : Fragment(R.layout.toolbar_list_view) {
 
         val list = binding.list
 
-        val feedAdapter = BookAdapter(Glide.with(this), object : BookAdapter.Callback {
-            override fun onClickBuyBtn(book: Book) {
-                findNavController().safeNavigate(
-                    HomeFragmentDirections.actionHomeFragmentToIABFragment(
-                        IABNav(
-                            title = book.title,
-                            url = book.amazonLink
+        val feedAdapter = BookAdapter(
+            Glide.with(this),
+            object : BookAdapter.Callback {
+                override fun onClickBuyBtn(book: Book) {
+                    findNavController().safeNavigate(
+                        HomeFragmentDirections.actionHomeFragmentToIABFragment(
+                            IABNav(
+                                title = book.title,
+                                url = book.amazonLink
+                            )
                         )
                     )
-                )
+                }
             }
-        })
+        )
         val footerLoadingAdapter = LoadingAdapter(object : LoadingAdapter.Callback {
             override fun onClickRetryBtn() {
                 vm.retry()

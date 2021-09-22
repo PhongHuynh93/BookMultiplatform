@@ -15,6 +15,7 @@ object Versions {
     const val kotlinxDateTime = "0.2.1"
     const val turbine = "0.5.2"
     const val parcelable = "0.1.4"
+    const val ktlint = "10.2.0"
 
     object AndroidX {
         const val supportLibrary: String = "1.2.0"
