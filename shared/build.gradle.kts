@@ -12,13 +12,14 @@ version = "1.0"
 kotlin {
     android()
 
+    // FIXME: turn on ios target make the IDE red highlight
     // Revert to just ios() when gradle plugin can properly resolve it
-    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
-    if (onPhone) {
-        iosArm64("ios")
-    } else {
-        iosX64("ios")
-    }
+//    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
+//    if (onPhone) {
+//        iosArm64("ios")
+//    } else {
+//        iosX64("ios")
+//    }
 
     cocoapods {
         summary = "Common library for the BookMultiplatform"
@@ -82,13 +83,13 @@ kotlin {
                 implementation(Deps.Coroutines.test)
             }
         }
-        val iosMain by getting {
-            dependencies {
-                // Network
-                implementation(Deps.Ktor.ios)
-            }
-        }
-        val iosTest by getting
+//        val iosMain by getting {
+//            dependencies {
+//                // Network
+//                implementation(Deps.Ktor.ios)
+//            }
+//        }
+//        val iosTest by getting
     }
 }
 

@@ -49,14 +49,21 @@ subprojects {
         }
     }
 
-//    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
-//
-//        kotlinOptions {
-//            // Treat all Kotlin warnings as errors
-//            allWarningsAsErrors = true
-//
-//            // Set JVM target to 1.8
-//            jvmTarget = "1.8"
-//        }
-//    }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
+
+        kotlinOptions {
+            // Treat all Kotlin warnings as errors
+            allWarningsAsErrors = true
+
+            // Set JVM target to 1.8
+            jvmTarget = "1.8"
+
+            freeCompilerArgs = listOf(
+                *freeCompilerArgs.toTypedArray(),
+                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xopt-in=kotlinx.coroutines.FlowPreview",
+                "-Xopt-in=kotlin.Experimental",
+            )
+        }
+    }
 }

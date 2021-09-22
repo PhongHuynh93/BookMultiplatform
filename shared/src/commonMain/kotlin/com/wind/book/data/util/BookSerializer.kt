@@ -2,6 +2,7 @@ package com.wind.book.data.util
 
 import com.wind.book.data.model.dto.BookListDto
 import com.wind.book.json
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
@@ -15,6 +16,7 @@ import kotlinx.serialization.json.JsonObject
 
 /**
  */
+@OptIn(ExperimentalSerializationApi::class)
 object BookSerializer : KSerializer<BookListDto?> {
 
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("BookSerializer", PrimitiveKind.STRING)
