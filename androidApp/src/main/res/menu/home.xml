@@ -5,9 +5,9 @@
         android:icon="@drawable/ic_book"
         android:title="@string/title_book" />
     <item
-        android:id="@+id/navigation_audiobook"
-        android:icon="@drawable/ic_audiobook"
-        android:title="@string/title_audio" />
+        android:id="@+id/navigation_podcast"
+        android:icon="@drawable/ic_podcast"
+        android:title="@string/title_podcast" />
     <item
         android:id="@+id/navigation_movie"
         android:icon="@drawable/ic_movie"

@@ -2,6 +2,7 @@ package com.wind.book
 
 import co.touchlab.kermit.Kermit
 import com.wind.book.data.repository.book.bookModule
+import com.wind.book.data.repository.podcast.podcastModule
 import com.wind.book.domain.domainModule
 import com.wind.book.viewmodel.BaseViewModel
 import com.wind.book.viewmodel.viewmodelModule
@@ -14,13 +15,13 @@ import kotlinx.datetime.Clock
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
-import org.koin.core.module.Module
-import org.koin.core.parameter.parametersOf
-import org.koin.core.scope.Scope
-import org.koin.dsl.module
 import org.koin.core.definition.Definition
 import org.koin.core.instance.InstanceFactory
+import org.koin.core.module.Module
+import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.Qualifier
+import org.koin.core.scope.Scope
+import org.koin.dsl.module
 import kotlin.reflect.KClass
 
 lateinit var koin: Koin
@@ -33,7 +34,8 @@ fun initKoin(appModule: Module): KoinApplication {
             coreModule,
             domainModule,
             viewmodelModule,
-            bookModule
+            bookModule,
+            podcastModule
         )
     }
 
