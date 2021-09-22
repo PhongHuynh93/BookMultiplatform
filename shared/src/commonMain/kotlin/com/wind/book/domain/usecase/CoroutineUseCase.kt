@@ -1,3 +1,4 @@
+// ktlint-disable filename
 package com.wind.book.domain.usecase
 
 import com.wind.book.log

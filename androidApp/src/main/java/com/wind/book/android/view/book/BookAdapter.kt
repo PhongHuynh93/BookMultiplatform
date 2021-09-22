@@ -19,7 +19,8 @@ class BookAdapter(private val rm: RequestManager, private val callback: Callback
         override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem == newItem
         }
-    }), GetItemCountCallback {
+    }),
+    GetItemCountCallback {
 
     init {
         stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY

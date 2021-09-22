@@ -24,7 +24,7 @@ class BookMapper : Mapper<BookDto, Book?> {
                     height = bookImageHeight,
                 ),
                 description = description.orEmpty(),
-                title =  title.orEmpty(),
+                title = title.orEmpty(),
                 amazonLink = amazonProductUrl.orEmpty()
             )
         }

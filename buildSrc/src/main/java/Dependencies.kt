@@ -1,21 +1,21 @@
 object Versions {
-    const val kotlin = "1.5.21"
+    const val kotlin = "1.6.0-M1-139"
     const val gradlePlugin = "7.0.2"
-
-    const val coroutines = "1.5.2-native-mt"
+    const val coroutines = "1.5.1-new-mm-dev2"
     const val kermit = "0.1.9"
     const val koin = "3.1.2"
-    const val ktor = "1.6.3"
+    const val ktor = "1.6.2-native-mm-eap-196"
     const val junit = "4.13.2"
     const val material = "1.3.0"
-    const val multiplatformSettings = "0.7.7"
+    const val multiplatformSettings = "0.8"
     const val robolectric = "4.5.1"
     const val sqlDelight = "1.5.0"
     const val stately = "1.1.7"
-    const val serialization = "1.2.1"
-    const val kotlinxDateTime = "0.1.1"
+    const val serialization = "1.2.2"
+    const val kotlinxDateTime = "0.2.1"
     const val turbine = "0.5.2"
     const val parcelable = "0.1.4"
+    const val ktlint = "10.2.0"
 
     object AndroidX {
         const val supportLibrary: String = "1.2.0"
