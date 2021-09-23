@@ -22,7 +22,7 @@ jobs:
         run: |
           ./gradlew --scan --stacktrace \
             assembleDebug \
-            app:lintDebug
+            androidApp:lintDebug
 
   ktlint:
     name: Check code style with Ktlint
