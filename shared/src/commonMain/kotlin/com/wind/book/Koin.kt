@@ -1,6 +1,7 @@
 package com.wind.book
 
 import co.touchlab.kermit.Kermit
+import com.wind.book.data.repository.article.storyModule
 import com.wind.book.data.repository.book.bookModule
 import com.wind.book.data.repository.podcast.podcastModule
 import com.wind.book.domain.domainModule
@@ -35,7 +36,8 @@ fun initKoin(appModule: Module): KoinApplication {
             domainModule,
             viewmodelModule,
             bookModule,
-            podcastModule
+            podcastModule,
+            storyModule,
         )
     }
 

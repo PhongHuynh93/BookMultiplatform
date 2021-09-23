@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rm"
+            type="com.bumptech.glide.RequestManager" />
+
+        <variable
+            name="article"
+            type="com.wind.book.model.Article" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/space_pretty_small">
+
+        <com.wind.book.android.widget.AspectRatioImageView
+            android:id="@+id/thumb"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/space_normal"
+            android:scaleType="centerCrop"
+            app:ari_aspectRatio="2:3"
+            app:rm="@{rm}"
+            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+            app:url="@{article.multimedia[0].url}"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/thumb"
+            android:layout_alignBottom="@+id/thumb"
+            android:layout_marginStart="@dimen/space_pretty_small"
+            android:layout_marginEnd="@dimen/space_normal"
+            android:layout_toEndOf="@+id/thumb"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:maxLines="3"
+            android:text="@{article.abstract}"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="@tools:sample/lorem" />
+    </RelativeLayout>
+
+</layout>

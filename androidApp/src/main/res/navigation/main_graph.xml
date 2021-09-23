@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_homeFragment_to_IABFragment"
             app:destination="@id/IABFragment" />
+
+        <action
+            android:id="@+id/action_articleFragment_to_IABFragment"
+            app:destination="@id/IABFragment" />
     </fragment>
 
     <fragment
