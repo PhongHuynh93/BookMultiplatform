@@ -19,7 +19,7 @@ class HomeFragment : Fragment(R.layout.home) {
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_book -> viewPager.setCurrentItem(0, false)
-                R.id.navigation_audiobook -> viewPager.setCurrentItem(1, false)
+                R.id.navigation_podcast -> viewPager.setCurrentItem(1, false)
                 R.id.navigation_movie -> viewPager.setCurrentItem(2, false)
             }
             return@setOnItemSelectedListener true
