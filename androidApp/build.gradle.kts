@@ -30,6 +30,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    lint {
+        // Disable lintVital. Not needed since lint is run on CI
+        isCheckReleaseBuilds = false
+        // Ignore any tests
+        isIgnoreTestSources = true
+        // Make the build fail on any lint errors
+        isAbortOnError = true
+        // Allow lint to check dependencies
+        isCheckDependencies = true
+    }
 }
 
 dependencies {
