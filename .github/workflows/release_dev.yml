@@ -17,7 +17,7 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x ./gradlew
       - name: Build Release APK
-        run: ./gradlew assembleDevDebug
+        run: ./gradlew assembleDebug
       - name: Get Apk Info
         uses: hkusu/apk-info-action@v1
         id: apk
