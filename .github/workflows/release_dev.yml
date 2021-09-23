@@ -22,7 +22,7 @@ jobs:
         uses: hkusu/apk-info-action@v1
         id: apk
         with:
-          apk-path: ${{ github.workspace }}/app/build/outputs/apk/dev/debug/app-dev-debug.apk
+          apk-path: ${{ github.workspace }}/androidApp/build/outputs/apk/debug/androidApp-debug.apk
       - name: Create or advance tag `latest`
         # the name of tag is `latest` is required for library above, used for create commit messages on each release
         uses: actions/github-script@v3
@@ -51,5 +51,5 @@ jobs:
           automatic_release_tag: ${{ steps.apk.outputs.version-name }}
           prerelease: true
           title: ${{ steps.apk.outputs.versionNum }}
-          files: ${{ github.workspace }}/app/build/outputs/apk/dev/debug/app-dev-debug.apk
+          files: ${{ github.workspace }}/androidApp/build/outputs/apk/debug/androidApp-debug.apk
 
