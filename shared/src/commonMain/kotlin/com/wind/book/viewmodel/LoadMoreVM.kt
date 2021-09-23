@@ -17,8 +17,8 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
     val refreshState: StateFlow<Boolean> = _refreshState
 
     // child class can override
-    protected var startOffsetPage = Constant.START_OFFSET_PAGE
-    protected var pageSize = Constant.PAGE_SIZE
+    protected open var startOffsetPage = Constant.START_OFFSET_PAGE
+    protected open var pageSize = Constant.PAGE_SIZE
     private val _data: MutableStateFlow<List<T>> = MutableStateFlow(emptyList())
 
     private var currentPage = startOffsetPage

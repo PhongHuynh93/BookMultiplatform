@@ -1,5 +1,7 @@
 package com.wind.book.android.extension
 
+import android.graphics.Rect
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -50,4 +52,13 @@ fun RecyclerView.handleLoadMore(visibleThreshold: Int? = null, getItemCountCallb
 
 fun interface GetItemCountCallback {
     fun getItemCount(): Int
+}
+
+fun Rect.setGridSpacing(parent: RecyclerView, view: View, spacing: Int, spanCount: Int) {
+    val position = parent.getChildAdapterPosition(view)
+    val spanIndex = position % spanCount
+    left = spacing - spanIndex * spacing / spanCount
+    right = (spanIndex + 1) * spacing / spanCount
+    top = if (position < spanCount) spacing else 0
+    bottom = spacing
 }

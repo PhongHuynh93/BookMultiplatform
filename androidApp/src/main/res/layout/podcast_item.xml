@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rm"
+            type="com.bumptech.glide.RequestManager" />
+
+        <variable
+            name="book"
+            type="com.wind.book.model.Podcast" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.wind.book.android.widget.AspectRatioImageView
+            android:id="@+id/thumb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:ari_aspectRatio="1:1"
+            app:rm="@{rm}"
+            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+            app:url="@{book.thumbnail}"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/thumb"
+            android:layout_alignStart="@id/thumb"
+            android:layout_alignEnd="@id/thumb"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_small">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@{book.title}"
+                android:textAppearance="?attr/textAppearanceListItem"
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_tiny"
+                android:maxLines="2"
+                android:text="@{book.publisher}"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="?android:textColorSecondary"
+                tools:text="@tools:sample/lorem" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>
