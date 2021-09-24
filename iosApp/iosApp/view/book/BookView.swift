@@ -15,7 +15,7 @@ struct BookView: View {
     
     var body: some View {
         NavigationView {
-            List(observable.data, id: \.id) { book in
+            List(observable.state.data as! [Book], id: \.id) { book in
                 HStack(alignment: .top) {
                     KFImage(URL(string: book.thumb.url))
                         .placeholder {
@@ -47,6 +47,19 @@ struct BookView: View {
             }
             .listStyle(.plain)
             .navigationTitle("Book")
+        }
+        .onAppear{ observable.startObserving() }
+        .onDisappear{ observable.stopObserving() }
+        .onReceive(observable.effect) { onEffect(effect: $0) }
+    }
+    
+    private func onEffect(effect: LoadMoreEffect) {
+        KoinKt.log.d(withMessage: {"Effect \(effect)"})
+        switch effect {
+        case is LoadMoreEffect.ScrollToTop:
+            KoinKt.log.d(withMessage: {"Scroll to top"})
+        default:
+            KoinKt.log.d(withMessage: {"Unknown effect"})
         }
     }
 }

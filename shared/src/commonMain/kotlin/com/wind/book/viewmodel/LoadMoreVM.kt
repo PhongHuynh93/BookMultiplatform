@@ -10,7 +10,15 @@ data class LoadMoreState<T>(
     val loadState: LoadState = LoadState.Loading(isEmpty = true),
     val refreshState: Boolean = false,
     val data: List<T> = emptyList(),
-) : BaseState()
+) : BaseState() {
+
+    // Need secondary constructor to initialize with no args in SwiftUI
+    constructor() : this(
+        loadState = LoadState.Loading(isEmpty = true),
+        refreshState = false,
+        data = emptyList(),
+    )
+}
 
 fun <T> MutableStateFlow<LoadMoreState<T>>.update(
     loadState: LoadState = value.loadState,
