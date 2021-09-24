@@ -13,12 +13,12 @@ import Kingfisher
 struct BookView: View {
     @StateObject var observable: BookObservable = koin.get()
     @State private var navIAB = false
-    @State private var iabNav: IABNav? = nil
+    @State private var iabNav: IABNav = IABNav()
     
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: LazyView(IABView()), isActive: self.$navIAB) {}
+                NavigationLink(destination: LazyView(IABView(iabNav: self.$iabNav)), isActive: self.$navIAB) {}
                 List(observable.state.data as! [Book], id: \.id) { book in
                     HStack(alignment: .top) {
                         KFImage(URL(string: book.thumb.url))

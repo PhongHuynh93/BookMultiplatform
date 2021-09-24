@@ -10,15 +10,10 @@ import SwiftUI
 import shared
 
 struct IABView: View {
+    @Binding var iabNav: IABNav
     
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .navigationBarTitle(Text("Test"), displayMode: .inline)
-    }
-}
-
-struct IABView_Previews: PreviewProvider {
-    static var previews: some View {
-        IABView()
+            .navigationBarTitle(Text(iabNav.title), displayMode: .inline)
     }
 }
