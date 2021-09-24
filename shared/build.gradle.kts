@@ -13,14 +13,15 @@ kotlin {
     android()
 
     ios {
-        binaries.framework()
+        binaries.framework {
+            baseName = "shared"
+        }
     }
 
     cocoapods {
         summary = "Common library for the BookMultiplatform"
         homepage = "https://github.com/PhongHuynh93/BookMultiplatform"
         ios.deploymentTarget = "14.1"
-        frameworkName = "shared"
         podfile = project.file("../iosApp/Podfile")
     }
 
