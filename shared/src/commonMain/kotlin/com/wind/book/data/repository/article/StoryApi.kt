@@ -9,13 +9,13 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 
 interface StoryAPI {
-    suspend fun get(currentPage: Int, section: String): List<Article>
+    suspend fun get(section: String): List<Article>
 }
 
 internal class StoryAPIImpl(private val client: HttpClient) : StoryAPI {
     private val articleMapper = ArticleMapper()
 
-    override suspend fun get(currentPage: Int, section: String): List<Article> {
+    override suspend fun get(section: String): List<Article> {
         return client.get<SectionResDto> {
             url {
                 takeFrom(Constant.HOST)

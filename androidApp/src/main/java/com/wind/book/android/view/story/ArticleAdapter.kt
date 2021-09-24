@@ -1,7 +1,6 @@
 package com.wind.book.android.view.story
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -38,24 +37,30 @@ class ArticleAdapter(private val rm: RequestManager, private val callback: Callb
         holder.bind(item)
     }
 
-    interface Callback : ArticleViewHolder.Callback {
-        fun onClick(view: View, pos: Int, item: Article)
-    }
+    interface Callback : ArticleViewHolder.Callback
 }
 
 class ArticleViewHolder(private val binding: ArticleItemBinding, private val rm: RequestManager, val callback: Callback) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: Article) {
-        binding.apply {
-            this.rm = this@ArticleViewHolder.rm
-            article = item
-        }
+    private lateinit var article: Article
+    init {
         binding.root.setOnClickListener {
-            if (callback is ArticleAdapter.Callback) {
-                callback.onClick(binding.root, 0, item)
+            val pos = bindingAdapterPosition
+            if (pos >= 0) {
+                callback.onClick(article)
             }
         }
     }
 
-    interface Callback
+    fun bind(item: Article) {
+        this.article = item
+        binding.apply {
+            this.rm = this@ArticleViewHolder.rm
+            article = item
+        }
+    }
+
+    interface Callback {
+        fun onClick(article: Article)
+    }
 }

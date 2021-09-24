@@ -30,9 +30,9 @@ class StoryViewModel(
         loadData()
     }
 
-    fun loadData() {
+    private fun loadData() {
         clientScope.launch {
-            apiCall(1).onSuccess {
+            apiCall().onSuccess {
                 _loadState.value = LoadState.NotLoading.Complete(it.isEmpty())
                 _data.value = it
             }.onFailure {
@@ -42,7 +42,7 @@ class StoryViewModel(
         }
     }
 
-    suspend fun apiCall(currentPage: Int): Result<List<Article>> {
-        return getArticleListUseCase(GetArticleListParam(currentPage = currentPage, section = "home"))
+    private suspend fun apiCall(): Result<List<Article>> {
+        return getArticleListUseCase(GetArticleListParam(section = "home"))
     }
 }

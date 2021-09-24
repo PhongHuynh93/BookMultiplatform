@@ -33,12 +33,12 @@ class ArticleFragment : Fragment(R.layout.toolbar_list_view) {
         val feedAdapter = ArticleAdapter(
             Glide.with(this),
             object : ArticleAdapter.Callback {
-                override fun onClick(view: View, pos: Int, item: Article) {
+                override fun onClick(article: Article) {
                     findNavController().safeNavigate(
                         HomeFragmentDirections.actionArticleFragmentToIABFragment(
                             IABNav(
-                                title = item.title,
-                                url = item.url
+                                title = article.title,
+                                url = article.url
                             )
                         )
                     )

@@ -5,11 +5,11 @@ import com.wind.book.domain.usecase.UseCase
 import com.wind.book.model.Article
 import com.wind.book.platformCoroutineDispatcher
 
-class GetArticleListParam(val currentPage: Int, val section: String)
+class GetArticleListParam(val section: String)
 class GetArticleListUseCase constructor(
     private val storyRepository: StoryRepository
 ) : UseCase<GetArticleListParam, List<Article>>(platformCoroutineDispatcher) {
     override suspend fun execute(parameters: GetArticleListParam): List<Article> {
-        return storyRepository.getArticleList(parameters.currentPage, parameters.section)
+        return storyRepository.getArticleList(parameters.section)
     }
 }

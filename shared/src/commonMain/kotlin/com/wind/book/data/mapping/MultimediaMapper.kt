@@ -18,7 +18,7 @@ class MultimediaMapper : Mapper<MultimediaDto, Multimedia?> {
 class MultiMediasMapper : Mapper<List<MultimediaDto?>?, List<Multimedia>> {
     override fun apply(input: List<MultimediaDto?>?): List<Multimedia> {
         val list = ArrayList<Multimedia>()
-        input?.forEach {
+        input?.mapNotNull {
             if (it != null) {
                 list.add(
                     Multimedia(
