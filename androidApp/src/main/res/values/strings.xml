@@ -6,5 +6,6 @@
     <string name="title_book">Book</string>
     <string name="title_movie">Movie</string>
     <string name="title_podcast">Podcast</string>
+    <string name="title_story">Stories</string>
     <string name="buy">Buy</string>
 </resources>
