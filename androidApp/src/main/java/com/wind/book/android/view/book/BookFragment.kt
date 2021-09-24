@@ -16,8 +16,8 @@ import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Book
 import com.wind.book.viewmodel.LoadMoreEffect
+import com.wind.book.viewmodel.home.BookEffect
 import com.wind.book.viewmodel.home.BookViewModel
-import com.wind.book.viewmodel.model.IABNav
 import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,14 +35,7 @@ class BookFragment : Fragment(R.layout.toolbar_list_view) {
             Glide.with(this),
             object : BookAdapter.Callback {
                 override fun onClickBuyBtn(book: Book) {
-                    findNavController().safeNavigate(
-                        HomeFragmentDirections.actionHomeFragmentToIABFragment(
-                            IABNav(
-                                title = book.title,
-                                url = book.amazonLink
-                            )
-                        )
-                    )
+                    vm.onClickBuy(book)
                 }
             }
         )
@@ -83,10 +76,17 @@ class BookFragment : Fragment(R.layout.toolbar_list_view) {
                     }
                 }
             }
-            effect.launchAndCollectIn(viewLifecycleOwner) {
+            bookEffect.launchAndCollectIn(viewLifecycleOwner) {
                 when (it) {
-                    LoadMoreEffect.ScrollToTop -> {
-                        list.binding.rcv.scrollToPosition(0)
+                    is BookEffect.LMEffect -> {
+                        when (it.loadMoreEffect) {
+                            LoadMoreEffect.ScrollToTop -> list.binding.rcv.scrollToPosition(0)
+                        }
+                    }
+                    is BookEffect.NavToIAB -> {
+                        findNavController().safeNavigate(
+                            HomeFragmentDirections.actionHomeFragmentToIABFragment(it.iabNav)
+                        )
                     }
                 }
             }
