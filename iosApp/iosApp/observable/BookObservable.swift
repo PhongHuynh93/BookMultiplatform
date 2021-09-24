@@ -15,7 +15,7 @@ final class BookObservable: ObservableObject {
     @Published private(set) var state: LoadMoreState<Book>
     private var stateCloseable: Ktor_ioCloseable!
     private var effectCloseable: Ktor_ioCloseable!
-    let effect = PassthroughSubject<LoadMoreEffect, Never>()
+    let effect = PassthroughSubject<BookEffect, Never>()
 
     init(viewModel: BookViewModel) {
         KoinKt.log.d(withMessage: {"BookObservable init viewmodel"})
@@ -34,7 +34,7 @@ final class BookObservable: ObservableObject {
             self.state = $0 as! LoadMoreState<Book>
         })
         effectCloseable = bookVM.observe(bookVM.effect, onChange: {
-            self.effect.send($0 as! LoadMoreEffect)
+            self.effect.send($0 as! BookEffect)
         })
     }
     

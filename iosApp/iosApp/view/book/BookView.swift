@@ -53,11 +53,16 @@ struct BookView: View {
         .onReceive(observable.effect) { onEffect(effect: $0) }
     }
     
-    private func onEffect(effect: LoadMoreEffect) {
+    private func onEffect(effect: BookEffect) {
         KoinKt.log.d(withMessage: {"Effect \(effect)"})
         switch effect {
-        case is LoadMoreEffect.ScrollToTop:
-            KoinKt.log.d(withMessage: {"Scroll to top"})
+        case is BookEffect.LMEffect:
+            switch (effect as! BookEffect.LMEffect).loadMoreEffect {
+            case is LoadMoreEffect.ScrollToTop:
+                KoinKt.log.d(withMessage: {"Scroll to top"})
+            default:
+                KoinKt.log.d(withMessage: {"Unknown effect"})
+            }
         default:
             KoinKt.log.d(withMessage: {"Unknown effect"})
         }
