@@ -6,35 +6,61 @@ import com.wind.book.viewmodel.util.LoadState
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-abstract class LoadMoreVM<T> : BaseViewModel() {
+data class LoadMoreState<T>(
+    val loadState: LoadState = LoadState.Loading(isEmpty = true),
+    val refreshState: Boolean = false,
+    val data: List<T> = emptyList(),
+) : BaseState()
+
+fun <T> MutableStateFlow<LoadMoreState<T>>.update(
+    loadState: LoadState = value.loadState,
+    refreshState: Boolean = value.refreshState,
+    data: List<T> = value.data,
+) {
+    value = value.copy(
+        loadState = loadState,
+        refreshState = refreshState,
+        data = data
+    )
+}
+
+interface LoadMoreEvent : BaseEvent {
+    fun loadMore(isRefresh: Boolean = false)
+    fun retry()
+    fun refresh()
+    fun scrollToTop()
+}
+
+sealed class LoadMoreEffect : BaseEffect() {
+    object ScrollToTop : LoadMoreEffect()
+}
+
+abstract class LoadMoreVM<T> : BaseMVIViewModel(), LoadMoreEvent {
+    // region MVI
+    private val _state = MutableStateFlow(LoadMoreState<T>())
+    override val state = _state.asStateFlow()
+
+    private val _effect = MutableSharedFlow<LoadMoreEffect>()
+    override val effect = _effect.asSharedFlow()
+
+    override val event = this as LoadMoreEvent
+    // end region
 
     private var canNotLoad: Boolean = false
-    private val _loadState: MutableStateFlow<LoadState> = MutableStateFlow(LoadState.Loading(isEmpty = true))
-    private val _refreshState: MutableStateFlow<Boolean> = MutableStateFlow(false)
-
-    // public for listening load state
-    val loadState: Flow<LoadState> = _loadState
-    val refreshState: StateFlow<Boolean> = _refreshState
 
     // child class can override
     protected open var startOffsetPage = Constant.START_OFFSET_PAGE
     protected open var pageSize = Constant.PAGE_SIZE
-    private val _data: MutableStateFlow<List<T>> = MutableStateFlow(emptyList())
 
     private var currentPage = startOffsetPage
     private val cachedData: List<T>
         get() {
-            return runBlocking { _data.first() }
+            return runBlocking { state.first().data }
         }
-
-    val data: StateFlow<List<T>> = _data
-
-    private val _scrollToTop: MutableSharedFlow<Unit> = MutableSharedFlow()
-    val scrollToTop: SharedFlow<Unit> = _scrollToTop
 
     private val currentLoadState: LoadState
         get() {
-            return runBlocking { _loadState.first() }
+            return runBlocking { state.first().loadState }
         }
 
     private val loadAPIScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
@@ -43,8 +69,8 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
         // Because we have a case when we done loading data, but still support add/remove data realtime
         // trigger this method to update the empty state of UI
         clientScope.launch {
-            _data.collectLatest {
-                updateDataState(it.isEmpty())
+            state.collectLatest {
+                updateDataState(it.data.isEmpty())
             }
         }
     }
@@ -54,7 +80,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
         super.onCleared()
     }
 
-    fun loadMore(isRefresh: Boolean = false) {
+    override fun loadMore(isRefresh: Boolean) {
         loadAPIScope.launch {
             if (!canLoad()) {
                 return@launch
@@ -85,7 +111,9 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
                     cachedData.addAll(notDuplicatedData)
                     log.v { "notDuplicatedData current page $currentPage isRefresh $isRefresh notDuplicatedData ${notDuplicatedData.size}" }
                     log.v { "cachedComment current page $currentPage isRefresh $isRefresh cachedData ${cachedData.size}" }
-                    _data.value = cachedData
+                    _state.update(
+                        data = cachedData
+                    )
                     // increase the size to get the next page
                     currentPage += pageSize
                     val endOfPage = notDuplicatedData.isEmpty()
@@ -94,7 +122,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
                     // auto load more if the data size < VISIBLE_THRESHOLD and we are not at the end of page
                     if (!endOfPage && cachedData.size < Constant.VISIBLE_THRESHOLD) {
                         log.v { "Auto load more because the data size is less than VISIBLE_THRESHOLD" }
-                        loadMore()
+                        loadMore(false)
                     }
                 }
                 .onFailure {
@@ -104,13 +132,13 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
         }
     }
 
-    fun retry() {
+    override fun retry() {
         log.v { "retry" }
         onRetry()
-        loadMore()
+        loadMore(false)
     }
 
-    fun refresh() {
+    override fun refresh() {
         // cancel all the previous APIs
         log.v { "Refresh" }
         loadAPIScope.coroutineContext.cancelChildren()
@@ -122,15 +150,19 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
      * delay a little bit before scrolling to top
      * because need to wait the list finish calculating the diffutil
      */
-    fun scrollToTop() {
+    override fun scrollToTop() {
         log.v { "scrollToTop" }
         clientScope.launch {
             delay(300)
-            _scrollToTop.emit(Unit)
+            _effect.emit(LoadMoreEffect.ScrollToTop)
         }
     }
 
-    abstract suspend fun apiCall(currentPage: Int, pageSize: Int, isRefresh: Boolean): Result<List<T>>
+    abstract suspend fun apiCall(
+        currentPage: Int,
+        pageSize: Int,
+        isRefresh: Boolean
+    ): Result<List<T>>
 
     private fun canLoad(): Boolean {
         return !canNotLoad
@@ -138,27 +170,34 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
 
     private fun onLoading(isEmpty: Boolean) {
         log.v { "onLoading isEmpty $isEmpty" }
-        _loadState.value = LoadState.Loading(isEmpty)
+        _state.update(
+            loadState = LoadState.Loading(isEmpty)
+        )
         canNotLoad = true
     }
 
     private fun onSuccess(isEmpty: Boolean, endOfPage: Boolean) {
         log.v { "onSuccessxxx isEmpty $isEmpty endOfPage $endOfPage" }
-        if (endOfPage) {
+        val loadState = if (endOfPage) {
             canNotLoad = true
-            _loadState.value = LoadState.NotLoading.Complete(isEmpty)
+            LoadState.NotLoading.Complete(isEmpty)
         } else {
-            _loadState.value = LoadState.Loading(isEmpty)
             canNotLoad = false
+            LoadState.Loading(isEmpty)
         }
-        _refreshState.value = false
+        _state.update(
+            loadState = loadState,
+            refreshState = false
+        )
     }
 
     private fun onError(exception: Throwable, isEmpty: Boolean) {
         log.v { "onError isEmpty $isEmpty ${exception.stackTraceToString()}" }
         canNotLoad = true
-        _loadState.value = LoadState.Error(exception, isEmpty)
-        _refreshState.value = false
+        _state.update(
+            loadState = LoadState.Error(exception, isEmpty),
+            refreshState = false
+        )
         clientScope.launch {
             toastError.emit(exception)
         }
@@ -167,7 +206,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
     private fun onRefresh() {
         log.v { "onRefresh" }
         canNotLoad = false
-        _refreshState.value = true
+        _state.update(refreshState = true)
     }
 
     private fun onRetry() {
@@ -179,7 +218,7 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
      * Data may change, trigger the previous load state
      */
     protected fun updateDataState(isEmpty: Boolean) {
-        val loadState = getLoadState()
+        val loadState = currentLoadState
         log.v { "updateStateIfCompleted previous state $loadState" }
         when (loadState) {
             is LoadState.Error -> LoadState.Error(loadState.error, isEmpty)
@@ -191,14 +230,11 @@ abstract class LoadMoreVM<T> : BaseViewModel() {
                     LoadState.NotLoading.Incomplete(isEmpty)
                 }
             }
-            null -> null
-        }?.let {
+        }.let {
             log.v { "updateStateIfCompleted current state $it" }
-            _loadState.value = it
+            _state.update(
+                loadState = it
+            )
         }
-    }
-
-    private fun getLoadState() = runBlocking {
-        _loadState.firstOrNull()
     }
 }

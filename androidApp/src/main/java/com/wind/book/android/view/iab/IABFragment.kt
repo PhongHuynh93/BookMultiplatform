@@ -3,11 +3,11 @@ package com.wind.book.android.view.iab
 import android.os.Bundle
 import android.view.View
 import android.webkit.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.wind.book.android.R
 import com.wind.book.android.databinding.IabBinding
-import com.wind.book.android.extension.gone
 import com.wind.book.android.extension.launchAndCollectIn
 import com.wind.book.android.util.viewBinding
 import com.wind.book.viewmodel.iab.IABViewModel
@@ -52,13 +52,15 @@ class IABFragment : Fragment(R.layout.iab) {
             }
         }
         vm.apply {
-            loadDone.launchAndCollectIn(viewLifecycleOwner) {
-                if (it) {
-                    binding.progressBar.gone()
+            var hasLoadURL = false
+            state.launchAndCollectIn(viewLifecycleOwner) {
+                binding.progressBar.isVisible = !it.loadDone
+                if (!hasLoadURL) {
+                    hasLoadURL = true
+                    it.url?.let {
+                        binding.webView.loadUrl(it)
+                    }
                 }
-            }
-            link.launchAndCollectIn(viewLifecycleOwner) {
-                binding.webView.loadUrl(it)
             }
         }
     }

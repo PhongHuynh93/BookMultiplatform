@@ -15,6 +15,7 @@ import com.wind.book.android.util.viewBinding
 import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Book
+import com.wind.book.viewmodel.LoadMoreEffect
 import com.wind.book.viewmodel.home.BookViewModel
 import com.wind.book.viewmodel.model.IABNav
 import com.wind.book.viewmodel.util.Constant
@@ -72,22 +73,22 @@ class BookFragment : Fragment(R.layout.toolbar_list_view) {
             }
         }
         vm.apply {
-            refreshState.launchAndCollectIn(viewLifecycleOwner) {
-                list.setRefreshState(it)
-            }
-            loadState.launchAndCollectIn(viewLifecycleOwner) { loadState ->
-                list.setLoadState(loadState)
-                footerLoadingAdapter.loadState = loadState
-            }
-            data.launchAndCollectIn(viewLifecycleOwner) {
-                feedAdapter.submitList(it) {
-                    if (it.isNotEmpty() && !concatAdapter.adapters.contains(footerLoadingAdapter)) {
+            state.launchAndCollectIn(viewLifecycleOwner) {
+                list.setRefreshState(it.refreshState)
+                list.setLoadState(it.loadState)
+                footerLoadingAdapter.loadState = it.loadState
+                feedAdapter.submitList(it.data) {
+                    if (it.data.isNotEmpty() && !concatAdapter.adapters.contains(footerLoadingAdapter)) {
                         concatAdapter.addAdapter(footerLoadingAdapter)
                     }
                 }
             }
-            scrollToTop.launchAndCollectIn(viewLifecycleOwner) {
-                list.binding.rcv.scrollToPosition(0)
+            effect.launchAndCollectIn(viewLifecycleOwner) {
+                when (it) {
+                    LoadMoreEffect.ScrollToTop -> {
+                        list.binding.rcv.scrollToPosition(0)
+                    }
+                }
             }
         }
     }
