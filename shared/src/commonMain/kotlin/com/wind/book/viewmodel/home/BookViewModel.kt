@@ -5,6 +5,7 @@ import com.wind.book.domain.usecase.book.GetBookListUseCase
 import com.wind.book.model.Book
 import com.wind.book.viewmodel.BaseEffect
 import com.wind.book.viewmodel.LoadMoreEffect
+import com.wind.book.viewmodel.LoadMoreEvent
 import com.wind.book.viewmodel.LoadMoreVM
 import com.wind.book.viewmodel.model.IABNav
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,12 +18,17 @@ sealed class BookEffect : BaseEffect() {
     class NavToIAB(val iabNav: IABNav) : BookEffect()
 }
 
+interface BookEvent : LoadMoreEvent {
+    fun onClickBuy(book: Book)
+}
+
 class BookViewModel(
     private val getBookListUseCase: GetBookListUseCase
-) : LoadMoreVM<Book>() {
+) : LoadMoreVM<Book>(), BookEvent {
 
     private val _bookEffect = MutableSharedFlow<BookEffect>()
     val bookEffect = _bookEffect.asSharedFlow()
+    override val event = this as BookEvent
 
     init {
         loadMore()
@@ -47,7 +53,7 @@ class BookViewModel(
         )
     }
 
-    fun onClickBuy(book: Book) {
+    override fun onClickBuy(book: Book) {
         clientScope.launch {
             _bookEffect.emit(
                 BookEffect.NavToIAB(

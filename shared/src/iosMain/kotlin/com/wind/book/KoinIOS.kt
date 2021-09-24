@@ -9,12 +9,12 @@ import kotlinx.cinterop.ObjCClass
 import kotlinx.cinterop.getOriginalKotlinClass
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
-import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.Qualifier
-import org.koin.dsl.module
 import org.koin.core.definition.Definition
 import org.koin.core.instance.InstanceFactory
 import org.koin.core.module.Module
+import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.Qualifier
+import org.koin.dsl.module
 import platform.Foundation.NSUserDefaults
 
 fun initKoinIos(

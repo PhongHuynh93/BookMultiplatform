@@ -9,8 +9,9 @@ import com.bumptech.glide.RequestManager
 import com.wind.book.android.databinding.BookItemBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Book
+import com.wind.book.viewmodel.home.BookEvent
 
-class BookAdapter(private val rm: RequestManager, private val callback: Callback) :
+class BookAdapter(private val rm: RequestManager, private val bookEvent: BookEvent) :
     ListAdapter<Book, BookViewHolder>(object : DiffUtil.ItemCallback<Book>() {
         override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem.id == newItem.id
@@ -28,7 +29,7 @@ class BookAdapter(private val rm: RequestManager, private val callback: Callback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         return BookViewHolder(
-            BookItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), rm, callback
+            BookItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), rm, bookEvent
         )
     }
 
@@ -36,11 +37,9 @@ class BookAdapter(private val rm: RequestManager, private val callback: Callback
         val item = getItem(position)
         holder.bind(item)
     }
-
-    interface Callback : BookViewHolder.Callback
 }
 
-class BookViewHolder(private val binding: BookItemBinding, private val rm: RequestManager, val callback: Callback) :
+class BookViewHolder(private val binding: BookItemBinding, private val rm: RequestManager, val callback: BookEvent) :
     RecyclerView.ViewHolder(binding.root) {
     private lateinit var book: Book
 
@@ -48,7 +47,7 @@ class BookViewHolder(private val binding: BookItemBinding, private val rm: Reque
         binding.buyBtn.setOnClickListener {
             val pos = bindingAdapterPosition
             if (pos >= 0) {
-                callback.onClickBuyBtn(book)
+                callback.onClickBuy(book)
             }
         }
     }
@@ -59,9 +58,5 @@ class BookViewHolder(private val binding: BookItemBinding, private val rm: Reque
             this.rm = this@BookViewHolder.rm
             book = item
         }
-    }
-
-    interface Callback {
-        fun onClickBuyBtn(book: Book)
     }
 }
