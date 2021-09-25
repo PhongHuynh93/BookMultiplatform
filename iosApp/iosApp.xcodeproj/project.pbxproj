@@ -16,6 +16,7 @@
 		71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013FC26F70BD70016F5E6 /* BookView.swift */; };
 		71A013FF26F70C910016F5E6 /* AudioBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013FE26F70C910016F5E6 /* AudioBookView.swift */; };
 		71A0140626F72F860016F5E6 /* BookObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A0140526F72F860016F5E6 /* BookObservable.swift */; };
+		71B97FD126FED65F00AE93BE /* CocaWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B97FD026FED65F00AE93BE /* CocaWebView.swift */; };
 		71FA47B126FA40E300F174F3 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B026FA40E300F174F3 /* Constant.swift */; };
 		71FA47B426FA439200F174F3 /* MyVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B226FA439200F174F3 /* MyVStack.swift */; };
 		71FA47B526FA439200F174F3 /* MyHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B326FA439200F174F3 /* MyHStack.swift */; };
@@ -35,6 +36,7 @@
 		71A013FC26F70BD70016F5E6 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		71A013FE26F70C910016F5E6 /* AudioBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBookView.swift; sourceTree = "<group>"; };
 		71A0140526F72F860016F5E6 /* BookObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookObservable.swift; sourceTree = "<group>"; };
+		71B97FD026FED65F00AE93BE /* CocaWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocaWebView.swift; sourceTree = "<group>"; };
 		71FA47B026FA40E300F174F3 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		71FA47B226FA439200F174F3 /* MyVStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyVStack.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/MyVStack.swift; sourceTree = "<group>"; };
 		71FA47B326FA439200F174F3 /* MyHStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyHStack.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/MyHStack.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		71A013F726F70BB30016F5E6 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				71B97FCE26FED63900AE93BE /* widget */,
 				719492AF26FE18CD002F1676 /* iab */,
 				71A013F626F70BA80016F5E6 /* movie */,
 				71A013F526F70B9C0016F5E6 /* audio */,
@@ -138,6 +141,14 @@
 				71A0140526F72F860016F5E6 /* BookObservable.swift */,
 			);
 			path = observable;
+			sourceTree = "<group>";
+		};
+		71B97FCE26FED63900AE93BE /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				71B97FD026FED65F00AE93BE /* CocaWebView.swift */,
+			);
+			path = widget;
 			sourceTree = "<group>";
 		};
 		71FA47AF26FA40CE00F174F3 /* util */ = {
@@ -319,6 +330,7 @@
 				71FA47B126FA40E300F174F3 /* Constant.swift in Sources */,
 				71A013F326F70A590016F5E6 /* HomeView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				71B97FD126FED65F00AE93BE /* CocaWebView.swift in Sources */,
 				71FA47B526FA439200F174F3 /* MyHStack.swift in Sources */,
 				719492B326FE32E0002F1676 /* LazyView.swift in Sources */,
 				71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */,
