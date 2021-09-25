@@ -15,4 +15,7 @@ object Constant {
     const val QUERY_TOKEN = "X-ListenAPI-Key"
     const val BEST_PODCAST_PATH = "api/v2/best_podcasts"
     const val PODCAST_PATH = "api/v2/podcasts/"
+
+    const val NEXT_EP_PUB_DATE_QUERY = "next_episode_pub_date"
+    const val SORT_QUERY = "sort"
 }

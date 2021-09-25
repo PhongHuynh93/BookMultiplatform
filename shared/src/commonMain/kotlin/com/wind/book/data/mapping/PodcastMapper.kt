@@ -6,6 +6,7 @@ import com.wind.book.model.Podcast
 
 class PodcastMapper : Mapper<PodcastDto, Podcast?> {
     private val extraMapper = ExtraMapper()
+    private val episodeMapper by lazy { EpisodeMapper() }
 
     override fun apply(input: PodcastDto): Podcast? = input.run {
         input.id ?: return null
@@ -34,7 +35,9 @@ class PodcastMapper : Mapper<PodcastDto, Podcast?> {
             input.isClaimed ?: false,
             input.email.orEmpty(),
             input.type.orEmpty(),
-            input.genreIds ?: emptyList()
+            input.genreIds ?: emptyList(),
+            input.episodeDtos?.mapNotNull { episodeMapper.apply(it) } ?: emptyList(),
+            input.nextEpisodePubDate ?: 0
         )
     }
 

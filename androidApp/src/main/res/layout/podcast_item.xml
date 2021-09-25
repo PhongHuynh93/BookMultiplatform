@@ -10,7 +10,7 @@
             type="com.bumptech.glide.RequestManager" />
 
         <variable
-            name="book"
+            name="podcast"
             type="com.wind.book.model.Podcast" />
     </data>
 
@@ -27,7 +27,7 @@
             app:ari_aspectRatio="1:1"
             app:rm="@{rm}"
             app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
-            app:url="@{book.thumbnail}"
+            app:url="@{podcast.thumbnail}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@{book.title}"
+                android:text="@{podcast.title}"
                 android:textAppearance="?attr/textAppearanceListItem"
                 tools:text="@tools:sample/lorem" />
 
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_tiny"
                 android:maxLines="2"
-                android:text="@{book.publisher}"
+                android:text="@{podcast.publisher}"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
                 android:textColor="?android:textColorSecondary"
                 tools:text="@tools:sample/lorem" />
