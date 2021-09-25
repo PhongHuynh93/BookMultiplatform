@@ -28,11 +28,13 @@ class IABFragment : Fragment(R.layout.iab) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val iabNav = args.iabNav
         binding.apply {
             vm = this@IABFragment.vm
             lifecycleOwner = viewLifecycleOwner
+            toolBar.title = iabNav.title
         }
-        event.setIABNav(args.iabNav)
+        binding.webView.loadUrl(iabNav.url)
         binding.webView.apply {
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
@@ -57,15 +59,8 @@ class IABFragment : Fragment(R.layout.iab) {
             }
         }
         vm.apply {
-            var hasLoadURL = false
             state.launchAndCollectIn(viewLifecycleOwner) {
                 binding.progressBar.isVisible = !it.loadDone
-                if (!hasLoadURL) {
-                    hasLoadURL = true
-                    it.url?.let {
-                        binding.webView.loadUrl(it)
-                    }
-                }
             }
         }
     }

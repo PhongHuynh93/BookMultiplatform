@@ -11,9 +11,12 @@ import SwiftUI
 
 struct IABView: View {
     @Binding var iabNav: IABNav
+    @StateObject var observable: IABObservable = koin.get()
 
     var body: some View {
-        CocaWebView(request: URLRequest(url: URL(string: iabNav.url)!))
+        CocaWebView(url: URL(string: iabNav.url)!)
             .navigationBarTitle(Text(iabNav.title), displayMode: .inline)
+            .onAppear { observable.startObserving() }
+            .onDisappear { observable.stopObserving() }
     }
 }
