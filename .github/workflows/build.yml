@@ -7,7 +7,7 @@ on:
 
 jobs:
   assemble:
-    name: Assemble the outputs of this project
+    name: Assemble Android
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
@@ -42,7 +42,7 @@ jobs:
             linkDebugFrameworkIosX64
 
   ktlint:
-    name: Check code style with Ktlint
+    name: Check Android code style
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
