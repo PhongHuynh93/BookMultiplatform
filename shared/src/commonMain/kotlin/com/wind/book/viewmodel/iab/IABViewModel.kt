@@ -1,50 +1,76 @@
 package com.wind.book.viewmodel.iab
 
 import com.wind.book.log
-import com.wind.book.share.WhileViewSubscribed
-import com.wind.book.viewmodel.BaseViewModel
-import com.wind.book.viewmodel.model.IABNav
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import com.wind.book.viewmodel.BaseEffect
+import com.wind.book.viewmodel.BaseEvent
+import com.wind.book.viewmodel.BaseMVIViewModel
+import com.wind.book.viewmodel.BaseState
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-class IABViewModel : BaseViewModel() {
-    private val _iabNav: MutableSharedFlow<IABNav> = MutableSharedFlow(replay = 1)
-    val iabNav: SharedFlow<IABNav> = _iabNav
-    val link = iabNav.map {
-        it.url
-    }
-    val title = iabNav.map {
-        it.title
-    }.stateIn(
-        scope = clientScope,
-        started = WhileViewSubscribed,
-        initialValue = ""
+data class IABState(
+    val loadDone: Boolean = false,
+    val progress: Int = 0
+) : BaseState() {
+    // Need secondary constructor to initialize with no args in SwiftUI
+    constructor() : this(
+        loadDone = false,
+        progress = 0
     )
+}
 
-    private val _loadDone: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val loadDone: StateFlow<Boolean> = _loadDone
-    private val _progress: MutableStateFlow<Int> = MutableStateFlow(0)
-    val progress: StateFlow<Int> = _progress
+fun MutableStateFlow<IABState>.update(
+    loadDone: Boolean = value.loadDone,
+    progress: Int = value.progress
+) {
+    value = value.copy(
+        loadDone = loadDone,
+        progress = progress
+    )
+}
 
-    fun setIABNav(iabNav: IABNav) {
-        clientScope.launch {
-            _iabNav.emit(iabNav)
-        }
-    }
+interface IABEvent : BaseEvent {
+    fun onProgressChanged(progress: Int)
+    fun onPageFinished()
+    fun onReceivedError()
+}
 
-    fun onProgressChanged(progress: Int) {
+sealed class IABEffect : BaseEffect()
+
+class IABViewModel : BaseMVIViewModel(), IABEvent {
+    private val _state = MutableStateFlow(IABState())
+    override val state = _state.asStateFlow()
+
+    private val _effect = MutableSharedFlow<IABEffect>()
+    override val effect = _effect.asSharedFlow()
+
+    override val event = this as IABEvent
+
+    override fun onProgressChanged(progress: Int) {
         log.e { "progress $progress" }
-        _progress.value = progress
         if (progress >= 30) {
-            _loadDone.value = true
+            _state.update(
+                progress = progress,
+                loadDone = true
+            )
+        } else {
+            _state.update(
+                progress = progress,
+            )
         }
     }
 
-    fun onPageFinished() {
-        _loadDone.value = true
+    override fun onPageFinished() {
+        _state.update(
+            loadDone = true
+        )
     }
 
-    fun onReceivedError() {
-        _loadDone.value = true
+    override fun onReceivedError() {
+        _state.update(
+            loadDone = true
+        )
     }
 }

@@ -10,5 +10,5 @@ import Foundation
 import UIKit
 
 // width/ height
-let bookRatio = CGFloat(2/3.0)
+let bookRatio = CGFloat(2 / 3.0)
 let smallRadius = CGFloat(4.0)

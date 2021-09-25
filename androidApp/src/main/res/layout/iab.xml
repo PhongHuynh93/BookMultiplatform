@@ -28,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/colorBackground"
                 app:showUpBtn="@{showUpBtn}"
-                app:title="@{vm.title}"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
 
