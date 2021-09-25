@@ -20,7 +20,7 @@ func startKoin() {
     _koin = koinApplication.koin
 }
 
-private var _koin: Koin_coreKoin? = nil
+private var _koin: Koin_coreKoin?
 var koin: Koin_coreKoin {
     return _koin!
 }
@@ -29,10 +29,8 @@ class IosAppInfo: AppInfo {
     let appId: String = Bundle.main.bundleIdentifier!
 }
 
-
 // swiftlint:disable force_cast
 extension Koin_coreKoin {
-
     // Viewmodel
     func get() -> BookViewModel {
         return koin.getDependency(objCClass: BookViewModel.self) as! BookViewModel

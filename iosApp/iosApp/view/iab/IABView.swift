@@ -6,8 +6,8 @@
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
-import SwiftUI
 import shared
+import SwiftUI
 
 struct IABView: View {
     @Binding var iabNav: IABNav

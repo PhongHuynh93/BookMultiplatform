@@ -6,9 +6,9 @@
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
+import Combine
 import Foundation
 import shared
-import Combine
 
 final class BookObservable: ObservableObject {
     let bookVM: BookViewModel
@@ -20,9 +20,9 @@ final class BookObservable: ObservableObject {
 
     init(viewModel: BookViewModel) {
         KoinKt.log.d(withMessage: { "BookObservable init viewmodel" })
-        self.bookVM = viewModel
-        self.state = LoadMoreState<Book>()
-        self.event = viewModel.event
+        bookVM = viewModel
+        state = LoadMoreState<Book>()
+        event = viewModel.event
     }
 
     deinit {
