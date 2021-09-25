@@ -11,18 +11,21 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         TabView {
-            BookView()
-                .tabItem {
-                    Label("Book", systemImage: "book")
-                }
-            AudioBookView()
-                .tabItem {
-                    Label("AudioBook", systemImage: "airpodsmax")
-                }
-            MovieView()
-                .tabItem {
-                    Label("Movie", systemImage: "film")
-                }
+            NavigationView {
+                BookView()
+            }.tabItem {
+                Label("Book", systemImage: "book")
+            }
+            NavigationView {
+                AudioBookView()
+            }.tabItem {
+                Label("AudioBook", systemImage: "airpodsmax")
+            }
+            NavigationView {
+                MovieView()
+            }.tabItem {
+                Label("Movie", systemImage: "film")
+            }
         }
     }
 }

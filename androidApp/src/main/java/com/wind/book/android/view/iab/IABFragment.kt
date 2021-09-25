@@ -10,6 +10,7 @@ import com.wind.book.android.R
 import com.wind.book.android.databinding.IabBinding
 import com.wind.book.android.extension.launchAndCollectIn
 import com.wind.book.android.util.viewBinding
+import com.wind.book.viewmodel.iab.IABEvent
 import com.wind.book.viewmodel.iab.IABViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +21,10 @@ class IABFragment : Fragment(R.layout.iab) {
     private val binding by viewBinding(IabBinding::bind)
     private val vm: IABViewModel by viewModel()
     private val args: IABFragmentArgs by navArgs()
+    private val event: IABEvent
+        get() {
+            return vm.event
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,18 +32,18 @@ class IABFragment : Fragment(R.layout.iab) {
             vm = this@IABFragment.vm
             lifecycleOwner = viewLifecycleOwner
         }
-        vm.setIABNav(args.iabNav)
+        event.setIABNav(args.iabNav)
         binding.webView.apply {
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)
-                    vm.onProgressChanged(newProgress)
+                    event.onProgressChanged(newProgress)
                 }
             }
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-                    vm.onPageFinished()
+                    event.onPageFinished()
                 }
 
                 override fun onReceivedError(
@@ -47,7 +52,7 @@ class IABFragment : Fragment(R.layout.iab) {
                     error: WebResourceError?
                 ) {
                     super.onReceivedError(view, request, error)
-                    vm.onReceivedError()
+                    event.onReceivedError()
                 }
             }
         }

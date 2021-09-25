@@ -36,6 +36,7 @@ interface IABEvent : BaseEvent {
     fun onProgressChanged(progress: Int)
     fun onPageFinished()
     fun onReceivedError()
+    fun setIABNav(iabNav: IABNav)
 }
 
 sealed class IABEffect : BaseEffect()
@@ -49,7 +50,7 @@ class IABViewModel : BaseMVIViewModel(), IABEvent {
 
     override val event = this as IABEvent
 
-    fun setIABNav(iabNav: IABNav) {
+    override fun setIABNav(iabNav: IABNav) {
         _state.update(
             url = iabNav.url,
             title = iabNav.title
