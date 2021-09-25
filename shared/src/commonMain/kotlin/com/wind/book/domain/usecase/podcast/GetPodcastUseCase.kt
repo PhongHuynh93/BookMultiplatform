@@ -5,11 +5,11 @@ import com.wind.book.domain.usecase.UseCase
 import com.wind.book.model.Podcast
 import com.wind.book.platformCoroutineDispatcher
 
-class GetPodcastParam(val currentPage: Int, val region: String)
+class GetPodcastListParam(val currentPage: Int, val region: String)
 
-class GetPodcastsUseCase(private val podcastRepository: PodcastRepository) :
-    UseCase<GetPodcastParam, List<Podcast>>(platformCoroutineDispatcher) {
+class GetPodcastUseCase(private val podcastRepository: PodcastRepository) :
+    UseCase<GetPodcastListParam, List<Podcast>>(platformCoroutineDispatcher) {
 
-    override suspend fun execute(parameters: GetPodcastParam) =
+    override suspend fun execute(parameters: GetPodcastListParam) =
         podcastRepository.getBestPodcast(parameters.currentPage, parameters.region)
 }

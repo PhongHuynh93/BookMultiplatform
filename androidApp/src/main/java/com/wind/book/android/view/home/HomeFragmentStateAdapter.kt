@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wind.book.android.view.book.BookFragment
 import com.wind.book.android.view.movie.MovieFragment
-import com.wind.book.android.view.podcast.PodcastsFragment
+import com.wind.book.android.view.podcast.PodcastFragment
 import com.wind.book.android.view.story.ArticleFragment
 
 class HomeFragmentStateAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
@@ -12,7 +12,7 @@ class HomeFragmentStateAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
 
     override fun createFragment(position: Int) = when (position) {
         0 -> BookFragment()
-        1 -> PodcastsFragment()
+        1 -> PodcastFragment()
         2 -> MovieFragment()
         3 -> ArticleFragment()
         else -> throw IllegalArgumentException()

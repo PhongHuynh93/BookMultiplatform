@@ -13,12 +13,18 @@ import com.wind.book.android.extension.launchAndCollectIn
 import com.wind.book.android.util.viewBinding
 import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.model.Podcast
-import com.wind.book.viewmodel.podcast.PodcastsViewModel
+import com.wind.book.viewmodel.LoadMoreEffect
+import com.wind.book.viewmodel.podcast.PodcastEffect
+import com.wind.book.viewmodel.podcast.PodcastEvent
+import com.wind.book.viewmodel.podcast.PodcastViewModel
 import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PodcastsFragment : Fragment(R.layout.toolbar_list_view) {
-    private val vm: PodcastsViewModel by viewModel()
+class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
+    private val vm: PodcastViewModel by viewModel()
+    private val event: PodcastEvent
+        get() = vm.event
+
     private val binding by viewBinding(ToolbarListViewBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,14 +36,11 @@ class PodcastsFragment : Fragment(R.layout.toolbar_list_view) {
         val feedAdapter = PodcastsAdapter(
             Glide.with(this),
             object : PodcastsAdapter.Callback {
-                override fun onClick(podcast: Podcast) {
-                }
+                override fun onClick(podcast: Podcast) = event.onClick(podcast)
             }
         )
         val footerLoadingAdapter = LoadingAdapter(object : LoadingAdapter.Callback {
-            override fun onClickRetryBtn() {
-                vm.retry()
-            }
+            override fun onClickRetryBtn() = event.retry()
         })
 
         val concatAdapter =
@@ -58,16 +61,16 @@ class PodcastsFragment : Fragment(R.layout.toolbar_list_view) {
                     }
                 }
                 adapter = concatAdapter
-                addItemDecoration(PodcastsDecoration(context, spanCount))
+                addItemDecoration(PodcastDecoration(context, spanCount))
                 handleLoadMore(Constant.VISIBLE_THRESHOLD, feedAdapter) {
-                    vm.loadMore()
+                    event.loadMore()
                 }
             }
             swipeRefresh.apply {
-                setOnRefreshListener { vm.refresh() }
+                setOnRefreshListener { event.refresh() }
             }
             loading.retryBtn.setOnClickListener {
-                vm.retry()
+                event.retry()
             }
         }
         vm.apply {
@@ -81,8 +84,16 @@ class PodcastsFragment : Fragment(R.layout.toolbar_list_view) {
                     }
                 }
             }
-            effect.launchAndCollectIn(viewLifecycleOwner) {
-                list.binding.rcv.scrollToPosition(0)
+            podcastEffect.launchAndCollectIn(viewLifecycleOwner) {
+                when (it) {
+                    is PodcastEffect.LMEffect -> {
+                        when (it.loadMoreEffect) {
+                            LoadMoreEffect.ScrollToTop -> list.binding.rcv.scrollToPosition(0)
+                        }
+                    }
+                    is PodcastEffect.NavToDetail -> {
+                    }
+                }
             }
             loadMore(true)
         }
