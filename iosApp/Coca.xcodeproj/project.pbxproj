@@ -10,7 +10,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		710A01FB26FEE08200F3F9B8 /* IABObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710A01FA26FEE08200F3F9B8 /* IABObservable.swift */; };
 		71514E2826F6ED72009B5C67 /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71514E2726F6ED72009B5C67 /* Koin.swift */; };
-		7173B4F326FF49EE00618FA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7173B4F226FF49EE00618FA9 /* Assets.xcassets */; };
+		7173B4F726FF50E700618FA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7173B4F626FF50E700618FA9 /* Assets.xcassets */; };
 		719492B126FE18E2002F1676 /* IABView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B026FE18E2002F1676 /* IABView.swift */; };
 		719492B326FE32E0002F1676 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B226FE32E0002F1676 /* LazyView.swift */; };
 		71A013F326F70A590016F5E6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013F226F70A590016F5E6 /* HomeView.swift */; };
@@ -33,7 +33,7 @@
 		33249BE0BCBCEAF6662DF57D /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		710A01FA26FEE08200F3F9B8 /* IABObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IABObservable.swift; sourceTree = "<group>"; };
 		71514E2726F6ED72009B5C67 /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
-		7173B4F226FF49EE00618FA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../../../Documents/Android Project/BooksKMM/Assets.xcassets"; sourceTree = "<group>"; };
+		7173B4F626FF50E700618FA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		719492B026FE18E2002F1676 /* IABView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IABView.swift; sourceTree = "<group>"; };
 		719492B226FE32E0002F1676 /* LazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LazyView.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/LazyView.swift; sourceTree = "<group>"; };
 		71A013F226F70A590016F5E6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -191,7 +191,6 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				7173B4F226FF49EE00618FA9 /* Assets.xcassets */,
 				719492B426FEBD19002F1676 /* extension */,
 				71FA47AF26FA40CE00F174F3 /* util */,
 				71A0140026F710B10016F5E6 /* observable */,
@@ -200,6 +199,7 @@
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				71514E2726F6ED72009B5C67 /* Koin.swift */,
+				7173B4F626FF50E700618FA9 /* Assets.xcassets */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -265,7 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7173B4F326FF49EE00618FA9 /* Assets.xcassets in Resources */,
+				7173B4F726FF50E700618FA9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
