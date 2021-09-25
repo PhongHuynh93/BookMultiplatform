@@ -41,7 +41,10 @@ class PodcastsFragment : Fragment(R.layout.toolbar_list_view) {
         })
 
         val concatAdapter =
-            ConcatAdapter(ConcatAdapter.Config.Builder().setIsolateViewTypes(false).build(), feedAdapter)
+            ConcatAdapter(
+                ConcatAdapter.Config.Builder().setIsolateViewTypes(false).build(),
+                feedAdapter
+            )
         binding.list.binding.apply {
             rcv.apply {
                 val spanCount = 2
@@ -81,6 +84,7 @@ class PodcastsFragment : Fragment(R.layout.toolbar_list_view) {
             effect.launchAndCollectIn(viewLifecycleOwner) {
                 list.binding.rcv.scrollToPosition(0)
             }
+            loadMore(true)
         }
     }
 }

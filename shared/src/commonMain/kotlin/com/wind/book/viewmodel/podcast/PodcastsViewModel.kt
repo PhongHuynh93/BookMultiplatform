@@ -7,13 +7,10 @@ import com.wind.book.viewmodel.LoadMoreVM
 
 class PodcastsViewModel(private val getPodcastsUseCase: GetPodcastsUseCase) : LoadMoreVM<Podcast>() {
 
-    init {
-        loadMore()
-    }
-
     override var startOffsetPage: Int = 1
 
-    override suspend fun apiCall(currentPage: Int, pageSize: Int, isRefresh: Boolean): Result<List<Podcast>> {
-        return getPodcastsUseCase(GetPodcastParam(currentPage, "vn"))
-    }
+    override suspend fun apiCall(currentPage: Int, pageSize: Int, isRefresh: Boolean) =
+        getPodcastsUseCase(GetPodcastParam(currentPage, "vn"))
+
+    override fun calcNextPage(currentPage: Int) = currentPage + 1
 }
