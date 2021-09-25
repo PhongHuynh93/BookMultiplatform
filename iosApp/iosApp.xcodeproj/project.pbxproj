@@ -11,7 +11,6 @@
 		71514E2826F6ED72009B5C67 /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71514E2726F6ED72009B5C67 /* Koin.swift */; };
 		719492B126FE18E2002F1676 /* IABView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B026FE18E2002F1676 /* IABView.swift */; };
 		719492B326FE32E0002F1676 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B226FE32E0002F1676 /* LazyView.swift */; };
-		719492B626FEBD29002F1676 /* BindingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B526FEBD29002F1676 /* BindingExtension.swift */; };
 		71A013F326F70A590016F5E6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013F226F70A590016F5E6 /* HomeView.swift */; };
 		71A013F926F70BC70016F5E6 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013F826F70BC70016F5E6 /* MovieView.swift */; };
 		71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013FC26F70BD70016F5E6 /* BookView.swift */; };
@@ -31,7 +30,6 @@
 		71514E2726F6ED72009B5C67 /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
 		719492B026FE18E2002F1676 /* IABView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IABView.swift; sourceTree = "<group>"; };
 		719492B226FE32E0002F1676 /* LazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LazyView.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/LazyView.swift; sourceTree = "<group>"; };
-		719492B526FEBD29002F1676 /* BindingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtension.swift; sourceTree = "<group>"; };
 		71A013F226F70A590016F5E6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		71A013F826F70BC70016F5E6 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		71A013FC26F70BD70016F5E6 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 		719492B426FEBD19002F1676 /* extension */ = {
 			isa = PBXGroup;
 			children = (
-				719492B526FEBD29002F1676 /* BindingExtension.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -322,7 +319,6 @@
 				71FA47B126FA40E300F174F3 /* Constant.swift in Sources */,
 				71A013F326F70A590016F5E6 /* HomeView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				719492B626FEBD29002F1676 /* BindingExtension.swift in Sources */,
 				71FA47B526FA439200F174F3 /* MyHStack.swift in Sources */,
 				719492B326FE32E0002F1676 /* LazyView.swift in Sources */,
 				71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */,
