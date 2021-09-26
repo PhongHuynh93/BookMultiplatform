@@ -10,6 +10,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		710A01FB26FEE08200F3F9B8 /* IABObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710A01FA26FEE08200F3F9B8 /* IABObservable.swift */; };
 		71514E2826F6ED72009B5C67 /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71514E2726F6ED72009B5C67 /* Koin.swift */; };
+		7160BAAC270073AA003ED014 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7160BAAA27006C8B003ED014 /* Launch Screen.storyboard */; };
 		7173B4F726FF50E700618FA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7173B4F626FF50E700618FA9 /* Assets.xcassets */; };
 		719492B126FE18E2002F1676 /* IABView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B026FE18E2002F1676 /* IABView.swift */; };
 		719492B326FE32E0002F1676 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B226FE32E0002F1676 /* LazyView.swift */; };
@@ -32,6 +33,7 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		710A01FA26FEE08200F3F9B8 /* IABObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IABObservable.swift; sourceTree = "<group>"; };
 		71514E2726F6ED72009B5C67 /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
+		7160BAAA27006C8B003ED014 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		7173B4F626FF50E700618FA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		719492B026FE18E2002F1676 /* IABView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IABView.swift; sourceTree = "<group>"; };
 		719492B226FE32E0002F1676 /* LazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LazyView.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/LazyView.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				71514E2726F6ED72009B5C67 /* Koin.swift */,
 				7173B4F626FF50E700618FA9 /* Assets.xcassets */,
+				7160BAAA27006C8B003ED014 /* Launch Screen.storyboard */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7160BAAC270073AA003ED014 /* Launch Screen.storyboard in Resources */,
 				7173B4F726FF50E700618FA9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
