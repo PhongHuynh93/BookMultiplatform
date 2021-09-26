@@ -2,6 +2,7 @@ package com.wind.book.android.binding
 
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
+import com.google.android.material.appbar.AppBarLayout
 import com.wind.book.android.R
 import com.wind.book.android.extension.unWrapContext
 
@@ -20,5 +21,11 @@ fun Toolbar.showUpBtn(showUpBtn: Boolean?, useCloseIcon: Boolean? = false) {
         setNavigationOnClickListener {
             it.context.unWrapContext().onBackPressed()
         }
+    }
+}
+
+fun Toolbar.setLayoutScrollBehavior(scrollFlag: Int) {
+    (layoutParams as AppBarLayout.LayoutParams).apply {
+        scrollFlags = scrollFlag
     }
 }

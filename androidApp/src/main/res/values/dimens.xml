@@ -9,4 +9,5 @@
     <dimen name="space_super_tiny">2dp</dimen>
 
     <dimen name="divider_height">0.5dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
 </resources>

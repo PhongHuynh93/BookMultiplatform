@@ -3,48 +3,43 @@ package com.wind.book.model
 data class Podcast(
     val id: String,
     val title: String,
-    val country: String,
-    val description: String,
-    val earliestPubDateMs: Long,
-    val email: String,
-    val explicitContent: Boolean,
-    val extra: Extra,
-    val genreIds: List<Int>,
-    val image: String,
-    val isClaimed: Boolean,
-    val itunesId: Int,
-    val language: String,
-    val latestPubDateMs: Long,
-    val listenScore: String,
-    val listenScoreGlobalRank: String,
-    val listennotesUrl: String,
-    val lookingFor: LookingFor,
     val publisher: String,
-    val rss: String,
+    val image: String,
     val thumbnail: String,
+    val listennotesUrl: String = "",
+    val listenScore: String = "",
+    val listenScoreGlobalRank: String = "",
     val totalEpisodes: Int,
-    val type: String,
-    val website: String
-)
+    val explicitContent: Boolean = false,
+    val description: String,
+    val itunesId: Int = 0,
+    val rss: String = "",
+    val latestPubDateMs: Long = 0,
+    val earliestPubDateMs: Long = 0,
+    val language: String = "",
+    val country: String = "",
+    val website: String = "",
+    val extra: Extra? = null,
+    val isClaimed: Boolean = false,
+    val email: String = "",
+    val type: String = "",
+    val genreIds: List<Int> = emptyList(),
+    val episodes: List<Episode> = emptyList(),
+    val nextEpisodePubDate: Long = 0
+) {
 
-data class LookingFor(
-    val cohosts: Boolean = false,
-    val crossPromotion: Boolean = false,
-    val guests: Boolean = true,
-    val sponsors: Boolean = false
-)
-
-data class Extra(
-    val facebookHandle: String = "",
-    val googleUrl: String = "",
-    val instagramHandle: String = "",
-    val linkedinUrl: String = "",
-    val patreonHandle: String = "",
-    val spotifyUrl: String = "",
-    val twitterHandle: String = "",
-    val url1: String = "",
-    val url2: String = "",
-    val url3: String = "",
-    val wechatHandle: String = "",
-    val youtubeUrl: String = ""
-)
+    data class Extra(
+        val twitterHandle: String = "",
+        val facebookHandle: String = "",
+        val instagramHandle: String = "",
+        val wechatHandle: String = "",
+        val patreonHandle: String = "",
+        val youtubeUrl: String = "",
+        val linkedinUrl: String = "",
+        val spotifyUrl: String = "",
+        val googleUrl: String = "",
+        val url1: String = "",
+        val url2: String = "",
+        val url3: String = ""
+    )
+}

@@ -10,7 +10,7 @@ import com.wind.book.android.databinding.PodcastItemBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Podcast
 
-class PodcastsAdapter(private val rm: RequestManager, private val callback: Callback) :
+class PodcastAdapter(private val rm: RequestManager, private val callback: Callback) :
     ListAdapter<Podcast, PodcastsViewHolder>(object : DiffUtil.ItemCallback<Podcast>() {
         override fun areItemsTheSame(oldItem: Podcast, newItem: Podcast): Boolean {
             return oldItem.id == newItem.id
@@ -26,11 +26,12 @@ class PodcastsAdapter(private val rm: RequestManager, private val callback: Call
         stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastsViewHolder {
-        return PodcastsViewHolder(
-            PodcastItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), rm, callback
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        PodcastsViewHolder(
+            PodcastItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            rm,
+            callback
         )
-    }
 
     override fun onBindViewHolder(holder: PodcastsViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -42,7 +43,7 @@ class PodcastsAdapter(private val rm: RequestManager, private val callback: Call
 class PodcastsViewHolder(
     private val binding: PodcastItemBinding,
     private val rm: RequestManager,
-    val callback: Callback
+    private val callback: Callback
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -61,7 +62,7 @@ class PodcastsViewHolder(
         podcast = item
         binding.apply {
             this.rm = this@PodcastsViewHolder.rm
-            book = item
+            podcast = item
         }
     }
 

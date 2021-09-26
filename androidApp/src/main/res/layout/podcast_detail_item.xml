@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rm"
+            type="com.bumptech.glide.RequestManager" />
+
+        <variable
+            name="podcast"
+            type="com.wind.book.model.Podcast" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_normal">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/thumb"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="@dimen/space_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rm="@{rm}"
+            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+            app:url="@{podcast.thumbnail}" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_pretty_small"
+            android:layout_marginEnd="@dimen/space_normal"
+            android:text="@{podcast.title}"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/thumb"
+            app:layout_constraintTop_toTopOf="@id/thumb"
+            tools:text="@tools:sample/cities" />
+
+        <TextView
+            android:id="@+id/publisher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{podcast.publisher}"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="@tools:sample/lorem" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/iab_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_normal"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/space_small"
+            android:src="@drawable/ic_link"
+            app:layout_constraintStart_toStartOf="@id/thumb"
+            app:layout_constraintTop_toBottomOf="@id/thumb" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_normal"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/space_small"
+            android:src="@drawable/ic_share"
+            app:layout_constraintStart_toEndOf="@id/iab_btn"
+            app:layout_constraintTop_toBottomOf="@id/thumb" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_pretty_small"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@{podcast.description}"
+            android:textAppearance="?attr/textAppearanceListItemSecondary"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/thumb"
+            app:layout_constraintTop_toBottomOf="@id/iab_btn"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/total_episodes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@{@string/total_episodes(podcast.totalEpisodes)}"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintBottom_toBottomOf="@id/sort_btn"
+            app:layout_constraintEnd_toStartOf="@id/sort_btn"
+            app:layout_constraintStart_toStartOf="@id/thumb"
+            app:layout_constraintTop_toTopOf="@id/sort_btn"
+            tools:text="100 episodes" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/sort_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_above_normal"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/space_small"
+            android:src="@drawable/ic_sort"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

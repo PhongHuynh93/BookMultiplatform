@@ -1,7 +1,7 @@
 package com.wind.book.data.repository.podcast
 
-import com.wind.book.data.repository.podcast.datasource.LocalPodcastsDataSource
-import com.wind.book.data.repository.podcast.datasource.RemotePodcastsDataSource
+import com.wind.book.data.repository.podcast.datasource.LocalPodcastDataSource
+import com.wind.book.data.repository.podcast.datasource.RemotePodcastDataSource
 import com.wind.book.model.Podcast
 
 interface PodcastRepository {
@@ -9,8 +9,8 @@ interface PodcastRepository {
 }
 
 internal class PodcastRepositoryImpl(
-    private val remoteSource: RemotePodcastsDataSource,
-    private val localSource: LocalPodcastsDataSource
+    private val remoteSource: RemotePodcastDataSource,
+    private val localSource: LocalPodcastDataSource
 ) : PodcastRepository {
 
     override suspend fun getBestPodcast(currentPage: Int, region: String) =

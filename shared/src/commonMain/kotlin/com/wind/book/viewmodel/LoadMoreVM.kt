@@ -123,7 +123,7 @@ abstract class LoadMoreVM<T> : BaseMVIViewModel(), LoadMoreEvent {
                         data = cachedData
                     )
                     // increase the size to get the next page
-                    currentPage += pageSize
+                    currentPage = calcNextPage(currentPage)
                     val endOfPage = notDuplicatedData.isEmpty()
                     onSuccess(isEmpty = cachedData.isEmpty(), endOfPage = endOfPage)
 
@@ -245,4 +245,6 @@ abstract class LoadMoreVM<T> : BaseMVIViewModel(), LoadMoreEvent {
             )
         }
     }
+
+    protected open fun calcNextPage(currentPage: Int) = currentPage + pageSize
 }
