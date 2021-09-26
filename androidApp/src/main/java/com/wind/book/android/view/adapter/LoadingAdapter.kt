@@ -82,9 +82,11 @@ class LoadingAdapter(private val callback: Callback) :
         fun bind(screen: LoadingScreen) {
             var isError = false
             var isEndOfPage = false
-            if (screen is LoadingScreen.Error) {
-                isError = true
-                binding.errorTv.text = screen.errorMessage
+            if (screen is LoadingScreen.Data<*>) {
+                screen.errorMessage?.also {
+                    isError = true
+                    binding.errorTv.text = it
+                }
             } else if (screen is LoadingScreen.Data<*>) {
                 isEndOfPage = screen.isEndPage
             }

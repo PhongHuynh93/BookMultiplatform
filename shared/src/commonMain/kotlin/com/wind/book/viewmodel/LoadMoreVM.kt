@@ -204,7 +204,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     }
 
     private fun onError(exception: Throwable) {
-        log.v { "$TAG onError isEmpty ${exception.stackTraceToString()}" }
+        log.v { "$TAG onError ${exception.stackTraceToString()}" }
         canNotLoad = true
         when (val screen = state.value.screen) {
             is LoadingScreen.Data<*> -> {
