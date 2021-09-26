@@ -95,4 +95,10 @@ class ListView @JvmOverloads constructor(
         log.e { "setRefreshStatexx $isOn" }
         binding.swipeRefresh.isRefreshing = isOn
     }
+
+    fun setOnRetryClick(onRetry: () -> Unit) {
+        binding.loading.retryBtn.setOnClickListener {
+            onRetry()
+        }
+    }
 }

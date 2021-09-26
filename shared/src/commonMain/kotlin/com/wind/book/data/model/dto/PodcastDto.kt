@@ -56,7 +56,11 @@ data class PodcastDto(
     @SerialName("type")
     val type: String? = null,
     @SerialName("genre_ids")
-    val genreIds: List<Int>? = null
+    val genreIds: List<Int>? = null,
+    @SerialName("episodes")
+    val episodeDtos: List<EpisodeDto>? = null,
+    @SerialName("next_episode_pub_date")
+    val nextEpisodePubDate: Long? = null
 )
 
 @Serializable

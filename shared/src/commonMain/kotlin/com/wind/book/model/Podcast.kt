@@ -24,6 +24,8 @@ data class Podcast(
     val email: String = "",
     val type: String = "",
     val genreIds: List<Int> = emptyList(),
+    val episodes: List<Episode> = emptyList(),
+    val nextEpisodePubDate: Long = 0
 ) {
 
     data class Extra(
