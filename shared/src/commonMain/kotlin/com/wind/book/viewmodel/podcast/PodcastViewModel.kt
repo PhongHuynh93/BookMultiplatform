@@ -30,6 +30,7 @@ class PodcastViewModel(private val getPodcastUseCase: GetPodcastUseCase) :
     override val event = this as PodcastEvent
 
     override var startOffsetPage: Int = 1
+    override var pageSize: Int = 1
 
     init {
         loadMore()
@@ -43,8 +44,6 @@ class PodcastViewModel(private val getPodcastUseCase: GetPodcastUseCase) :
 
     override suspend fun apiCall(currentPage: Int, pageSize: Int, isRefresh: Boolean) =
         getPodcastUseCase(GetPodcastListParam(currentPage, "vn"))
-
-    override fun calcNextPage(currentPage: Int) = currentPage + 1
 
     override fun onClick(podcast: Podcast) {
         clientScope.launch {

@@ -70,7 +70,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     protected open var startOffsetPage = Constant.START_OFFSET_PAGE
     protected open var pageSize = Constant.PAGE_SIZE
 
-    private var currentPage = startOffsetPage
+    private var currentPage: Int? = null
 
     @Suppress("UNCHECKED_CAST")
     private val cachedData: List<T>
@@ -97,11 +97,12 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
             if (!canLoad()) {
                 return@launch
             }
-            if (isRefresh) {
-                onLoading()
-                currentPage = startOffsetPage
+            onLoading()
+
+            val currentPage = if (isRefresh) {
+                startOffsetPage
             } else {
-                onLoading()
+                currentPage ?: startOffsetPage
             }
             log.v { "$TAG start load more $currentPage isRefresh $isRefresh" }
             apiCall(currentPage, pageSize, isRefresh)
@@ -126,7 +127,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
                     log.v { "$TAG notDuplicatedData current page=$currentPage isRefresh=$isRefresh notDuplicatedData=${notDuplicatedData.size}" }
                     log.v { "$TAG cachedComment current page=$currentPage isRefresh=$isRefresh cachedData=${cachedData.size}" }
                     // increase the size to get the next page
-                    currentPage = calcNextPage(currentPage)
+                    this@LoadMoreVM.currentPage = calcNextPage(currentPage)
                     val endOfPage = notDuplicatedData.isEmpty()
                     onSuccess(endOfPage = endOfPage)
                     // FIXME: 26/09/2021 handle text localization here
@@ -248,5 +249,5 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
         canNotLoad = false
     }
 
-    protected open fun calcNextPage(currentPage: Int) = currentPage + pageSize
+    private fun calcNextPage(currentPage: Int) = currentPage + pageSize
 }
