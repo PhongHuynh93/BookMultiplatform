@@ -52,6 +52,7 @@ sealed class LoadMoreEffect : BaseEffect() {
     object ScrollToTop : LoadMoreEffect()
 }
 
+private val TAG = LoadMoreVM::class.simpleName
 abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent {
     // region MVI
     private val _state = MutableStateFlow(LoadingState())
@@ -102,11 +103,11 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
             } else {
                 onLoading()
             }
-            log.v { "start load more $currentPage isRefresh $isRefresh" }
+            log.v { "$TAG start load more $currentPage isRefresh $isRefresh" }
             apiCall(currentPage, pageSize, isRefresh)
                 .onSuccess { list ->
                     ensureActive()
-                    log.v { "return data current page=$currentPage isRefresh=$isRefresh dataSize=${list.size}" }
+                    log.v { "$TAG return data current page=$currentPage isRefresh=$isRefresh dataSize=${list.size}" }
 
                     val cachedData = if (isRefresh) {
                         scrollToTop()
@@ -122,8 +123,8 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
                         }
                     }
                     cachedData.addAll(notDuplicatedData)
-                    log.v { "notDuplicatedData current page=$currentPage isRefresh=$isRefresh notDuplicatedData=${notDuplicatedData.size}" }
-                    log.v { "cachedComment current page=$currentPage isRefresh=$isRefresh cachedData=${cachedData.size}" }
+                    log.v { "$TAG notDuplicatedData current page=$currentPage isRefresh=$isRefresh notDuplicatedData=${notDuplicatedData.size}" }
+                    log.v { "$TAG cachedComment current page=$currentPage isRefresh=$isRefresh cachedData=${cachedData.size}" }
                     // increase the size to get the next page
                     currentPage = calcNextPage(currentPage)
                     val endOfPage = notDuplicatedData.isEmpty()
@@ -142,26 +143,26 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
                     }
                     // auto load more if the data size < VISIBLE_THRESHOLD and we are not at the end of page
                     if (!endOfPage && cachedData.size < Constant.VISIBLE_THRESHOLD) {
-                        log.v { "Auto load more because the data size is less than VISIBLE_THRESHOLD" }
+                        log.v { "$TAG Auto load more because the data size is less than VISIBLE_THRESHOLD" }
                         loadMore(false)
                     }
                 }
                 .onFailure {
                     ensureActive()
-                    onError(it, cachedData.isEmpty())
+                    onError(it)
                 }
         }
     }
 
     override fun retry() {
-        log.v { "retry" }
+        log.v { "$TAG retry" }
         onRetry()
         loadMore(false)
     }
 
     override fun refresh() {
         // cancel all the previous APIs
-        log.v { "Refresh" }
+        log.v { "$TAG Refresh" }
         loadAPIScope.coroutineContext.cancelChildren()
         onRefresh()
         loadMore(isRefresh = true)
@@ -172,7 +173,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
      * because need to wait the list finish calculating the diffutil
      */
     override fun scrollToTop() {
-        log.v { "scrollToTop" }
+        log.v { "$TAG scrollToTop" }
         clientScope.launch {
             delay(300)
             _effect.emit(LoadMoreEffect.ScrollToTop)
@@ -190,7 +191,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     }
 
     private fun onLoading() {
-        log.v { "onLoading" }
+        log.v { "$TAG onLoading" }
         canNotLoad = true
         when (val screen = _state.value.screen) {
             is LoadingScreen.Data<*> -> {
@@ -207,12 +208,12 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     }
 
     private fun onSuccess(endOfPage: Boolean) {
-        log.v { "onSuccessxxx" }
+        log.v { "$TAG onSuccessxxx" }
         canNotLoad = endOfPage
     }
 
-    private fun onError(exception: Throwable, isEmpty: Boolean) {
-        log.v { "onError isEmpty $isEmpty ${exception.stackTraceToString()}" }
+    private fun onError(exception: Throwable) {
+        log.v { "$TAG onError isEmpty ${exception.stackTraceToString()}" }
         canNotLoad = true
         when (val screen = state.value.screen) {
             is LoadingScreen.Data<*> -> {
@@ -234,7 +235,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     }
 
     private fun onRefresh() {
-        log.v { "onRefresh" }
+        log.v { "$TAG onRefresh" }
         canNotLoad = false
         when (val screen = state.value.screen) {
             is LoadingScreen.Data<*> -> {
@@ -251,7 +252,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     }
 
     private fun onRetry() {
-        log.v { "onRetry" }
+        log.v { "$TAG onRetry" }
         canNotLoad = false
     }
 

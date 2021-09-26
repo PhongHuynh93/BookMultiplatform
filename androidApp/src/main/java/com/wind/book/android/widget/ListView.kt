@@ -17,7 +17,7 @@ import com.wind.book.android.extension.inflater
 import com.wind.book.log
 import com.wind.book.viewmodel.LoadingScreen
 
-private val TAG = ListView::class.java.simpleName
+private val TAG = ListView::class.simpleName
 
 class ListView @JvmOverloads constructor(
     context: Context,
@@ -56,7 +56,7 @@ class ListView @JvmOverloads constructor(
         var isLoading = false
         var isError = false
         var isRefresh = false
-        // disable swipe when not have data
+        // disable swipe when the screen is error/no data/loading
         if (screen is LoadingScreen.Data<*>) {
             binding.swipeRefresh.isEnabled = useSwipe
         } else {
@@ -64,8 +64,6 @@ class ListView @JvmOverloads constructor(
         }
         when (screen) {
             is LoadingScreen.Data<*> -> {
-                // enable swipe when have data
-                binding.swipeRefresh.isEnabled = useSwipe
                 isRefresh = screen.isRefresh
             }
             is LoadingScreen.Error -> {
