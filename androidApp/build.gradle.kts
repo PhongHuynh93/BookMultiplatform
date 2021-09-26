@@ -1,3 +1,6 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 plugins {
     id(Plugins.androidApplication)
     id(Plugins.serialization)
@@ -14,8 +17,8 @@ android {
         applicationId = Configs.androidApplicationId
         minSdk = Configs.minSdk
         targetSdk = Configs.targetSdk
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = getVersionCodeX()
+        versionName = getVersionNameX()
     }
     buildTypes {
         getByName("release") {
@@ -40,6 +43,14 @@ android {
         // Allow lint to check dependencies
         isCheckDependencies = true
     }
+}
+
+fun getVersionNameX(): String {
+    return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy.MM.dd-HH"))
+}
+
+fun getVersionCodeX(): Int {
+    return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHH")).toInt()
 }
 
 dependencies {
