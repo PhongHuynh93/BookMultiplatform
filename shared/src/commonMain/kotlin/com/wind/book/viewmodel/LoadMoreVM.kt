@@ -1,6 +1,7 @@
 package com.wind.book.viewmodel
 
 import com.wind.book.log
+import com.wind.book.model.Identifiable
 import com.wind.book.viewmodel.util.Constant
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -51,7 +52,7 @@ sealed class LoadMoreEffect : BaseEffect() {
     object ScrollToTop : LoadMoreEffect()
 }
 
-abstract class LoadMoreVM<T> : BaseMVIViewModel(), LoadMoreEvent {
+abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent {
     // region MVI
     private val _state = MutableStateFlow(LoadingState())
     override val state = _state.asStateFlow()
@@ -115,9 +116,10 @@ abstract class LoadMoreVM<T> : BaseMVIViewModel(), LoadMoreEvent {
                     }
 
                     // filter duplication
-                    // TODO: 26/09/2021 filter depend on id
                     val notDuplicatedData = list.filterNot {
-                        cachedData.contains(it)
+                        cachedData.any { cached ->
+                            it.id == cached.id
+                        }
                     }
                     cachedData.addAll(notDuplicatedData)
                     log.v { "notDuplicatedData current page=$currentPage isRefresh=$isRefresh notDuplicatedData=${notDuplicatedData.size}" }

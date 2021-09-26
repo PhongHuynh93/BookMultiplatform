@@ -5,7 +5,7 @@ import com.arkivanov.essenty.parcelable.Parcelize
 
 @Parcelize
 data class Podcast(
-    val id: String,
+    override val id: String,
     val title: String,
     val publisher: String,
     val image: String,
@@ -30,7 +30,7 @@ data class Podcast(
     val genreIds: List<Int> = emptyList(),
     val episodes: List<Episode> = emptyList(),
     val nextEpisodePubDate: Long = 0
-) : Parcelable {
+) : Parcelable, Identifiable {
 
     @Parcelize
     data class Extra(

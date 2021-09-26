@@ -13,7 +13,7 @@ import com.wind.book.model.Article
 class ArticleAdapter(private val rm: RequestManager, private val callback: Callback) :
     ListAdapter<Article, ArticleViewHolder>(object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem.url == newItem.url
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
