@@ -1,6 +1,8 @@
-target 'iosApp' do
+target 'Coca' do
   use_frameworks!
   platform :ios, '14.1'
+  project 'Coca.xcodeproj'
   pod 'shared', :path => '../shared'
   pod 'Kingfisher', '~> 7.0'
+  pod 'SwiftLint'
 end
