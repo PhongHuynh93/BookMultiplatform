@@ -22,6 +22,7 @@ import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.model.Episode
 import com.wind.book.model.Podcast
 import com.wind.book.viewmodel.LoadMoreEffect
+import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailEffect
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailEvent
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailViewModel
@@ -98,21 +99,28 @@ class PodcastDetailFragment : Fragment(R.layout.toolbar_list_view) {
                 setOnRefreshListener { event.refresh() }
             }
         }
-        vm.setArgs(args.podcastNav)
+        args.podcast.also { podcast ->
+            vm.setArgs(podcast)
+            title = podcast.title
+            podcastAdapter.podcast = podcast
+        }
         vm.apply {
-            podcastDetailState.launchAndCollectIn(viewLifecycleOwner) {
-                list.setRefreshState(it.refreshState)
-                list.setLoadState(it.loadState)
-                loadingAdapter.loadState = it.loadState
-                episodesAdapter.submitList(it.data) {
-                    if (it.data.isNotEmpty() && !concatAdapter.adapters.contains(loadingAdapter)) {
-                        concatAdapter.addAdapter(loadingAdapter)
+            state.launchAndCollectIn(viewLifecycleOwner) {
+                val screen = it.screen
+                if (screen is LoadingScreen.Data<*>) {
+                    @Suppress("UNCHECKED_CAST")
+                    val data = screen.data as List<Episode>
+                    episodesAdapter.submitList(data) {
+                        if (data.isNotEmpty() && !concatAdapter.adapters.contains(
+                                loadingAdapter
+                            )
+                        ) {
+                            concatAdapter.addAdapter(loadingAdapter)
+                        }
                     }
                 }
-                it.podcast.let { podcast ->
-                    title = podcast?.title ?: ""
-                    podcastAdapter.podcast = podcast
-                }
+                list.setScreen(screen)
+                loadingAdapter.loadState = screen
             }
             podcastDetailEffect.launchAndCollectIn(viewLifecycleOwner) {
                 when (it) {
@@ -139,7 +147,6 @@ class PodcastDetailFragment : Fragment(R.layout.toolbar_list_view) {
                     }
                 }
             }
-            loadMore(true)
         }
     }
 }

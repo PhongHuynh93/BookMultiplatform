@@ -5,43 +5,17 @@ import com.wind.book.domain.usecase.podcast_detail.GetPodcastDetailUseCase
 import com.wind.book.model.Episode
 import com.wind.book.model.Podcast
 import com.wind.book.model.SortMode
-import com.wind.book.viewmodel.*
-import com.wind.book.viewmodel.model.PodcastNav
-import com.wind.book.viewmodel.util.LoadState
-import kotlinx.coroutines.flow.*
+import com.wind.book.viewmodel.BaseEffect
+import com.wind.book.viewmodel.LoadMoreEffect
+import com.wind.book.viewmodel.LoadMoreEvent
+import com.wind.book.viewmodel.LoadMoreVM
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-data class PodcastDetailState(
-    val loadState: LoadState = LoadState.Loading(isEmpty = true),
-    val refreshState: Boolean = false,
-    val podcast: Podcast? = null,
-    val data: List<Episode> = emptyList(),
-) : BaseState() {
-    // Need secondary constructor to initialize with no args in SwiftUI
-    constructor() : this(
-        loadState = LoadState.Loading(isEmpty = true),
-        refreshState = false,
-        podcast = null,
-        data = emptyList(),
-    )
-}
-
-fun MutableStateFlow<PodcastDetailState>.update(
-    loadState: LoadState = value.loadState,
-    refreshState: Boolean = value.refreshState,
-    podcast: Podcast? = value.podcast,
-    data: List<Episode> = value.data,
-) {
-    value = value.copy(
-        loadState = loadState,
-        refreshState = refreshState,
-        podcast = podcast,
-        data = data
-    )
-}
-
 interface PodcastDetailEvent : LoadMoreEvent {
-    fun setArgs(podcastNav: PodcastNav)
+    fun setArgs(podcast: Podcast)
     fun onShare(podcast: Podcast)
     fun onOpenLink(podcast: Podcast)
 }
@@ -56,9 +30,6 @@ class PodcastDetailViewModel(
     private val getPodcastDetailUseCase: GetPodcastDetailUseCase
 ) : LoadMoreVM<Episode>(), PodcastDetailEvent {
 
-    private val _podcastDetailState = MutableStateFlow(PodcastDetailState())
-    val podcastDetailState = _podcastDetailState
-
     private val _podcastDetailEffect = MutableSharedFlow<PodcastDetailEffect>()
     val podcastDetailEffect = _podcastDetailEffect.asSharedFlow()
 
@@ -69,19 +40,6 @@ class PodcastDetailViewModel(
     private var podcast: Podcast? = null
 
     init {
-
-        clientScope.launch {
-            state.collect {
-                _podcastDetailState.emit(
-                    PodcastDetailState(
-                        it.loadState,
-                        it.refreshState,
-                        podcast,
-                        it.data
-                    )
-                )
-            }
-        }
         // capture the base effect and emit again
         clientScope.launch {
             effect.collectLatest {
@@ -108,19 +66,9 @@ class PodcastDetailViewModel(
             .map { it.episodes }
     }
 
-    override fun setArgs(podcastNav: PodcastNav) {
-        clientScope.launch {
-            podcast = Podcast(
-                id = podcastNav.id,
-                title = podcastNav.title,
-                publisher = podcastNav.publisher,
-                image = podcastNav.image,
-                thumbnail = podcastNav.thumbnail,
-                description = podcastNav.description,
-                totalEpisodes = podcastNav.totalEpisodes
-            )
-            loadMore(true)
-        }
+    override fun setArgs(podcast: Podcast) {
+        this.podcast = podcast
+        loadMore()
     }
 
     override fun onShare(podcast: Podcast) {

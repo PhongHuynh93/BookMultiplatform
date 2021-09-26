@@ -15,7 +15,9 @@ import com.wind.book.android.extension.fadeOut
 import com.wind.book.android.extension.getColorAttr
 import com.wind.book.android.extension.inflater
 import com.wind.book.log
-import com.wind.book.viewmodel.util.LoadState
+import com.wind.book.viewmodel.LoadingScreen
+
+private val TAG = ListView::class.java.simpleName
 
 class ListView @JvmOverloads constructor(
     context: Context,
@@ -48,13 +50,38 @@ class ListView @JvmOverloads constructor(
         }
     }
 
-    fun setLoadState(loadState: LoadState) {
-        log.e { "load statexxx $loadState" }
+    fun setScreen(screen: LoadingScreen) {
+        log.e { "$TAG screenxxx $screen" }
+        var isListEmpty = false
+        var isLoading = false
+        var isError = false
+        var isRefresh = false
+        // disable swipe when not have data
+        if (screen is LoadingScreen.Data<*>) {
+            binding.swipeRefresh.isEnabled = useSwipe
+        } else {
+            binding.swipeRefresh.isEnabled = false
+        }
+        when (screen) {
+            is LoadingScreen.Data<*> -> {
+                // enable swipe when have data
+                binding.swipeRefresh.isEnabled = useSwipe
+                isRefresh = screen.isRefresh
+            }
+            is LoadingScreen.Error -> {
+                isError = true
+                binding.loading.errorTv.text = screen.errorMessage
+            }
+            LoadingScreen.Loading -> {
+                isLoading = true
+            }
+            is LoadingScreen.NoData -> {
+                isListEmpty = true
+            }
+        }
         // show empty list
-        val isListEmpty = loadState is LoadState.NotLoading.Complete && loadState.isEmpty
         showEmptyList(isListEmpty)
         // Show loading spinner during initial load or refresh.
-        val isLoading = loadState is LoadState.Loading && loadState.isEmpty
         binding.loading.loadingContainer.apply {
             if (isLoading) {
                 fadeIn()
@@ -62,23 +89,11 @@ class ListView @JvmOverloads constructor(
                 fadeOut()
             }
         }
-        if (loadState.isEmpty) {
-            // disable swipe when list is empty
-            binding.swipeRefresh.isEnabled = false
-        } else {
-            binding.swipeRefresh.isEnabled = useSwipe
-        }
+        // refresh
+        binding.swipeRefresh.isRefreshing = isRefresh
         // Show the retry state if initial load or refresh fails and there are no items.
-        binding.loading.retryBtn.isVisible = loadState is LoadState.Error && loadState.isEmpty
-        showError(loadState)
-    }
-
-    private fun showError(loadState: LoadState) {
-        val errorState = loadState as? LoadState.Error
-        binding.loading.errorTv.isVisible = errorState != null && loadState.isEmpty
-        errorState?.let {
-            binding.loading.errorTv.text = it.error.toString()
-        }
+        binding.loading.retryBtn.isVisible = isError
+        binding.loading.errorTv.isVisible = isError
     }
 
     private fun showEmptyList(show: Boolean) {
@@ -89,11 +104,6 @@ class ListView @JvmOverloads constructor(
             binding.emptyListContainer.visibility = View.GONE
             binding.rcv.visibility = View.VISIBLE
         }
-    }
-
-    fun setRefreshState(isOn: Boolean) {
-        log.e { "setRefreshStatexx $isOn" }
-        binding.swipeRefresh.isRefreshing = isOn
     }
 
     fun setOnRetryClick(onRetry: () -> Unit) {

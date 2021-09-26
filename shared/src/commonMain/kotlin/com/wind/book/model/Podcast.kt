@@ -1,5 +1,9 @@
 package com.wind.book.model
 
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.arkivanov.essenty.parcelable.Parcelize
+
+@Parcelize
 data class Podcast(
     val id: String,
     val title: String,
@@ -26,8 +30,9 @@ data class Podcast(
     val genreIds: List<Int> = emptyList(),
     val episodes: List<Episode> = emptyList(),
     val nextEpisodePubDate: Long = 0
-) {
+) : Parcelable {
 
+    @Parcelize
     data class Extra(
         val twitterHandle: String = "",
         val facebookHandle: String = "",
@@ -41,5 +46,5 @@ data class Podcast(
         val url1: String = "",
         val url2: String = "",
         val url3: String = ""
-    )
+    ) : Parcelable
 }
