@@ -10,7 +10,7 @@ import com.wind.book.android.databinding.PodcastItemBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Podcast
 
-class PodcastsAdapter(private val rm: RequestManager, private val callback: Callback) :
+class PodcastAdapter(private val rm: RequestManager, private val callback: Callback) :
     ListAdapter<Podcast, PodcastsViewHolder>(object : DiffUtil.ItemCallback<Podcast>() {
         override fun areItemsTheSame(oldItem: Podcast, newItem: Podcast): Boolean {
             return oldItem.id == newItem.id

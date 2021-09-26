@@ -33,9 +33,9 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
 
         val list = binding.list
 
-        val feedAdapter = PodcastsAdapter(
+        val podcastAdapter = PodcastAdapter(
             Glide.with(this),
-            object : PodcastsAdapter.Callback {
+            object : PodcastAdapter.Callback {
                 override fun onClick(podcast: Podcast) = event.onClick(podcast)
             }
         )
@@ -46,7 +46,7 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
         val concatAdapter =
             ConcatAdapter(
                 ConcatAdapter.Config.Builder().setIsolateViewTypes(false).build(),
-                feedAdapter
+                podcastAdapter
             )
         binding.list.binding.apply {
             rcv.apply {
@@ -62,7 +62,7 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
                 }
                 adapter = concatAdapter
                 addItemDecoration(PodcastDecoration(context, spanCount))
-                handleLoadMore(Constant.VISIBLE_THRESHOLD, feedAdapter) {
+                handleLoadMore(Constant.VISIBLE_THRESHOLD, podcastAdapter) {
                     event.loadMore()
                 }
             }
@@ -78,8 +78,11 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
                 list.setRefreshState(it.refreshState)
                 list.setLoadState(it.loadState)
                 footerLoadingAdapter.loadState = it.loadState
-                feedAdapter.submitList(it.data) {
-                    if (it.data.isNotEmpty() && !concatAdapter.adapters.contains(footerLoadingAdapter)) {
+                podcastAdapter.submitList(it.data) {
+                    if (it.data.isNotEmpty() && !concatAdapter.adapters.contains(
+                            footerLoadingAdapter
+                        )
+                    ) {
                         concatAdapter.addAdapter(footerLoadingAdapter)
                     }
                 }
@@ -95,7 +98,6 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
                     }
                 }
             }
-            loadMore(true)
         }
     }
 }

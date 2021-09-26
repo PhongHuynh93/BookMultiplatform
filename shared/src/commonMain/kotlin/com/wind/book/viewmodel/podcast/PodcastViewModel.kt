@@ -31,6 +31,10 @@ class PodcastViewModel(private val getPodcastUseCase: GetPodcastUseCase) :
 
     override var startOffsetPage: Int = 1
 
+    init {
+        loadMore(true)
+    }
+
     override suspend fun apiCall(currentPage: Int, pageSize: Int, isRefresh: Boolean) =
         getPodcastUseCase(GetPodcastListParam(currentPage, "vn"))
 
