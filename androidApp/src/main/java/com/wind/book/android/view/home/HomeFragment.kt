@@ -13,6 +13,7 @@ class HomeFragment : Fragment(R.layout.home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewPager = binding.viewPager.apply {
+            offscreenPageLimit = 1
             adapter = HomeFragmentStateAdapter(this@HomeFragment)
             isUserInputEnabled = false
         }
