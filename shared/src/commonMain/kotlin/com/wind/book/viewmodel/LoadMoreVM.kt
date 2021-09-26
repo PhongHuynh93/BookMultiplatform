@@ -193,17 +193,8 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     private fun onLoading() {
         log.v { "$TAG onLoading" }
         canNotLoad = true
-        when (val screen = _state.value.screen) {
-            is LoadingScreen.Data<*> -> {
-                _state.update(
-                    screen.copy(
-                        isEndPage = false
-                    )
-                )
-            }
-            else -> {
-                _state.update(LoadingScreen.Loading)
-            }
+        if (_state.value.screen !is LoadingScreen.Data<*>) {
+            _state.update(LoadingScreen.Loading)
         }
     }
 
@@ -219,6 +210,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
             is LoadingScreen.Data<*> -> {
                 _state.update(
                     screen = screen.copy(
+                        isRefresh = false,
                         errorMessage = exception.message
                     )
                 )

@@ -6,7 +6,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.wind.book.android.R
 import com.wind.book.android.databinding.LoadMoreItemBinding
+import com.wind.book.log
 import com.wind.book.viewmodel.LoadingScreen
+
+private val TAG = LoadingAdapter::class.simpleName
 
 class LoadingAdapter(private val callback: Callback) :
     RecyclerView.Adapter<LoadingAdapter.LoadStateViewHolder>() {
@@ -19,6 +22,7 @@ class LoadingAdapter(private val callback: Callback) :
      */
     var loadState: LoadingScreen? = null
         set(loadState) {
+            log.v { "$TAG screen=$loadState field=$field" }
             if (field != loadState) {
                 val displayOldItem = displayLoadStateAsItem(field)
                 val displayNewItem = displayLoadStateAsItem(loadState)
