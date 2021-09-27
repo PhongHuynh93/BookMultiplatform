@@ -8,7 +8,10 @@ data class Article(
     val url: String,
     val multimedia: List<Multimedia>,
     val date: String,
-)
+) : Identifiable {
+    override val id: String
+        get() = url
+}
 
 data class Multimedia(
     val caption: String,

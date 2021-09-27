@@ -36,7 +36,7 @@
         android:id="@+id/podcastDetailFragment"
         android:name="com.wind.book.android.view.podcast_detail.PodcastDetailFragment">
         <argument
-            android:name="podcastNav"
-            app:argType="com.wind.book.viewmodel.model.PodcastNav" />
+            android:name="podcast"
+            app:argType="com.wind.book.model.Podcast" />
     </fragment>
 </navigation>

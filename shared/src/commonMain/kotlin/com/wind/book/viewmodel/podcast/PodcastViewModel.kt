@@ -7,9 +7,9 @@ import com.wind.book.viewmodel.BaseEffect
 import com.wind.book.viewmodel.LoadMoreEffect
 import com.wind.book.viewmodel.LoadMoreEvent
 import com.wind.book.viewmodel.LoadMoreVM
-import com.wind.book.viewmodel.model.PodcastNav
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 interface PodcastEvent : LoadMoreEvent {
@@ -18,7 +18,7 @@ interface PodcastEvent : LoadMoreEvent {
 
 sealed class PodcastEffect : BaseEffect() {
     class LMEffect(val loadMoreEffect: LoadMoreEffect) : PodcastEffect()
-    data class NavToDetail(val podcastNav: PodcastNav) : PodcastEffect()
+    data class NavToDetail(val podcast: Podcast) : PodcastEffect()
 }
 
 class PodcastViewModel(private val getPodcastUseCase: GetPodcastUseCase) :
@@ -30,30 +30,25 @@ class PodcastViewModel(private val getPodcastUseCase: GetPodcastUseCase) :
     override val event = this as PodcastEvent
 
     override var startOffsetPage: Int = 1
+    override var pageSize: Int = 1
 
     init {
-        loadMore(true)
+        loadMore()
+        // capture the base effect and emit again
+        clientScope.launch {
+            effect.collectLatest {
+                _podcastEffect.emit(PodcastEffect.LMEffect(it))
+            }
+        }
     }
 
     override suspend fun apiCall(currentPage: Int, pageSize: Int, isRefresh: Boolean) =
         getPodcastUseCase(GetPodcastListParam(currentPage, "vn"))
 
-    override fun calcNextPage(currentPage: Int) = currentPage + 1
-
     override fun onClick(podcast: Podcast) {
         clientScope.launch {
             _podcastEffect.emit(
-                PodcastEffect.NavToDetail(
-                    PodcastNav(
-                        podcast.id,
-                        podcast.title,
-                        podcast.publisher,
-                        podcast.image,
-                        podcast.thumbnail,
-                        podcast.description,
-                        podcast.totalEpisodes
-                    )
-                )
+                PodcastEffect.NavToDetail(podcast)
             )
         }
     }

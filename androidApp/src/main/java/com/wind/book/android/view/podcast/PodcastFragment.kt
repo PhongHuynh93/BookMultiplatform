@@ -17,6 +17,7 @@ import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Podcast
 import com.wind.book.viewmodel.LoadMoreEffect
+import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.podcast.PodcastEffect
 import com.wind.book.viewmodel.podcast.PodcastEvent
 import com.wind.book.viewmodel.podcast.PodcastViewModel
@@ -78,17 +79,21 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
         }
         vm.apply {
             state.launchAndCollectIn(viewLifecycleOwner) {
-                list.setRefreshState(it.refreshState)
-                list.setLoadState(it.loadState)
-                footerLoadingAdapter.loadState = it.loadState
-                podcastAdapter.submitList(it.data) {
-                    if (it.data.isNotEmpty() && !concatAdapter.adapters.contains(
-                            footerLoadingAdapter
-                        )
-                    ) {
-                        concatAdapter.addAdapter(footerLoadingAdapter)
+                val screen = it.screen
+                if (screen is LoadingScreen.Data<*>) {
+                    @Suppress("UNCHECKED_CAST")
+                    val data = screen.data as List<Podcast>
+                    podcastAdapter.submitList(data) {
+                        if (data.isNotEmpty() && !concatAdapter.adapters.contains(
+                                footerLoadingAdapter
+                            )
+                        ) {
+                            concatAdapter.addAdapter(footerLoadingAdapter)
+                        }
                     }
                 }
+                list.setScreen(screen)
+                footerLoadingAdapter.loadState = screen
             }
             podcastEffect.launchAndCollectIn(viewLifecycleOwner) {
                 when (it) {
@@ -100,7 +105,7 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
                     is PodcastEffect.NavToDetail -> {
                         findNavController().safeNavigate(
                             HomeFragmentDirections.actionHomeFragmentToPodcastDetailFragment(
-                                it.podcastNav
+                                it.podcast
                             )
                         )
                     }

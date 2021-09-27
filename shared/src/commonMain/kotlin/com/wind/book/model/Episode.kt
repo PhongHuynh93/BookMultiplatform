@@ -1,7 +1,10 @@
 package com.wind.book.model
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.arkivanov.essenty.parcelable.Parcelize
 
+@Parcelize
 data class Episode(
-    val id: String,
+    override val id: String,
     val title: String,
     val description: String,
     val pubDateMs: Long,
@@ -15,4 +18,4 @@ data class Episode(
     val explicitContent: Boolean,
     val link: String,
     val guidFromRss: String
-)
+) : Parcelable, Identifiable

@@ -3,41 +3,64 @@ package com.wind.book.viewmodel.home
 import com.wind.book.domain.usecase.story.GetArticleListParam
 import com.wind.book.domain.usecase.story.GetArticleListUseCase
 import com.wind.book.model.Article
-import com.wind.book.viewmodel.BaseViewModel
-import com.wind.book.viewmodel.util.LoadState
-import kotlinx.coroutines.flow.Flow
+import com.wind.book.viewmodel.*
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+
+sealed class StoryEffect : BaseEffect()
+
+interface StoryEvent : BaseEvent {
+    fun retry()
+    fun refresh()
+}
 
 class StoryViewModel(
     private val getArticleListUseCase: GetArticleListUseCase
-) : BaseViewModel() {
-    private val _loadState: MutableStateFlow<LoadState> = MutableStateFlow(LoadState.Loading(isEmpty = true))
+) : BaseMVIViewModel(), StoryEvent {
 
-    // public for listening load state
-    val loadState: Flow<LoadState> = _loadState
+    private val _state = MutableStateFlow(LoadingState())
+    override val state = _state.asStateFlow()
 
-    private val _data: MutableStateFlow<List<Article>> = MutableStateFlow(emptyList())
-    val data: StateFlow<List<Article>> = _data
+    private val _effect = MutableSharedFlow<StoryEffect>()
+    override val effect = _effect.asSharedFlow()
+
+    override val event: StoryEvent
+        get() = this
 
     init {
         loadData()
     }
 
-    fun retry() {
-        _loadState.value = LoadState.Loading(true)
+    override fun retry() {
+        loadData()
+    }
+
+    override fun refresh() {
         loadData()
     }
 
     private fun loadData() {
         clientScope.launch {
+            _state.update(LoadingScreen.Loading)
             apiCall().onSuccess {
-                _loadState.value = LoadState.NotLoading.Complete(it.isEmpty())
-                _data.value = it
+                if (it.isEmpty()) {
+                    // TODO: 26/09/2021 handle localization
+                    _state.update(screen = LoadingScreen.NoData("No Data"))
+                } else {
+                    _state.update(
+                        screen = LoadingScreen.Data(
+                            data = it,
+                            isEndPage = true,
+                        )
+                    )
+                }
             }.onFailure {
-                _loadState.value = LoadState.Error(it, true)
-                _data.value = emptyList()
+                _state.update(
+                    screen = LoadingScreen.Error(it.message.orEmpty())
+                )
             }
         }
     }

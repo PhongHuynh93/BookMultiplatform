@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wind.book.android.R
 import com.wind.book.android.databinding.LoadMoreItemBinding
 import com.wind.book.log
-import com.wind.book.viewmodel.util.LoadState
+import com.wind.book.viewmodel.LoadingScreen
 
-class LoadingAdapter(private val callback: Callback) : RecyclerView.Adapter<LoadingAdapter.LoadStateViewHolder>() {
+private val TAG = LoadingAdapter::class.simpleName
+
+class LoadingAdapter(private val callback: Callback) :
+    RecyclerView.Adapter<LoadingAdapter.LoadStateViewHolder>() {
 
     /**
      * LoadState to present in the adapter.
@@ -17,11 +20,10 @@ class LoadingAdapter(private val callback: Callback) : RecyclerView.Adapter<Load
      * Changing this property will immediately notify the Adapter to change the item it's
      * presenting.
      */
-    var loadState: LoadState = LoadState.Loading(isEmpty = true)
+    var loadState: LoadingScreen? = null
         set(loadState) {
+            log.v { "$TAG screen=$loadState field=$field" }
             if (field != loadState) {
-                log.e { "old load state $field new load state $loadState" }
-
                 val displayOldItem = displayLoadStateAsItem(field)
                 val displayNewItem = displayLoadStateAsItem(loadState)
 
@@ -38,12 +40,13 @@ class LoadingAdapter(private val callback: Callback) : RecyclerView.Adapter<Load
 
     /**
      * Returns true if the LoadState should be displayed as a list item when active.
-     *
-     *  [LoadState.Loading] and [LoadState.Error] present as list items,
-     * [LoadState.Done] is not.
      */
-    private fun displayLoadStateAsItem(loadState: LoadState): Boolean {
-        return loadState is LoadState.Loading || loadState is LoadState.Error
+    private fun displayLoadStateAsItem(loadState: LoadingScreen?): Boolean {
+        return when (loadState) {
+            is LoadingScreen.Data<*> -> !loadState.isEndPage
+            is LoadingScreen.Error -> true
+            else -> false
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -67,22 +70,30 @@ class LoadingAdapter(private val callback: Callback) : RecyclerView.Adapter<Load
     }
 
     override fun onBindViewHolder(holder: LoadStateViewHolder, position: Int) {
-        holder.bind(loadState)
+        holder.bind(loadState!!)
     }
 
     interface Callback {
         fun onClickRetryBtn()
     }
 
-    class LoadStateViewHolder(val binding: LoadMoreItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(loadState: LoadState) {
-            if (loadState is LoadState.Error) {
-                binding.errorTv.text = loadState.error.toString()
+    class LoadStateViewHolder(val binding: LoadMoreItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(screen: LoadingScreen) {
+            var isError = false
+            var isEndOfPage = false
+            if (screen is LoadingScreen.Data<*>) {
+                screen.errorMessage?.also {
+                    isError = true
+                    binding.errorTv.text = it
+                }
+            } else if (screen is LoadingScreen.Data<*>) {
+                isEndOfPage = screen.isEndPage
             }
 
-            binding.progressBar.isVisible = loadState is LoadState.Loading
-            binding.retryBtn.isVisible = loadState is LoadState.Error
-            binding.errorTv.isVisible = loadState is LoadState.Error
+            binding.progressBar.isVisible = !isEndOfPage && !isError
+            binding.retryBtn.isVisible = isError
+            binding.errorTv.isVisible = isError
         }
     }
 }
