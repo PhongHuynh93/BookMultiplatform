@@ -33,12 +33,12 @@ class BookMapper : Mapper<BookDto, Book?> {
     }
 }
 
-class BookNameMapper : Mapper<BookNameDto, BookName> {
-    override fun apply(input: BookNameDto): BookName {
+class BookNameMapper : Mapper<BookNameDto, BookName?> {
+    override fun apply(input: BookNameDto): BookName? {
         return input.run {
             BookName(
-                displayName = displayName,
-                encodedName = listNameEncoded
+                displayName = displayName ?: return null,
+                encodedName = listNameEncoded ?: return null
             )
         }
     }
