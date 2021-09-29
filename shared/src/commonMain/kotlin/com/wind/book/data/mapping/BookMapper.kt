@@ -1,7 +1,9 @@
 package com.wind.book.data.mapping
 
 import com.wind.book.data.model.dto.BookDto
+import com.wind.book.data.model.dto.BookNameDto
 import com.wind.book.model.Book
+import com.wind.book.model.BookName
 import com.wind.book.model.Thumb
 
 class BookMapper : Mapper<BookDto, Book?> {
@@ -26,6 +28,17 @@ class BookMapper : Mapper<BookDto, Book?> {
                 description = description.orEmpty(),
                 title = title.orEmpty(),
                 amazonLink = amazonProductUrl.orEmpty()
+            )
+        }
+    }
+}
+
+class BookNameMapper : Mapper<BookNameDto, BookName> {
+    override fun apply(input: BookNameDto): BookName {
+        return input.run {
+            BookName(
+                displayName = displayName,
+                encodedName = listNameEncoded
             )
         }
     }
