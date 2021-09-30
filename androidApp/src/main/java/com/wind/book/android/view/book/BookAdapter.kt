@@ -9,7 +9,7 @@ import com.bumptech.glide.RequestManager
 import com.wind.book.android.databinding.BookItemBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Book
-import com.wind.book.viewmodel.home.BookEvent
+import com.wind.book.viewmodel.book.BookEvent
 
 class BookAdapter(private val rm: RequestManager, private val bookEvent: BookEvent) :
     ListAdapter<Book, BookViewHolder>(object : DiffUtil.ItemCallback<Book>() {

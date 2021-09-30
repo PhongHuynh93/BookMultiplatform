@@ -2,12 +2,13 @@ package com.wind.book.android.view.book
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.bumptech.glide.Glide
 import com.wind.book.android.R
-import com.wind.book.android.databinding.ToolbarListViewBinding
+import com.wind.book.android.databinding.ListViewBinding
 import com.wind.book.android.extension.handleLoadMore
 import com.wind.book.android.extension.launchAndCollectIn
 import com.wind.book.android.extension.safeNavigate
@@ -15,25 +16,35 @@ import com.wind.book.android.util.viewBinding
 import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Book
+import com.wind.book.model.BookName
 import com.wind.book.viewmodel.LoadMoreEffect
 import com.wind.book.viewmodel.LoadingScreen
-import com.wind.book.viewmodel.home.BookEffect
-import com.wind.book.viewmodel.home.BookEvent
-import com.wind.book.viewmodel.home.BookViewModel
+import com.wind.book.viewmodel.book.BookEffect
+import com.wind.book.viewmodel.book.BookEvent
+import com.wind.book.viewmodel.book.BookViewModel
 import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class BookFragment : Fragment(R.layout.toolbar_list_view) {
+class BookFragment : Fragment(R.layout.list_view) {
+    companion object {
+        fun newInstance(bookName: BookName): BookFragment {
+            return BookFragment().apply {
+                arguments =
+                    bundleOf(com.wind.book.android.util.Constant.BundleKey.BOOK_NAME to bookName)
+            }
+        }
+    }
+
     private val vm: BookViewModel by viewModel()
     private val event: BookEvent
         get() {
             return vm.event
         }
-    private val binding by viewBinding(ToolbarListViewBinding::bind)
+    private val binding by viewBinding(ListViewBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.setTitle(R.string.title_book)
+        event.setBookName(requireArguments().getParcelable<BookName>(com.wind.book.android.util.Constant.BundleKey.BOOK_NAME)!!.encodedName)
 
         val list = binding.list
 

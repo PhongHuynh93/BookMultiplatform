@@ -1,4 +1,4 @@
-package com.wind.book.viewmodel.home
+package com.wind.book.viewmodel.book
 
 import com.wind.book.domain.usecase.book.GetBookListParam
 import com.wind.book.domain.usecase.book.GetBookListUseCase
@@ -20,6 +20,7 @@ sealed class BookEffect : BaseEffect() {
 
 interface BookEvent : LoadMoreEvent {
     fun onClickBuy(book: Book)
+    fun setBookName(bookName: String)
 }
 
 class BookViewModel(
@@ -29,15 +30,20 @@ class BookViewModel(
     private val _bookEffect = MutableSharedFlow<BookEffect>()
     val bookEffect = _bookEffect.asSharedFlow()
     override val event = this as BookEvent
+    private lateinit var bookName: String
 
     init {
-        loadMore()
         // capture the base effect and emit again
         clientScope.launch {
             effect.collectLatest {
                 _bookEffect.emit(BookEffect.LMEffect(it))
             }
         }
+    }
+
+    override fun setBookName(bookName: String) {
+        this.bookName = bookName
+        loadMore(isRefresh = true)
     }
 
     override suspend fun apiCall(
@@ -48,7 +54,7 @@ class BookViewModel(
         return getBookListUseCase(
             GetBookListParam(
                 currentPage = currentPage,
-                listName = "hardcover-fiction"
+                listName = bookName
             )
         )
     }

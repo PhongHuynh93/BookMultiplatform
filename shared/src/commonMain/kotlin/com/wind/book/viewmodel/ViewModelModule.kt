@@ -1,7 +1,8 @@
 package com.wind.book.viewmodel
 
 import com.wind.book.viewModelDefinition
-import com.wind.book.viewmodel.home.BookViewModel
+import com.wind.book.viewmodel.book.BookPagerViewModel
+import com.wind.book.viewmodel.book.BookViewModel
 import com.wind.book.viewmodel.home.StoryViewModel
 import com.wind.book.viewmodel.iab.IABViewModel
 import com.wind.book.viewmodel.podcast.PodcastViewModel
@@ -14,4 +15,5 @@ val viewmodelModule = module {
     viewModelDefinition { PodcastViewModel(get()) }
     viewModelDefinition { StoryViewModel(get()) }
     viewModelDefinition { PodcastDetailViewModel(get()) }
+    viewModelDefinition { BookPagerViewModel(get()) }
 }
