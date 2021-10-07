@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="ListView">
         <attr name="lv_enableSwipe" format="boolean" />
+        <attr name="lv_isVerticalList" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="AspectRatioImageView">

@@ -12,6 +12,7 @@ import com.wind.book.android.databinding.ListViewBinding
 import com.wind.book.android.extension.handleLoadMore
 import com.wind.book.android.extension.launchAndCollectIn
 import com.wind.book.android.extension.safeNavigate
+import com.wind.book.android.util.tryCast
 import com.wind.book.android.util.viewBinding
 import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.android.view.home.HomeFragmentDirections
@@ -81,9 +82,7 @@ class BookFragment : Fragment(R.layout.list_view) {
         vm.apply {
             state.launchAndCollectIn(viewLifecycleOwner) {
                 val screen = it.screen
-                if (screen is LoadingScreen.Data<*>) {
-                    @Suppress("UNCHECKED_CAST")
-                    val data = screen.data as List<Book>
+                screen.tryCast<LoadingScreen.Data<Book>> {
                     feedAdapter.submitList(data) {
                         if (data.isNotEmpty() && !concatAdapter.adapters.contains(
                                 footerLoadingAdapter

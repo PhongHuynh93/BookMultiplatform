@@ -12,6 +12,6 @@ class MovieFragment : Fragment(R.layout.toolbar_list_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.setTitle(R.string.title_movie)
+        binding.toolbar.setTitle(R.string.movie)
     }
 }

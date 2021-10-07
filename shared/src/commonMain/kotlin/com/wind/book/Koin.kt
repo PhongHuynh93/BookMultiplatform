@@ -3,16 +3,19 @@ package com.wind.book
 import co.touchlab.kermit.Kermit
 import com.wind.book.data.repository.article.storyModule
 import com.wind.book.data.repository.book.bookModule
+import com.wind.book.data.repository.music.genre.genreModule
 import com.wind.book.data.repository.podcast.podcastModule
 import com.wind.book.data.repository.podcast_detail.podcastDetailModule
 import com.wind.book.domain.domainModule
 import com.wind.book.viewmodel.BaseViewModel
 import com.wind.book.viewmodel.viewmodelModule
-import io.ktor.client.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
+import io.ktor.client.HttpClient
+import io.ktor.client.features.HttpTimeout
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
 import kotlinx.datetime.Clock
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
@@ -40,6 +43,7 @@ fun initKoin(appModule: Module): KoinApplication {
             podcastModule,
             storyModule,
             podcastDetailModule,
+            genreModule
         )
     }
 

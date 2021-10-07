@@ -37,12 +37,16 @@ class ListView @JvmOverloads constructor(
             val enableSwipe = a.getBoolean(R.styleable.ListView_lv_enableSwipe, false)
             useSwipe = enableSwipe
             binding.swipeRefresh.isEnabled = enableSwipe
+            val isVerticalList = a.getBoolean(R.styleable.ListView_lv_isVerticalList, true)
+            binding.rcv.apply {
+                if (isVerticalList) {
+                    defaultVerList()
+                }
+                bindPaddingBottom()
+                hasFixedSize()
+            }
         }
 
-        binding.rcv.apply {
-            defaultVerList()
-            bindPaddingBottom()
-        }
         binding.swipeRefresh.apply {
             val arrayOfInt = IntArray(1)
             arrayOfInt[0] = context.getColorAttr(R.attr.colorAccent)

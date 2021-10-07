@@ -95,7 +95,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:text="@{@string/total_episodes(podcast.totalEpisodes)}"
+            android:text="@{@string/podcast_total_episodes(podcast.totalEpisodes)}"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toBottomOf="@id/sort_btn"
             app:layout_constraintEnd_toStartOf="@id/sort_btn"

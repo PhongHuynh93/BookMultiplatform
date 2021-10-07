@@ -32,7 +32,7 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.setTitle(R.string.title_book)
+        binding.toolbar.setTitle(R.string.book)
 
         val list = binding.list
 
