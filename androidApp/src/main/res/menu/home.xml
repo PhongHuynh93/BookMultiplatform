@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_book"
-        android:icon="@drawable/ic_book"
-        android:title="@string/title_book" />
+        android:id="@+id/navigation_music"
+        android:icon="@drawable/ic_baseline_music_note_24"
+        android:title="@string/music" />
     <item
         android:id="@+id/navigation_podcast"
         android:icon="@drawable/ic_podcast"
-        android:title="@string/title_podcast" />
+        android:title="@string/podcast" />
     <item
         android:id="@+id/navigation_movie"
         android:icon="@drawable/ic_movie"
-        android:title="@string/title_movie" />
+        android:title="@string/movie" />
     <item
         android:id="@+id/navigation_story"
         android:icon="@drawable/ic_book"
-        android:title="@string/title_story" />
+        android:title="@string/story" />
 </menu>

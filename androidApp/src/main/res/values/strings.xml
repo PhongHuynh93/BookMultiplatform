@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- General. -->
     <string name="app_name">Coca</string>
     <string name="no_data">No data</string>
     <string name="retry">Retry</string>
-    <string name="title_book">Book</string>
-    <string name="title_movie">Movie</string>
-    <string name="title_podcast">Podcast</string>
-    <string name="title_story">Stories</string>
+    <string name="music">Music</string>
+    <string name="book">Book</string>
+    <string name="movie">Movie</string>
+    <string name="podcast">Podcast</string>
+    <string name="story">Stories</string>
+    <string name="genre">Genre</string>
     <string name="buy">Buy</string>
-    <string name="total_episodes">%d episodes</string>
+
+    <!-- Podcast. -->
+    <string name="podcast_total_episodes">%d episodes</string>
+
+    <!-- Music. -->
 </resources>

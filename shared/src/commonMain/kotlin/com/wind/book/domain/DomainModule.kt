@@ -2,6 +2,7 @@ package com.wind.book.domain
 
 import com.wind.book.domain.usecase.book.GetBookListUseCase
 import com.wind.book.domain.usecase.book.GetBookNameUseCase
+import com.wind.book.domain.usecase.music.genre.GetGenreListUseCase
 import com.wind.book.domain.usecase.podcast.GetPodcastUseCase
 import com.wind.book.domain.usecase.podcast_detail.GetPodcastDetailUseCase
 import com.wind.book.domain.usecase.story.GetArticleListUseCase
@@ -13,4 +14,5 @@ val domainModule = module {
     factory { GetArticleListUseCase(get()) }
     factory { GetPodcastDetailUseCase(get()) }
     factory { GetBookNameUseCase(get()) }
+    factory { GetGenreListUseCase(get()) }
 }

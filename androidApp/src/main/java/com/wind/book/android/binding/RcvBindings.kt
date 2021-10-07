@@ -1,7 +1,6 @@
 package com.wind.book.android.binding
 
-import android.graphics.Rect
-import android.view.View
+import androidx.core.view.updatePadding
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,17 +18,8 @@ fun RecyclerView.defaultVerList(defaultVerList: Boolean? = null) {
 @BindingAdapter("paddingBottom")
 fun RecyclerView.bindPaddingBottom(_paddingBottom: Int? = null) {
     val paddingBottom = _paddingBottom ?: context.spaceLarge.toInt()
-    addItemDecoration(object : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-            super.getItemOffsets(outRect, view, parent, state)
-            val pos = parent.getChildViewHolder(view).absoluteAdapterPosition
-            (pos != -1 && (pos == (parent.adapter?.itemCount ?: 0) - 1)).let {
-                if (it) {
-                    outRect.bottom = paddingBottom
-                }
-            }
-        }
-    })
+    updatePadding(bottom = paddingBottom)
+    clipToPadding = false
 }
 
 @BindingAdapter("defaultHozList")
