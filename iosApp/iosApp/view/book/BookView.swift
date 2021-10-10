@@ -17,12 +17,16 @@ struct BookView: View {
 
     var body: some View {
         VStack {
-            switch observable.state.loadState {
-            case is LoadState.Loading:
-                LoadingScreen()
-            default:
+            switch observable.state.screen {
+            case _ as LoadingScreen.Loading:
+                LoadingView()
+            case let noData as LoadingScreen.NoData:
+                Text(noData.message)
+            case let error as LoadingScreen.Error:
+                Text(error.errorMessage)
+            case let data as LoadingScreenData<Book>:
                 NavigationLink(destination: LazyView(IABView(iabNav: self.$iabNav)), isActive: self.$navIAB) {}
-                List(observable.state.data as! [Book], id: \.id) { book in
+                List(data.data as! [Book], id: \.id) { book in
                     HStack(alignment: .top) {
                         KFImage(URL(string: book.thumb.url))
                             .placeholder {
@@ -54,6 +58,8 @@ struct BookView: View {
                         }
                     }.padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
                 }.listStyle(.plain)
+            default:
+                Text("Not Handling")
             }
         }
         .navigationTitle("Book")
@@ -65,8 +71,8 @@ struct BookView: View {
     private func onEffect(effect: BookEffect) {
         KoinKt.log.d(withMessage: { "Effect \(effect)" })
         switch effect {
-        case is BookEffect.LMEffect:
-            switch (effect as! BookEffect.LMEffect).loadMoreEffect {
+        case let lmEffect as BookEffect.LMEffect:
+            switch lmEffect.loadMoreEffect {
             case is LoadMoreEffect.ScrollToTop:
                 KoinKt.log.d(withMessage: { "Scroll to top" })
             default:
