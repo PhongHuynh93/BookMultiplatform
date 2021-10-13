@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.wind.book.android.R
+import com.wind.book.android.binding.showUpBtn
 import com.wind.book.android.databinding.ToolbarGridViewBinding
 import com.wind.book.android.extension.handleLoadMore
 import com.wind.book.android.extension.launchAndCollectIn
@@ -38,8 +39,9 @@ class ArtistFragment : Fragment(R.layout.toolbar_grid_view) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.title = getString(R.string.genre)
         vm.genreId = args.genre.id
+        binding.title = args.genre.model.name
+        binding.toolbar.showUpBtn(showUpBtn = true)
 
         val list = binding.list
         val artistAdapter = ArtistAdapter(
