@@ -13,6 +13,7 @@ sealed class LoadingEffect : BaseEffect()
 interface LoadingEvent : BaseEvent {
     fun retry()
     fun refresh()
+    fun loadData(isRefresh: Boolean = false)
 }
 
 abstract class LoadingVM<T : Identifiable> : BaseMVIViewModel(), LoadingEvent {
@@ -43,7 +44,7 @@ abstract class LoadingVM<T : Identifiable> : BaseMVIViewModel(), LoadingEvent {
         loadData(isRefresh = true)
     }
 
-    private fun loadData(isRefresh: Boolean = false) {
+    override fun loadData(isRefresh: Boolean) {
         clientScope.launch {
             if (isRefresh) {
                 _state.update(LoadingScreen.Loading)

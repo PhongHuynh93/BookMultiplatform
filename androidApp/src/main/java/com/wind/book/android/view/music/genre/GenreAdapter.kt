@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.wind.book.android.databinding.ItemGenreBinding
-import com.wind.book.log
+import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.music.Genre
 import com.wind.book.viewmodel.music.genre.GenreEvent
 
@@ -23,7 +23,8 @@ class GenreAdapter(
         override fun areContentsTheSame(oldItem: Genre, newItem: Genre): Boolean {
             return oldItem == newItem
         }
-    }) {
+    }),
+    GetItemCountCallback {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
         return GenreViewHolder(
@@ -60,7 +61,6 @@ class GenreAdapter(
 
         fun bind(genre: Genre) {
             this.genre = genre
-            log.d { "request mana $requestManager" }
             binding.apply {
                 rm = requestManager
                 item = genre
