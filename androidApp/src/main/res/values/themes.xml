@@ -12,6 +12,7 @@
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.LargeComponent</item>
         <!-- Customize your widget here. -->
         <item name="tabStyle">@style/Widget.Coca.TabLayout</item>
+        <item name="colorSurface2">@color/black_10</item>
     </style>
 
     <style name="ThemeOverlay.Coca.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
