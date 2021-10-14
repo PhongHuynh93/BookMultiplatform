@@ -7,6 +7,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
+import com.wind.book.android.R
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 @BindingAdapter(
@@ -18,21 +19,6 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 )
 fun ImageView.loadImage(requestManager: RequestManager, url: String?, width: Int? = null, height: Int? = null) {
     getRequestBuilder(requestManager, url, width, height)
-        .into(this)
-}
-
-@BindingAdapter(
-    "rm",
-    "roundUrl"
-)
-fun ImageView.loadRoundImage(requestManager: RequestManager, url: String?) {
-    val requestOptions: RequestOptions = RequestOptions()
-        .circleCrop()
-        .diskCacheStrategy(DiskCacheStrategy.ALL)
-
-    requestManager
-        .load(url)
-        .apply(requestOptions)
         .into(this)
 }
 
@@ -61,6 +47,7 @@ fun getRequestBuilder(
 
     return requestManager
         .load(url)
+        .placeholder(R.drawable.image_placeholder)
         .apply(requestOptions)
         .let {
             if (width != null && height != null) {

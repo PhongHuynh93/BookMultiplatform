@@ -6,8 +6,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="dividerColor">@color/black_10</item>
         <item name="android:textColorSecondary">@color/black_50</item>
+        <!-- Shape style -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.LargeComponent</item>
         <!-- Customize your widget here. -->
         <item name="tabStyle">@style/Widget.Coca.TabLayout</item>
+        <item name="colorSurface2">@color/black_10</item>
     </style>
 
     <style name="ThemeOverlay.Coca.Dark" parent="ThemeOverlay.MaterialComponents.Dark">

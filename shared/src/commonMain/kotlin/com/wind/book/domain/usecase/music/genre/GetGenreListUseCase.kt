@@ -5,11 +5,11 @@ import com.wind.book.domain.usecase.UseCase
 import com.wind.book.model.music.Genre
 import com.wind.book.platformCoroutineDispatcher
 
-class GetGenreListParam()
+class GetGenreListParam(val index: Int, val limit: Int)
 class GetGenreListUseCase constructor(
     private val genreRepository: GenreRepository
 ) : UseCase<GetGenreListParam, List<Genre>>(platformCoroutineDispatcher) {
     override suspend fun execute(parameters: GetGenreListParam): List<Genre> {
-        return genreRepository.getGenreList()
+        return genreRepository.getGenreList(parameters.index, parameters.limit)
     }
 }
