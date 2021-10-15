@@ -31,6 +31,7 @@ import kotlin.reflect.KClass
 
 lateinit var koin: Koin
 lateinit var log: Kermit
+lateinit var httpClient: HttpClient
 fun initKoin(appModule: Module): KoinApplication {
     val koinApplication = startKoin {
         modules(
@@ -51,7 +52,7 @@ fun initKoin(appModule: Module): KoinApplication {
     log = koin.get<Kermit> { parametersOf(null) }
     val appInfo = koin.get<AppInfo>() // AppInfo is a Kotlin interface with separate Android and iOS implementations
     log.v { "App Id ${appInfo.appId}" }
-
+    httpClient = koin.get()
     return koinApplication
 }
 

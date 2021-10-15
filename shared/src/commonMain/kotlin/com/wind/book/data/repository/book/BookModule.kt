@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 internal val bookModule = module {
     single<BestSellerAPI> {
-        BestSellerAPIImpl(get())
+        BestSellerAPIImpl()
     }
     single<LocalBookDataSource> {
         LocalBookDataSourceImpl()

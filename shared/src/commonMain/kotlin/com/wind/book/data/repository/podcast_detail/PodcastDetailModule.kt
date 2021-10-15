@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 internal val podcastDetailModule = module {
     single<PodcastDetailAPI> {
-        PodcastDetailAPIImpl(get())
+        PodcastDetailAPIImpl()
     }
     single<RemotePodcastDetailDataSource> {
         RemotePodcastDetailDataSourceImpl(get())
