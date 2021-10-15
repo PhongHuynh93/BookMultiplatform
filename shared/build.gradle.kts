@@ -12,11 +12,11 @@ version = "1.0"
 kotlin {
     android()
 
-//    ios {
-//        binaries.framework {
-//            baseName = "shared"
-//        }
-//    }
+    ios {
+        binaries.framework {
+            baseName = "shared"
+        }
+    }
 
     cocoapods {
         summary = "Common library for the BookMultiplatform"
@@ -79,13 +79,13 @@ kotlin {
                 implementation(Deps.Coroutines.test)
             }
         }
-//        val iosMain by getting {
-//            dependencies {
-//                // Network
-//                implementation(Deps.Ktor.ios)
-//            }
-//        }
-//        val iosTest by getting
+        val iosMain by getting {
+            dependencies {
+                // Network
+                implementation(Deps.Ktor.ios)
+            }
+        }
+        val iosTest by getting
     }
 }
 

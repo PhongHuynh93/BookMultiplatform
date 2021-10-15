@@ -2,6 +2,7 @@ package com.wind.book.viewmodel
 
 import com.wind.book.log
 import com.wind.book.model.Identifiable
+import com.wind.book.toastError
 import com.wind.book.viewmodel.util.Constant
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -53,6 +54,7 @@ sealed class LoadMoreEffect : BaseEffect() {
 }
 
 private val TAG = LoadMoreVM::class.simpleName
+
 abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent {
     // region MVI
     private val _state = MutableStateFlow(LoadingState())
@@ -205,7 +207,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     }
 
     private fun onError(exception: Throwable) {
-        log.v { "$TAG onError ${exception.stackTraceToString()}" }
+        log.v { "$TAG onError" }
         canNotLoad = true
         when (val screen = state.value.screen) {
             is LoadingScreen.Data<*> -> {
