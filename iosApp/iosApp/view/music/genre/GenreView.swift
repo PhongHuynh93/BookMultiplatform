@@ -6,6 +6,7 @@
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
+import Kingfisher
 import shared
 import SwiftUI
 
@@ -14,7 +15,7 @@ struct GenreView: View {
     @State private var navIAB = false
 
     let columns = [
-        GridItem(.adaptive(minimum: 80)),
+        GridItem(.adaptive(minimum: 140)),
     ]
 
     var body: some View {
@@ -28,9 +29,24 @@ struct GenreView: View {
                 Text(error.errorMessage)
             case let data as LoadingScreenData<Genre>:
                 ScrollView {
-                    LazyVGrid(columns: columns, spacing: 20) {
+                    LazyVGrid(columns: columns) {
                         ForEach(data.data as! [Genre], id: \.id) { genre in
-                            Text(genre.id)
+                            ZStack {
+                                GeometryReader { gr in
+                                    KFImage(URL(string: genre.model.pictureMedium))
+                                        .placeholder {
+                                            VStack {
+                                                Color.gray
+                                            }
+                                        }
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(height: gr.size.height)
+                                }
+                                .aspectRatio(genreRatio, contentMode: .fill)
+                                .cornerRadius(smallRadius)
+                                .clipped()
+                            }
                         }
                     }
                     .padding(.horizontal)
