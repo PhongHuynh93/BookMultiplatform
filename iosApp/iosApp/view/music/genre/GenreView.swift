@@ -56,6 +56,8 @@ struct GenreView: View {
                                             .foregroundColor(Color.white)
                                     }
                                 )
+                            }.onAppear {
+                                observable.loadMore(genre: genre)
                             }
                         }
                     }

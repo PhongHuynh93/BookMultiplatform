@@ -24,7 +24,7 @@ final class GenreObservable: ObservableObject {
         state = LoadingState()
         event = viewModel.event
     }
-
+
     deinit {
         KoinKt.log.d(withMessage: { "GenreViewModel deinit" })
         genreVM.onCleared()
@@ -44,5 +44,9 @@ final class GenreObservable: ObservableObject {
         KoinKt.log.d(withMessage: { "GenreViewModel stopObserving" })
         stateCloseable.close()
         effectCloseable.close()
+    }
+    
+    func loadMore(genre: Genre) {
+        genreVM.loadMore(isRefresh: false)
     }
 }
