@@ -14,8 +14,9 @@ struct GenreView: View {
     @StateObject var observable: GenreObservable = koin.get()
     @State private var navIAB = false
 
+    // make at least 2 columns
     let columns = [
-        GridItem(.adaptive(minimum: 140)),
+        GridItem(.adaptive(minimum: 140), spacing: 10),
     ]
 
     var body: some View {
@@ -29,7 +30,7 @@ struct GenreView: View {
                 Text(error.errorMessage)
             case let data as LoadingScreenData<Genre>:
                 ScrollView {
-                    LazyVGrid(columns: columns) {
+                    LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(data.data as! [Genre], id: \.id) { genre in
                             ZStack {
                                 GeometryReader { gr in
@@ -46,6 +47,15 @@ struct GenreView: View {
                                 .aspectRatio(genreRatio, contentMode: .fill)
                                 .cornerRadius(smallRadius)
                                 .clipped()
+                                .overlay(
+                                    ZStack {
+                                        Color("overlay")
+                                        Text(genre.model.name)
+                                            .font(.subheadline)
+                                            .bold()
+                                            .foregroundColor(Color.white)
+                                    }
+                                )
                             }
                         }
                     }
