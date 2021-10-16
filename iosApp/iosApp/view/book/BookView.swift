@@ -29,11 +29,7 @@ struct BookView: View {
                 List(data.data as! [Book], id: \.id) { book in
                     HStack(alignment: .top) {
                         KFImage(URL(string: book.thumb.url))
-                            .placeholder {
-                                VStack {
-                                    Color.gray
-                                }
-                            }
+                            .placeholder()
                             .resizable()
                             .aspectRatio(bookRatio, contentMode: .fill)
                             .frame(width: 128)

@@ -35,11 +35,7 @@ struct GenreView: View {
                             ZStack {
                                 GeometryReader { gr in
                                     KFImage(URL(string: genre.model.pictureMedium))
-                                        .placeholder {
-                                            VStack {
-                                                Color.gray
-                                            }
-                                        }
+                                        .placeholder()
                                         .resizable()
                                         .scaledToFill()
                                         .frame(height: gr.size.height)
