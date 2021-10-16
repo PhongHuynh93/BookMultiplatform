@@ -50,7 +50,7 @@ struct BookView: View {
                             Button("Buy") {
                                 KoinKt.log.d(withMessage: { "on tap buy" })
                                 observable.event.onClickBuy(book: book)
-                            }.buttonStyle(.bordered)
+                            }
                         }
                     }.padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
                 }.listStyle(.plain)
