@@ -41,8 +41,6 @@ struct GenreView: View {
                                         .frame(height: gr.size.height)
                                 }
                                 .aspectRatio(genreRatio, contentMode: .fill)
-                                .cornerRadius(smallRadius)
-                                .clipped()
                                 .overlay(
                                     ZStack {
                                         Color("overlay")
@@ -52,7 +50,10 @@ struct GenreView: View {
                                             .foregroundColor(Color.white)
                                     }
                                 )
-                            }.onAppear {
+                            }
+                            .cornerRadius(smallRadius)
+                            .clipped()
+                            .onAppear {
                                 observable.loadMore(genre: genre)
                             }
                         }
