@@ -9,7 +9,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven(uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"))
     }
     with(ClassPaths) {
         dependencies {
@@ -25,7 +24,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven(uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"))
         maven(uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-coroutines/maven"))
         maven(uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap"))
     }
