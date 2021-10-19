@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="rm"
-            type="com.bumptech.glide.RequestManager" />
-
-        <variable
             name="book"
             type="com.wind.book.model.Book" />
     </data>
@@ -27,7 +23,6 @@
             android:layout_marginStart="@dimen/space_normal"
             android:scaleType="centerCrop"
             app:ari_aspectRatio="3:2"
-            app:rm="@{rm}"
             app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
             app:url="@{book.thumb.url}"
             tools:srcCompat="@tools:sample/avatars" />

@@ -3,13 +3,11 @@ package com.wind.book.android.view.podcast_detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
 import com.wind.book.android.R
 import com.wind.book.android.databinding.PodcastDetailItemBinding
 import com.wind.book.model.Podcast
 
 class PodcastInfoAdapter(
-    private val rm: RequestManager,
     private val callback: Callback
 ) :
     RecyclerView.Adapter<PodcastViewHolder>() {
@@ -46,7 +44,7 @@ class PodcastInfoAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         PodcastViewHolder(
             PodcastDetailItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            rm, callback
+            callback
         )
 
     override fun onBindViewHolder(holder: PodcastViewHolder, position: Int) {
@@ -62,7 +60,6 @@ class PodcastInfoAdapter(
 
 class PodcastViewHolder(
     private val binding: PodcastDetailItemBinding,
-    private val rm: RequestManager,
     val callback: Callback
 ) :
     RecyclerView.ViewHolder(binding.root) {
@@ -84,7 +81,6 @@ class PodcastViewHolder(
     fun bind(item: Podcast) {
         podcast = item
         binding.apply {
-            this.rm = this@PodcastViewHolder.rm
             podcast = item
         }
     }

@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="rm"
-            type="com.bumptech.glide.RequestManager" />
-
-        <variable
             name="podcast"
             type="com.wind.book.model.Podcast" />
     </data>
@@ -25,7 +21,6 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             app:ari_aspectRatio="1:1"
-            app:rm="@{rm}"
             app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
             app:url="@{podcast.thumbnail}"
             tools:srcCompat="@tools:sample/avatars" />

@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.wind.book.android.R
 import com.wind.book.android.binding.setLayoutScrollBehavior
@@ -52,7 +51,6 @@ class PodcastDetailFragment : Fragment(R.layout.toolbar_list_view) {
         val list = binding.list
 
         val podcastAdapter = PodcastInfoAdapter(
-            Glide.with(this),
             object : PodcastInfoAdapter.Callback {
                 override fun onShareClick(podcast: Podcast) = event.onShare(podcast)
 

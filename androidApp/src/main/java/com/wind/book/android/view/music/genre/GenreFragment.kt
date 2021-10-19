@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.wind.book.android.R
 import com.wind.book.android.databinding.ToolbarGridViewBinding
 import com.wind.book.android.extension.handleLoadMore
@@ -42,7 +41,6 @@ class GenreFragment : Fragment(R.layout.toolbar_grid_view) {
 
         val list = binding.list
         val genreAdapter = GenreAdapter(
-            Glide.with(this),
             event
         )
         val footerLoadingAdapter = LoadingAdapter(object : LoadingAdapter.Callback {

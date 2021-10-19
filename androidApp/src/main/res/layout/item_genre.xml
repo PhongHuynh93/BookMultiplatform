@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="rm"
-            type="com.bumptech.glide.RequestManager" />
-
-        <variable
             name="item"
             type="com.wind.book.model.music.Genre" />
     </data>
@@ -28,7 +24,6 @@
             android:foreground="@color/overlay"
             android:scaleType="centerCrop"
             app:ari_aspectRatio="1:2"
-            app:rm="@{rm}"
             app:url="@{item.model.pictureMedium}"
             tools:src="@tools:sample/avatars" />
 

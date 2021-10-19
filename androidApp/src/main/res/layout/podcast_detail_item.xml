@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="rm"
-            type="com.bumptech.glide.RequestManager" />
-
-        <variable
             name="podcast"
             type="com.wind.book.model.Podcast" />
     </data>
@@ -26,7 +22,6 @@
             android:layout_marginStart="@dimen/space_normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:rm="@{rm}"
             app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
             app:url="@{podcast.thumbnail}" />
 

@@ -16,6 +16,7 @@ object Versions {
     const val turbine = "0.5.2"
     const val parcelable = "0.1.4"
     const val ktlint = "10.2.0"
+    const val asyncImage = "1.4.0"
 
     object AndroidX {
         const val supportLibrary: String = "1.2.0"
@@ -37,11 +38,6 @@ object Versions {
         const val compose = "1.0.1"
         const val activity = "1.3.0"
         const val accompanist = "0.13.0"
-    }
-
-    object ImageLoader {
-        const val glide: String = "4.11.0"
-        const val glideTransform = "4.3.0"
     }
 }
 
@@ -127,10 +123,7 @@ object Deps {
     }
 
     object ImageLoader {
-        const val core = "com.github.bumptech.glide:glide:${Versions.ImageLoader.glide}"
-        const val transform = "jp.wasabeef:glide-transformations:${Versions.ImageLoader.glideTransform}"
-        const val compiler = "com.github.bumptech.glide:compiler:${Versions.ImageLoader.glide}"
-        const val rcv = "com.github.bumptech.glide:recyclerview-integration:${Versions.ImageLoader.glide}"
+        const val core = "io.coil-kt:coil:${Versions.asyncImage}"
     }
 }
 

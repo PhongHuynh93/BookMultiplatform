@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.wind.book.android.R
 import com.wind.book.android.databinding.ToolbarListViewBinding
 import com.wind.book.android.extension.launchAndCollectIn
@@ -33,7 +32,6 @@ class ArticleFragment : Fragment(R.layout.toolbar_list_view) {
         val list = binding.list
 
         val articleAdapter = ArticleAdapter(
-            Glide.with(this),
             object : ArticleAdapter.Callback {
                 override fun onClick(article: Article) {
                     findNavController().safeNavigate(
