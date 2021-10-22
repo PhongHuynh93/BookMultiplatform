@@ -50,6 +50,19 @@ fun RecyclerView.handleLoadMore(visibleThreshold: Int? = null, getItemCountCallb
     })
 }
 
+// invoke whenever on view is attached to window
+fun RecyclerView.handleLoadMore(callback: (View) -> Unit) {
+    addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
+        override fun onChildViewAttachedToWindow(view: View) {
+            callback.invoke(view)
+        }
+
+        override fun onChildViewDetachedFromWindow(view: View) {
+            // not handle
+        }
+    })
+}
+
 fun interface GetItemCountCallback {
     fun getItemCount(): Int
 }

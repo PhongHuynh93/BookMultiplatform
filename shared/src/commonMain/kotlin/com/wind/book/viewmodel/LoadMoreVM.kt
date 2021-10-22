@@ -47,6 +47,7 @@ interface LoadMoreEvent : BaseEvent {
     fun retry()
     fun refresh()
     fun scrollToTop()
+    fun loadMore(indexOfItem: Int)
 }
 
 sealed class LoadMoreEffect : BaseEffect() {
@@ -71,6 +72,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     // child class can override
     protected open var startOffsetPage = Constant.START_OFFSET_PAGE
     protected open var pageSize = Constant.PAGE_SIZE
+    protected open var visibleThreshold = Constant.VISIBLE_THRESHOLD
 
     private var currentPage: Int? = null
 
@@ -180,6 +182,18 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
         clientScope.launch {
             delay(300)
             _effect.emit(LoadMoreEffect.ScrollToTop)
+        }
+    }
+
+    override fun loadMore(indexOfItem: Int) {
+        val screen = _state.value.screen
+        if (screen is LoadingScreen.Data<*>) {
+            val list = screen.data
+            log.d { "$TAG indexOfItem = $indexOfItem" }
+            log.d { "$TAG list.size - indexOfItem ${list.size - indexOfItem} visibleThreshold $visibleThreshold" }
+            if (list.size - indexOfItem <= visibleThreshold) {
+                loadMore(isRefresh = false)
+            }
         }
     }
 
