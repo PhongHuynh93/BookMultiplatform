@@ -46,7 +46,7 @@ final class GenreObservable: ObservableObject {
         effectCloseable.close()
     }
     
-    func loadMore(genre: Genre) {
-        genreVM.loadMore(isRefresh: false)
+    func loadMore(indexOfItem: Int) {
+        genreVM.loadMore(indexOfItem: Int32(indexOfItem))
     }
 }

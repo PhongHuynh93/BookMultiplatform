@@ -54,7 +54,7 @@ struct GenreView: View {
                             .cornerRadius(smallRadius)
                             .clipped()
                             .onAppear {
-                                observable.loadMore(genre: genre)
+                                observable.loadMore(indexOfItem: (data.data as! [Genre]).firstIndex(of: genre)!)
                             }
                         }
                     }
