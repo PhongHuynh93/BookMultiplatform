@@ -82,9 +82,4 @@ dependencies {
 
     // Image load
     implementation(Deps.ImageLoader.core)
-    implementation(Deps.ImageLoader.transform)
-    kapt(Deps.ImageLoader.compiler)
-    implementation(Deps.ImageLoader.rcv) {
-        isTransitive = false
-    }
 }

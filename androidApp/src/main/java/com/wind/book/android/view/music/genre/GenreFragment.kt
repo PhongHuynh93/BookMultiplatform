@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.wind.book.android.R
 import com.wind.book.android.databinding.ToolbarGridViewBinding
 import com.wind.book.android.extension.handleLoadMore
@@ -22,7 +21,6 @@ import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.music.genre.GenreEffect
 import com.wind.book.viewmodel.music.genre.GenreEvent
 import com.wind.book.viewmodel.music.genre.GenreViewModel
-import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val SPAN_COUNT = 2
@@ -42,7 +40,6 @@ class GenreFragment : Fragment(R.layout.toolbar_grid_view) {
 
         val list = binding.list
         val genreAdapter = GenreAdapter(
-            Glide.with(this),
             event
         )
         val footerLoadingAdapter = LoadingAdapter(object : LoadingAdapter.Callback {
@@ -77,8 +74,8 @@ class GenreFragment : Fragment(R.layout.toolbar_grid_view) {
                         SPAN_COUNT
                     )
                 )
-                handleLoadMore(Constant.VISIBLE_THRESHOLD, genreAdapter) {
-                    event.loadMore()
+                handleLoadMore {
+                    event.loadMore(rcv.getChildViewHolder(it).bindingAdapterPosition)
                 }
             }
             swipeRefresh.apply {

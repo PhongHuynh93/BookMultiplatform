@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.wind.book.android.R
 import com.wind.book.android.binding.showUpBtn
 import com.wind.book.android.databinding.ToolbarGridViewBinding
@@ -45,7 +44,6 @@ class ArtistFragment : Fragment(R.layout.toolbar_grid_view) {
 
         val list = binding.list
         val artistAdapter = ArtistAdapter(
-            Glide.with(this),
             event
         )
         val footerLoadingAdapter = LoadingAdapter(object : LoadingAdapter.Callback {

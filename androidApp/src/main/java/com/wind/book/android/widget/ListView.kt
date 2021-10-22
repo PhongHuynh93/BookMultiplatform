@@ -10,8 +10,6 @@ import com.wind.book.android.R
 import com.wind.book.android.binding.bindPaddingBottom
 import com.wind.book.android.binding.defaultVerList
 import com.wind.book.android.databinding.ListBinding
-import com.wind.book.android.extension.fadeIn
-import com.wind.book.android.extension.fadeOut
 import com.wind.book.android.extension.getColorAttr
 import com.wind.book.android.extension.inflater
 import com.wind.book.log
@@ -84,13 +82,7 @@ class ListView @JvmOverloads constructor(
         // show empty list
         showEmptyList(isListEmpty)
         // Show loading spinner during initial load or refresh.
-        binding.loading.loadingContainer.apply {
-            if (isLoading) {
-                fadeIn()
-            } else {
-                fadeOut()
-            }
-        }
+        binding.loading.loadingContainer.isVisible = isLoading
         // refresh
         binding.swipeRefresh.isRefreshing = isRefresh
         // Show the retry state if initial load or refresh fails and there are no items.

@@ -5,12 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
 import com.wind.book.android.databinding.ArticleItemBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Article
 
-class ArticleAdapter(private val rm: RequestManager, private val callback: Callback) :
+class ArticleAdapter(private val callback: Callback) :
     ListAdapter<Article, ArticleViewHolder>(object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.id == newItem.id
@@ -28,7 +27,7 @@ class ArticleAdapter(private val rm: RequestManager, private val callback: Callb
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         return ArticleViewHolder(
-            ArticleItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), rm, callback
+            ArticleItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), callback
         )
     }
 
@@ -40,7 +39,7 @@ class ArticleAdapter(private val rm: RequestManager, private val callback: Callb
     interface Callback : ArticleViewHolder.Callback
 }
 
-class ArticleViewHolder(private val binding: ArticleItemBinding, private val rm: RequestManager, val callback: Callback) :
+class ArticleViewHolder(private val binding: ArticleItemBinding, val callback: Callback) :
     RecyclerView.ViewHolder(binding.root) {
     private lateinit var article: Article
     init {
@@ -55,7 +54,6 @@ class ArticleViewHolder(private val binding: ArticleItemBinding, private val rm:
     fun bind(item: Article) {
         this.article = item
         binding.apply {
-            this.rm = this@ArticleViewHolder.rm
             article = item
         }
     }

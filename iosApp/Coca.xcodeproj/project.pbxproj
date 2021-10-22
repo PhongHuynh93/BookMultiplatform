@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		710A01FB26FEE08200F3F9B8 /* IABObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710A01FA26FEE08200F3F9B8 /* IABObservable.swift */; };
+		71287505271AD04A00D3B3D9 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71287504271AD04A00D3B3D9 /* ImageExtension.swift */; };
 		71514E2826F6ED72009B5C67 /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71514E2726F6ED72009B5C67 /* Koin.swift */; };
+		7155D01D2718902C0094E238 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155D01C2718902C0094E238 /* GenreView.swift */; };
+		7155D020271890380094E238 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155D01F271890380094E238 /* ArtistView.swift */; };
+		7155D022271890730094E238 /* GenreObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155D021271890730094E238 /* GenreObservable.swift */; };
 		7160BAAC270073AA003ED014 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7160BAAA27006C8B003ED014 /* Launch Screen.storyboard */; };
 		7173B4F726FF50E700618FA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7173B4F626FF50E700618FA9 /* Assets.xcassets */; };
 		719492B126FE18E2002F1676 /* IABView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B026FE18E2002F1676 /* IABView.swift */; };
@@ -22,8 +26,6 @@
 		71B97FD126FED65F00AE93BE /* CocaWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B97FD026FED65F00AE93BE /* CocaWebView.swift */; };
 		71B97FD326FEDA3800AE93BE /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B97FD226FEDA3800AE93BE /* LoadingScreen.swift */; };
 		71FA47B126FA40E300F174F3 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B026FA40E300F174F3 /* Constant.swift */; };
-		71FA47B426FA439200F174F3 /* MyVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B226FA439200F174F3 /* MyVStack.swift */; };
-		71FA47B526FA439200F174F3 /* MyHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA47B326FA439200F174F3 /* MyHStack.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		7E9F8730756C29C1A7547A3A /* Pods_Coca.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ECC157A974C9273C87B21A6 /* Pods_Coca.framework */; };
 /* End PBXBuildFile section */
@@ -32,9 +34,14 @@
 		18DA7756FA6AEA148CE0A49F /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		710A01FA26FEE08200F3F9B8 /* IABObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IABObservable.swift; sourceTree = "<group>"; };
+		71287504271AD04A00D3B3D9 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageExtension.swift; path = iosApp/view/music/genre/ImageExtension.swift; sourceTree = SOURCE_ROOT; };
 		71514E2726F6ED72009B5C67 /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
+		7155D01C2718902C0094E238 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
+		7155D01F271890380094E238 /* ArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
+		7155D021271890730094E238 /* GenreObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreObservable.swift; sourceTree = "<group>"; };
 		7160BAAA27006C8B003ED014 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		7173B4F626FF50E700618FA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7190B948271B2EA200D25A82 /* Coca.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Coca.entitlements; sourceTree = "<group>"; };
 		719492B026FE18E2002F1676 /* IABView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IABView.swift; sourceTree = "<group>"; };
 		719492B226FE32E0002F1676 /* LazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LazyView.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/LazyView.swift; sourceTree = "<group>"; };
 		71A013F226F70A590016F5E6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -45,8 +52,6 @@
 		71B97FD026FED65F00AE93BE /* CocaWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocaWebView.swift; sourceTree = "<group>"; };
 		71B97FD226FEDA3800AE93BE /* LoadingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingScreen.swift; path = "../../../../../D-KMP-sample/iosApp/iosApp/views/screens/LoadingScreen.swift"; sourceTree = "<group>"; };
 		71FA47B026FA40E300F174F3 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		71FA47B226FA439200F174F3 /* MyVStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyVStack.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/MyVStack.swift; sourceTree = "<group>"; };
-		71FA47B326FA439200F174F3 /* MyHStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyHStack.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/MyHStack.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* Coca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coca.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,9 +92,36 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7155D0182718900B0094E238 /* music */ = {
+			isa = PBXGroup;
+			children = (
+				7155D01A271890180094E238 /* artist */,
+				7155D019271890140094E238 /* genre */,
+			);
+			path = music;
+			sourceTree = "<group>";
+		};
+		7155D019271890140094E238 /* genre */ = {
+			isa = PBXGroup;
+			children = (
+				7155D01C2718902C0094E238 /* GenreView.swift */,
+				7155D021271890730094E238 /* GenreObservable.swift */,
+			);
+			path = genre;
+			sourceTree = "<group>";
+		};
+		7155D01A271890180094E238 /* artist */ = {
+			isa = PBXGroup;
+			children = (
+				7155D01F271890380094E238 /* ArtistView.swift */,
+			);
+			path = artist;
+			sourceTree = "<group>";
+		};
 		719492AF26FE18CD002F1676 /* iab */ = {
 			isa = PBXGroup;
 			children = (
+				710A01FA26FEE08200F3F9B8 /* IABObservable.swift */,
 				719492B026FE18E2002F1676 /* IABView.swift */,
 			);
 			path = iab;
@@ -98,6 +130,7 @@
 		719492B426FEBD19002F1676 /* extension */ = {
 			isa = PBXGroup;
 			children = (
+				71287504271AD04A00D3B3D9 /* ImageExtension.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -113,6 +146,7 @@
 		71A013F426F70B910016F5E6 /* book */ = {
 			isa = PBXGroup;
 			children = (
+				71A0140526F72F860016F5E6 /* BookObservable.swift */,
 				71A013FC26F70BD70016F5E6 /* BookView.swift */,
 			);
 			path = book;
@@ -137,6 +171,7 @@
 		71A013F726F70BB30016F5E6 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7155D0182718900B0094E238 /* music */,
 				71B97FCE26FED63900AE93BE /* widget */,
 				719492AF26FE18CD002F1676 /* iab */,
 				71A013F626F70BA80016F5E6 /* movie */,
@@ -145,15 +180,6 @@
 				71A013F126F70A450016F5E6 /* home */,
 			);
 			path = view;
-			sourceTree = "<group>";
-		};
-		71A0140026F710B10016F5E6 /* observable */ = {
-			isa = PBXGroup;
-			children = (
-				71A0140526F72F860016F5E6 /* BookObservable.swift */,
-				710A01FA26FEE08200F3F9B8 /* IABObservable.swift */,
-			);
-			path = observable;
 			sourceTree = "<group>";
 		};
 		71B97FCE26FED63900AE93BE /* widget */ = {
@@ -169,8 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				719492B226FE32E0002F1676 /* LazyView.swift */,
-				71FA47B326FA439200F174F3 /* MyHStack.swift */,
-				71FA47B226FA439200F174F3 /* MyVStack.swift */,
 				71FA47B026FA40E300F174F3 /* Constant.swift */,
 			);
 			path = util;
@@ -179,6 +203,7 @@
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
+				7190B948271B2EA200D25A82 /* Coca.entitlements */,
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
 				3CE4B3C98CD62E0A41C6DF47 /* Pods */,
@@ -199,7 +224,6 @@
 			children = (
 				719492B426FEBD19002F1676 /* extension */,
 				71FA47AF26FA40CE00F174F3 /* util */,
-				71A0140026F710B10016F5E6 /* observable */,
 				71A013F726F70BB30016F5E6 /* view */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -343,22 +367,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71287505271AD04A00D3B3D9 /* ImageExtension.swift in Sources */,
 				71A013F926F70BC70016F5E6 /* MovieView.swift in Sources */,
 				71514E2826F6ED72009B5C67 /* Koin.swift in Sources */,
 				71FA47B126FA40E300F174F3 /* Constant.swift in Sources */,
+				7155D01D2718902C0094E238 /* GenreView.swift in Sources */,
 				71A013F326F70A590016F5E6 /* HomeView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				71B97FD326FEDA3800AE93BE /* LoadingScreen.swift in Sources */,
 				71B97FD126FED65F00AE93BE /* CocaWebView.swift in Sources */,
-				71FA47B526FA439200F174F3 /* MyHStack.swift in Sources */,
 				719492B326FE32E0002F1676 /* LazyView.swift in Sources */,
 				71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */,
 				719492B126FE18E2002F1676 /* IABView.swift in Sources */,
 				71A0140626F72F860016F5E6 /* BookObservable.swift in Sources */,
+				7155D022271890730094E238 /* GenreObservable.swift in Sources */,
 				71A013FF26F70C910016F5E6 /* AudioBookView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
-				71FA47B426FA439200F174F3 /* MyVStack.swift in Sources */,
 				710A01FB26FEE08200F3F9B8 /* IABObservable.swift in Sources */,
+				7155D020271890380094E238 /* ArtistView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,10 +513,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Coca.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W742CJJYE6;
 				ENABLE_PREVIEWS = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\"",
@@ -498,13 +524,14 @@
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wind.book.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -516,10 +543,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Coca.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W742CJJYE6;
 				ENABLE_PREVIEWS = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\"",
@@ -527,13 +554,14 @@
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wind.book.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

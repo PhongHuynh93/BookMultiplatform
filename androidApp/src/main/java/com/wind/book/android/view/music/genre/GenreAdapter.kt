@@ -5,14 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
 import com.wind.book.android.databinding.ItemGenreBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.music.Genre
 import com.wind.book.viewmodel.music.genre.GenreEvent
 
 class GenreAdapter(
-    private val requestManager: RequestManager,
     private val event: GenreEvent
 ) : ListAdapter<Genre, GenreAdapter.GenreViewHolder>(object : DiffUtil
     .ItemCallback<Genre>() {
@@ -33,7 +31,6 @@ class GenreAdapter(
                 parent,
                 false
             ),
-            requestManager = requestManager,
             callback = event
         )
     }
@@ -44,7 +41,6 @@ class GenreAdapter(
 
     class GenreViewHolder(
         private val binding: ItemGenreBinding,
-        private val requestManager: RequestManager,
         private val callback: GenreEvent
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -62,7 +58,6 @@ class GenreAdapter(
         fun bind(genre: Genre) {
             this.genre = genre
             binding.apply {
-                rm = requestManager
                 item = genre
                 executePendingBindings()
             }

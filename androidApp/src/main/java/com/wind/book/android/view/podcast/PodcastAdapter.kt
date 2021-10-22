@@ -5,12 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
 import com.wind.book.android.databinding.PodcastItemBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Podcast
 
-class PodcastAdapter(private val rm: RequestManager, private val callback: Callback) :
+class PodcastAdapter(private val callback: Callback) :
     ListAdapter<Podcast, PodcastsViewHolder>(object : DiffUtil.ItemCallback<Podcast>() {
         override fun areItemsTheSame(oldItem: Podcast, newItem: Podcast): Boolean {
             return oldItem.id == newItem.id
@@ -29,7 +28,6 @@ class PodcastAdapter(private val rm: RequestManager, private val callback: Callb
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         PodcastsViewHolder(
             PodcastItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            rm,
             callback
         )
 
@@ -42,7 +40,6 @@ class PodcastAdapter(private val rm: RequestManager, private val callback: Callb
 
 class PodcastsViewHolder(
     private val binding: PodcastItemBinding,
-    private val rm: RequestManager,
     private val callback: Callback
 ) :
     RecyclerView.ViewHolder(binding.root) {
@@ -61,7 +58,6 @@ class PodcastsViewHolder(
     fun bind(item: Podcast) {
         podcast = item
         binding.apply {
-            this.rm = this@PodcastsViewHolder.rm
             podcast = item
         }
     }

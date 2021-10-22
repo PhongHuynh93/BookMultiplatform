@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="rm"
-            type="com.bumptech.glide.RequestManager" />
-
-        <variable
             name="item"
             type="com.wind.book.model.music.Artist" />
     </data>
@@ -25,7 +21,6 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            app:rm="@{rm}"
             app:shapeAppearance="@style/ShapeAppearance.CircleComponent"
             app:url="@{item.model.pictureMedium}"
             tools:src="@tools:sample/avatars" />

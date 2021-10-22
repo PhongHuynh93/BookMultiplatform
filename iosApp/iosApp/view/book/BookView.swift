@@ -29,11 +29,7 @@ struct BookView: View {
                 List(data.data as! [Book], id: \.id) { book in
                     HStack(alignment: .top) {
                         KFImage(URL(string: book.thumb.url))
-                            .placeholder {
-                                VStack {
-                                    Color.gray
-                                }
-                            }
+                            .placeholder()
                             .resizable()
                             .aspectRatio(bookRatio, contentMode: .fill)
                             .frame(width: 128)
@@ -54,7 +50,7 @@ struct BookView: View {
                             Button("Buy") {
                                 KoinKt.log.d(withMessage: { "on tap buy" })
                                 observable.event.onClickBuy(book: book)
-                            }.buttonStyle(.bordered)
+                            }
                         }
                     }.padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
                 }.listStyle(.plain)

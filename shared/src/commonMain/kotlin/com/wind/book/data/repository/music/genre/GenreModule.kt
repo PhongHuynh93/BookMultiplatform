@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 internal val genreModule = module {
     single<GenreAPI> {
-        GenreAPIImpl(get())
+        GenreAPIImpl()
     }
     single<LocalGenreDataSource> {
         LocalGenreDataSourceImpl()

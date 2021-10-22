@@ -2,6 +2,7 @@ package com.wind.book.viewmodel
 
 import com.wind.book.log
 import com.wind.book.model.Identifiable
+import com.wind.book.toastError
 import com.wind.book.viewmodel.util.Constant
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -46,6 +47,7 @@ interface LoadMoreEvent : BaseEvent {
     fun retry()
     fun refresh()
     fun scrollToTop()
+    fun loadMore(indexOfItem: Int)
 }
 
 sealed class LoadMoreEffect : BaseEffect() {
@@ -53,6 +55,7 @@ sealed class LoadMoreEffect : BaseEffect() {
 }
 
 private val TAG = LoadMoreVM::class.simpleName
+
 abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent {
     // region MVI
     private val _state = MutableStateFlow(LoadingState())
@@ -69,6 +72,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     // child class can override
     protected open var startOffsetPage = Constant.START_OFFSET_PAGE
     protected open var pageSize = Constant.PAGE_SIZE
+    protected open var visibleThreshold = Constant.VISIBLE_THRESHOLD
 
     private var currentPage: Int? = null
 
@@ -181,6 +185,18 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
         }
     }
 
+    override fun loadMore(indexOfItem: Int) {
+        val screen = _state.value.screen
+        if (screen is LoadingScreen.Data<*>) {
+            val list = screen.data
+            log.d { "$TAG indexOfItem = $indexOfItem" }
+            log.d { "$TAG list.size - indexOfItem ${list.size - indexOfItem} visibleThreshold $visibleThreshold" }
+            if (list.size - indexOfItem <= visibleThreshold) {
+                loadMore(isRefresh = false)
+            }
+        }
+    }
+
     abstract suspend fun apiCall(
         currentPage: Int,
         pageSize: Int,
@@ -205,7 +221,7 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     }
 
     private fun onError(exception: Throwable) {
-        log.v { "$TAG onError ${exception.stackTraceToString()}" }
+        log.v { "$TAG onError" }
         canNotLoad = true
         when (val screen = state.value.screen) {
             is LoadingScreen.Data<*> -> {

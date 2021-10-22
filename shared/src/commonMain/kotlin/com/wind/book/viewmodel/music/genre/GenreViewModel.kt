@@ -1,6 +1,5 @@
 package com.wind.book.viewmodel.music.genre
 
-import androidx.lifecycle.viewModelScope
 import com.wind.book.domain.usecase.music.genre.GetGenreListParam
 import com.wind.book.domain.usecase.music.genre.GetGenreListUseCase
 import com.wind.book.model.music.Genre
@@ -40,7 +39,7 @@ class GenreViewModel(
     }
 
     override fun onClickGenre(genre: Genre) {
-        viewModelScope.launch {
+        clientScope.launch {
             _genreEffect.emit(GenreEffect.NavToArtist(genre))
         }
     }

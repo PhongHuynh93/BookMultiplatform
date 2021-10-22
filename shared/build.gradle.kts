@@ -12,8 +12,12 @@ version = "1.0"
 kotlin {
     android()
 
-    ios {
-        binaries.framework {
+    listOf(
+        iosX64(),
+        iosArm64(),
+        // iosSimulatorArm64() waiting ktor M1 support
+    ).forEach {
+        it.binaries.framework {
             baseName = "shared"
         }
     }
@@ -71,21 +75,19 @@ kotlin {
                 implementation(Deps.koinAndroid)
             }
         }
-        val androidTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
-                // Coroutines
-                implementation(Deps.Coroutines.test)
-            }
-        }
-        val iosMain by getting {
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        // val iosSimulatorArm64Main by getting
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            // iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 // Network
                 implementation(Deps.Ktor.ios)
             }
         }
-        val iosTest by getting
     }
 }
 

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version Versions.ktlint
     id("io.gitlab.arturbosch.detekt") version "1.18.1"
@@ -7,15 +9,14 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
-        }
     }
-    dependencies {
-        classpath(ClassPaths.gradlePlugin)
-        classpath(ClassPaths.kotlinPlugin)
-        classpath(ClassPaths.safeArgs)
-        classpath(ClassPaths.serialization)
+    with(ClassPaths) {
+        dependencies {
+            classpath(gradlePlugin)
+            classpath(kotlinPlugin)
+            classpath(safeArgs)
+            classpath(serialization)
+        }
     }
 }
 
@@ -23,16 +24,8 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
-        maven {
-            url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
-        }
-        maven {
-            url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-coroutines/maven")
-        }
-        maven {
-            url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
-        }
+        maven(uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-coroutines/maven"))
+        maven(uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap"))
     }
 }
 
@@ -42,7 +35,8 @@ subprojects {
     ktlint {
         verbose.set(true)
         filter {
-            exclude { it.file.path.contains("build/") }
+            exclude("**/generated/**")
+            include("**/kotlin/**")
         }
         disabledRules.set(setOf("no-wildcard-imports", "experimental:annotation"))
     }
@@ -53,8 +47,7 @@ subprojects {
         }
     }
 
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
-
+    tasks.withType<KotlinCompile> {
         kotlinOptions {
             // Treat all Kotlin warnings as errors
             allWarningsAsErrors = true

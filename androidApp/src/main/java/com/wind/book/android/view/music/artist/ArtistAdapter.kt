@@ -5,14 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
 import com.wind.book.android.databinding.ItemArtistBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.music.Artist
 import com.wind.book.viewmodel.music.artist.ArtistEvent
 
 class ArtistAdapter constructor(
-    private val requestManager: RequestManager,
     private val callback: ArtistEvent
 ) : ListAdapter<Artist, ArtistAdapter.ArtistViewHolder>(object : DiffUtil
     .ItemCallback<Artist>() {
@@ -31,7 +29,7 @@ class ArtistAdapter constructor(
                 LayoutInflater.from(parent.context),
                 parent, false
             ),
-            requestManager, callback
+            callback
         )
     }
 
@@ -41,7 +39,6 @@ class ArtistAdapter constructor(
 
     class ArtistViewHolder(
         private val binding: ItemArtistBinding,
-        private val requestManager: RequestManager,
         private val callback: ArtistEvent
     ) : RecyclerView.ViewHolder(binding.root) {
         private lateinit var artist: Artist
@@ -58,7 +55,6 @@ class ArtistAdapter constructor(
         fun bind(artist: Artist) {
             this.artist = artist
             binding.apply {
-                rm = requestManager
                 item = artist
                 executePendingBindings()
             }

@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.wind.book.android.R
 import com.wind.book.android.databinding.ToolbarListViewBinding
 import com.wind.book.android.extension.handleLoadMore
@@ -37,7 +36,6 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
         val list = binding.list
 
         val podcastAdapter = PodcastAdapter(
-            Glide.with(this),
             object : PodcastAdapter.Callback {
                 override fun onClick(podcast: Podcast) = event.onClick(podcast)
             }

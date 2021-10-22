@@ -4,7 +4,11 @@ import com.wind.book.domain.usecase.book.GetBookNameParam
 import com.wind.book.domain.usecase.book.GetBookNameUseCase
 import com.wind.book.model.BookName
 import com.wind.book.share.WhileViewSubscribed
-import com.wind.book.viewmodel.*
+import com.wind.book.toastError
+import com.wind.book.viewmodel.BaseEffect
+import com.wind.book.viewmodel.BaseEvent
+import com.wind.book.viewmodel.BaseMVIViewModel
+import com.wind.book.viewmodel.BaseState
 import kotlinx.coroutines.flow.*
 
 data class BookPagerState(

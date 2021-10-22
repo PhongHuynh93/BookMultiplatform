@@ -39,6 +39,10 @@ extension Koin_coreKoin {
     func get() -> IABViewModel {
         return koin.getDependency(objCClass: IABViewModel.self) as! IABViewModel
     }
+    
+    func get() -> GenreViewModel {
+        return koin.getDependency(objCClass: GenreViewModel.self) as! GenreViewModel
+    }
 
     // Observable
     func get() -> BookObservable {
@@ -47,5 +51,9 @@ extension Koin_coreKoin {
 
     func get() -> IABObservable {
         return IABObservable(viewModel: get())
+    }
+    
+    func get() -> GenreObservable {
+        return GenreObservable(viewModel: get())
     }
 }

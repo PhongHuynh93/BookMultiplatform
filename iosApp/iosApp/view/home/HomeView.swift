@@ -12,9 +12,9 @@ struct HomeView: View {
     var body: some View {
         TabView {
             NavigationView {
-                BookView()
+                GenreView()
             }.tabItem {
-                Label("Book", systemImage: "book")
+                Label("Genre", systemImage: "music.note")
             }
             NavigationView {
                 AudioBookView()

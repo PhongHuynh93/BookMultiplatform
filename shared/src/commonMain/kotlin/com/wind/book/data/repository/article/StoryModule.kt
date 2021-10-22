@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 internal val storyModule = module {
     single<StoryAPI> {
-        StoryAPIImpl(get())
+        StoryAPIImpl()
     }
 
     single<RemoteStoryDataSource> {

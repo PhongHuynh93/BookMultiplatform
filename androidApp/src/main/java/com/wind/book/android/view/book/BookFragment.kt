@@ -6,7 +6,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
-import com.bumptech.glide.Glide
 import com.wind.book.android.R
 import com.wind.book.android.databinding.ListViewBinding
 import com.wind.book.android.extension.handleLoadMore
@@ -50,7 +49,6 @@ class BookFragment : Fragment(R.layout.list_view) {
         val list = binding.list
 
         val feedAdapter = BookAdapter(
-            Glide.with(this),
             event
         )
         val footerLoadingAdapter = LoadingAdapter(object : LoadingAdapter.Callback {

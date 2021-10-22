@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
 import com.wind.book.android.databinding.BookItemBinding
 import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Book
 import com.wind.book.viewmodel.book.BookEvent
 
-class BookAdapter(private val rm: RequestManager, private val bookEvent: BookEvent) :
+class BookAdapter(private val bookEvent: BookEvent) :
     ListAdapter<Book, BookViewHolder>(object : DiffUtil.ItemCallback<Book>() {
         override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem.id == newItem.id
@@ -29,7 +28,7 @@ class BookAdapter(private val rm: RequestManager, private val bookEvent: BookEve
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         return BookViewHolder(
-            BookItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), rm, bookEvent
+            BookItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), bookEvent
         )
     }
 
@@ -39,7 +38,7 @@ class BookAdapter(private val rm: RequestManager, private val bookEvent: BookEve
     }
 }
 
-class BookViewHolder(private val binding: BookItemBinding, private val rm: RequestManager, val callback: BookEvent) :
+class BookViewHolder(private val binding: BookItemBinding, val callback: BookEvent) :
     RecyclerView.ViewHolder(binding.root) {
     private lateinit var book: Book
 
@@ -55,7 +54,6 @@ class BookViewHolder(private val binding: BookItemBinding, private val rm: Reque
     fun bind(item: Book) {
         this.book = item
         binding.apply {
-            this.rm = this@BookViewHolder.rm
             book = item
         }
     }

@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 internal val podcastModule = module {
     single<PodcastAPI> {
-        PodcastAPIImpl(get())
+        PodcastAPIImpl()
     }
     single<LocalPodcastDataSource> {
         LocalPodcastDataSourceImpl()
