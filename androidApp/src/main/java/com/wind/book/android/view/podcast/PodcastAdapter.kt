@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.wind.book.android.databinding.PodcastItemBinding
-import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Podcast
 
 class PodcastAdapter(private val callback: Callback) :
@@ -18,8 +17,7 @@ class PodcastAdapter(private val callback: Callback) :
         override fun areContentsTheSame(oldItem: Podcast, newItem: Podcast): Boolean {
             return oldItem == newItem
         }
-    }),
-    GetItemCountCallback {
+    }) {
 
     init {
         stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY

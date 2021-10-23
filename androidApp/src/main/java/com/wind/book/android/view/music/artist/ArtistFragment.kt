@@ -21,7 +21,6 @@ import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.music.artist.ArtistEffect
 import com.wind.book.viewmodel.music.artist.ArtistEvent
 import com.wind.book.viewmodel.music.artist.ArtistViewModel
-import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val SPAN_COUNT = 2
@@ -68,8 +67,8 @@ class ArtistFragment : Fragment(R.layout.toolbar_grid_view) {
                         SPAN_COUNT
                     )
                 )
-                handleLoadMore(Constant.VISIBLE_THRESHOLD, artistAdapter) {
-                    event.loadMore()
+                handleLoadMore {
+                    event.loadMore(it)
                 }
             }
             swipeRefresh.apply {

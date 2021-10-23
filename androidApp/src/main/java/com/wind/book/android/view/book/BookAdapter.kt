@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.wind.book.android.databinding.BookItemBinding
-import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Book
 import com.wind.book.viewmodel.book.BookEvent
 
@@ -19,8 +18,7 @@ class BookAdapter(private val bookEvent: BookEvent) :
         override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem == newItem
         }
-    }),
-    GetItemCountCallback {
+    }) {
 
     init {
         stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY

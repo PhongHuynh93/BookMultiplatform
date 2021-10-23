@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.wind.book.android.databinding.ItemArtistBinding
-import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.music.Artist
 import com.wind.book.viewmodel.music.artist.ArtistEvent
 
@@ -21,8 +20,7 @@ class ArtistAdapter constructor(
         override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean {
             return oldItem == newItem
         }
-    }),
-    GetItemCountCallback {
+    }) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistViewHolder {
         return ArtistViewHolder(
             ItemArtistBinding.inflate(
