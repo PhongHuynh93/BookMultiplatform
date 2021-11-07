@@ -12,7 +12,8 @@ import SwiftUI
 
 struct GenreView: View {
     @StateObject var observable: GenreObservable = koin.get()
-    @State private var navIAB = false
+    @State private var navArtist = false
+    @State private var genre = Genre()
 
     // make at least 2 columns
     let columns = [
@@ -32,29 +33,31 @@ struct GenreView: View {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(data.data as! [Genre], id: \.id) { genre in
-                            ZStack {
-                                GeometryReader { gr in
-                                    KFImage(URL(string: genre.model.pictureMedium))
-                                        .placeholder()
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(height: gr.size.height)
-                                }
-                                .aspectRatio(genreRatio, contentMode: .fill)
-                                .overlay(
-                                    ZStack {
-                                        Color("overlay")
-                                        Text(genre.model.name)
-                                            .font(.subheadline)
-                                            .bold()
-                                            .foregroundColor(Color.white)
+                            NavigationLink(destination: ArtistView(genre: genre), isActive: self.$navArtist) {
+                                ZStack {
+                                    GeometryReader { gr in
+                                        KFImage(URL(string: genre.model.pictureMedium))
+                                            .placeholder()
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(height: gr.size.height)
                                     }
-                                )
-                            }
-                            .cornerRadius(smallRadius)
-                            .clipped()
-                            .onAppear {
-                                observable.loadMore(indexOfItem: (data.data as! [Genre]).firstIndex(of: genre)!)
+                                    .aspectRatio(genreRatio, contentMode: .fill)
+                                    .overlay(
+                                        ZStack {
+                                            Color("overlay")
+                                            Text(genre.model.name)
+                                                .font(.subheadline)
+                                                .bold()
+                                                .foregroundColor(Color.white)
+                                        }
+                                    )
+                                }
+                                .cornerRadius(smallRadius)
+                                .clipped()
+                                .onAppear {
+                                    observable.loadMore(indexOfItem: (data.data as! [Genre]).firstIndex(of: genre)!)
+                                }
                             }
                         }
                     }
@@ -80,8 +83,9 @@ struct GenreView: View {
             default:
                 KoinKt.log.d(withMessage: { "Unknown effect" })
             }
-        case is GenreEffect.NavToArtist:
-            navIAB = true
+        case let effect as GenreEffect.NavToArtist:
+            genre = effect.genre
+            navArtist = true
         default:
             KoinKt.log.d(withMessage: { "Unknown effect" })
         }

@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.6.0-RC"
+    const val kotlin = "1.6.0-RC2"
     const val gradlePlugin = "7.0.3"
     const val coroutines = "1.5.1-new-mm-dev2"
     const val kermit = "0.1.9"

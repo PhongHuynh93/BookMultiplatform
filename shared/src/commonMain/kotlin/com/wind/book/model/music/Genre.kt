@@ -8,4 +8,10 @@ import com.wind.book.model.Identifiable
 data class Genre(
     override val id: String,
     val model: BaseMusicModel,
-) : Parcelable, Identifiable
+) : Parcelable, Identifiable {
+    // Need secondary constructor to initialize with no args in SwiftUI
+    constructor() : this(
+        id = "",
+        model = BaseMusicModel()
+    )
+}
