@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.wind.book.android.databinding.ArticleItemBinding
-import com.wind.book.android.extension.GetItemCountCallback
 import com.wind.book.model.Article
 
 class ArticleAdapter(private val callback: Callback) :
@@ -18,8 +17,7 @@ class ArticleAdapter(private val callback: Callback) :
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem == newItem
         }
-    }),
-    GetItemCountCallback {
+    }) {
 
     init {
         stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY

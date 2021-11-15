@@ -77,8 +77,8 @@ class PodcastDetailFragment : Fragment(R.layout.toolbar_list_view) {
             rcv.apply {
                 adapter = concatAdapter
                 addItemDecoration(PodcastItemDecoration(context))
-                handleLoadMore(10, episodesAdapter) {
-                    event.loadMore()
+                handleLoadMore {
+                    event.loadMore(it)
                 }
                 val toolbarElevation = resources.getDimension(R.dimen.toolbar_elevation)
                 addOnScrollListener(object : RecyclerView.OnScrollListener() {

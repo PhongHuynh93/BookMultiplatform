@@ -66,8 +66,8 @@ class BookFragment : Fragment(R.layout.list_view) {
             rcv.apply {
                 adapter = concatAdapter
                 addItemDecoration(BookItemDecoration(requireContext()))
-                handleLoadMore(Constant.VISIBLE_THRESHOLD, feedAdapter) {
-                    event.loadMore()
+                handleLoadMore {
+                    event.loadMore(it)
                 }
             }
             swipeRefresh.apply {

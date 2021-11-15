@@ -75,7 +75,7 @@ class GenreFragment : Fragment(R.layout.toolbar_grid_view) {
                     )
                 )
                 handleLoadMore {
-                    event.loadMore(rcv.getChildViewHolder(it).bindingAdapterPosition)
+                    event.loadMore(it)
                 }
             }
             swipeRefresh.apply {

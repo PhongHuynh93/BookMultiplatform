@@ -11,4 +11,14 @@ data class BaseMusicModel(
     val pictureMedium: String,
     val pictureSmall: String,
     val pictureXl: String
-) : Parcelable
+) : Parcelable {
+    // Need secondary constructor to initialize with no args in SwiftUI
+    constructor() : this(
+        name = "",
+        picture = "",
+        pictureBig = "",
+        pictureMedium = "",
+        pictureSmall = "",
+        pictureXl = "",
+    )
+}

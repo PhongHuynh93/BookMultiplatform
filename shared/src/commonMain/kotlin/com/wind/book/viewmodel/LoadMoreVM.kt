@@ -189,6 +189,9 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
         val screen = _state.value.screen
         if (screen is LoadingScreen.Data<*>) {
             val list = screen.data
+            if (list.isEmpty()) {
+                return
+            }
             log.d { "$TAG indexOfItem = $indexOfItem" }
             log.d { "$TAG list.size - indexOfItem ${list.size - indexOfItem} visibleThreshold $visibleThreshold" }
             if (list.size - indexOfItem <= visibleThreshold) {

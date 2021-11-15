@@ -30,41 +30,17 @@ fun RecyclerView.smoothAndFastScrollTo(to: Int) {
     }
 }
 
-private const val VISIBLE_THRESHOLD = 20
-fun RecyclerView.handleLoadMore(visibleThreshold: Int? = null, getItemCountCallback: GetItemCountCallback, callback: () -> Unit) {
-    val threshold = visibleThreshold ?: VISIBLE_THRESHOLD
-    val layoutManager = layoutManager as LinearLayoutManager
-    val checkScroll: (layoutManager: LinearLayoutManager, callback: () -> Unit) -> Unit =
-        { lm, cb ->
-            val totalItemCount = getItemCountCallback.getItemCount()
-            val lastVisibleItem = lm.findLastVisibleItemPosition()
-            if (totalItemCount <= (lastVisibleItem + threshold)) {
-                cb.invoke()
-            }
-        }
-    addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-            checkScroll(layoutManager, callback)
-        }
-    })
-}
-
 // invoke whenever on view is attached to window
-fun RecyclerView.handleLoadMore(callback: (View) -> Unit) {
+fun RecyclerView.handleLoadMore(callback: (Int) -> Unit) {
     addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
         override fun onChildViewAttachedToWindow(view: View) {
-            callback.invoke(view)
+            callback.invoke(getChildViewHolder(view).bindingAdapterPosition)
         }
 
         override fun onChildViewDetachedFromWindow(view: View) {
             // not handle
         }
     })
-}
-
-fun interface GetItemCountCallback {
-    fun getItemCount(): Int
 }
 
 fun Rect.setGridSpacing(parent: RecyclerView, view: View, spacing: Int, spanCount: Int) {

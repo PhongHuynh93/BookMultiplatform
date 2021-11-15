@@ -20,7 +20,6 @@ import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.podcast.PodcastEffect
 import com.wind.book.viewmodel.podcast.PodcastEvent
 import com.wind.book.viewmodel.podcast.PodcastViewModel
-import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
@@ -64,8 +63,8 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
                 }
                 adapter = concatAdapter
                 addItemDecoration(PodcastDecoration(context, spanCount))
-                handleLoadMore(Constant.VISIBLE_THRESHOLD, podcastAdapter) {
-                    event.loadMore()
+                handleLoadMore {
+                    event.loadMore(it)
                 }
             }
             swipeRefresh.apply {

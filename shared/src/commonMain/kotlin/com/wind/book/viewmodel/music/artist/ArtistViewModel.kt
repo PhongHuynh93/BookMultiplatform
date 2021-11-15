@@ -2,6 +2,7 @@ package com.wind.book.viewmodel.music.artist
 
 import com.wind.book.domain.usecase.music.artist.GetArtistListByGenreParam
 import com.wind.book.domain.usecase.music.artist.GetArtistListByGenreUseCase
+import com.wind.book.log
 import com.wind.book.model.music.Artist
 import com.wind.book.viewmodel.BaseEffect
 import com.wind.book.viewmodel.LoadMoreEvent
@@ -28,6 +29,7 @@ class ArtistViewModel(
     override val event = this as ArtistEvent
     var genreId: String = ""
         set(value) {
+            log.d { "genreId $value and current field $field" }
             if (value != field) {
                 field = value
                 loadMore()
