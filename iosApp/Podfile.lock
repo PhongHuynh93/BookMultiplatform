@@ -1,14 +1,17 @@
 PODS:
   - Kingfisher (7.0.0)
+  - NavigationStack (1.0.4)
   - shared (1.0)
 
 DEPENDENCIES:
   - Kingfisher (~> 7.0)
+  - NavigationStack
   - shared (from `../shared`)
 
 SPEC REPOS:
   trunk:
     - Kingfisher
+    - NavigationStack
 
 EXTERNAL SOURCES:
   shared:
@@ -16,8 +19,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Kingfisher: 5efc54fec3980f92354898532e562cc17f31efb4
+  NavigationStack: c2fb4c71b89659481e8e0dfb20e533681dce084f
   shared: 682133c5d0681084aac6ddd23b51c18dfec19810
 
-PODFILE CHECKSUM: 1b531293137eb16828257754a2479a6fceb223c4
+PODFILE CHECKSUM: 6a0b3dc31b3eafb18e989470cd3cc0416f19b34d
 
 COCOAPODS: 1.11.2

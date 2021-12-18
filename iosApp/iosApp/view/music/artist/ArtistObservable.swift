@@ -11,7 +11,7 @@ import Foundation
 import shared
 
 final class ArtistObservable: ObservableObject {
-    let artistVM: ArtistViewModel
+    private let artistVM: ArtistViewModel
     @Published private(set) var state: LoadingState
     private var stateCloseable: Ktor_ioCloseable!
     private var effectCloseable: Ktor_ioCloseable!
@@ -48,10 +48,5 @@ final class ArtistObservable: ObservableObject {
 
     func loadMore(indexOfItem: Int) {
         artistVM.loadMore(indexOfItem: Int32(indexOfItem))
-    }
-
-    func setGenre(genre: Genre) {
-        KoinKt.log.d(withMessage: { "setGenre \(genre)" })
-        artistVM.genreId = genre.id
     }
 }

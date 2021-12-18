@@ -11,7 +11,7 @@ import Foundation
 import shared
 
 final class GenreObservable: ObservableObject {
-    let genreVM: GenreViewModel
+    private let genreVM: GenreViewModel
     @Published private(set) var state: LoadingState
     private var stateCloseable: Ktor_ioCloseable!
     private var effectCloseable: Ktor_ioCloseable!

@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 
 interface ArtistEvent : LoadMoreEvent {
     fun onClickArtist(artist: Artist)
+    fun setGenreId(genreId: String)
 }
 
 sealed class ArtistEffect : BaseEffect() {
@@ -27,14 +28,7 @@ class ArtistViewModel(
     private val _artistEffect = MutableSharedFlow<ArtistEffect>()
     val artistEffect = _artistEffect.asSharedFlow()
     override val event = this as ArtistEvent
-    var genreId: String = ""
-        set(value) {
-            log.d { "genreId $value and current field $field" }
-            if (value != field) {
-                field = value
-                loadMore()
-            }
-        }
+    private var genreId: String = ""
 
     init {
         // capture the base effect and emit again
@@ -60,6 +54,12 @@ class ArtistViewModel(
     }
 
     override fun onClickArtist(artist: Artist) {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
+    }
+
+    override fun setGenreId(genreId: String) {
+        log.d { "genreId $genreId ArtistViewModel hashcode ${hashCode()}" }
+        this.genreId = genreId
+        loadMore(isRefresh = true)
     }
 }

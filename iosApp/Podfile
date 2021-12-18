@@ -4,4 +4,5 @@ target 'Coca' do
   project 'Coca.xcodeproj'
   pod 'shared', :path => '../shared'
   pod 'Kingfisher', '~> 7.0'
+  pod 'NavigationStack'
 end
