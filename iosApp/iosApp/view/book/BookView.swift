@@ -48,7 +48,7 @@ struct BookView: View {
                                 .lineLimit(3)
                             Spacer()
                             Button("Buy") {
-                                KoinKt.log.d(withMessage: { "on tap buy" })
+                                KoinKt.log.d(message: { "on tap buy" })
                                 observable.event.onClickBuy(book: book)
                             }
                         }
@@ -65,20 +65,20 @@ struct BookView: View {
     }
 
     private func onEffect(effect: BookEffect) {
-        KoinKt.log.d(withMessage: { "Effect \(effect)" })
+        KoinKt.log.d(message: { "Effect \(effect)" })
         switch effect {
         case let lmEffect as BookEffect.LMEffect:
             switch lmEffect.loadMoreEffect {
             case is LoadMoreEffect.ScrollToTop:
-                KoinKt.log.d(withMessage: { "Scroll to top" })
+                KoinKt.log.d(message: { "Scroll to top" })
             default:
-                KoinKt.log.d(withMessage: { "Unknown effect" })
+                KoinKt.log.d(message: { "Unknown effect" })
             }
         case let nav as BookEffect.NavToIAB:
             iabNav = nav.iabNav
             navIAB = true
         default:
-            KoinKt.log.d(withMessage: { "Unknown effect" })
+            KoinKt.log.d(message: { "Unknown effect" })
         }
     }
 }

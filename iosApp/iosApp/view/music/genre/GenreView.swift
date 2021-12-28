@@ -73,19 +73,19 @@ struct GenreView: View {
     }
 
     private func onEffect(effect: GenreEffect) {
-        KoinKt.log.d(withMessage: { "Effect \(effect)" })
+        KoinKt.log.d(message: { "Effect \(effect)" })
         switch effect {
         case let lmEffect as GenreEffect.LoadMoreEffect:
             switch lmEffect.loadMoreEffect {
             case is LoadMoreEffect.ScrollToTop:
-                KoinKt.log.d(withMessage: { "Scroll to top" })
+                KoinKt.log.d(message: { "Scroll to top" })
             default:
-                KoinKt.log.d(withMessage: { "Unknown effect" })
+                KoinKt.log.d(message: { "Unknown effect" })
             }
         case let effect as GenreEffect.NavToArtist:
             navigationStack.push(ArtistView(genre: effect.genre))
         default:
-            KoinKt.log.d(withMessage: { "Unknown effect" })
+            KoinKt.log.d(message: { "Unknown effect" })
         }
     }
 }

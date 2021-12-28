@@ -83,10 +83,10 @@ struct ArtistView: View {
     }
 
     private func onEffect(effect: ArtistEffect) {
-        KoinKt.log.d(withMessage: { "Effect \(effect)" })
+        KoinKt.log.d(message: { "Effect \(effect)" })
         switch effect {
         default:
-            KoinKt.log.d(withMessage: { "Unknown effect" })
+            KoinKt.log.d(message: { "Unknown effect" })
         }
     }
 }

@@ -19,19 +19,19 @@ final class GenreObservable: ObservableObject {
     let event: GenreEvent
 
     init(viewModel: GenreViewModel) {
-        KoinKt.log.d(withMessage: { "GenreViewModel init viewmodel" })
+        KoinKt.log.d(message: { "GenreViewModel init viewmodel" })
         genreVM = viewModel
         state = LoadingState()
         event = viewModel.event
     }
 
     deinit {
-        KoinKt.log.d(withMessage: { "GenreViewModel deinit" })
+        KoinKt.log.d(message: { "GenreViewModel deinit" })
         genreVM.onCleared()
     }
 
     func startObserving() {
-        KoinKt.log.d(withMessage: { "GenreViewModel startObserving" })
+        KoinKt.log.d(message: { "GenreViewModel startObserving" })
         stateCloseable = genreVM.observe(genreVM.state, onChange: {
             self.state = $0 as! LoadingState
         })
@@ -41,7 +41,7 @@ final class GenreObservable: ObservableObject {
     }
 
     func stopObserving() {
-        KoinKt.log.d(withMessage: { "GenreViewModel stopObserving" })
+        KoinKt.log.d(message: { "GenreViewModel stopObserving" })
         stateCloseable.close()
         effectCloseable.close()
     }

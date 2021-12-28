@@ -19,19 +19,19 @@ final class ArtistObservable: ObservableObject {
     let event: ArtistEvent
 
     init(viewModel: ArtistViewModel) {
-        KoinKt.log.d(withMessage: { "ArtistViewModel init viewmodel" })
+        KoinKt.log.d(message: { "ArtistViewModel init viewmodel" })
         artistVM = viewModel
         state = LoadingState()
         event = viewModel.event
     }
 
     deinit {
-        KoinKt.log.d(withMessage: { "ArtistViewModel deinit" })
+        KoinKt.log.d(message: { "ArtistViewModel deinit" })
         artistVM.onCleared()
     }
 
     func startObserving() {
-        KoinKt.log.d(withMessage: { "ArtistViewModel startObserving" })
+        KoinKt.log.d(message: { "ArtistViewModel startObserving" })
         stateCloseable = artistVM.observe(artistVM.state, onChange: {
             self.state = $0 as! LoadingState
         })
@@ -41,7 +41,7 @@ final class ArtistObservable: ObservableObject {
     }
 
     func stopObserving() {
-        KoinKt.log.d(withMessage: { "ArtistViewModel stopObserving" })
+        KoinKt.log.d(message: { "ArtistViewModel stopObserving" })
         stateCloseable.close()
         effectCloseable.close()
     }

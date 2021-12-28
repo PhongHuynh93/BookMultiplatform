@@ -66,7 +66,7 @@ private val coreModule = module {
         Clock.System
     }
     single<HttpClient> {
-        log.v("Init core") { "init http client" }
+        log.v("Init core init http client")
         HttpClient {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(json = json)
@@ -74,7 +74,7 @@ private val coreModule = module {
             install(Logging) {
                 logger = object : Logger {
                     override fun log(message: String) {
-                        log.v("Network") { message }
+                        log.v("Network message")
                     }
                 }
                 level = LogLevel.ALL
