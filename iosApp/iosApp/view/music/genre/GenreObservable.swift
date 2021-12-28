@@ -24,11 +24,6 @@ final class GenreObservable: ObservableObject {
         state = LoadingState()
         event = viewModel.event
     }
-
-    deinit {
-        KoinKt.log.d(message: { "GenreViewModel deinit" })
-        genreVM.onCleared()
-    }
 
     func startObserving() {
         KoinKt.log.d(message: { "GenreViewModel startObserving" })

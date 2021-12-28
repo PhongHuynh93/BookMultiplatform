@@ -14,6 +14,7 @@ object Versions {
     const val parcelable = "0.1.4"
     const val ktlint = "10.2.0"
     const val asyncImage = "1.4.0"
+    const val compose = "1.1.0-rc01"
 
     object AndroidX {
         const val supportLibrary: String = "1.2.0"
@@ -29,12 +30,6 @@ object Versions {
         const val test = "1.3.0"
         const val test_ext = "1.1.2"
         const val nav = "2.4.0-alpha06"
-    }
-
-    object Compose {
-        const val compose = "1.0.1"
-        const val activity = "1.3.0"
-        const val accompanist = "0.13.0"
     }
 }
 
@@ -72,17 +67,6 @@ object Deps {
         const val junit = "androidx.test.ext:junit:${Versions.AndroidX.test_ext}"
         const val runner = "androidx.test:runner:${Versions.AndroidX.test}"
         const val rules = "androidx.test:rules:${Versions.AndroidX.test}"
-    }
-
-    object Compose {
-        const val ui = "androidx.compose.ui:ui:${Versions.Compose.compose}"
-        const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.Compose.compose}"
-        const val foundation = "androidx.compose.foundation:foundation:${Versions.Compose.compose}"
-        const val material = "androidx.compose.material:material:${Versions.Compose.compose}"
-        const val activityCompose = "androidx.activity:activity-compose:${Versions.Compose.activity}"
-        object Accompanist {
-            const val swipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.Compose.accompanist}"
-        }
     }
 
     object KotlinTest {

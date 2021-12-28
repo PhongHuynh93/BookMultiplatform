@@ -24,12 +24,7 @@ final class IABObservable: ObservableObject {
         state = IABState()
         event = viewModel.event
     }
-
-    deinit {
-        KoinKt.log.d(message: { "IABObservable deinit" })
-        vm.onCleared()
-    }
-
+    
     func startObserving() {
         KoinKt.log.d(message: { "IABObservable startObserving" })
         stateCloseable = vm.observe(vm.state, onChange: {

@@ -7,12 +7,10 @@
 //
 
 import Kingfisher
-import NavigationStack
 import shared
 import SwiftUI
 
 struct GenreView: View {
-    @EnvironmentObject private var navigationStack: NavigationStack
     @StateObject var observable: GenreObservable = koin.get()
 
     // make at least 2 columns
@@ -31,36 +29,38 @@ struct GenreView: View {
                 Text(error.errorMessage)
             case let data as LoadingScreenData<Genre>:
                 ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10) {
+                    LazyVGrid(columns: columns) {
                         ForEach(data.data as! [Genre], id: \.id) { genre in
-                            ZStack {
-                                GeometryReader { gr in
-                                    KFImage(URL(string: genre.model.pictureMedium))
-                                        .placeholder()
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(height: gr.size.height)
-                                }
-                                .aspectRatio(genreRatio, contentMode: .fill)
-                                .overlay(
-                                    ZStack {
-                                        Color("overlay")
-                                        Text(genre.model.name)
-                                            .font(.subheadline)
-                                            .bold()
-                                            .foregroundColor(Color.white)
+                            NavigationLink(destination: ArtistView(genre: genre)) {
+                                ZStack {
+                                    GeometryReader { gr in
+                                        KFImage(URL(string: genre.model.pictureMedium))
+                                            .placeholder()
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(height: gr.size.height)
                                     }
-                                )
+                                    .aspectRatio(genreRatio, contentMode: .fill)
+                                    .overlay(
+                                        ZStack {
+                                            Color("overlay")
+                                            Text(genre.model.name)
+                                                .font(.subheadline)
+                                                .bold()
+                                                .foregroundColor(Color.white)
+                                        }
+                                    )
+                                }
+                                .cornerRadius(smallRadius)
+                                .clipped()
+                                .onAppear {
+                                    observable.loadMore(indexOfItem: (data.data as! [Genre]).firstIndex(of: genre)!)
+                                }
                             }
-                            .cornerRadius(smallRadius)
-                            .clipped()
-                            .onAppear {
-                                observable.loadMore(indexOfItem: (data.data as! [Genre]).firstIndex(of: genre)!)
-                            }
-                            .onTapGesture { observable.event.onClickGenre(genre: genre) }
                         }
                     }
                     .padding(.horizontal)
+                    .padding(.bottom)
                 }
             default:
                 Text("Not Handling")
@@ -82,8 +82,6 @@ struct GenreView: View {
             default:
                 KoinKt.log.d(message: { "Unknown effect" })
             }
-        case let effect as GenreEffect.NavToArtist:
-            navigationStack.push(ArtistView(genre: effect.genre))
         default:
             KoinKt.log.d(message: { "Unknown effect" })
         }

@@ -94,8 +94,13 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     private val loadAPIScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     override fun onCleared() {
-        // FIXME: Bug on IOS when it cancels the scope while loading
-        if (platform == PlatformType.ANDROID) {
+        // on iOS
+        // don't use `cancel` but just `cancelChildren`
+        // because the view model is reused later
+        // If use `cancel`, the scope can not be used at that time
+        if (platform == PlatformType.IOS) {
+            loadAPIScope.coroutineContext.cancelChildren()
+        } else {
             loadAPIScope.cancel()
         }
         super.onCleared()

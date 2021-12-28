@@ -55,11 +55,11 @@ subprojects {
             // Set JVM target to 1.8
             jvmTarget = "1.8"
 
-            freeCompilerArgs = listOf(
-                *freeCompilerArgs.toTypedArray(),
+            freeCompilerArgs = freeCompilerArgs + listOf(
                 "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                 "-Xopt-in=kotlinx.coroutines.FlowPreview",
                 "-Xopt-in=kotlin.Experimental",
+                "-Xopt-in=kotlin.RequiresOptIn"
             )
         }
     }

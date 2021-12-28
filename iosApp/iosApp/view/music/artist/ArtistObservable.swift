@@ -27,7 +27,6 @@ final class ArtistObservable: ObservableObject {
 
     deinit {
         KoinKt.log.d(message: { "ArtistViewModel deinit" })
-        artistVM.onCleared()
     }
 
     func startObserving() {
