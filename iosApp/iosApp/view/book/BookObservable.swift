@@ -19,7 +19,7 @@ final class BookObservable: ObservableObject {
     let event: BookEvent
 
     init(viewModel: BookViewModel) {
-        KoinKt.log.d(withMessage: { "BookObservable init viewmodel" })
+        KoinKt.log.d(message: { "BookObservable init viewmodel" })
         bookVM = viewModel
         state = LoadingState()
         event = viewModel.event
@@ -27,12 +27,12 @@ final class BookObservable: ObservableObject {
     }
 
     deinit {
-        KoinKt.log.d(withMessage: { "BookObservable deinit" })
+        KoinKt.log.d(message: { "BookObservable deinit" })
         bookVM.onCleared()
     }
 
     func startObserving() {
-        KoinKt.log.d(withMessage: { "BookObservable startObserving" })
+        KoinKt.log.d(message: { "BookObservable startObserving" })
         stateCloseable = bookVM.observe(bookVM.state, onChange: {
             self.state = $0 as! LoadingState
         })
@@ -42,7 +42,7 @@ final class BookObservable: ObservableObject {
     }
 
     func stopObserving() {
-        KoinKt.log.d(withMessage: { "BookObservable stopObserving" })
+        KoinKt.log.d(message: { "BookObservable stopObserving" })
         stateCloseable.close()
         effectCloseable.close()
     }

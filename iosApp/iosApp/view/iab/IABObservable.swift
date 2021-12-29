@@ -19,19 +19,14 @@ final class IABObservable: ObservableObject {
     let event: IABEvent
 
     init(viewModel: IABViewModel) {
-        KoinKt.log.d(withMessage: { "IABObservable init viewmodel" })
+        KoinKt.log.d(message: { "IABObservable init viewmodel" })
         vm = viewModel
         state = IABState()
         event = viewModel.event
     }
-
-    deinit {
-        KoinKt.log.d(withMessage: { "IABObservable deinit" })
-        vm.onCleared()
-    }
-
+    
     func startObserving() {
-        KoinKt.log.d(withMessage: { "IABObservable startObserving" })
+        KoinKt.log.d(message: { "IABObservable startObserving" })
         stateCloseable = vm.observe(vm.state, onChange: {
             self.state = $0 as! IABState
         })
@@ -41,7 +36,7 @@ final class IABObservable: ObservableObject {
     }
 
     func stopObserving() {
-        KoinKt.log.d(withMessage: { "IABObservable stopObserving" })
+        KoinKt.log.d(message: { "IABObservable stopObserving" })
         stateCloseable.close()
         effectCloseable.close()
     }

@@ -2,6 +2,8 @@ package com.wind.book.viewmodel
 
 import com.wind.book.log
 import com.wind.book.model.Identifiable
+import com.wind.book.model.PlatformType
+import com.wind.book.platform
 import com.wind.book.toastError
 import com.wind.book.viewmodel.util.Constant
 import kotlinx.coroutines.*
@@ -92,27 +94,36 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     private val loadAPIScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     override fun onCleared() {
-        loadAPIScope.cancel()
+        // on iOS
+        // don't use `cancel` but just `cancelChildren`
+        // because the view model is reused later
+        // If use `cancel`, the scope can not be used at that time
+        if (platform == PlatformType.IOS) {
+            loadAPIScope.coroutineContext.cancelChildren()
+        } else {
+            loadAPIScope.cancel()
+        }
         super.onCleared()
     }
 
     override fun loadMore(isRefresh: Boolean) {
+        log.v { "$TAG loadMore $isRefresh" }
         loadAPIScope.launch {
             if (!canLoad()) {
                 return@launch
             }
-            onLoading()
+            onLoading(isRefresh)
 
             val currentPage = if (isRefresh) {
                 startOffsetPage
             } else {
                 currentPage ?: startOffsetPage
             }
-            log.v { "$TAG start load more $currentPage isRefresh $isRefresh" }
+            log.v { "$TAG start load more $currentPage" }
             apiCall(currentPage, pageSize, isRefresh)
                 .onSuccess { list ->
                     ensureActive()
-                    log.v { "$TAG return data current page=$currentPage isRefresh=$isRefresh dataSize=${list.size}" }
+                    log.v { "$TAG return data current page=$currentPage dataSize=${list.size}" }
 
                     val cachedData = if (isRefresh) {
                         scrollToTop()
@@ -128,8 +139,8 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
                         }
                     }
                     cachedData.addAll(notDuplicatedData)
-                    log.v { "$TAG notDuplicatedData current page=$currentPage isRefresh=$isRefresh notDuplicatedData=${notDuplicatedData.size}" }
-                    log.v { "$TAG cachedComment current page=$currentPage isRefresh=$isRefresh cachedData=${cachedData.size}" }
+                    log.v { "$TAG notDuplicatedData notDuplicatedData=${notDuplicatedData.size}" }
+                    log.v { "$TAG cachedComment cachedData=${cachedData.size}" }
                     // increase the size to get the next page
                     this@LoadMoreVM.currentPage = calcNextPage(currentPage)
                     val endOfPage = notDuplicatedData.isEmpty()
@@ -207,20 +218,23 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     ): Result<List<T>>
 
     private fun canLoad(): Boolean {
+        log.v { "$TAG canLoad ${!canNotLoad}" }
         return !canNotLoad
     }
 
-    private fun onLoading() {
+    private fun onLoading(isRefresh: Boolean) {
         log.v { "$TAG onLoading" }
         canNotLoad = true
-        if (_state.value.screen !is LoadingScreen.Data<*>) {
+        // normally, we only show loading screen when we dont have data
+        // refresh then force loading screen show
+        if (isRefresh || _state.value.screen !is LoadingScreen.Data<*>) {
             _state.update(LoadingScreen.Loading)
         }
     }
 
     private fun onSuccess(endOfPage: Boolean) {
-        log.v { "$TAG onSuccessxxx" }
         canNotLoad = endOfPage
+        log.v { "$TAG onSuccess with endOfPage=$endOfPage" }
     }
 
     private fun onError(exception: Throwable) {

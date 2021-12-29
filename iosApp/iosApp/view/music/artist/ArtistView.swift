@@ -18,7 +18,7 @@ struct ArtistView: View {
 
     // make at least 2 columns
     let columns = [
-        GridItem(.adaptive(minimum: 140), spacing: 10),
+        GridItem(.adaptive(minimum: 140), spacing: 24)
     ]
 
     init(genre: Genre) {
@@ -30,13 +30,14 @@ struct ArtistView: View {
             switch observable.state.screen {
             case _ as LoadingScreen.Loading:
                 LoadingView()
+                    .onAppear { observable.event.setGenreId(genreId: genre.id) }
             case let noData as LoadingScreen.NoData:
                 Text(noData.message)
             case let error as LoadingScreen.Error:
                 Text(error.errorMessage)
             case let data as LoadingScreenData<Artist>:
                 ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10) {
+                    LazyVGrid(columns: columns) {
                         ForEach(data.data as! [Artist], id: \.id) { artist in
                             NavigationLink(destination: LazyView(ArtistDetailView()), isActive: self.$navToArtistDetail) {
                                 VStack {
@@ -50,7 +51,10 @@ struct ArtistView: View {
                                     .aspectRatio(1, contentMode: .fill)
                                     .clipShape(Circle())
                                     Text(artist.model.name)
+                                        .font(.body)
+                                        .foregroundColor(Color.white)
                                 }
+                                .padding(.bottom)
                                 .onAppear {
                                     observable.loadMore(indexOfItem: (data.data as! [Artist]).firstIndex(of: artist)!)
                                 }
@@ -58,30 +62,23 @@ struct ArtistView: View {
                         }
                     }
                     .padding(.horizontal)
+                    .padding(.bottom)
                 }
             default:
                 Text("Not Handling")
             }
-        }.navigationTitle("Artist")
-            .onAppear {
-                observable.startObserving()
-                observable.setGenre(genre: genre)
-            }
-            .onDisappear { observable.stopObserving() }
-            .onReceive(observable.effect) { onEffect(effect: $0) }
+        }
+        .onAppear { observable.startObserving() }
+        .onDisappear { observable.stopObserving() }
+        .onReceive(observable.effect) { onEffect(effect: $0) }
+        .navigationTitle(genre.model.name)
     }
 
     private func onEffect(effect: ArtistEffect) {
-        KoinKt.log.d(withMessage: { "Effect \(effect)" })
+        KoinKt.log.d(message: { "Effect \(effect)" })
         switch effect {
         default:
-            KoinKt.log.d(withMessage: { "Unknown effect" })
+            KoinKt.log.d(message: { "Unknown effect" })
         }
     }
 }
-
-// struct ArtistView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ArtistView()
-//    }
-// }

@@ -12,8 +12,6 @@ import SwiftUI
 
 struct GenreView: View {
     @StateObject var observable: GenreObservable = koin.get()
-    @State private var navArtist = false
-    @State private var genre = Genre()
 
     // make at least 2 columns
     let columns = [
@@ -31,9 +29,9 @@ struct GenreView: View {
                 Text(error.errorMessage)
             case let data as LoadingScreenData<Genre>:
                 ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10) {
+                    LazyVGrid(columns: columns) {
                         ForEach(data.data as! [Genre], id: \.id) { genre in
-                            NavigationLink(destination: ArtistView(genre: genre), isActive: self.$navArtist) {
+                            NavigationLink(destination: ArtistView(genre: genre)) {
                                 ZStack {
                                     GeometryReader { gr in
                                         KFImage(URL(string: genre.model.pictureMedium))
@@ -62,6 +60,7 @@ struct GenreView: View {
                         }
                     }
                     .padding(.horizontal)
+                    .padding(.bottom)
                 }
             default:
                 Text("Not Handling")
@@ -74,20 +73,17 @@ struct GenreView: View {
     }
 
     private func onEffect(effect: GenreEffect) {
-        KoinKt.log.d(withMessage: { "Effect \(effect)" })
+        KoinKt.log.d(message: { "Effect \(effect)" })
         switch effect {
         case let lmEffect as GenreEffect.LoadMoreEffect:
             switch lmEffect.loadMoreEffect {
             case is LoadMoreEffect.ScrollToTop:
-                KoinKt.log.d(withMessage: { "Scroll to top" })
+                KoinKt.log.d(message: { "Scroll to top" })
             default:
-                KoinKt.log.d(withMessage: { "Unknown effect" })
+                KoinKt.log.d(message: { "Unknown effect" })
             }
-        case let effect as GenreEffect.NavToArtist:
-            genre = effect.genre
-            navArtist = true
         default:
-            KoinKt.log.d(withMessage: { "Unknown effect" })
+            KoinKt.log.d(message: { "Unknown effect" })
         }
     }
 }

@@ -11,7 +11,7 @@ import Foundation
 import shared
 
 final class GenreObservable: ObservableObject {
-    let genreVM: GenreViewModel
+    private let genreVM: GenreViewModel
     @Published private(set) var state: LoadingState
     private var stateCloseable: Ktor_ioCloseable!
     private var effectCloseable: Ktor_ioCloseable!
@@ -19,19 +19,14 @@ final class GenreObservable: ObservableObject {
     let event: GenreEvent
 
     init(viewModel: GenreViewModel) {
-        KoinKt.log.d(withMessage: { "GenreViewModel init viewmodel" })
+        KoinKt.log.d(message: { "GenreViewModel init viewmodel" })
         genreVM = viewModel
         state = LoadingState()
         event = viewModel.event
     }
-
-    deinit {
-        KoinKt.log.d(withMessage: { "GenreViewModel deinit" })
-        genreVM.onCleared()
-    }
 
     func startObserving() {
-        KoinKt.log.d(withMessage: { "GenreViewModel startObserving" })
+        KoinKt.log.d(message: { "GenreViewModel startObserving" })
         stateCloseable = genreVM.observe(genreVM.state, onChange: {
             self.state = $0 as! LoadingState
         })
@@ -41,7 +36,7 @@ final class GenreObservable: ObservableObject {
     }
 
     func stopObserving() {
-        KoinKt.log.d(withMessage: { "GenreViewModel stopObserving" })
+        KoinKt.log.d(message: { "GenreViewModel stopObserving" })
         stateCloseable.close()
         effectCloseable.close()
     }

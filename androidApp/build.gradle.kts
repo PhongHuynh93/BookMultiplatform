@@ -28,6 +28,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        compose = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -42,6 +43,11 @@ android {
         isAbortOnError = true
         // Allow lint to check dependencies
         isCheckDependencies = true
+    }
+
+    // add compose
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.compose
     }
 }
 
@@ -82,4 +88,15 @@ dependencies {
 
     // Image load
     implementation(Deps.ImageLoader.core)
+
+    // Compose
+    implementation("androidx.compose.runtime:runtime:${Versions.compose}")
+    implementation("androidx.compose.ui:ui:${Versions.compose}")
+    implementation("androidx.compose.foundation:foundation:${Versions.compose}")
+    implementation("androidx.compose.foundation:foundation-layout:${Versions.compose}")
+    implementation("androidx.compose.material3:material3:${Versions.material3}")
+    implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02")
+    implementation("androidx.compose.material:material-icons-extended:${Versions.compose}")
+    implementation("androidx.activity:activity-compose:1.4.0")
 }

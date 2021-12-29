@@ -37,7 +37,7 @@ class ArtistFragment : Fragment(R.layout.toolbar_grid_view) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vm.genreId = args.genre.id
+        event.setGenreId(args.genre.id)
         binding.title = args.genre.model.name
         binding.toolbar.showUpBtn(showUpBtn = true)
 

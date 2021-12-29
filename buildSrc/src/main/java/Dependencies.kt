@@ -1,22 +1,21 @@
 object Versions {
-    const val kotlin = "1.6.0-RC2"
-    const val gradlePlugin = "7.0.3"
+    const val kotlin = "1.6.0"
+    const val gradlePlugin = "7.0.4"
     const val coroutines = "1.5.1-new-mm-dev2"
-    const val kermit = "0.1.9"
-    const val koin = "3.1.2"
+    const val kermit = "0.3.0-m1"
+    const val koin = "3.1.4"
     const val ktor = "1.6.2-native-mm-eap-196"
     const val junit = "4.13.2"
     const val material = "1.3.0"
+    const val material3 = "1.0.0-alpha02"
     const val multiplatformSettings = "0.8"
-    const val robolectric = "4.5.1"
     const val sqlDelight = "1.5.0"
-    const val stately = "1.1.7"
     const val serialization = "1.2.2"
-    const val kotlinxDateTime = "0.2.1"
-    const val turbine = "0.5.2"
+    const val kotlinxDateTime = "0.3.1"
     const val parcelable = "0.1.4"
     const val ktlint = "10.2.0"
     const val asyncImage = "1.4.0"
+    const val compose = "1.1.0-rc01"
 
     object AndroidX {
         const val supportLibrary: String = "1.2.0"
@@ -33,12 +32,6 @@ object Versions {
         const val test_ext = "1.1.2"
         const val nav = "2.4.0-alpha06"
     }
-
-    object Compose {
-        const val compose = "1.0.1"
-        const val activity = "1.3.0"
-        const val accompanist = "0.13.0"
-    }
 }
 
 object Deps {
@@ -50,10 +43,7 @@ object Deps {
     const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"
     const val multiplatformSettings = "com.russhwolf:multiplatform-settings:${Versions.multiplatformSettings}"
     const val multiplatformSettingsTest = "com.russhwolf:multiplatform-settings-test:${Versions.multiplatformSettings}"
-    const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
-    const val stately = "co.touchlab:stately-common:${Versions.stately}"
     const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
-    const val turbine = "app.cash.turbine:turbine:${Versions.turbine}"
     const val parcelable = "com.arkivanov.essenty:parcelable:${Versions.parcelable}"
 
     object AndroidX {
@@ -78,17 +68,6 @@ object Deps {
         const val junit = "androidx.test.ext:junit:${Versions.AndroidX.test_ext}"
         const val runner = "androidx.test:runner:${Versions.AndroidX.test}"
         const val rules = "androidx.test:rules:${Versions.AndroidX.test}"
-    }
-
-    object Compose {
-        const val ui = "androidx.compose.ui:ui:${Versions.Compose.compose}"
-        const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.Compose.compose}"
-        const val foundation = "androidx.compose.foundation:foundation:${Versions.Compose.compose}"
-        const val material = "androidx.compose.material:material:${Versions.Compose.compose}"
-        const val activityCompose = "androidx.activity:activity-compose:${Versions.Compose.activity}"
-        object Accompanist {
-            const val swipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.Compose.accompanist}"
-        }
     }
 
     object KotlinTest {
