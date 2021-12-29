@@ -13,3 +13,8 @@ import UIKit
 let bookRatio = CGFloat(2 / 3.0)
 let smallRadius = CGFloat(4.0)
 let genreRatio = CGFloat(2 / 1.0)
+
+// padding
+let paddingLarge: CGFloat = 20
+let paddingNormal: CGFloat = 10
+let paddingSmall: CGFloat = 5

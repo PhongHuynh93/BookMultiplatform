@@ -7,6 +7,7 @@ object Versions {
     const val ktor = "1.6.2-native-mm-eap-196"
     const val junit = "4.13.2"
     const val material = "1.3.0"
+    const val material3 = "1.0.0-alpha02"
     const val multiplatformSettings = "0.8"
     const val sqlDelight = "1.5.0"
     const val serialization = "1.2.2"
