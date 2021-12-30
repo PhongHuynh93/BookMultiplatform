@@ -9,7 +9,11 @@ import com.wind.book.viewmodel.BaseEffect
 import com.wind.book.viewmodel.BaseEvent
 import com.wind.book.viewmodel.BaseMVIViewModel
 import com.wind.book.viewmodel.BaseState
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 
 data class BookPagerState(
     val bookNames: List<BookName>

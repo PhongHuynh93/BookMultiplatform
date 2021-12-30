@@ -7,6 +7,6 @@ import com.wind.book.log
 open class BaseVMUnitTest : BaseUnitTest() {
 
     init {
-        log = Kermit(CommonLogger()).withTag("Book Multiplatform")
+        log = Kermit(CommonLogger()).withTag("Test")
     }
 }

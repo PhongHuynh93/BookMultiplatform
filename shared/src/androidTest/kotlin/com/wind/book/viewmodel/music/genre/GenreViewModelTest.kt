@@ -25,7 +25,7 @@ class GenreViewModelTest : BaseVMUnitTest() {
     )
 
     @Test
-    fun `when click genre then nav to artist page`() = runTest {
+    fun `when click genre then nav to artist page`() = runTest(testDispatcher) {
         val vm = createVM()
         val job = launch {
             vm.genreEffect.collectLatest {
@@ -39,7 +39,7 @@ class GenreViewModelTest : BaseVMUnitTest() {
                 }
             }
         }
-        job.cancel()
         vm.onClickGenre(FakeData.genre)
+        job.cancel()
     }
 }
