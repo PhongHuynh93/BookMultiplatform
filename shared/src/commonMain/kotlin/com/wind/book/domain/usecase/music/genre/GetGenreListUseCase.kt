@@ -6,7 +6,7 @@ import com.wind.book.model.music.Genre
 import com.wind.book.platformCoroutineDispatcher
 
 class GetGenreListParam(val index: Int, val limit: Int)
-class GetGenreListUseCase constructor(
+open class GetGenreListUseCase constructor(
     private val genreRepository: GenreRepository
 ) : UseCase<GetGenreListParam, List<Genre>>(platformCoroutineDispatcher) {
     override suspend fun execute(parameters: GetGenreListParam): List<Genre> {
