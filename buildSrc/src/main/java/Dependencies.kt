@@ -16,6 +16,7 @@ object Versions {
     const val ktlint = "10.2.0"
     const val asyncImage = "1.4.0"
     const val compose = "1.1.0-rc02"
+    const val uuid = "0.3.1"
 
     object AndroidX {
         const val supportLibrary: String = "1.2.0"
@@ -47,6 +48,7 @@ object Deps {
         "com.russhwolf:multiplatform-settings-test:${Versions.multiplatformSettings}"
     const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
     const val parcelable = "com.arkivanov.essenty:parcelable:${Versions.parcelable}"
+    const val uuid = "com.benasher44:uuid:${Versions.uuid}"
 
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.supportLibrary}"

@@ -56,6 +56,8 @@ kotlin {
                 implementation(Deps.kotlinxDateTime)
                 // Parcelable
                 implementation(Deps.parcelable)
+                // uuid
+                implementation(Deps.uuid)
             }
         }
         val commonTest by getting {
