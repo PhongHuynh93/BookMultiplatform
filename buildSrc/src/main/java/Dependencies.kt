@@ -1,7 +1,7 @@
 object Versions {
     const val kotlin = "1.6.0"
     const val gradlePlugin = "7.0.4"
-    const val coroutines = "1.5.1-new-mm-dev2"
+    const val coroutines = "1.6.0"
     const val kermit = "0.3.0-m1"
     const val koin = "3.1.4"
     const val ktor = "1.6.2-native-mm-eap-196"
