@@ -19,7 +19,7 @@ struct BookView: View {
         VStack {
             switch observable.state.screen {
             case _ as LoadingScreen.Loading:
-                LoadingView()
+              LoadingView {}
             case let noData as LoadingScreen.NoData:
                 Text(noData.message)
             case let error as LoadingScreen.Error:

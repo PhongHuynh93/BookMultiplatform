@@ -44,8 +44,4 @@ final class ArtistObservable: ObservableObject {
         stateCloseable.close()
         effectCloseable.close()
     }
-
-    func loadMore(indexOfItem: Int) {
-        artistVM.loadMore(indexOfItem: Int32(indexOfItem))
-    }
 }
