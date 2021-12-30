@@ -4,7 +4,8 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 private val formatter by lazy { SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()) }
 
