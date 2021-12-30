@@ -66,6 +66,7 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
                 implementation(Deps.koinTest)
                 implementation(Deps.multiplatformSettingsTest)
+                implementation(Deps.Coroutines.test)
             }
         }
         val androidMain by getting {
@@ -75,6 +76,13 @@ kotlin {
                 // ViewModel
                 implementation(Deps.AndroidX.viewModel)
                 implementation(Deps.koinAndroid)
+            }
+        }
+        val androidTest by getting {
+            dependencies {
+                implementation(Deps.AndroidXTest.core)
+                implementation(Deps.AndroidXTest.mockKotlin)
+                implementation(Deps.AndroidXTest.truth)
             }
         }
         val iosX64Main by getting

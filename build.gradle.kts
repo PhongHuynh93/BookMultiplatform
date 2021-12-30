@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.jlleitschuh.gradle.ktlint") version Versions.ktlint
-    id("io.gitlab.arturbosch.detekt") version "1.18.1"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    id("org.jetbrains.kotlinx.kover") version "0.5.0-RC"
+    id("com.github.ben-manes.versions") version "0.39.0"
 }
 
 buildscript {
@@ -38,7 +39,7 @@ subprojects {
             exclude("**/generated/**")
             include("**/kotlin/**")
         }
-        disabledRules.set(setOf("no-wildcard-imports", "experimental:annotation"))
+        disabledRules.set(setOf("experimental:annotation"))
     }
 
     afterEvaluate {
@@ -62,5 +63,19 @@ subprojects {
                 "-Xopt-in=kotlin.RequiresOptIn"
             )
         }
+    }
+}
+
+tasks.named<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask>("dependencyUpdates").configure {
+    rejectVersionIf {
+        val current = DependencyUpdates.versionToRelease(currentVersion)
+        // If we're using a SNAPSHOT, ignore since we must be doing so for a reason.
+        if (current == ReleaseType.SNAPSHOT) {
+            return@rejectVersionIf true
+        }
+
+        // Otherwise we reject if the candidate is more 'unstable' than our version
+        val candidate = DependencyUpdates.versionToRelease(candidate.version)
+        return@rejectVersionIf candidate.isLessStableThan(current)
     }
 }
