@@ -15,7 +15,7 @@ kotlin {
     listOf(
         iosX64(),
         iosArm64(),
-        // iosSimulatorArm64() waiting ktor M1 support
+        iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
@@ -42,7 +42,7 @@ kotlin {
                 implementation(Deps.Ktor.commonCore)
                 implementation(Deps.Ktor.commonJson)
                 implementation(Deps.Ktor.commonLogging)
-                implementation(Deps.Ktor.commonSerialization)
+                implementation(Deps.Ktor.negotiation)
 
                 // Coroutines
                 implementation(Deps.Coroutines.common)
@@ -56,6 +56,8 @@ kotlin {
                 implementation(Deps.kotlinxDateTime)
                 // Parcelable
                 implementation(Deps.parcelable)
+                // uuid
+                implementation(Deps.uuid)
             }
         }
         val commonTest by getting {
@@ -77,12 +79,12 @@ kotlin {
         }
         val iosX64Main by getting
         val iosArm64Main by getting
-        // val iosSimulatorArm64Main by getting
+        val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
-            // iosSimulatorArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 // Network
                 implementation(Deps.Ktor.ios)

@@ -2,6 +2,7 @@ package com.wind.book.data.util
 
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.utils.EmptyContent
+import io.ktor.http.path
 import io.ktor.http.takeFrom
 
 abstract class BaseAPI {
@@ -11,7 +12,7 @@ abstract class BaseAPI {
     protected fun HttpRequestBuilder.apiPath(vararg components: String) {
         url {
             takeFrom(baseUrl)
-            path(components.asList())
+            path(*components)
         }
     }
 

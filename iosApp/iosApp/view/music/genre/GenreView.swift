@@ -35,27 +35,7 @@ struct GenreView: View {
           LazyVGrid(columns: columns) {
             ForEach(data.data as! [Genre], id: \.id) { genre in
               NavigationLink(destination: ArtistView(genre: genre)) {
-                ZStack {
-                  GeometryReader { gr in
-                    KFImage(URL(string: genre.model.pictureMedium))
-                      .placeholder()
-                      .resizable()
-                      .scaledToFill()
-                      .frame(height: gr.size.height)
-                  }
-                  .aspectRatio(genreRatio, contentMode: .fill)
-                  .overlay(
-                    ZStack {
-                      Color("overlay")
-                      Text(genre.model.name)
-                        .font(.subheadline)
-                        .bold()
-                        .foregroundColor(Color.white)
-                    }
-                  )
-                }
-                .cornerRadius(smallRadius)
-                .clipped()
+                GenreItemView(genre: genre)
               }
             }
             // show the loading indicator or error message
@@ -94,8 +74,45 @@ struct GenreView: View {
   }
 }
 
-struct GenreView_Previews: PreviewProvider {
+struct GenreItemView: View {
+  let genre: Genre
+
+  var body: some View {
+    ZStack {
+      GeometryReader { gr in
+        KFImage(URL(string: genre.model.pictureMedium))
+          .placeholder()
+          .resizable()
+          .scaledToFill()
+          .frame(height: gr.size.height)
+      }
+      .aspectRatio(genreRatio, contentMode: .fill)
+      .overlay(
+        ZStack {
+          Color("overlay")
+          Text(genre.model.name)
+            .font(.subheadline)
+            .bold()
+            .foregroundColor(Color.white)
+        }
+      )
+    }
+    .cornerRadius(smallRadius)
+    .clipped()
+  }
+}
+
+struct GenreViewItem_Previews: PreviewProvider {
   static var previews: some View {
-    GenreView()
+    GenreItemView(genre: FakeData.shared.genre)
+      .previewLayout(.fixed(width: 200, height: 100))
+  }
+}
+
+struct GenreViewItem_Dark_Previews: PreviewProvider {
+  static var previews: some View {
+    GenreItemView(genre: FakeData.shared.genre)
+      .previewLayout(.fixed(width: 200, height: 100))
+      .preferredColorScheme(.dark)
   }
 }

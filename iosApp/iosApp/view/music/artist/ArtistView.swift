@@ -43,20 +43,7 @@ struct ArtistView: View {
           LazyVGrid(columns: columns) {
             ForEach(data.data as! [Artist], id: \.id) { artist in
               NavigationLink(destination: ArtistDetailView()) {
-                VStack {
-                  GeometryReader { gr in
-                    KFImage(URL(string: artist.model.pictureMedium))
-                      .placeholder()
-                      .resizable()
-                      .scaledToFill()
-                      .frame(height: gr.size.height)
-                  }
-                  .aspectRatio(1, contentMode: .fill)
-                  .clipShape(Circle())
-                  Text(artist.model.name)
-                    .font(.body)
-                }
-                .padding(.bottom)
+                ArtistItemView(artist: artist)
               }
             }
             // show the loading indicator or error message
@@ -87,3 +74,40 @@ struct ArtistView: View {
     }
   }
 }
+
+struct ArtistItemView: View {
+  let artist: Artist
+
+  var body: some View {
+    VStack {
+      GeometryReader { gr in
+        KFImage(URL(string: artist.model.pictureMedium))
+          .placeholder()
+          .resizable()
+          .scaledToFill()
+          .frame(height: gr.size.height)
+      }
+      .aspectRatio(1, contentMode: .fill)
+      .clipShape(Circle())
+      Text(artist.model.name)
+        .font(.body)
+    }
+    .padding(.bottom)
+  }
+}
+
+struct ArtistItemItem_Previews: PreviewProvider {
+  static var previews: some View {
+    ArtistItemView(artist: FakeData.shared.artist)
+      .previewLayout(.fixed(width: 200, height: 250))
+  }
+}
+
+struct ArtistItemItem_Dark_Previews: PreviewProvider {
+  static var previews: some View {
+    ArtistItemView(artist: FakeData.shared.artist)
+      .preferredColorScheme(.dark)
+      .previewLayout(.fixed(width: 200, height: 250))
+  }
+}
+

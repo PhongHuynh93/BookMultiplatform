@@ -10,13 +10,14 @@ import com.wind.book.domain.domainModule
 import com.wind.book.viewmodel.BaseViewModel
 import com.wind.book.viewmodel.viewmodelModule
 import io.ktor.client.HttpClient
-import io.ktor.client.features.HttpTimeout
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
+import io.ktor.client.plugins.ContentNegotiation
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.datetime.Clock
+import kotlinx.serialization.json.Json
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
@@ -56,7 +57,7 @@ fun initKoin(appModule: Module): KoinApplication {
     return koinApplication
 }
 
-val json = kotlinx.serialization.json.Json {
+val json = Json {
     isLenient = true
     ignoreUnknownKeys = true
 }
@@ -68,8 +69,8 @@ private val coreModule = module {
     single<HttpClient> {
         log.v("Init core init http client")
         HttpClient {
-            install(JsonFeature) {
-                serializer = KotlinxSerializer(json = json)
+            install(ContentNegotiation) {
+                json(json)
             }
             install(Logging) {
                 logger = object : Logger {
