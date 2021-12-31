@@ -215,8 +215,6 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
             if (list.isEmpty()) {
                 return
             }
-            log.d { "$TAG indexOfItem = $indexOfItem" }
-            log.d { "$TAG list.size - indexOfItem ${list.size - indexOfItem} visibleThreshold $visibleThreshold" }
             if (list.size - indexOfItem <= visibleThreshold) {
                 loadMore(isRefresh = false)
             }

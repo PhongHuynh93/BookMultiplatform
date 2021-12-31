@@ -15,6 +15,6 @@ val domainModule = module {
     factory { GetArticleListUseCase(get()) }
     factory { GetPodcastDetailUseCase(get()) }
     factory { GetBookNameUseCase(get()) }
-    factory { GetGenreListUseCase(get()) }
-    factory { GetArtistListByGenreUseCase(get()) }
+    factory { GetGenreListUseCase(get(), get()) }
+    factory { GetArtistListByGenreUseCase(get(), get()) }
 }

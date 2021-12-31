@@ -15,7 +15,8 @@ import org.junit.Test
 class GenreViewModelTest : BaseVMUnitTest() {
 
     private fun createVM(
-        getGenreListUseCase: GetGenreListUseCase = object : GetGenreListUseCase(mock {}) {
+        getGenreListUseCase: GetGenreListUseCase = object :
+            GetGenreListUseCase(testDispatcher, mock {}) {
             override suspend fun execute(parameters: GetGenreListParam): List<Genre> {
                 return FakeData.genreList
             }
