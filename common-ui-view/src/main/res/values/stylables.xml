@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ListView">
+        <attr name="lv_enableSwipe" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AspectRatioImageView">
+        <attr name="ari_aspectRatio" format="string" />
+        <attr name="ari_aspectRatioEnabled" format="boolean" />
+        <attr name="ari_dominantMeasurement">
+            <enum name="width" value="0" />
+            <enum name="height" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

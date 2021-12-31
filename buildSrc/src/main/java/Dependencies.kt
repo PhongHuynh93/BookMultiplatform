@@ -3,7 +3,6 @@ object Versions {
     const val gradlePlugin = "7.0.4"
     const val coroutines = "1.6.0"
     const val kermit = "0.3.0-m1"
-    const val koin = "3.1.4"
     const val ktor = "2.0.0-beta-1"
     const val junit = "4.13.2"
     const val material = "1.6.0-alpha01"
@@ -28,9 +27,6 @@ object Deps {
     const val junit = "junit:junit:${Versions.junit}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val kermit = "co.touchlab:kermit:${Versions.kermit}"
-    const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
-    const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
-    const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"
     const val multiplatformSettings =
         "com.russhwolf:multiplatform-settings:${Versions.multiplatformSettings}"
     const val multiplatformSettingsTest =

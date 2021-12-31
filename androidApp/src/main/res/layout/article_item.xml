@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         android:paddingVertical="@dimen/space_pretty_small">
 
-        <com.wind.book.android.widget.AspectRatioImageView
+        <com.example.common_ui_view.widget.AspectRatioImageView
             android:id="@+id/thumb"
             android:layout_width="84dp"
             android:layout_height="wrap_content"

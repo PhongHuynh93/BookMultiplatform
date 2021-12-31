@@ -11,6 +11,7 @@ coreKtx = "1.8.0-alpha02"
 lifeCycleKtx = "2.4.0"
 test = "1.4.1-alpha03"
 nav = "2.4.0-rc01"
+koin = "3.1.4"
 
 [libraries]
 androidX-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "supportLibrary" }
@@ -33,6 +34,10 @@ gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradl
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 serializationPlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
+
 [bundles]
 androidX = [
     "androidX-appCompat",
@@ -49,4 +54,9 @@ androidX = [
     "androidX-lifeCycleCommon",
     "androidX-navFragment",
     "androidX-navUI",
+]
+koin = [
+    "koin-android",
+    "koin-core",
+    "koin-test"
 ]

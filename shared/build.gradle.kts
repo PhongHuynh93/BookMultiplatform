@@ -51,7 +51,7 @@ kotlin {
                 // Key-Value storage
                 implementation(Deps.multiplatformSettings)
                 // Injection
-                implementation(Deps.koinCore)
+                implementation(libs.koin.core)
                 // Date-time
                 implementation(Deps.kotlinxDateTime)
                 // Parcelable
@@ -64,7 +64,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation(Deps.koinTest)
+                implementation(libs.koin.test)
                 implementation(Deps.multiplatformSettingsTest)
                 implementation(Deps.Coroutines.test)
             }
@@ -75,7 +75,7 @@ kotlin {
                 implementation(Deps.Ktor.androidCore)
                 // ViewModel
                 implementation(libs.androidX.viewModel)
-                implementation(Deps.koinAndroid)
+                implementation(libs.koin.android)
             }
         }
         val androidTest by getting {

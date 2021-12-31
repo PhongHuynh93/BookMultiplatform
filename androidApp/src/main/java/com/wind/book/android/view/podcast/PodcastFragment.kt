@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.common_ui_view.adapter.LoadingAdapter
+import com.example.common_ui_view.databinding.ToolbarListViewBinding
+import com.example.common_ui_view.extension.handleLoadMore
+import com.example.common_ui_view.extension.launchAndCollectIn
+import com.example.common_ui_view.extension.safeNavigate
+import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
-import com.wind.book.android.databinding.ToolbarListViewBinding
-import com.wind.book.android.extension.handleLoadMore
-import com.wind.book.android.extension.launchAndCollectIn
-import com.wind.book.android.extension.safeNavigate
-import com.wind.book.android.util.viewBinding
-import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Podcast
 import com.wind.book.viewmodel.LoadMoreEffect
@@ -30,8 +30,10 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.setTitle(R.string.book)
-
+        binding.apply {
+            title = getString(R.string.book)
+            showUpBtn = false
+        }
         val list = binding.list
 
         val podcastAdapter = PodcastAdapter(

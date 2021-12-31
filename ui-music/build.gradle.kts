@@ -1,6 +1,8 @@
 plugins {
     id(Plugins.androidLibrary)
     kotlin(Plugins.kotlinAndroid)
+    kotlin(Plugins.kapt)
+    id(Plugins.safeArgs)
 }
 
 android {
@@ -23,6 +25,10 @@ android {
             )
         }
     }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -30,5 +36,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.shared)
+    implementation(projects.commonUiView)
     implementation(libs.bundles.androidX)
+    implementation(libs.bundles.koin)
 }

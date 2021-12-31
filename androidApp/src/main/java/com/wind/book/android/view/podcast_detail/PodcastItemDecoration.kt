@@ -5,9 +5,9 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
+import com.example.common_ui_view.extension.getColorAttr
+import com.example.common_ui_view.extension.getDimen
 import com.wind.book.android.R
-import com.wind.book.android.extension.getColorAttr
-import com.wind.book.android.extension.getDimen
 
 class PodcastItemDecoration(private val context: Context) : RecyclerView.ItemDecoration() {
     private val dividerHeight = context.getDimen(R.dimen.divider_height)

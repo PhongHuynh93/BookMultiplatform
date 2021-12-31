@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.common_ui_view.adapter.LoadingAdapter
+import com.example.common_ui_view.binding.setLayoutScrollBehavior
+import com.example.common_ui_view.binding.showUpBtn
+import com.example.common_ui_view.databinding.ToolbarListViewBinding
+import com.example.common_ui_view.extension.handleLoadMore
+import com.example.common_ui_view.extension.launchAndCollectIn
+import com.example.common_ui_view.util.viewBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.wind.book.android.R
-import com.wind.book.android.binding.setLayoutScrollBehavior
-import com.wind.book.android.binding.showUpBtn
-import com.wind.book.android.databinding.ToolbarListViewBinding
-import com.wind.book.android.extension.handleLoadMore
-import com.wind.book.android.extension.launchAndCollectIn
-import com.wind.book.android.util.viewBinding
-import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.model.Episode
 import com.wind.book.model.Podcast
 import com.wind.book.viewmodel.LoadMoreEffect
@@ -40,7 +40,6 @@ class PodcastDetailFragment : Fragment(R.layout.toolbar_list_view) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var title = ""
-        binding.toolbar.showUpBtn(true)
         binding.toolbar.apply {
             showUpBtn(true)
             val flag =

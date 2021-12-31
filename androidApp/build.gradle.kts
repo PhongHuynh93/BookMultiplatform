@@ -62,20 +62,13 @@ fun getVersionCodeX(): Int {
 dependencies {
     implementation(projects.shared)
     implementation(projects.uiMusic)
-
-    // UI
+    implementation(projects.commonUiView)
     implementation(libs.bundles.androidX)
+    implementation(libs.bundles.koin)
 
     // Coroutines
     implementation(Deps.Coroutines.common)
     implementation(Deps.Coroutines.android)
-
-    // DI
-    implementation(Deps.koinCore)
-    implementation(Deps.koinAndroid)
-
-    // Image load
-    implementation(Deps.ImageLoader.core)
 
     // Compose
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")

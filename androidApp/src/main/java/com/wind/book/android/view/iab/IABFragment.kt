@@ -10,10 +10,10 @@ import android.webkit.WebViewClient
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.common_ui_view.extension.launchAndCollectIn
+import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
 import com.wind.book.android.databinding.IabBinding
-import com.wind.book.android.extension.launchAndCollectIn
-import com.wind.book.android.util.viewBinding
 import com.wind.book.viewmodel.iab.IABEvent
 import com.wind.book.viewmodel.iab.IABViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

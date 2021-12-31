@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.common_ui_view.databinding.ToolbarListViewBinding
+import com.example.common_ui_view.extension.launchAndCollectIn
+import com.example.common_ui_view.extension.safeNavigate
+import com.example.common_ui_view.util.tryCast
+import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
-import com.wind.book.android.databinding.ToolbarListViewBinding
-import com.wind.book.android.extension.launchAndCollectIn
-import com.wind.book.android.extension.safeNavigate
-import com.wind.book.android.util.tryCast
-import com.wind.book.android.util.viewBinding
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Article
 import com.wind.book.viewmodel.LoadingEvent
@@ -28,7 +28,10 @@ class ArticleFragment : Fragment(R.layout.toolbar_list_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.setTitle(R.string.story)
+        binding.apply {
+            title = getString(R.string.story)
+            showUpBtn = false
+        }
         val list = binding.list
 
         val articleAdapter = ArticleAdapter(
