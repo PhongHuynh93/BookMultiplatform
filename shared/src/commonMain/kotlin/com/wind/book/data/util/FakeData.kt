@@ -47,4 +47,14 @@ object FakeData {
         radio = false,
         trackList = ""
     )
+
+    val artistList = generateArtist(50)
+
+    private fun generateArtist(size: Int): List<Artist> {
+        val result = mutableListOf<Artist>()
+        repeat(size) {
+            result.add(artist)
+        }
+        return result
+    }
 }
