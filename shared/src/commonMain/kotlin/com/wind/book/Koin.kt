@@ -16,6 +16,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.datetime.Clock
 import kotlinx.serialization.json.Json
 import org.koin.core.Koin
@@ -63,6 +64,9 @@ val json = Json {
 }
 
 private val coreModule = module {
+    single<CoroutineDispatcher> {
+        platformCoroutineDispatcher
+    }
     single<Clock> {
         Clock.System
     }
