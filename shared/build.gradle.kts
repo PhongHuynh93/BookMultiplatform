@@ -74,7 +74,7 @@ kotlin {
                 // Network
                 implementation(Deps.Ktor.androidCore)
                 // ViewModel
-                implementation(Deps.AndroidX.viewModel)
+                implementation(libs.androidX.viewModel)
                 implementation(Deps.koinAndroid)
             }
         }

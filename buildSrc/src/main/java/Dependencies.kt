@@ -17,20 +17,8 @@ object Versions {
     const val compose = "1.1.0-rc02"
     const val uuid = "0.3.1"
 
-    object AndroidX {
-        const val supportLibrary: String = "1.4.0"
-        const val material: String = "1.3.0"
-        const val constraintLayout: String = "2.1.2"
-        const val rcv = "1.3.0-alpha01"
-        const val swipeToRefresh = "1.2.0-alpha01"
-        const val vPager = "1.1.0-beta01"
-        const val coreKtx = "1.8.0-alpha02"
-        const val lifeCycleKtx = "2.4.0"
-        const val test = "1.4.1-alpha03"
-        const val nav = "2.4.0-rc01"
-    }
-
     object Test {
+        const val test = "1.4.1-alpha03"
         const val mockKotlin = "2.2.0"
         const val truth = "1.1.3"
     }
@@ -51,31 +39,8 @@ object Deps {
     const val parcelable = "com.arkivanov.essenty:parcelable:${Versions.parcelable}"
     const val uuid = "com.benasher44:uuid:${Versions.uuid}"
 
-    object AndroidX {
-        const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.supportLibrary}"
-        const val material = "com.google.android.material:material:${Versions.AndroidX.material}"
-        const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.AndroidX.rcv}"
-        const val swipeToRefresh =
-            "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.AndroidX.swipeToRefresh}"
-        const val constraint =
-            "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraintLayout}"
-        const val viewPager = "androidx.viewpager2:viewpager2:${Versions.AndroidX.vPager}"
-        const val core = "androidx.core:core-ktx:${Versions.AndroidX.coreKtx}"
-        const val fragment = "androidx.fragment:fragment-ktx:${Versions.AndroidX.supportLibrary}"
-        const val activity = "androidx.activity:activity-ktx:${Versions.AndroidX.supportLibrary}"
-        const val lifeCycle =
-            "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.AndroidX.lifeCycleKtx}"
-        const val viewModel =
-            "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.AndroidX.lifeCycleKtx}"
-        const val lifeCycleCommon =
-            "androidx.lifecycle:lifecycle-common-java8:${Versions.AndroidX.lifeCycleKtx}"
-        const val navFragment =
-            "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.nav}"
-        const val navUI = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.nav}"
-    }
-
     object AndroidXTest {
-        const val core = "androidx.test:core:${Versions.AndroidX.test}"
+        const val core = "androidx.test:core:${Versions.Test.test}"
         const val mockKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.Test.mockKotlin}"
         const val truth = "com.google.truth:truth:${Versions.Test.truth}"
     }
@@ -138,12 +103,4 @@ object Plugins {
     const val safeArgs = "androidx.navigation.safeargs.kotlin"
     const val googleService = "com.google.gms.google-services"
     const val crashlytics = "com.google.firebase.crashlytics"
-}
-
-object ClassPaths {
-    const val gradlePlugin = "com.android.tools.build:gradle:${Versions.gradlePlugin}"
-    const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
-    const val safeArgs =
-        "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.AndroidX.nav}"
 }
