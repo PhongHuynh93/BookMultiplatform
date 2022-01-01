@@ -18,7 +18,7 @@ import com.wind.book.viewmodel.home.StoryViewModel
 import com.wind.book.viewmodel.model.IABNav
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ArticleFragment : Fragment(R.layout.toolbar_list_view) {
+class ArticleFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val vm: StoryViewModel by viewModel()
     private val binding by viewBinding(ToolbarListViewBinding::bind)
     private val event: LoadingEvent

@@ -24,7 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val SPAN_COUNT = 2
 
-class GenreFragment : Fragment(R.layout.toolbar_list_view) {
+class GenreFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val binding by viewBinding(ToolbarListViewBinding::bind)
     private val vm: GenreViewModel by viewModel()
     private val event: GenreEvent
@@ -61,7 +61,7 @@ class GenreFragment : Fragment(R.layout.toolbar_list_view) {
                 layoutManager = GridLayoutManager(requireContext(), SPAN_COUNT).apply {
                     spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                         override fun getSpanSize(position: Int): Int {
-                            return if (concatAdapter.getItemViewType(position) == R.layout.load_state_item) {
+                            return if (concatAdapter.getItemViewType(position) == com.example.common_ui_view.R.layout.load_state_item) {
                                 2
                             } else {
                                 1

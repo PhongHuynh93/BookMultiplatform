@@ -20,7 +20,7 @@ fun View.setWidthForItemInHozRecyclerView(width: Int) {
 
 fun View.addRippleBorderless() {
     if (context.theme == null) return
-    val a = context.theme.obtainStyledAttributes(intArrayOf(R.attr.selectableItemBackgroundBorderless))
+    val a = context.theme.obtainStyledAttributes(intArrayOf(androidx.appcompat.R.attr.selectableItemBackgroundBorderless))
     val d = a.getDrawable(0)
     a.recycle()
     foreground = d
@@ -28,7 +28,7 @@ fun View.addRippleBorderless() {
 
 fun View.addRipple() {
     if (context.theme == null) return
-    val a = context.theme.obtainStyledAttributes(intArrayOf(R.attr.selectableItemBackground))
+    val a = context.theme.obtainStyledAttributes(intArrayOf(androidx.appcompat.R.attr.selectableItemBackground))
     val d = a.getDrawable(0)
     a.recycle()
     foreground = d

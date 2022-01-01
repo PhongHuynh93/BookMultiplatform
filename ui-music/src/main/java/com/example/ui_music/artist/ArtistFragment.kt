@@ -24,7 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val SPAN_COUNT = 2
 
-class ArtistFragment : Fragment(R.layout.toolbar_list_view) {
+class ArtistFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val binding by viewBinding(ToolbarListViewBinding::bind)
     private val vm: ArtistViewModel by viewModel()
     private val event: ArtistEvent

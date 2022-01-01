@@ -12,10 +12,10 @@ import com.wind.book.android.R
 
 class ArticleItemDecoration(private val context: Context) : RecyclerView.ItemDecoration() {
     private val hozDividerSpace = context.spaceNormal
-    private val dividerHeight = context.getDimen(R.dimen.divider_height)
+    private val dividerHeight = context.getDimen(com.example.common_ui_view.R.dimen.divider_height)
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = context.getColorAttr(R.attr.dividerColor)
+        color = context.getColorAttr(com.example.common_ui_view.R.attr.dividerColor)
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {

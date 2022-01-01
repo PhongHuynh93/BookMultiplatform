@@ -7,7 +7,7 @@ import com.example.common_ui_view.databinding.ToolbarListViewBinding
 import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
 
-class MovieFragment : Fragment(R.layout.toolbar_list_view) {
+class MovieFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val binding by viewBinding(ToolbarListViewBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

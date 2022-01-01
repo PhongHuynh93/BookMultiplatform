@@ -27,7 +27,7 @@ import com.wind.book.viewmodel.podcast_detail.PodcastDetailEvent
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PodcastDetailFragment : Fragment(R.layout.toolbar_list_view) {
+class PodcastDetailFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val binding by viewBinding(ToolbarListViewBinding::bind)
     private val vm: PodcastDetailViewModel by viewModel()
     private val event: PodcastDetailEvent
@@ -79,7 +79,7 @@ class PodcastDetailFragment : Fragment(R.layout.toolbar_list_view) {
                 handleLoadMore {
                     event.loadMore(it)
                 }
-                val toolbarElevation = resources.getDimension(R.dimen.toolbar_elevation)
+                val toolbarElevation = resources.getDimension(com.example.common_ui_view.R.dimen.toolbar_elevation)
                 addOnScrollListener(object : RecyclerView.OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)

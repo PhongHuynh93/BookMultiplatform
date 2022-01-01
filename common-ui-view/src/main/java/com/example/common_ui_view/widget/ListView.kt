@@ -44,7 +44,7 @@ class ListView @JvmOverloads constructor(
 
         binding.swipeRefresh.apply {
             val arrayOfInt = IntArray(1)
-            arrayOfInt[0] = context.getColorAttr(R.attr.colorAccent)
+            arrayOfInt[0] = context.getColorAttr(androidx.appcompat.R.attr.colorAccent)
             setColorSchemeColors(*arrayOfInt)
         }
     }

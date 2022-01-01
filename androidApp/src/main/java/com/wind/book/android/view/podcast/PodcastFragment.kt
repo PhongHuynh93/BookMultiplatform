@@ -22,7 +22,7 @@ import com.wind.book.viewmodel.podcast.PodcastEvent
 import com.wind.book.viewmodel.podcast.PodcastViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
+class PodcastFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val vm: PodcastViewModel by viewModel()
     private val event: PodcastEvent
         get() = vm.event
@@ -57,7 +57,7 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
                 layoutManager = GridLayoutManager(context, spanCount).apply {
                     spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                         override fun getSpanSize(position: Int) =
-                            when (R.layout.load_state_item) {
+                            when (com.example.common_ui_view.R.layout.load_state_item) {
                                 rcv.adapter?.getItemViewType(position) -> spanCount
                                 else -> 1
                             }
