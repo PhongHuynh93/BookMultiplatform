@@ -8,14 +8,9 @@ jobs:
   Gradle:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
-        uses: actions/checkout@v1
-      - name: setup jdk
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Make Gradle executable
-        run: chmod +x ./gradlew
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/cancelPreviousFlow
+      - uses: ./.github/actions/setup
       - name: Build Release APK
         run: ./gradlew assembleDebug
       - name: Get Apk Info

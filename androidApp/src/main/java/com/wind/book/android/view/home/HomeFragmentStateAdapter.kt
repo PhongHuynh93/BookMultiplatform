@@ -2,8 +2,8 @@ package com.wind.book.android.view.home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.ui_music.genre.GenreFragment
 import com.wind.book.android.view.movie.MovieFragment
-import com.wind.book.android.view.music.genre.GenreFragment
 import com.wind.book.android.view.podcast.PodcastFragment
 import com.wind.book.android.view.story.ArticleFragment
 

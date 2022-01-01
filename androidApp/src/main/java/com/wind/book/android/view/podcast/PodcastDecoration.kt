@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.wind.book.android.extension.setGridSpacing
-import com.wind.book.android.extension.spaceNormal
+import com.example.common_ui_view.extension.setGridSpacing
+import com.example.common_ui_view.extension.spaceNormal
 
 class PodcastDecoration(context: Context, private val spanCount: Int) : RecyclerView.ItemDecoration() {
     private val spaceNormal = context.spaceNormal.toInt()

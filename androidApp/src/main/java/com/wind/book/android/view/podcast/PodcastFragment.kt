@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.common_ui_view.adapter.LoadingAdapter
+import com.example.common_ui_view.databinding.ToolbarListViewBinding
+import com.example.common_ui_view.extension.handleLoadMore
+import com.example.common_ui_view.extension.launchAndCollectIn
+import com.example.common_ui_view.extension.safeNavigate
+import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
-import com.wind.book.android.databinding.ToolbarListViewBinding
-import com.wind.book.android.extension.handleLoadMore
-import com.wind.book.android.extension.launchAndCollectIn
-import com.wind.book.android.extension.safeNavigate
-import com.wind.book.android.util.viewBinding
-import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Podcast
 import com.wind.book.viewmodel.LoadMoreEffect
@@ -22,7 +22,7 @@ import com.wind.book.viewmodel.podcast.PodcastEvent
 import com.wind.book.viewmodel.podcast.PodcastViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
+class PodcastFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val vm: PodcastViewModel by viewModel()
     private val event: PodcastEvent
         get() = vm.event
@@ -30,8 +30,10 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.setTitle(R.string.book)
-
+        binding.apply {
+            title = getString(R.string.book)
+            showUpBtn = false
+        }
         val list = binding.list
 
         val podcastAdapter = PodcastAdapter(
@@ -55,7 +57,7 @@ class PodcastFragment : Fragment(R.layout.toolbar_list_view) {
                 layoutManager = GridLayoutManager(context, spanCount).apply {
                     spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                         override fun getSpanSize(position: Int) =
-                            when (R.layout.load_state_item) {
+                            when (com.example.common_ui_view.R.layout.load_state_item) {
                                 rcv.adapter?.getItemViewType(position) -> spanCount
                                 else -> 1
                             }

@@ -33,14 +33,17 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-
         <action
-            android:id="@+id/action_homeFragment_to_artistFragment"
-            app:destination="@id/artistFragment"
+            android:id="@+id/action_homeFragment_to_music_graph"
+            app:destination="@id/music_graph"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="genre"
+                app:argType="com.wind.book.model.music.Genre" />
+        </action>
     </fragment>
 
     <fragment
@@ -59,13 +62,6 @@
             android:name="podcast"
             app:argType="com.wind.book.model.Podcast" />
     </fragment>
-    <fragment
-        android:id="@+id/artistFragment"
-        android:name="com.wind.book.android.view.music.artist.ArtistFragment"
-        android:label="ArtistFragment"
-        tools:layout="@layout/toolbar_grid_view">
-        <argument
-            android:name="genre"
-            app:argType="com.wind.book.model.music.Genre" />
-    </fragment>
+    <include app:graph="@navigation/music_graph" />
+
 </navigation>

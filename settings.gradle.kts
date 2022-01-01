@@ -3,11 +3,13 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
-        maven(uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-coroutines/maven"))
-        maven(uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap"))
     }
 }
 
 rootProject.name = "BookMultiplatform"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview("VERSION_CATALOGS")
 include(":androidApp")
 include(":shared")
+include(":ui-music")
+include(":common-ui-view")

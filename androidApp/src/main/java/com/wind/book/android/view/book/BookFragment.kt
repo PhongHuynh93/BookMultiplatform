@@ -6,14 +6,14 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
+import com.example.common_ui_view.adapter.LoadingAdapter
+import com.example.common_ui_view.extension.handleLoadMore
+import com.example.common_ui_view.extension.launchAndCollectIn
+import com.example.common_ui_view.extension.safeNavigate
+import com.example.common_ui_view.util.tryCast
+import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
 import com.wind.book.android.databinding.ListViewBinding
-import com.wind.book.android.extension.handleLoadMore
-import com.wind.book.android.extension.launchAndCollectIn
-import com.wind.book.android.extension.safeNavigate
-import com.wind.book.android.util.tryCast
-import com.wind.book.android.util.viewBinding
-import com.wind.book.android.view.adapter.LoadingAdapter
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Book
 import com.wind.book.model.BookName
@@ -22,7 +22,6 @@ import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.book.BookEffect
 import com.wind.book.viewmodel.book.BookEvent
 import com.wind.book.viewmodel.book.BookViewModel
-import com.wind.book.viewmodel.util.Constant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookFragment : Fragment(R.layout.list_view) {

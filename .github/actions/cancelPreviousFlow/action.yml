@@ -1,0 +1,9 @@
+name: 'Cancel previous flow'
+description: 'Cancel previous flow'
+runs:
+  using: "composite"
+  steps:
+    - name: Cancel Previous Flow
+      uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}

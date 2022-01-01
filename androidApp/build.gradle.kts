@@ -60,34 +60,15 @@ fun getVersionCodeX(): Int {
 }
 
 dependencies {
-    implementation(project(":shared"))
-
-    // UI
-    implementation(Deps.AndroidX.appCompat)
-    implementation(Deps.AndroidX.material)
-    implementation(Deps.AndroidX.recyclerView)
-    implementation(Deps.AndroidX.swipeToRefresh)
-    implementation(Deps.AndroidX.constraint)
-    implementation(Deps.AndroidX.viewPager)
-    implementation(Deps.AndroidX.core)
-    implementation(Deps.AndroidX.fragment)
-    implementation(Deps.AndroidX.activity)
-    implementation(Deps.AndroidX.lifeCycle)
-    implementation(Deps.AndroidX.viewModel)
-    implementation(Deps.AndroidX.lifeCycleCommon)
-    implementation(Deps.AndroidX.navFragment)
-    implementation(Deps.AndroidX.navUI)
+    implementation(projects.shared)
+    implementation(projects.uiMusic)
+    implementation(projects.commonUiView)
+    implementation(libs.bundles.androidX)
+    implementation(libs.bundles.koin)
 
     // Coroutines
     implementation(Deps.Coroutines.common)
     implementation(Deps.Coroutines.android)
-
-    // DI
-    implementation(Deps.koinCore)
-    implementation(Deps.koinAndroid)
-
-    // Image load
-    implementation(Deps.ImageLoader.core)
 
     // Compose
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")

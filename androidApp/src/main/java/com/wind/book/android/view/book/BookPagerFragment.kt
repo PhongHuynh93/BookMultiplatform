@@ -5,12 +5,12 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.common_ui_view.extension.launchAndCollectIn
+import com.example.common_ui_view.util.viewBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wind.book.android.R
 import com.wind.book.android.databinding.BookPagerBinding
-import com.wind.book.android.extension.launchAndCollectIn
-import com.wind.book.android.util.viewBinding
 import com.wind.book.model.BookName
 import com.wind.book.viewmodel.book.BookPagerEvent
 import com.wind.book.viewmodel.book.BookPagerViewModel

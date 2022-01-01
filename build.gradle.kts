@@ -11,13 +11,11 @@ buildscript {
         google()
         mavenCentral()
     }
-    with(ClassPaths) {
-        dependencies {
-            classpath(gradlePlugin)
-            classpath(kotlinPlugin)
-            classpath(safeArgs)
-            classpath(serialization)
-        }
+    dependencies {
+        classpath(libs.gradlePlugin)
+        classpath(libs.kotlinPlugin)
+        classpath(libs.navPlugin)
+        classpath(libs.serializationPlugin)
     }
 }
 
@@ -25,8 +23,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven(uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-coroutines/maven"))
-        maven(uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap"))
     }
 }
 
