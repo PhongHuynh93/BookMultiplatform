@@ -1,0 +1,22 @@
+name: 'Setup Ruby'
+description: 'Setup Ruby'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.6'
+
+    - name: Cache Ruby - Bundler
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    - name: Install bundle
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+      shell: bash
