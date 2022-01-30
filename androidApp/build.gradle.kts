@@ -28,11 +28,6 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
-        compose = true
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
     lint {
         // Disable lintVital. Not needed since lint is run on CI
@@ -43,11 +38,6 @@ android {
         isAbortOnError = true
         // Allow lint to check dependencies
         isCheckDependencies = true
-    }
-
-    // add compose
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
     }
 }
 
@@ -69,14 +59,4 @@ dependencies {
     // Coroutines
     implementation(Deps.Coroutines.common)
     implementation(Deps.Coroutines.android)
-
-    // Compose
-    implementation("androidx.compose.runtime:runtime:${Versions.compose}")
-    implementation("androidx.compose.ui:ui:${Versions.compose}")
-    implementation("androidx.compose.foundation:foundation:${Versions.compose}")
-    implementation("androidx.compose.foundation:foundation-layout:${Versions.compose}")
-    implementation("androidx.compose.material3:material3:${Versions.material3}")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0")
-    implementation("androidx.compose.material:material-icons-extended:1.2.0-alpha02")
-    implementation("androidx.activity:activity-compose:1.4.0")
 }

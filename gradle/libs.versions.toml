@@ -1,4 +1,6 @@
 [versions]
+plugin-multiplatform-compose = "1.0.1"
+
 kotlin = "1.6.10"
 gradlePlugin = "7.0.4"
 supportLibrary = "1.4.0"
@@ -12,6 +14,12 @@ lifeCycleKtx = "2.4.0"
 test = "1.4.1-alpha03"
 nav = "2.4.0-rc01"
 koin = "3.1.4"
+voyager = "1.0.0-beta14"
+kotlinx-coroutines = "1.6.0"
+coil = "2.0.0-alpha06"
+activity-compose = "1.4.0"
+work-runtime-ktx = "2.7.1"
+accompanist = "0.22.0-rc"
 
 [libraries]
 androidX-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "supportLibrary" }
@@ -33,10 +41,23 @@ navPlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin",
 gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin"}
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 serializationPlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+plugin-multiplatform-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "plugin-multiplatform-compose" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
+
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+
+#compose
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
+
+work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
 
 [bundles]
 androidX = [
@@ -60,3 +81,4 @@ koin = [
     "koin-core",
     "koin-test"
 ]
+plugins = ["gradlePlugin", "kotlinPlugin",  "navPlugin", "plugin-multiplatform-compose", "serializationPlugin"]
