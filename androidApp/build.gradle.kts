@@ -76,7 +76,7 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:${Versions.compose}")
     implementation("androidx.compose.foundation:foundation-layout:${Versions.compose}")
     implementation("androidx.compose.material3:material3:${Versions.material3}")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02")
-    implementation("androidx.compose.material:material-icons-extended:1.1.0-rc01")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0")
+    implementation("androidx.compose.material:material-icons-extended:1.2.0-alpha02")
     implementation("androidx.activity:activity-compose:1.4.0")
 }

@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     id("org.jetbrains.kotlinx.kover") version "0.5.0-RC"
     id("com.github.ben-manes.versions") version "0.39.0"
 }
