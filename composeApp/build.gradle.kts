@@ -13,45 +13,48 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.shared)
-                //Compose UI
+                // Compose UI
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
                 implementation(compose.ui)
                 implementation(compose.uiTooling)
-                //Navigation
+                // Navigation
                 implementation(libs.voyager.navigator)
-                //DI
+                // DI
                 implementation(libs.koin.core)
-                //Coroutines
+                // Coroutines
                 implementation(libs.kotlinx.coroutines.core)
+                // Network
+                implementation(libs.ktor.client.okhttp)
             }
         }
         val androidMain by getting {
             dependencies {
-                //Compose Utils
+                implementation(projects.commonUiView)
+                // Compose Utils
                 implementation(libs.coil.compose)
                 implementation(libs.activity.compose)
                 implementation(libs.accompanist.insets)
                 implementation(libs.accompanist.swiperefresh)
-                //Coroutines
+                // Coroutines
                 implementation(libs.kotlinx.coroutines.android)
-                //DI
+                // DI
                 implementation(libs.koin.android)
-                //WorkManager
+                // WorkManager
                 implementation(libs.work.runtime.ktx)
             }
         }
         val jvmMain by getting {
             dependencies {
-                //Compose UI
+                // Compose UI
                 implementation(compose.desktop.currentOs)
             }
         }
     }
 }
 
-//android app
+// android app
 android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     compileSdk = Configs.compileSdk
@@ -74,7 +77,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
-
 
 // desktop app
 // ./gradlew :composeApp:run
