@@ -28,7 +28,7 @@ internal class BestSellerAPIImpl : BaseAPI(), BestSellerAPI {
             apiPath(Constant.Book.BOOK_PATH, "current", "$listName.json")
             parameter(Constant.Book.QUERY_OFFSET, currentPage.toString())
             parameter(Constant.Book.QUERY_API_KEY, Constant.Book.API_KEY)
-        }.getOrThrow().results?.books?.mapNotNull {
+        }.results?.books?.mapNotNull {
             it?.let {
                 bookMapper.apply(it)
             }
@@ -39,7 +39,7 @@ internal class BestSellerAPIImpl : BaseAPI(), BestSellerAPI {
         return doGet<BookNameListDto> {
             apiPath(Constant.Book.BOOK_PATH, "names.json")
             parameter(Constant.Book.QUERY_API_KEY, Constant.Book.API_KEY)
-        }.getOrThrow().results?.mapNotNull {
+        }.results?.mapNotNull {
             it?.let {
                 bookNameMapper.apply(it)
             }

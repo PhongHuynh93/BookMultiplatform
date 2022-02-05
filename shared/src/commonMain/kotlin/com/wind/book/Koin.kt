@@ -79,7 +79,7 @@ private val coreModule = module {
             install(Logging) {
                 logger = object : Logger {
                     override fun log(message: String) {
-                        log.v("Network message")
+                        log.v("Network message $message")
                     }
                 }
                 level = LogLevel.ALL

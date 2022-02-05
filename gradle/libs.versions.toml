@@ -13,7 +13,7 @@ coreKtx = "1.8.0-alpha02"
 lifeCycleKtx = "2.4.0"
 test = "1.4.1-alpha03"
 nav = "2.4.0-rc01"
-koin = "3.1.4"
+koin = "3.1.5"
 voyager = "1.0.0-beta14"
 kotlinx-coroutines = "1.6.0"
 coil = "2.0.0-alpha06"
@@ -47,6 +47,7 @@ plugin-multiplatform-compose = { module = "org.jetbrains.compose:compose-gradle-
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin"}
 
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
@@ -86,6 +87,7 @@ androidX = [
 koin = [
     "koin-android",
     "koin-core",
-    "koin-test"
+    "koin-test",
+    "koin-compose",
 ]
 plugins = ["gradlePlugin", "kotlinPlugin",  "navPlugin", "plugin-multiplatform-compose", "serializationPlugin"]

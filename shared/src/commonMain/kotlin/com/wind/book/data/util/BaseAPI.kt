@@ -18,7 +18,7 @@ abstract class BaseAPI {
 
     suspend inline fun <reified T> doGet(
         requestBuilder: HttpRequestBuilder.() -> Unit
-    ): Result<T> {
+    ): T {
         return tryCatch {
             httpHelper.doGet {
                 apply(requestBuilder)
@@ -29,7 +29,7 @@ abstract class BaseAPI {
     suspend inline fun <reified T> doPost(
         requestBody: Any = EmptyContent,
         requestBuilder: HttpRequestBuilder.() -> Unit
-    ): Result<T> {
+    ): T {
         return tryCatch {
             httpHelper.doPost(requestBody) {
                 apply(requestBuilder)
@@ -37,11 +37,12 @@ abstract class BaseAPI {
         }
     }
 
-    inline fun <T> tryCatch(action: () -> T): Result<T> {
+    inline fun <T> tryCatch(action: () -> T): T {
         return try {
-            Result.success(action())
+            action()
         } catch (e: Throwable) {
-            Result.failure(UnknownFailure)
+            // TODO: handle no connection here
+            throw UnknownFailure
         }
     }
 }

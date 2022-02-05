@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Platform.Theme.Coca" parent="android:Theme.Material.Light" />
+
+    <style name="Base.Theme.Coca" parent="Platform.Theme.Coca">
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Theme.Coca" parent="Base.Theme.Coca">
+    </style>
+</resources>

@@ -31,7 +31,6 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(projects.commonUiView)
                 // Compose Utils
                 implementation(libs.coil.compose)
                 implementation(libs.activity.compose)
@@ -41,6 +40,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.android)
                 // DI
                 implementation(libs.koin.android)
+                implementation(libs.koin.compose)
                 // WorkManager
                 implementation(libs.work.runtime.ktx)
             }

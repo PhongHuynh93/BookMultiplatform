@@ -235,9 +235,15 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     private fun onLoading(isRefresh: Boolean) {
         log.v { "$TAG onLoading" }
         canNotLoad = true
-        // normally, we only show loading screen when we dont have data
-        // refresh then force loading screen show
-        if (isRefresh || _state.value.screen !is LoadingScreen.Data<*>) {
+        //  we only show loading screen when we don't have data
+        val screen = _state.value.screen
+        if (screen is LoadingScreen.Data<*>) {
+            _state.update(
+                screen = screen.copy(
+                    isRefresh = isRefresh
+                )
+            )
+        } else {
             _state.update(LoadingScreen.Loading)
         }
     }
@@ -273,18 +279,6 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
     private fun onRefresh() {
         log.v { "$TAG onRefresh" }
         canNotLoad = false
-        when (val screen = state.value.screen) {
-            is LoadingScreen.Data<*> -> {
-                _state.update(
-                    screen = screen.copy(
-                        isRefresh = true
-                    )
-                )
-            }
-            else -> {
-                // not care for other screen type
-            }
-        }
     }
 
     private fun onRetry() {
