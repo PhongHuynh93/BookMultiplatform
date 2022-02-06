@@ -26,6 +26,7 @@ import com.wind.book.sharedUI.Overlay
 import com.wind.book.sharedUI.Shapes
 import com.wind.book.sharedUI.normalSpace
 import com.wind.book.sharedUI.util.tryCast
+import com.wind.book.sharedUI.view.LoadingItem
 import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.LoadingState
 
@@ -34,7 +35,7 @@ import com.wind.book.viewmodel.LoadingState
 fun GenreFeed(
     state: LoadingState,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
+    onClick: () -> Unit = {},
 ) {
     Box(
         modifier = modifier,
@@ -56,12 +57,21 @@ fun GenreFeed(
                                 onClick = onClick
                             )
                         }
+                        // FIXME: wait for span in vertical
+                        // https://stackoverflow.com/questions/65981114/does-jetpack-composes-lazyverticalgrid-have-span-strategy
+                        item {
+                            if (screen.errorMessage != null) {
+                                Text(text = screen.errorMessage!!)
+                            } else if (!screen.isEndPage) {
+                                LoadingItem()
+                            }
+                        }
                     }
                 }
             }
-            is LoadingScreen.Error -> Text(text = "error")
-            LoadingScreen.Loading -> Text(text = "loading")
-            is LoadingScreen.NoData -> Text(text = "no data")
+            is LoadingScreen.Error -> Text(text = screen.errorMessage)
+            LoadingScreen.Loading -> LoadingItem()
+            is LoadingScreen.NoData -> Text(text = screen.message)
         }
     }
 }

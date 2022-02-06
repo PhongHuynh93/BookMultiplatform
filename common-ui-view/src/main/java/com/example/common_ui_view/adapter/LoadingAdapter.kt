@@ -87,7 +87,6 @@ class LoadingAdapter(private val callback: Callback) :
                     isError = true
                     binding.errorTv.text = it
                 }
-            } else if (screen is LoadingScreen.Data<*>) {
                 isEndOfPage = screen.isEndPage
             }
 

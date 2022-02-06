@@ -1,8 +1,9 @@
-package com.wind.book.sharedUI
+package com.wind.book.android.view.music
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.wind.book.data.util.FakeData
+import com.wind.book.sharedUI.AppTheme
 import com.wind.book.sharedUI.view.music.GenreFeed
 import com.wind.book.sharedUI.view.music.GenreItem
 import com.wind.book.viewmodel.LoadingScreen
