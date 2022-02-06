@@ -36,6 +36,7 @@ kotlin {
                 implementation(libs.activity.compose)
                 implementation(libs.accompanist.insets)
                 implementation(libs.accompanist.swiperefresh)
+                implementation(libs.accompanist.insetsui)
                 // Coroutines
                 implementation(libs.kotlinx.coroutines.android)
                 // DI

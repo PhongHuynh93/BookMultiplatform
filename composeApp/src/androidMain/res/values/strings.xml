@@ -8,6 +8,7 @@
     <string name="podcast">Podcast</string>
     <string name="story">Stories</string>
     <string name="buy">Buy</string>
+    <string name="genre">Genre</string>
 
     <!-- Podcast. -->
     <string name="podcast_total_episodes">%d episodes</string>
