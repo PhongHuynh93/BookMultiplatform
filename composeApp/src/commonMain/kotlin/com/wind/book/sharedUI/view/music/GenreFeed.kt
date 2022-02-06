@@ -35,6 +35,7 @@ import com.wind.book.viewmodel.LoadingState
 fun GenreFeed(
     state: LoadingState,
     modifier: Modifier = Modifier,
+    contentPaddingValue: PaddingValues = PaddingValues(all = normalSpace),
     onClick: () -> Unit = {},
 ) {
     Box(
@@ -47,7 +48,7 @@ fun GenreFeed(
                     val data = data
                     LazyVerticalGrid(
                         cells = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(all = normalSpace),
+                        contentPadding = contentPaddingValue,
                         horizontalArrangement = Arrangement.spacedBy(normalSpace),
                         verticalArrangement = Arrangement.spacedBy(normalSpace),
                     ) {

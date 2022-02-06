@@ -1,6 +1,7 @@
 package com.wind.book.android.view.music
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -19,6 +20,7 @@ import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.wind.book.android.R
 import com.wind.book.android.view.AppBarAlphas
+import com.wind.book.sharedUI.normalSpace
 import com.wind.book.sharedUI.view.music.GenreFeed
 import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.music.genre.GenreViewModel
@@ -68,11 +70,22 @@ class GenreScreen : Screen, KoinComponent {
                 },
                 onRefresh = { vm.refresh() }
             ) {
+                val contentPaddingValue = PaddingValues(
+                    start = normalSpace,
+                    top = normalSpace,
+                    end = normalSpace,
+                    bottom = normalSpace + rememberInsetsPaddingValues(
+                        insets = LocalWindowInsets.current.navigationBars,
+                        applyTop = false,
+                        applyBottom = true,
+                    ).calculateBottomPadding(),
+                )
                 // We apply the contentPadding passed to us from the Scaffold
                 Box(modifier = Modifier.padding(paddingValues)) {
                     GenreFeed(
                         state = state.value,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        contentPaddingValue = contentPaddingValue
                     ) {
                         // TODO: go to album list
                     }
