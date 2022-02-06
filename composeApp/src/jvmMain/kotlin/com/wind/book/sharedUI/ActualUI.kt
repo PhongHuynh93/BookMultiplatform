@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.ktor.client.HttpClient
@@ -129,10 +131,19 @@ internal actual fun Dialog(
         focusable = true,
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().padding(8.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
             contentAlignment = Alignment.Center,
         ) {
             content()
         }
     }
+}
+
+internal actual fun _font(fontName: String, fontWeight: FontWeight): Font {
+    return androidx.compose.ui.text.platform.Font(
+        resource = fontName,
+        weight = fontWeight,
+    )
 }

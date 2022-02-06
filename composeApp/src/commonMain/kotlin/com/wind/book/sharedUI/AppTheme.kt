@@ -49,6 +49,7 @@ fun AppTheme(
     MaterialTheme(
         colors = if (darkTheme) DarkColors else LightColors,
         shapes = Shapes,
+        typography = CocaTypography,
         content = content
     )
 }

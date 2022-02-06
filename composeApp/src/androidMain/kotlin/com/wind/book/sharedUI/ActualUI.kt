@@ -9,6 +9,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.insets.navigationBarsHeight
@@ -87,3 +89,29 @@ internal actual fun Dialog(
     onDismissRequest: () -> Unit,
     content: @Composable () -> Unit
 ) = androidx.compose.ui.window.Dialog(onDismissRequest = onDismissRequest, content = content)
+
+internal actual fun _font(
+    fontName: String,
+    fontWeight: FontWeight
+): Font {
+    return Font(
+        resId = when (fontName) {
+            "inter_300.ttf" -> {
+                R.font.inter_300
+            }
+            "inter_400.ttf" -> {
+                R.font.inter_400
+            }
+            "inter_500.ttf" -> {
+                R.font.inter_500
+            }
+            "inter_700.ttf" -> {
+                R.font.inter_700
+            }
+            else -> {
+                R.font.inter_400
+            }
+        },
+        fontWeight
+    )
+}
