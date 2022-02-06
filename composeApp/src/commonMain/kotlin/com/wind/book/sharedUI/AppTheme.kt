@@ -53,3 +53,16 @@ fun AppTheme(
         content = content
     )
 }
+
+// preview not use typography, because it can not render
+@Composable
+fun PreviewAppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    MaterialTheme(
+        colors = if (darkTheme) DarkColors else LightColors,
+        shapes = Shapes,
+        content = content
+    )
+}

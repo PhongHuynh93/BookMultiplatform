@@ -1,9 +1,9 @@
-package com.wind.book.android.view.music
+package com.wind.book.android.view
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.wind.book.data.util.FakeData
-import com.wind.book.sharedUI.AppTheme
+import com.wind.book.sharedUI.PreviewAppTheme
 import com.wind.book.sharedUI.view.LoadingItem
 import com.wind.book.sharedUI.view.music.GenreFeed
 import com.wind.book.viewmodel.LoadingScreen
@@ -12,7 +12,7 @@ import com.wind.book.viewmodel.LoadingState
 @Preview
 @Composable
 fun LoadingItemPreview() {
-    AppTheme {
+    PreviewAppTheme {
         LoadingItem()
     }
 }
@@ -20,7 +20,7 @@ fun LoadingItemPreview() {
 @Preview
 @Composable
 fun NoDataPreview() {
-    AppTheme {
+    PreviewAppTheme {
         GenreFeed(
             state = LoadingState(
                 LoadingScreen.NoData("No data")
@@ -32,7 +32,7 @@ fun NoDataPreview() {
 @Preview
 @Composable
 fun LoadingErrorErrorPreview() {
-    AppTheme {
+    PreviewAppTheme {
         GenreFeed(
             state = LoadingState(
                 LoadingScreen.Error("No data")
@@ -44,7 +44,7 @@ fun LoadingErrorErrorPreview() {
 @Preview
 @Composable
 fun LoadMorePreview() {
-    AppTheme {
+    PreviewAppTheme {
         GenreFeed(
             state = LoadingState(
                 LoadingScreen.Data(
@@ -63,7 +63,7 @@ fun LoadMorePreview() {
 @Preview
 @Composable
 fun LoadMoreErrorPreview() {
-    AppTheme {
+    PreviewAppTheme {
         GenreFeed(
             state = LoadingState(
                 LoadingScreen.Data(
