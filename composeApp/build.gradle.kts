@@ -46,6 +46,11 @@ kotlin {
                 implementation(libs.work.runtime.ktx)
             }
         }
+        val androidTest by getting {
+            dependencies {
+                implementation(libs.test.compose)
+            }
+        }
         val jvmMain by getting {
             dependencies {
                 // Compose UI

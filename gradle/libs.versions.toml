@@ -72,6 +72,9 @@ accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pa
 
 work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
 
+#test
+test-compose =  { module = "androidx.compose.ui:ui-test-junit4", version.ref = "plugin-multiplatform-compose" }
+
 [bundles]
 androidX = [
     "androidX-appCompat",
