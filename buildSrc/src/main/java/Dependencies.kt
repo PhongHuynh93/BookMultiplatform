@@ -1,12 +1,10 @@
 object Versions {
     const val kotlin = "1.6.10"
-    const val gradlePlugin = "7.0.4"
     const val coroutines = "1.6.0"
     const val kermit = "0.3.0-m1"
     const val ktor = "2.0.0-beta-1"
     const val junit = "4.13.2"
     const val material = "1.6.0-alpha01"
-    const val material3 = "1.0.0-alpha02"
     const val multiplatformSettings = "0.8.1"
     const val sqlDelight = "1.5.0"
     const val serialization = "1.2.2"

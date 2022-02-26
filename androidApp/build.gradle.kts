@@ -29,16 +29,6 @@ android {
         viewBinding = true
         dataBinding = true
     }
-    lint {
-        // Disable lintVital. Not needed since lint is run on CI
-        isCheckReleaseBuilds = false
-        // Ignore any tests
-        isIgnoreTestSources = true
-        // Make the build fail on any lint errors
-        isAbortOnError = true
-        // Allow lint to check dependencies
-        isCheckDependencies = true
-    }
 }
 
 fun getVersionNameX(): String {
