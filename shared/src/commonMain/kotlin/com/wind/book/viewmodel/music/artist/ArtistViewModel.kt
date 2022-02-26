@@ -60,6 +60,6 @@ class ArtistViewModel(
     override fun setGenreId(genreId: String) {
         log.d { "genreId $genreId ArtistViewModel hashcode ${hashCode()}" }
         this.genreId = genreId
-        loadMore(isRefresh = true)
+        refresh()
     }
 }

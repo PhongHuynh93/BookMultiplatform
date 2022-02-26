@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import com.wind.book.log
 import com.wind.book.model.music.Genre
 import com.wind.book.sharedUI.AppTheme
 import com.wind.book.sharedUI.AsyncImage
@@ -38,6 +39,7 @@ fun GenreFeed(
     modifier: Modifier = Modifier,
     contentPaddingValue: PaddingValues = PaddingValues(all = normalSpace),
     onClick: () -> Unit = {},
+//    onLoadMore: (Int) -> Unit = {}
 ) {
     Box(
         modifier = modifier,
@@ -47,13 +49,17 @@ fun GenreFeed(
             is LoadingScreen.Data<*> -> {
                 screen.tryCast<LoadingScreen.Data<Genre>> {
                     val data = data
+                    log.e { "new data ${data.size}" }
                     LazyVerticalGrid(
                         cells = GridCells.Fixed(2),
                         contentPadding = contentPaddingValue,
                         horizontalArrangement = Arrangement.spacedBy(normalSpace),
                         verticalArrangement = Arrangement.spacedBy(normalSpace),
                     ) {
-                        itemsIndexed(data) { _, item ->
+                        itemsIndexed(data) { index, item ->
+                            // FIXME: Crash when called load more
+                            log.d { "index $index" }
+//                            onLoadMore(index)
                             GenreItem(
                                 item = item,
                                 onClick = onClick

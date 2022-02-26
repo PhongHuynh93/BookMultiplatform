@@ -57,7 +57,7 @@ fun MutableStateFlow<LoadingState>.update(
 }
 
 interface LoadMoreEvent : BaseEvent {
-    fun loadMore(isRefresh: Boolean = false)
+    fun loadMore()
     fun retry()
     fun refresh()
     fun scrollToTop()
@@ -118,7 +118,11 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
         super.onCleared()
     }
 
-    override fun loadMore(isRefresh: Boolean) {
+    override fun loadMore() {
+        loadMore(isRefresh = false)
+    }
+
+    private fun loadMore(isRefresh: Boolean) {
         log.v { "$TAG loadMore $isRefresh" }
         loadAPIScope.launch {
             if (!canLoad()) {

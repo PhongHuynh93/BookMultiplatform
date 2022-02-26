@@ -68,10 +68,14 @@ class GenreScreen : Screen, KoinComponent {
                     GenreFeed(
                         state = state.value,
                         modifier = Modifier.fillMaxSize(),
-                        contentPaddingValue = contentPaddingValue
-                    ) {
-                        // TODO: go to album list
-                    }
+                        contentPaddingValue = contentPaddingValue,
+                        onClick = {
+                            // TODO: go to album list
+                        },
+//                        onLoadMore = { index ->
+//                            vm.loadMore(index)
+//                        }
+                    )
                 }
             }
         }
