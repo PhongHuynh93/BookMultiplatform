@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import com.wind.book.model.music.Genre
+import com.wind.book.sharedUI.AppTheme
 import com.wind.book.sharedUI.AsyncImage
 import com.wind.book.sharedUI.Overlay
 import com.wind.book.sharedUI.Shapes
@@ -84,30 +85,33 @@ fun GenreItem(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
-    Box(
-        modifier = modifier
-            .clip(Shapes.medium)
-            .clickable {
-                onClick()
-            }
-    ) {
-        AsyncImage(
-            url = item.model.pictureMedium,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .aspectRatio(2f)
-                .fillMaxWidth()
-        )
+    // FIXME: Find out why it's not worked
+    AppTheme(darkTheme = true) {
         Box(
-            modifier = Modifier
-                .matchParentSize()
-                .background(Overlay)
-        )
-        Text(
-            text = item.model.name,
-            style = MaterialTheme.typography.subtitle1,
-            fontWeight = FontWeight.Medium,
-            modifier = Modifier.align(Alignment.Center)
-        )
+            modifier = modifier
+                .clip(Shapes.medium)
+                .clickable {
+                    onClick()
+                }
+        ) {
+            AsyncImage(
+                url = item.model.pictureMedium,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .aspectRatio(2f)
+                    .fillMaxWidth()
+            )
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .background(Overlay)
+            )
+            Text(
+                text = item.model.name,
+                style = MaterialTheme.typography.subtitle1,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
     }
 }
