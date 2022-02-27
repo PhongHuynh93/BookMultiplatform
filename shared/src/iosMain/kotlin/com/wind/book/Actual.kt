@@ -9,3 +9,5 @@ actual val platform = PlatformType.IOS
 actual val platformCoroutineDispatcher: CoroutineDispatcher = Dispatchers.Default
 
 actual fun isDebug() = Platform.isDebugBinary
+
+actual interface Parcelable

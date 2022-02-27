@@ -9,7 +9,6 @@ object Versions {
     const val sqlDelight = "1.5.0"
     const val serialization = "1.2.2"
     const val kotlinxDateTime = "0.3.1"
-    const val parcelable = "0.2.2"
     const val asyncImage = "2.0.0-alpha06"
     const val uuid = "0.3.1"
 
@@ -29,7 +28,6 @@ object Deps {
     const val multiplatformSettingsTest =
         "com.russhwolf:multiplatform-settings-test:${Versions.multiplatformSettings}"
     const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
-    const val parcelable = "com.arkivanov.essenty:parcelable:${Versions.parcelable}"
     const val uuid = "com.benasher44:uuid:${Versions.uuid}"
 
     object AndroidXTest {

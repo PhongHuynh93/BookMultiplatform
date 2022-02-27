@@ -8,6 +8,7 @@ import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.insets.ui.TopAppBar
 import com.wind.book.sharedUI.PreviewAppTheme
+import com.wind.book.sharedUI.view.AppBarAlphas
 
 @Composable
 fun CocaTopAppBar(title: String) {

@@ -2,6 +2,7 @@ package com.wind.book
 
 import co.touchlab.kermit.Kermit
 import co.touchlab.kermit.SystemLogger
+import com.russhwolf.settings.ExperimentalSettingsImplementation
 import com.russhwolf.settings.JvmPreferencesSettings
 import com.russhwolf.settings.Settings
 import com.wind.book.viewmodel.BaseViewModel
@@ -12,6 +13,7 @@ import org.koin.core.qualifier.Qualifier
 import org.koin.dsl.module
 import java.util.prefs.Preferences
 
+@OptIn(ExperimentalSettingsImplementation::class)
 actual val platformModule: Module = module {
     single<Settings> {
         JvmPreferencesSettings(Preferences.userRoot())

@@ -52,8 +52,9 @@ fun initKoin(appModule: Module): KoinApplication {
 
     val koin = koinApplication.koin
     log = koin.get<Kermit> { parametersOf(null) }
-    val appInfo = koin.get<AppInfo>() // AppInfo is a Kotlin interface with separate Android and iOS implementations
-    log.v { "App Id ${appInfo.appId}" }
+    // FIXME: Bug in jvm
+//    val appInfo = koin.get<AppInfo>() // AppInfo is a Kotlin interface with separate Android and iOS implementations
+//    log.v { "App Id ${appInfo.appId}" }
     httpClient = koin.get()
     return koinApplication
 }

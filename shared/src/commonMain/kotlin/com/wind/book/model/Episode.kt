@@ -1,6 +1,7 @@
 package com.wind.book.model
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+
+import com.wind.book.Parcelable
+import com.wind.book.Parcelize
 
 @Parcelize
 data class Episode(

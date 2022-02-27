@@ -10,3 +10,5 @@ actual val platformCoroutineDispatcher: CoroutineDispatcher = Dispatchers.Defaul
 
 // FIXME: JVM don't have this field
 actual fun isDebug() = false
+
+actual interface Parcelable
