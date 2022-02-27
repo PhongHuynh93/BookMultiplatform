@@ -24,7 +24,7 @@ internal class PodcastDetailAPIImpl() : BaseAPI(), PodcastDetailAPI {
             parameter(Constant.NEXT_EP_PUB_DATE_QUERY, nextEpisodePubDate.toString())
             parameter(Constant.SORT_QUERY, sort)
             header(Constant.QUERY_TOKEN, Constant.API_TOKEN)
-        }.getOrThrow().let {
+        }.let {
             podcastMapper.apply(it)
         }
 }

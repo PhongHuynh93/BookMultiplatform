@@ -11,7 +11,6 @@ version = "1.0"
 
 kotlin {
     android()
-
     listOf(
         iosX64(),
         iosArm64(),
@@ -21,6 +20,7 @@ kotlin {
             baseName = "shared"
         }
     }
+    jvm()
 
     cocoapods {
         summary = "Common library for the BookMultiplatform"
@@ -96,6 +96,12 @@ kotlin {
             dependencies {
                 // Network
                 implementation(Deps.Ktor.ios)
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+                // Network
+                implementation(Deps.Ktor.jvm)
             }
         }
     }

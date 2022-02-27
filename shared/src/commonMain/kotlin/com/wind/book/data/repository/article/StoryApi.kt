@@ -21,7 +21,7 @@ internal class StoryAPIImpl : BaseAPI(), StoryAPI {
         return doGet<SectionResDto> {
             apiPath(Constant.Book.STORY_PATH, "$section.json")
             parameter(Constant.Book.QUERY_API_KEY, Constant.Book.API_KEY)
-        }.getOrThrow().results?.mapNotNull {
+        }.results?.mapNotNull {
             it?.let {
                 articleMapper.apply(it)
             }

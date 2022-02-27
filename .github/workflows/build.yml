@@ -17,7 +17,7 @@ jobs:
         run: |
           ./gradlew --scan --stacktrace \
             assembleDebug \
-            androidApp:lintDebug
+            composeApp:lintDebug
 
   test:
     name: Test Android
@@ -29,7 +29,7 @@ jobs:
       - name: Unit test
         run: |
           ./gradlew --scan --stacktrace \
-            testDebugUnitTest
+            composeApp:testDebugUnitTest
 
   iOS:
     name: Assemble iOS framework

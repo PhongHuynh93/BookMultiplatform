@@ -43,7 +43,7 @@ class BookViewModel(
 
     override fun setBookName(bookName: String) {
         this.bookName = bookName
-        loadMore(isRefresh = true)
+        refresh()
     }
 
     override suspend fun apiCall(

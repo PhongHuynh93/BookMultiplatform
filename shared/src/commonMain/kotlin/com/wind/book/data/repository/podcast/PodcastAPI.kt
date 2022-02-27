@@ -25,8 +25,7 @@ internal class PodcastAPIImpl : BaseAPI(), PodcastAPI {
             parameter("page", currentPage)
             parameter("region", region)
             header(Constant.QUERY_TOKEN, Constant.API_TOKEN)
-        }.getOrThrow()
-            .podcastDtos?.mapNotNull {
-                podcastMapper.apply(it)
-            } ?: emptyList()
+        }.podcastDtos?.mapNotNull {
+            podcastMapper.apply(it)
+        } ?: emptyList()
 }

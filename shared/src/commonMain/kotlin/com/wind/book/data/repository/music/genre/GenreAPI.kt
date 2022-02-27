@@ -27,7 +27,7 @@ internal class GenreAPIImpl : BaseAPI(), GenreAPI {
             apiPath("genre")
             parameter("index", index)
             parameter("limit", limit)
-        }.getOrThrow().data?.mapNotNull {
+        }.data?.mapNotNull {
             it?.let {
                 genreMapper.apply(it)
             }
@@ -39,7 +39,7 @@ internal class GenreAPIImpl : BaseAPI(), GenreAPI {
             apiPath("genre/$genreId/artists")
             parameter("index", index)
             parameter("limit", limit)
-        }.getOrThrow().data?.mapNotNull {
+        }.data?.mapNotNull {
             it?.let {
                 artistMapper.apply(it)
             }

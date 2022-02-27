@@ -1,19 +1,16 @@
 object Versions {
     const val kotlin = "1.6.10"
-    const val gradlePlugin = "7.0.4"
     const val coroutines = "1.6.0"
     const val kermit = "0.3.0-m1"
     const val ktor = "2.0.0-beta-1"
     const val junit = "4.13.2"
     const val material = "1.6.0-alpha01"
-    const val material3 = "1.0.0-alpha02"
     const val multiplatformSettings = "0.8.1"
     const val sqlDelight = "1.5.0"
     const val serialization = "1.2.2"
     const val kotlinxDateTime = "0.3.1"
     const val parcelable = "0.2.2"
     const val asyncImage = "2.0.0-alpha06"
-    const val compose = "1.1.0-rc02"
     const val uuid = "0.3.1"
 
     object Test {
@@ -74,6 +71,7 @@ object Deps {
 
         const val androidCore = "io.ktor:ktor-client-android:${Versions.ktor}"
         const val ios = "io.ktor:ktor-client-ios:${Versions.ktor}"
+        const val jvm = "io.ktor:ktor-client-jvm:${Versions.ktor}"
     }
 
     object ImageLoader {
