@@ -73,7 +73,9 @@ accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pa
 work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
 
 #test
-test-compose =  { module = "androidx.compose.ui:ui-test-junit4", version.ref = "plugin-multiplatform-compose" }
+test-compose-ui = { module = "androidx.compose.ui:ui-test", version.ref = "plugin-multiplatform-compose" }
+test-compose-ui-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "plugin-multiplatform-compose" }
+test-compose-ui-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "plugin-multiplatform-compose" }
 
 [bundles]
 androidX = [
@@ -99,3 +101,5 @@ koin = [
     "koin-compose",
 ]
 plugins = ["gradlePlugin", "kotlinPlugin",  "navPlugin", "plugin-multiplatform-compose", "serializationPlugin"]
+
+testCompose = ["test-compose-ui", "test-compose-ui-junit", "test-compose-ui-manifest"]

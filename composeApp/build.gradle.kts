@@ -48,7 +48,7 @@ kotlin {
         }
         val androidTest by getting {
             dependencies {
-                implementation(libs.test.compose)
+                implementation(libs.bundles.testCompose)
             }
         }
         val jvmMain by getting {
