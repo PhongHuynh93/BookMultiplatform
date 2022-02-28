@@ -54,8 +54,6 @@ kotlin {
                 implementation(libs.koin.core)
                 // Date-time
                 implementation(Deps.kotlinxDateTime)
-                // Parcelable
-                implementation(Deps.parcelable)
                 // uuid
                 implementation(Deps.uuid)
             }
