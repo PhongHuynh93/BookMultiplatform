@@ -1,57 +1,116 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("kotlinx-serialization")
+    id("kotlin-parcelize")
 }
 
+// Use version for cocoaPod
 version = "1.0"
 
 kotlin {
     android()
-
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-        else -> ::iosX64
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "shared"
+        }
     }
-
-    iosTarget("ios") {}
+    jvm()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Common library for the BookMultiplatform"
+        homepage = "https://github.com/PhongHuynh93/BookMultiplatform"
         ios.deploymentTarget = "14.1"
-        frameworkName = "shared"
         podfile = project.file("../iosApp/Podfile")
     }
-    
+
     sourceSets {
-        val commonMain by getting
+        all {
+            languageSettings.apply {
+                optIn("kotlin.RequiresOptIn")
+                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+            }
+        }
+        val commonMain by getting {
+            dependencies {
+                // Network
+                implementation(Deps.Ktor.commonCore)
+                implementation(Deps.Ktor.commonJson)
+                implementation(Deps.Ktor.commonLogging)
+                implementation(Deps.Ktor.negotiation)
+
+                // Coroutines
+                implementation(Deps.Coroutines.common)
+                // Logger
+                api(Deps.kermit)
+                // Key-Value storage
+                implementation(Deps.multiplatformSettings)
+                // Injection
+                implementation(libs.koin.core)
+                // Date-time
+                implementation(Deps.kotlinxDateTime)
+                // uuid
+                implementation(Deps.uuid)
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                implementation(libs.koin.test)
+                implementation(Deps.multiplatformSettingsTest)
+                implementation(Deps.Coroutines.test)
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                // Network
+                implementation(Deps.Ktor.androidCore)
+                // ViewModel
+                implementation(libs.androidX.viewModel)
+                implementation(libs.koin.android)
+            }
+        }
         val androidTest by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
+                implementation(Deps.AndroidXTest.core)
+                implementation(Deps.AndroidXTest.mockKotlin)
+                implementation(Deps.AndroidXTest.truth)
             }
         }
-        val iosMain by getting
-        val iosTest by getting
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                // Network
+                implementation(Deps.Ktor.ios)
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+                // Network
+                implementation(Deps.Ktor.jvm)
+            }
+        }
     }
 }
 
 android {
-    compileSdkVersion(31)
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    compileSdk = Configs.compileSdk
+
     defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(31)
+        minSdk = Configs.minSdk
+        targetSdk = Configs.targetSdk
     }
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 }

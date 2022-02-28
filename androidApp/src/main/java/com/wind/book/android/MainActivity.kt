@@ -1,20 +1,23 @@
 package com.wind.book.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.wind.book.Greeting
-import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.wind.book.toastError
+import kotlinx.coroutines.flow.collectLatest
 
-fun greet(): String {
-    return Greeting().greeting()
-}
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        lifecycleScope.launchWhenStarted {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                toastError.collectLatest {
+                    Toast.makeText(this@MainActivity, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,50 @@
+name: Build & Publish Release Dev APK on dev branch
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  Gradle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/cancelPreviousFlow
+      - uses: ./.github/actions/setup
+      - name: Build Release APK
+        run: ./gradlew assembleDebug
+      - name: Get Apk Info
+        uses: hkusu/apk-info-action@v1
+        id: apk
+        with:
+          apk-path: ${{ github.workspace }}/androidApp/build/outputs/apk/debug/androidApp-debug.apk
+      - name: Create or advance tag `latest`
+        # the name of tag is `latest` is required for library above, used for create commit messages on each release
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            try {
+                await github.git.deleteRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: "tags/latest"
+                })
+            } catch (e) {
+              console.log("The latest tag doesn't exist yet: " + e)
+            }
+            await github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/latest",
+              sha: context.sha
+            })
+      - name: Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: ${{ steps.apk.outputs.version-name }}
+          prerelease: true
+          title: ${{ steps.apk.outputs.versionNum }}
+          files: ${{ github.workspace }}/androidApp/build/outputs/apk/debug/androidApp-debug.apk
+

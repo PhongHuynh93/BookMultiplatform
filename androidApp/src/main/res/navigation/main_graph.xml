@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.wind.book.android.view.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/home">
+        <action
+            android:id="@+id/action_homeFragment_to_IABFragment"
+            app:destination="@id/IABFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_articleFragment_to_IABFragment"
+            app:destination="@id/IABFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_podcastDetailFragment"
+            app:destination="@id/podcastDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_music_graph"
+            app:destination="@id/music_graph"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="genre"
+                app:argType="com.wind.book.model.music.Genre" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/IABFragment"
+        android:name="com.wind.book.android.view.iab.IABFragment"
+        android:label="IABFragment"
+        tools:layout="@layout/iab">
+        <argument
+            android:name="iabNav"
+            app:argType="com.wind.book.viewmodel.model.IABNav" />
+    </fragment>
+    <fragment
+        android:id="@+id/podcastDetailFragment"
+        android:name="com.wind.book.android.view.podcast_detail.PodcastDetailFragment">
+        <argument
+            android:name="podcast"
+            app:argType="com.wind.book.model.Podcast" />
+    </fragment>
+    <include app:graph="@navigation/music_graph" />
+
+</navigation>

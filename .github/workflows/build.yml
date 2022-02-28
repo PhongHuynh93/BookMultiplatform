@@ -1,0 +1,54 @@
+name: Pre-Merge
+
+on:
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  assemble:
+    name: Assemble Android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/cancelPreviousFlow
+      - uses: ./.github/actions/setup
+      - name: Build Android app
+        run: |
+          ./gradlew --scan --stacktrace \
+            assembleDebug \
+            composeApp:lintDebug
+
+  test:
+    name: Test Android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/cancelPreviousFlow
+      - uses: ./.github/actions/setup
+      - name: Unit test
+        run: |
+          ./gradlew --scan --stacktrace \
+            composeApp:testDebugUnitTest
+
+  iOS:
+    name: Assemble iOS framework
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/cancelPreviousFlow
+      - uses: ./.github/actions/setup
+      - name: Assemble iOS framework
+        run: |
+          ./gradlew --scan --stacktrace \
+            linkDebugFrameworkIosX64
+
+  ktlint:
+    name: Check Android code style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/cancelPreviousFlow
+      - uses: ./.github/actions/setup
+      - name: Check ktlint
+        run: ./gradlew ktlintCheck
