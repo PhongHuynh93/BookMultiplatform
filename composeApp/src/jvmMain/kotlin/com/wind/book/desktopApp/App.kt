@@ -13,6 +13,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.wind.book.desktopApp.view.music.GenreScreen
 import com.wind.book.initKoin
 import com.wind.book.sharedUI.AppTheme
+import com.wind.book.util.AppContext
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,7 +25,7 @@ import org.koin.dsl.module
 fun main() = application {
     initKoin(
         module {
-            // don't need any things specific to jvm
+            single<AppContext> { }
         }
     )
 

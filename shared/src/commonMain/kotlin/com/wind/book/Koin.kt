@@ -7,6 +7,7 @@ import com.wind.book.data.repository.music.genre.genreModule
 import com.wind.book.data.repository.podcast.podcastModule
 import com.wind.book.data.repository.podcast_detail.podcastDetailModule
 import com.wind.book.domain.domainModule
+import com.wind.book.util.ObserveConnectionState
 import com.wind.book.viewmodel.BaseViewModel
 import com.wind.book.viewmodel.viewmodelModule
 import io.ktor.client.HttpClient
@@ -34,6 +35,7 @@ import kotlin.reflect.KClass
 lateinit var koin: Koin
 lateinit var log: Kermit
 lateinit var httpClient: HttpClient
+lateinit var observeConnectionState: ObserveConnectionState
 fun initKoin(appModule: Module): KoinApplication {
     val koinApplication = startKoin {
         modules(
@@ -56,6 +58,7 @@ fun initKoin(appModule: Module): KoinApplication {
 //    val appInfo = koin.get<AppInfo>() // AppInfo is a Kotlin interface with separate Android and iOS implementations
 //    log.v { "App Id ${appInfo.appId}" }
     httpClient = koin.get()
+    observeConnectionState = ObserveConnectionState(koin.get())
     return koinApplication
 }
 

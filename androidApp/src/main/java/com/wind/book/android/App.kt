@@ -1,9 +1,9 @@
 package com.wind.book.android
 
 import android.app.Application
-import android.content.Context
 import com.wind.book.AppInfo
 import com.wind.book.initKoin
+import com.wind.book.util.AppContext
 import org.koin.dsl.module
 
 class App : Application() {
@@ -11,7 +11,7 @@ class App : Application() {
         super.onCreate()
         initKoin(
             module {
-                single<Context> { this@App }
+                single<AppContext> { this@App }
                 single<AppInfo> { AndroidAppInfo }
             },
         )
