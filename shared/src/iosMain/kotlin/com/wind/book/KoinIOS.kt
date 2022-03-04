@@ -4,6 +4,7 @@ import co.touchlab.kermit.Kermit
 import co.touchlab.kermit.NSLogLogger
 import com.russhwolf.settings.AppleSettings
 import com.russhwolf.settings.Settings
+import com.wind.book.util.AppContext
 import com.wind.book.viewmodel.BaseViewModel
 import kotlinx.cinterop.ObjCClass
 import kotlinx.cinterop.getOriginalKotlinClass
@@ -23,6 +24,7 @@ fun initKoinIos(
     doOnStartup: () -> Unit
 ): KoinApplication = initKoin(
     module {
+        single<AppContext> { }
         single<Settings> { AppleSettings(userDefaults) }
         single { appInfo }
         single { doOnStartup }

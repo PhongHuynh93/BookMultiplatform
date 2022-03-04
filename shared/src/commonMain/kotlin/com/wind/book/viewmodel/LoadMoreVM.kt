@@ -3,8 +3,10 @@ package com.wind.book.viewmodel
 import com.wind.book.log
 import com.wind.book.model.Identifiable
 import com.wind.book.model.PlatformType
+import com.wind.book.observeConnectionState
 import com.wind.book.platform
 import com.wind.book.toastError
+import com.wind.book.util.ConnectionState
 import com.wind.book.viewmodel.util.Constant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +19,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -104,6 +107,22 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
         }
 
     private val loadAPIScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+
+    init {
+        clientScope.launch {
+            observeConnectionState.observeConnectivityAsFlow().collectLatest {
+                when (it) {
+                    ConnectionState.ConnectionAvailable -> {
+                        val currentScreen = _state.value.screen
+                        if (currentScreen is LoadingScreen.Error || (currentScreen is LoadingScreen.Data<*> && currentScreen.errorMessage != null)) {
+                            retry()
+                        }
+                    }
+                    ConnectionState.NoConnection -> {}
+                }
+            }
+        }
+    }
 
     override fun onCleared() {
         // on iOS
