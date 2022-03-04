@@ -1,18 +1,16 @@
-package com.wind.book.android.view
+package com.wind.book.desktopApp.view
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
-import com.google.accompanist.insets.ui.TopAppBar
 import com.wind.book.sharedUI.PreviewAppTheme
 import com.wind.book.sharedUI.view.AppBarAlphas
 
@@ -24,10 +22,6 @@ fun CocaTopAppBar(title: String, upAvailable: Boolean = false) {
         title = {
             Text(text = title)
         },
-        contentPadding = rememberInsetsPaddingValues(
-            insets = LocalWindowInsets.current.systemBars,
-            applyBottom = false,
-        ),
         backgroundColor = MaterialTheme.colors.surface.copy(
             alpha = AppBarAlphas.translucentBarAlpha()
         ),
