@@ -5,39 +5,34 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.insets.ui.Scaffold
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.wind.book.android.R
 import com.wind.book.android.view.CocaTopAppBar
+import com.wind.book.model.music.Genre
 import com.wind.book.sharedUI.normalSpace
-import com.wind.book.sharedUI.view.music.GenreFeed
+import com.wind.book.sharedUI.view.music.ArtistFeed
 import com.wind.book.viewmodel.LoadingScreen
-import com.wind.book.viewmodel.music.genre.GenreViewModel
+import com.wind.book.viewmodel.music.artist.ArtistViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.component.KoinComponent
 
-class GenreScreen : Screen, KoinComponent {
+data class ArtistScreen(private val genre: Genre) : Screen, KoinComponent {
 
     @Composable
     override fun Content() {
-        val vm = getViewModel<GenreViewModel>()
+        val vm = getViewModel<ArtistViewModel>()
         val state = vm.state.collectAsState()
-        val navigator = LocalNavigator.currentOrThrow
-
+        vm.setGenreId(genre.id)
         Scaffold(
             topBar = {
-                CocaTopAppBar(title = stringResource(id = R.string.genre))
+                CocaTopAppBar(title = genre.model.name, upAvailable = true)
             }
         ) { paddingValues ->
-
             SwipeRefresh(
                 state = rememberSwipeRefreshState(
                     when (val screen = state.value.screen) {
@@ -66,16 +61,10 @@ class GenreScreen : Screen, KoinComponent {
                         applyBottom = true,
                     ).calculateBottomPadding(),
                 )
-                GenreFeed(
+                ArtistFeed(
                     state = state.value,
                     modifier = Modifier.fillMaxSize(),
-                    contentPaddingValue = contentPaddingValue,
-                    onClick = {
-                        navigator.push(ArtistScreen(it))
-                    },
-//                        onLoadMore = { index ->
-//                            vm.loadMore(index)
-//                        }
+                    contentPaddingValue = contentPaddingValue
                 )
             }
         }

@@ -10,8 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.unit.dp
 
+val largeSpace = 24.dp
+val aboveNormalSpace = 20.dp
 val normalSpace = 16.dp
 val smallSpace = 8.dp
+val tinySpace = 8.dp
 
 val Overlay = Color(0x66000000)
 

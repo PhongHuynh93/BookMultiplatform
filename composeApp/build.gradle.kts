@@ -21,6 +21,7 @@ kotlin {
                 implementation(compose.uiTooling)
                 // Navigation
                 implementation(libs.voyager.navigator)
+                implementation(libs.voyager.transition)
                 // DI
                 implementation(libs.koin.core)
                 // Coroutines
