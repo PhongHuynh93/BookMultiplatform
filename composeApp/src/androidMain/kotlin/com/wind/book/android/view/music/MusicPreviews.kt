@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.wind.book.data.util.FakeData
 import com.wind.book.sharedUI.PreviewAppTheme
+import com.wind.book.sharedUI.view.CocaTopAppBar
 import com.wind.book.sharedUI.view.music.ArtistFeed
 import com.wind.book.sharedUI.view.music.ArtistItem
 import com.wind.book.sharedUI.view.music.GenreFeed
@@ -60,5 +61,13 @@ fun ArtistItemPreview() {
         ArtistItem(
             item = FakeData.artist
         )
+    }
+}
+
+@Preview
+@Composable
+fun CocaTopAppBarPreview() {
+    PreviewAppTheme {
+        CocaTopAppBar(title = "Title")
     }
 }

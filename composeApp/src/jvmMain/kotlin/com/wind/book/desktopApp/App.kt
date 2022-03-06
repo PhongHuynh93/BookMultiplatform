@@ -10,9 +10,9 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import cafe.adriel.voyager.navigator.Navigator
-import com.wind.book.desktopApp.view.music.GenreScreen
 import com.wind.book.initKoin
 import com.wind.book.sharedUI.AppTheme
+import com.wind.book.sharedUI.view.music.GenreScreen
 import com.wind.book.util.AppContext
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -42,7 +42,7 @@ fun main() = application {
         }
     ) {
         AppTheme {
-            Navigator(GenreScreen())
+            Navigator(GenreScreen(onClickGenre = {}))
         }
     }
 }

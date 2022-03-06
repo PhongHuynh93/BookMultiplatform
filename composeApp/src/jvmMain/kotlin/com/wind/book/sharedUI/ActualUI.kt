@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
@@ -24,11 +25,14 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
+import com.wind.book.viewmodel.BaseViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.request.get
 import io.ktor.client.statement.readBytes
 import org.jetbrains.skia.Image
+import org.koin.java.KoinJavaComponent.inject
 
 internal actual fun Modifier.systemStatusBarsHeight(additional: Dp): Modifier = this
 
@@ -149,3 +153,22 @@ internal actual fun _font(fontName: String, fontWeight: FontWeight): Font {
         weight = fontWeight,
     )
 }
+
+@Composable
+internal actual fun SwipeRefresh(
+    isRefreshing: Boolean,
+    indicatorPadding: PaddingValues,
+    onRefresh: () -> Unit,
+    content: @Composable () -> Unit
+) {
+    content()
+}
+
+actual typealias Screen = Screen
+
+@Composable
+actual inline fun <reified T : BaseViewModel> getViewModel(): T = inject<T>(T::class.java).value
+
+@Composable
+actual fun insetTop(): Dp = 0.dp
+actual fun insetBottom(): Dp = 0.dp
