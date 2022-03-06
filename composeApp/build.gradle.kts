@@ -10,6 +10,12 @@ kotlin {
     jvm()
 
     sourceSets {
+        all {
+            languageSettings.apply {
+                optIn("kotlin.RequiresOptIn")
+                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+            }
+        }
         commonMain {
             dependencies {
                 implementation(projects.shared)
