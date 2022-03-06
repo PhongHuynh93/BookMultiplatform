@@ -8,8 +8,8 @@ import androidx.core.view.WindowCompat
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.wind.book.android.view.music.GenreScreen
 import com.wind.book.sharedUI.AppTheme
+import com.wind.book.sharedUI.view.music.GenreScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 class MainActivity : ComponentActivity() {
@@ -19,7 +19,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
                 ProvideWindowInsets(consumeWindowInsets = false) {
-                    Navigator(GenreScreen()) { navigator ->
+                    Navigator(
+                        GenreScreen(
+                            onClickGenre = {}
+                        )
+                    ) { navigator ->
                         SlideTransition(navigator)
                     }
                 }

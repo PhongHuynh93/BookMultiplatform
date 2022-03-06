@@ -1,6 +1,7 @@
 package com.wind.book.sharedUI
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,11 +13,18 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import cafe.adriel.voyager.core.screen.Screen
 import coil.compose.rememberAsyncImagePainter
+import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsHeight
 import com.google.accompanist.insets.navigationBarsWithImePadding
+import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.insets.statusBarsHeight
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.wind.book.android.R
+import com.wind.book.viewmodel.BaseViewModel
 
 @Composable
 internal actual fun AsyncImage(
@@ -68,10 +76,7 @@ private fun resNameToId(resName: String): Int = when (resName) {
 // TODO:
 @Composable
 internal actual fun _str(resName: String): String = when (resName) {
-    "Add" -> stringResource(R.string.app_name)
-    "All" -> stringResource(R.string.app_name)
-    "Remove" -> stringResource(R.string.app_name)
-    "Rss feed url" -> stringResource(R.string.app_name)
+    "Genre" -> stringResource(R.string.genre)
     else -> error("Unknown resName: $resName")
 }
 
@@ -114,4 +119,47 @@ internal actual fun _font(
         },
         fontWeight
     )
+}
+
+@Composable
+internal actual fun SwipeRefresh(
+    isRefreshing: Boolean,
+    indicatorPadding: PaddingValues,
+    onRefresh: () -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing),
+        indicatorPadding = indicatorPadding,
+        clipIndicatorToPadding = false,
+        indicator = { indicatorState, refreshTriggerDistance ->
+            SwipeRefreshIndicator(
+                state = indicatorState,
+                refreshTriggerDistance = refreshTriggerDistance,
+                scale = true // https://github.com/google/accompanist/issues/572
+            )
+        },
+        onRefresh = onRefresh,
+        content = content
+    )
+}
+
+actual typealias Screen = Screen
+
+@Composable
+actual inline fun <reified T : BaseViewModel> getViewModel(): T =
+    org.koin.androidx.compose.getViewModel()
+
+@Composable
+actual fun insetTop(): Dp {
+    return rememberInsetsPaddingValues(
+        insets = LocalWindowInsets.current.systemBars
+    ).calculateTopPadding()
+}
+
+@Composable
+actual fun insetBottom(): Dp {
+    return rememberInsetsPaddingValues(
+        insets = LocalWindowInsets.current.navigationBars,
+    ).calculateBottomPadding()
 }

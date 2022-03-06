@@ -12,9 +12,9 @@ import com.google.accompanist.insets.ui.Scaffold
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.wind.book.android.view.CocaTopAppBar
 import com.wind.book.model.music.Genre
 import com.wind.book.sharedUI.normalSpace
+import com.wind.book.sharedUI.view.CocaTopAppBar
 import com.wind.book.sharedUI.view.music.ArtistFeed
 import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.music.artist.ArtistViewModel
@@ -30,7 +30,7 @@ data class ArtistScreen(private val genre: Genre) : Screen, KoinComponent {
         vm.setGenreId(genre.id)
         Scaffold(
             topBar = {
-                CocaTopAppBar(title = genre.model.name, upAvailable = true)
+                CocaTopAppBar(title = genre.model.name) // TODO: handle back
             }
         ) { paddingValues ->
             SwipeRefresh(
