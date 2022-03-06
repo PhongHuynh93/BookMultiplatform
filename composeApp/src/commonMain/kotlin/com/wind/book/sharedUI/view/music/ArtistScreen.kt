@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -75,7 +76,10 @@ data class ArtistScreen(
                 ArtistFeed(
                     state = state.value,
                     modifier = Modifier.fillMaxSize(),
-                    contentPaddingValue = contentPaddingValue
+                    contentPaddingValue = contentPaddingValue,
+                    onLoadMore = {
+                        vm.loadMore(it)
+                    }
                 )
             }
         }
@@ -89,6 +93,7 @@ fun ArtistFeed(
     modifier: Modifier = Modifier,
     contentPaddingValue: PaddingValues = PaddingValues(all = normalSpace),
     onClick: (Artist) -> Unit = {},
+    onLoadMore: (Int) -> Unit = {}
 ) {
     Box(
         modifier = modifier,
@@ -105,21 +110,26 @@ fun ArtistFeed(
                         horizontalArrangement = Arrangement.spacedBy(normalSpace),
                         verticalArrangement = Arrangement.spacedBy(largeSpace),
                     ) {
-                        itemsIndexed(data) { _, item ->
-                            // FIXME: Crash when called load more
-//                            onLoadMore(index)
+                        itemsIndexed(data) { index, item ->
+                            onLoadMore(index)
                             ArtistItem(
                                 item = item,
                                 onClick = onClick
                             )
                         }
-                        // FIXME: wait for span in vertical
-                        // https://stackoverflow.com/questions/65981114/does-jetpack-composes-lazyverticalgrid-have-span-strategy
-                        item {
+                        item(
+                            // Temporary hide the span - it has bug UI
+//                            span = {
+//                                GridItemSpan(2)
+//                            }
+                        ) {
                             if (screen.errorMessage != null) {
                                 Text(text = screen.errorMessage!!)
                             } else if (!screen.isEndPage) {
                                 LoadingItem()
+                            } else {
+                                // add zero size spacer or else it will crash
+                                Spacer(modifier = Modifier)
                             }
                         }
                     }

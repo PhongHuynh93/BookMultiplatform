@@ -6,11 +6,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.GridItemSpan
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
@@ -78,6 +78,9 @@ data class GenreScreen(private val onClickGenre: (Genre) -> Unit) : Screen, Koin
                     modifier = Modifier.fillMaxSize(),
                     contentPaddingValue = contentPaddingValue,
                     onClick = onClickGenre,
+                    onLoadMore = {
+                        vm.loadMore(it)
+                    }
                 )
             }
         }
@@ -91,7 +94,7 @@ fun GenreFeed(
     modifier: Modifier = Modifier,
     contentPaddingValue: PaddingValues = PaddingValues(all = normalSpace),
     onClick: (Genre) -> Unit = {},
-//    onLoadMore: (Int) -> Unit = {}
+    onLoadMore: (Int) -> Unit = {}
 ) {
     Box(
         modifier = modifier,
@@ -108,23 +111,26 @@ fun GenreFeed(
                         horizontalArrangement = Arrangement.spacedBy(normalSpace),
                         verticalArrangement = Arrangement.spacedBy(normalSpace),
                     ) {
-                        itemsIndexed(data) { _, item ->
-                            // FIXME: Crash when called load more
-//                            onLoadMore(index)
+                        itemsIndexed(data) { index, item ->
+                            onLoadMore(index)
                             GenreItem(
                                 item = item,
                                 onClick = onClick
                             )
                         }
                         item(
-                            span = {
-                                GridItemSpan(2)
-                            }
+                            // Temporary hide the span - it has bug UI
+//                            span = {
+//                                GridItemSpan(2)
+//                            }
                         ) {
                             if (screen.errorMessage != null) {
                                 Text(text = screen.errorMessage!!)
                             } else if (!screen.isEndPage) {
                                 LoadingItem()
+                            } else {
+                                // add zero size spacer or else it will crash
+                                Spacer(modifier = Modifier)
                             }
                         }
                     }
