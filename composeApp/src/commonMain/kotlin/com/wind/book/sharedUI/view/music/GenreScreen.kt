@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.GridItemSpan
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
@@ -115,9 +116,11 @@ fun GenreFeed(
                                 onClick = onClick
                             )
                         }
-                        // FIXME: wait for span in vertical
-                        // https://stackoverflow.com/questions/65981114/does-jetpack-composes-lazyverticalgrid-have-span-strategy
-                        item {
+                        item(
+                            span = {
+                                GridItemSpan(2)
+                            }
+                        ) {
                             if (screen.errorMessage != null) {
                                 Text(text = screen.errorMessage!!)
                             } else if (!screen.isEndPage) {
