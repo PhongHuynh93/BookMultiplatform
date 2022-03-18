@@ -13,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -63,22 +62,17 @@ interface LoadMoreEvent : BaseEvent {
     fun loadMore()
     fun retry()
     fun refresh()
-    fun scrollToTop()
     fun loadMore(indexOfItem: Int)
-}
-
-sealed class LoadMoreEffect : BaseEffect() {
-    object ScrollToTop : LoadMoreEffect()
 }
 
 private val TAG = LoadMoreVM::class.simpleName
 
-abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent {
+abstract class LoadMoreVM<T : Identifiable, E : BaseEffect> : BaseMVIViewModel(), LoadMoreEvent {
     // region MVI
     private val _state = MutableStateFlow(LoadingState())
     override val state = _state.asStateFlow()
 
-    private val _effect = MutableSharedFlow<LoadMoreEffect>()
+    protected val _effect = MutableSharedFlow<E>()
     override val effect = _effect.asSharedFlow()
 
     override val event = this as LoadMoreEvent
@@ -161,7 +155,6 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
                     log.v { "$TAG return data current page=$currentPage dataSize=${list.size}" }
 
                     val cachedData = if (isRefresh) {
-                        scrollToTop()
                         mutableListOf()
                     } else {
                         this@LoadMoreVM.cachedData.toMutableList()
@@ -217,18 +210,6 @@ abstract class LoadMoreVM<T : Identifiable> : BaseMVIViewModel(), LoadMoreEvent 
         loadAPIScope.coroutineContext.cancelChildren()
         onRefresh()
         loadMore(isRefresh = true)
-    }
-
-    /**
-     * delay a little bit before scrolling to top
-     * because need to wait the list finish calculating the diffutil
-     */
-    override fun scrollToTop() {
-        log.v { "$TAG scrollToTop" }
-        clientScope.launch {
-            delay(300)
-            _effect.emit(LoadMoreEffect.ScrollToTop)
-        }
     }
 
     override fun loadMore(indexOfItem: Int) {

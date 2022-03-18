@@ -103,10 +103,8 @@ class GenreFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_
                 list.setScreen(screen)
                 footerLoadingAdapter.loadState = screen
             }
-            genreEffect.launchAndCollectIn(viewLifecycleOwner) {
+            effect.launchAndCollectIn(viewLifecycleOwner) {
                 when (it) {
-                    is GenreEffect.LoadMoreEffect -> {
-                    }
                     is GenreEffect.NavToArtist -> {
                         openArtist.emit(it.genre)
                     }

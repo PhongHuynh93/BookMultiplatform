@@ -17,7 +17,6 @@ import com.wind.book.android.databinding.ListViewBinding
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Book
 import com.wind.book.model.BookName
-import com.wind.book.viewmodel.LoadMoreEffect
 import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.book.BookEffect
 import com.wind.book.viewmodel.book.BookEvent
@@ -92,13 +91,8 @@ class BookFragment : Fragment(R.layout.list_view) {
                 list.setScreen(screen)
                 footerLoadingAdapter.loadState = screen
             }
-            bookEffect.launchAndCollectIn(viewLifecycleOwner) {
+            effect.launchAndCollectIn(viewLifecycleOwner) {
                 when (it) {
-                    is BookEffect.LMEffect -> {
-                        when (it.loadMoreEffect) {
-                            LoadMoreEffect.ScrollToTop -> list.binding.rcv.scrollToPosition(0)
-                        }
-                    }
                     is BookEffect.NavToIAB -> {
                         findNavController().safeNavigate(
                             HomeFragmentDirections.actionHomeFragmentToIABFragment(it.iabNav)

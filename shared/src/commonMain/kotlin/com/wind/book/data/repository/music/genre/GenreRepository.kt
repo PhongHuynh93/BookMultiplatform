@@ -2,12 +2,14 @@ package com.wind.book.data.repository.music.genre
 
 import com.wind.book.data.repository.music.genre.datasource.LocalGenreDataSource
 import com.wind.book.data.repository.music.genre.datasource.RemoteGenreDataSource
+import com.wind.book.model.music.Album
 import com.wind.book.model.music.Artist
 import com.wind.book.model.music.Genre
 
 interface GenreRepository {
     suspend fun getGenreList(index: Int, limit: Int): List<Genre>
     suspend fun getArtistList(genreId: String, index: Int, limit: Int): List<Artist>
+    suspend fun getArtistAlbumList(id: String, index: Int, limit: Int): List<Album>
 }
 
 internal class GenreRepositoryImpl(
@@ -21,5 +23,9 @@ internal class GenreRepositoryImpl(
 
     override suspend fun getArtistList(genreId: String, index: Int, limit: Int): List<Artist> {
         return remoteSource.getArtistList(genreId, index, limit)
+    }
+
+    override suspend fun getArtistAlbumList(id: String, index: Int, limit: Int): List<Album> {
+        return remoteSource.getArtistAlbumList(id, index, limit)
     }
 }
