@@ -1,11 +1,21 @@
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.serialization)
     kotlin(Plugins.kotlinAndroid)
     id(Plugins.kotlinParcel)
     id("org.jetbrains.compose")
     kotlin(Plugins.kapt)
-    id(Plugins.safeArgs)
+    id("com.google.devtools.ksp") version "1.6.10-1.0.4"
+}
+
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
 }
 
 android {
@@ -30,6 +40,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        freeCompilerArgs = listOf(
+            *freeCompilerArgs.toTypedArray(),
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in=kotlinx.coroutines.FlowPreview",
+            "-Xopt-in=kotlin.Experimental",
+            "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
+            "-Xopt-in=com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi",
+        )
+    }
 }
 
 dependencies {
@@ -50,9 +70,15 @@ dependencies {
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.swiperefresh)
     implementation(libs.accompanist.insetsui)
+    implementation(libs.androidX.material)
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     // DI
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    // Nav Host
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.23.1")
+    implementation("io.github.raamcosta.compose-destinations:animations-core:1.3.4-beta")
+    implementation("io.github.raamcosta.compose-destinations:core:1.3.4-beta")
+    ksp("io.github.raamcosta.compose-destinations:ksp:1.3.4-beta")
 }
