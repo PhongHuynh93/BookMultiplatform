@@ -32,6 +32,8 @@ import androidx.compose.ui.unit.sp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.wind.wallup.R
+import com.wind.wallup.destinations.HomeScreenDestination
+import com.wind.wallup.destinations.SplashScreenDestination
 import com.wind.wallup.utils.UNSPLASH_URL
 
 @Destination(
@@ -47,11 +49,11 @@ fun SplashScreen(
         targetValue = if (isStarted) 1.2F else 1F,
         animationSpec = tween(durationMillis = 1500)
     ) {
-//        navigator.navigate(HomeScreenDestination) {
-//            popUpTo(SplashScreenDestination.route) {
-//                inclusive = true
-//            }
-//        }
+        navigator.navigate(HomeScreenDestination) {
+            popUpTo(SplashScreenDestination.route) {
+                inclusive = true
+            }
+        }
     }
     LaunchedEffect(key1 = true, block = { isStarted = true })
     Box(modifier = Modifier.fillMaxSize()) {

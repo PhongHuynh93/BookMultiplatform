@@ -9,6 +9,7 @@ import com.wind.book.viewmodel.music.artist.ArtistViewModel
 import com.wind.book.viewmodel.music.genre.GenreViewModel
 import com.wind.book.viewmodel.podcast.PodcastViewModel
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailViewModel
+import com.wind.book.viewmodel.wallup.home.HomeViewModel
 import org.koin.dsl.module
 
 val viewmodelModule = module {
@@ -20,4 +21,5 @@ val viewmodelModule = module {
     viewModelDefinition { BookPagerViewModel(get()) }
     viewModelDefinition { GenreViewModel(get()) }
     viewModelDefinition { ArtistViewModel(get()) }
+    viewModelDefinition { HomeViewModel(get(), get(), get()) }
 }

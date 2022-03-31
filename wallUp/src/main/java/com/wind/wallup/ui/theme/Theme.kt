@@ -39,3 +39,16 @@ fun WallUpTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
         content = content
     )
 }
+
+// preview not use typography, because it can not render
+@Composable
+fun PreviewAppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    MaterialTheme(
+        colors = if (darkTheme) DarkColorPalette else LightColorPalette,
+        shapes = Shapes,
+        content = content
+    )
+}

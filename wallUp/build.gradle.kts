@@ -47,6 +47,10 @@ android {
             "-Xopt-in=kotlinx.coroutines.FlowPreview",
             "-Xopt-in=kotlin.Experimental",
             "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
+            "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-Xopt-in=androidx.compose.ui.unit.ExperimentalUnitApi",
+            "-Xopt-in=coil.annotation.ExperimentalCoilApi",
             "-Xopt-in=com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi",
         )
     }
@@ -60,6 +64,7 @@ dependencies {
     implementation(compose.material)
     implementation(compose.ui)
     implementation(compose.uiTooling)
+    implementation(compose.uiTooling)
     // DI
     implementation(libs.koin.core)
     // Coroutines
@@ -67,6 +72,7 @@ dependencies {
     // Compose Utils
     implementation(libs.coil.compose)
     implementation(libs.activity.compose)
+    implementation(libs.icon.compose)
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.swiperefresh)
     implementation(libs.accompanist.insetsui)

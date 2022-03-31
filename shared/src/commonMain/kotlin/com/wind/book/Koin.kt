@@ -6,6 +6,7 @@ import com.wind.book.data.repository.book.bookModule
 import com.wind.book.data.repository.music.genre.genreModule
 import com.wind.book.data.repository.podcast.podcastModule
 import com.wind.book.data.repository.podcast_detail.podcastDetailModule
+import com.wind.book.data.repository.wallup.home.homeModule
 import com.wind.book.domain.domainModule
 import com.wind.book.util.ObserveConnectionState
 import com.wind.book.viewmodel.BaseViewModel
@@ -48,7 +49,8 @@ fun initKoin(appModule: Module): KoinApplication {
             podcastModule,
             storyModule,
             podcastDetailModule,
-            genreModule
+            genreModule,
+            homeModule
         )
     }
 
