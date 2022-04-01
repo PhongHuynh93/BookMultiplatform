@@ -1,8 +1,5 @@
 package com.wind.book.model.wallup
 
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
-
 data class UnsplashPhoto(
     val id: String,
     val createdAt: String,
@@ -19,9 +16,7 @@ data class UnsplashPhoto(
     val userDetail: UserDetail,
     val relatedCollections: RelatedCollections,
     val isBookmarked: Boolean = false
-) {
-    val encodedUrl = URLEncoder.encode(smallImage, StandardCharsets.UTF_8.toString())
-}
+)
 
 data class UserDetail(
     val name: String,

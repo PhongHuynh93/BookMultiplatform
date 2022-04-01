@@ -30,7 +30,7 @@ final class GenreObservable: ObservableObject {
         stateCloseable = genreVM.observe(genreVM.state, onChange: {
             self.state = $0 as! LoadingState
         })
-        effectCloseable = genreVM.observe(genreVM.genreEffect, onChange: {
+        effectCloseable = genreVM.observe(genreVM.effect, onChange: {
             self.effect.send($0 as! GenreEffect)
         })
     }

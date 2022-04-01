@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		7100A87727F6F85000E01553 /* WallupHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100A87627F6F85000E01553 /* WallupHomeView.swift */; };
+		7100A87927F6F88600E01553 /* WallupHomeObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100A87827F6F88600E01553 /* WallupHomeObservable.swift */; };
 		7107F843277D543700301B4B /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107F842277D543700301B4B /* ErrorView.swift */; };
 		7107F845277D550E00301B4B /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107F844277D550E00301B4B /* LoadMoreView.swift */; };
 		7107F847277D5DDA00301B4B /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107F846277D5DDA00301B4B /* NoDataView.swift */; };
@@ -21,7 +23,6 @@
 		7160BAAC270073AA003ED014 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7160BAAA27006C8B003ED014 /* Launch Screen.storyboard */; };
 		7173B4F726FF50E700618FA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7173B4F626FF50E700618FA9 /* Assets.xcassets */; };
 		719492B126FE18E2002F1676 /* IABView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B026FE18E2002F1676 /* IABView.swift */; };
-		719492B326FE32E0002F1676 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719492B226FE32E0002F1676 /* LazyView.swift */; };
 		71A013F326F70A590016F5E6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013F226F70A590016F5E6 /* HomeView.swift */; };
 		71A013F926F70BC70016F5E6 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013F826F70BC70016F5E6 /* MovieView.swift */; };
 		71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A013FC26F70BD70016F5E6 /* BookView.swift */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		18DA7756FA6AEA148CE0A49F /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		7100A87627F6F85000E01553 /* WallupHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallupHomeView.swift; sourceTree = "<group>"; };
+		7100A87827F6F88600E01553 /* WallupHomeObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallupHomeObservable.swift; sourceTree = "<group>"; };
 		7107F842277D543700301B4B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		7107F844277D550E00301B4B /* LoadMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		7107F846277D5DDA00301B4B /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
@@ -52,7 +55,6 @@
 		7173B4F626FF50E700618FA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7190B948271B2EA200D25A82 /* Coca.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Coca.entitlements; sourceTree = "<group>"; };
 		719492B026FE18E2002F1676 /* IABView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IABView.swift; sourceTree = "<group>"; };
-		719492B226FE32E0002F1676 /* LazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LazyView.swift; path = ../../../../AnimeListKMM/iosApp/iosApp/util/LazyView.swift; sourceTree = "<group>"; };
 		71A013F226F70A590016F5E6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		71A013F826F70BC70016F5E6 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		71A013FC26F70BD70016F5E6 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,15 @@
 				9540A0A53EE3136265DFA208 /* Pods-Coca.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7100A87527F6F82000E01553 /* wallup */ = {
+			isa = PBXGroup;
+			children = (
+				7100A87627F6F85000E01553 /* WallupHomeView.swift */,
+				7100A87827F6F88600E01553 /* WallupHomeObservable.swift */,
+			);
+			path = wallup;
 			sourceTree = "<group>";
 		};
 		7155D0182718900B0094E238 /* music */ = {
@@ -183,6 +194,7 @@
 		71A013F726F70BB30016F5E6 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7100A87527F6F82000E01553 /* wallup */,
 				7155D0182718900B0094E238 /* music */,
 				71B97FCE26FED63900AE93BE /* widget */,
 				719492AF26FE18CD002F1676 /* iab */,
@@ -209,7 +221,6 @@
 		71FA47AF26FA40CE00F174F3 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				719492B226FE32E0002F1676 /* LazyView.swift */,
 				71FA47B026FA40E300F174F3 /* Constant.swift */,
 			);
 			path = util;
@@ -393,6 +404,7 @@
 				71287505271AD04A00D3B3D9 /* ImageExtension.swift in Sources */,
 				71A013F926F70BC70016F5E6 /* MovieView.swift in Sources */,
 				71514E2826F6ED72009B5C67 /* Koin.swift in Sources */,
+				7100A87927F6F88600E01553 /* WallupHomeObservable.swift in Sources */,
 				7107F845277D550E00301B4B /* LoadMoreView.swift in Sources */,
 				71FA47B126FA40E300F174F3 /* Constant.swift in Sources */,
 				7155D01D2718902C0094E238 /* GenreView.swift in Sources */,
@@ -402,10 +414,10 @@
 				7107F843277D543700301B4B /* ErrorView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				71B97FD126FED65F00AE93BE /* CocaWebView.swift in Sources */,
-				719492B326FE32E0002F1676 /* LazyView.swift in Sources */,
 				7107F847277D5DDA00301B4B /* NoDataView.swift in Sources */,
 				71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */,
 				719492B126FE18E2002F1676 /* IABView.swift in Sources */,
+				7100A87727F6F85000E01553 /* WallupHomeView.swift in Sources */,
 				71A0140626F72F860016F5E6 /* BookObservable.swift in Sources */,
 				714C9970277C61F100E6B45B /* LoadingView.swift in Sources */,
 				7155D022271890730094E238 /* GenreObservable.swift in Sources */,

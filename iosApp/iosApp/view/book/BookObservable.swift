@@ -36,7 +36,7 @@ final class BookObservable: ObservableObject {
         stateCloseable = bookVM.observe(bookVM.state, onChange: {
             self.state = $0 as! LoadingState
         })
-        effectCloseable = bookVM.observe(bookVM.bookEffect, onChange: {
+        effectCloseable = bookVM.observe(bookVM.effect, onChange: {
             self.effect.send($0 as! BookEffect)
         })
     }

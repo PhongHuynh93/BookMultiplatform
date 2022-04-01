@@ -25,7 +25,7 @@ struct LoadMoreView: View {
         )
       } else if !isEndPage {
         LoadingView {
-          loadMoreEvent.loadMore(isRefresh: false)
+          loadMoreEvent.loadMore()
         }
       }
     }
