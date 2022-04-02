@@ -23,7 +23,7 @@ class GenreViewModel(
     override val event = this as GenreEvent
 
     init {
-        loadMore()
+        loadData()
     }
 
     override fun onClickGenre(genre: Genre) {

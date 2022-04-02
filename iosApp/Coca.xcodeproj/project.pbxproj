@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		7100A87727F6F85000E01553 /* WallupHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100A87627F6F85000E01553 /* WallupHomeView.swift */; };
 		7100A87927F6F88600E01553 /* WallupHomeObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100A87827F6F88600E01553 /* WallupHomeObservable.swift */; };
 		7107F843277D543700301B4B /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107F842277D543700301B4B /* ErrorView.swift */; };
 		7107F845277D550E00301B4B /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107F844277D550E00301B4B /* LoadMoreView.swift */; };
@@ -39,7 +38,6 @@
 /* Begin PBXFileReference section */
 		18DA7756FA6AEA148CE0A49F /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		7100A87627F6F85000E01553 /* WallupHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallupHomeView.swift; sourceTree = "<group>"; };
 		7100A87827F6F88600E01553 /* WallupHomeObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallupHomeObservable.swift; sourceTree = "<group>"; };
 		7107F842277D543700301B4B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		7107F844277D550E00301B4B /* LoadMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 		7100A87527F6F82000E01553 /* wallup */ = {
 			isa = PBXGroup;
 			children = (
-				7100A87627F6F85000E01553 /* WallupHomeView.swift */,
 				7100A87827F6F88600E01553 /* WallupHomeObservable.swift */,
 			);
 			path = wallup;
@@ -417,7 +414,6 @@
 				7107F847277D5DDA00301B4B /* NoDataView.swift in Sources */,
 				71A013FD26F70BD70016F5E6 /* BookView.swift in Sources */,
 				719492B126FE18E2002F1676 /* IABView.swift in Sources */,
-				7100A87727F6F85000E01553 /* WallupHomeView.swift in Sources */,
 				71A0140626F72F860016F5E6 /* BookObservable.swift in Sources */,
 				714C9970277C61F100E6B45B /* LoadingView.swift in Sources */,
 				7155D022271890730094E238 /* GenreObservable.swift in Sources */,

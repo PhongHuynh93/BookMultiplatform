@@ -36,7 +36,7 @@ struct ArtistView: View {
       case let error as LoadingScreen.Error:
         ErrorView(
           errorMessage: error.errorMessage,
-          loadMoreEvent: observable.event
+          loadingEvent: observable.event
         )
       case let data as LoadingScreenData<Artist>:
         ScrollView {

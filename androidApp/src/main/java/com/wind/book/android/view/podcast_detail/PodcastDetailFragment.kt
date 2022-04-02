@@ -75,7 +75,7 @@ class PodcastDetailFragment : Fragment(com.example.common_ui_view.R.layout.toolb
                 adapter = concatAdapter
                 addItemDecoration(PodcastItemDecoration(context))
                 handleLoadMore {
-                    event.loadMore(it)
+                    event.loadData(it)
                 }
                 val toolbarElevation =
                     resources.getDimension(com.example.common_ui_view.R.dimen.toolbar_elevation)

@@ -25,7 +25,7 @@ class PodcastViewModel(private val getPodcastUseCase: GetPodcastUseCase) :
     override var pageSize: Int = 1
 
     init {
-        loadMore()
+        loadData()
     }
 
     override suspend fun apiCall(currentPage: Int, pageSize: Int, isRefresh: Boolean) =

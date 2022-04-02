@@ -65,7 +65,7 @@ class BookFragment : Fragment(R.layout.list_view) {
                 adapter = concatAdapter
                 addItemDecoration(BookItemDecoration(requireContext()))
                 handleLoadMore {
-                    event.loadMore(it)
+                    event.loadData(it)
                 }
             }
             swipeRefresh.apply {

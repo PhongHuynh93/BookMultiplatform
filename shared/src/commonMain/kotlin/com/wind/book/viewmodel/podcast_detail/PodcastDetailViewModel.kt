@@ -51,7 +51,7 @@ class PodcastDetailViewModel(
 
     override fun setArgs(podcast: Podcast) {
         this.podcast = podcast
-        loadMore()
+        loadData()
     }
 
     override fun onShare(podcast: Podcast) {

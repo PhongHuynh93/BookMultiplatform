@@ -58,11 +58,8 @@ fun MutableStateFlow<LoadingState>.update(
     )
 }
 
-interface LoadMoreEvent : BaseEvent {
-    fun loadMore()
-    fun retry()
-    fun refresh()
-    fun loadMore(indexOfItem: Int)
+interface LoadMoreEvent : LoadingEvent {
+    fun loadData(indexOfItem: Int)
 }
 
 private val TAG = LoadMoreVM::class.simpleName
@@ -131,7 +128,7 @@ abstract class LoadMoreVM<T : Identifiable, E : BaseEffect> : BaseMVIViewModel()
         super.onCleared()
     }
 
-    override fun loadMore() {
+    override fun loadData() {
         loadMore(isRefresh = false)
     }
 
@@ -212,7 +209,10 @@ abstract class LoadMoreVM<T : Identifiable, E : BaseEffect> : BaseMVIViewModel()
         loadMore(isRefresh = true)
     }
 
-    override fun loadMore(indexOfItem: Int) {
+    /**
+     * Calculate time to trigger load more
+     */
+    override fun loadData(indexOfItem: Int) {
         val screen = _state.value.screen
         if (screen is LoadingScreen.Data<*>) {
             val list = screen.data

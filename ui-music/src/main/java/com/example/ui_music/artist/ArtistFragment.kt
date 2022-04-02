@@ -64,7 +64,7 @@ class ArtistFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list
                     )
                 )
                 handleLoadMore {
-                    event.loadMore(it)
+                    event.loadData(it)
                 }
             }
             swipeRefresh.apply {

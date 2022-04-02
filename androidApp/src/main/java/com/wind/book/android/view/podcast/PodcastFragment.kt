@@ -65,7 +65,7 @@ class PodcastFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_lis
                 adapter = concatAdapter
                 addItemDecoration(PodcastDecoration(context, spanCount))
                 handleLoadMore {
-                    event.loadMore(it)
+                    event.loadData(it)
                 }
             }
             swipeRefresh.apply {

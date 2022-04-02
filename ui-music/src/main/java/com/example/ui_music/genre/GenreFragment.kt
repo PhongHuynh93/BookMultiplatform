@@ -77,7 +77,7 @@ class GenreFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_
                     )
                 )
                 handleLoadMore {
-                    event.loadMore(it)
+                    event.loadData(it)
                 }
             }
             swipeRefresh.apply {
