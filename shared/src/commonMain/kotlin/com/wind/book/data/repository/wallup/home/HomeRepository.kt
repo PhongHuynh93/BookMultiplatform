@@ -1,13 +1,13 @@
 package com.wind.book.data.repository.wallup.home
 
 import com.wind.book.data.repository.wallup.home.datasource.RemoteHomeDataSource
-import com.wind.book.model.wallup.Category
 import com.wind.book.model.wallup.ColorItem
 import com.wind.book.model.wallup.UnsplashPhoto
+import com.wind.book.model.wallup.WallupCategory
 
 interface HomeRepository {
     suspend fun getColorList(): List<ColorItem>
-    suspend fun getCategoryList(): List<Category>
+    suspend fun getCategoryList(): List<WallupCategory>
     suspend fun getRandomPhotos(limit: Int): List<UnsplashPhoto>
 }
 
@@ -45,8 +45,8 @@ internal class HomeRepositoryImpl(
         )
     }
 
-    override suspend fun getCategoryList(): List<Category> {
-        return Category.values().toList()
+    override suspend fun getCategoryList(): List<WallupCategory> {
+        return WallupCategory.values().toList()
     }
 
     override suspend fun getRandomPhotos(limit: Int): List<UnsplashPhoto> {
