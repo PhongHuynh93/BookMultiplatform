@@ -13,19 +13,17 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.wind.book.model.wallup.Category
+import com.wind.book.model.wallup.WallupCategory
 import com.wind.wallup.extensions.gridItems
 import com.wind.wallup.ui.SectionTitle
 
 fun LazyListScope.categoriesSection(
-    categories: List<Category>,
-    onClickCategory: (Category) -> Unit
+    wallupCategories: List<WallupCategory>,
+    onClickCategory: (WallupCategory) -> Unit
 ) {
     item(key = "categories_section") {
         SectionTitle(
@@ -35,7 +33,7 @@ fun LazyListScope.categoriesSection(
         )
     }
     gridItems(
-        data = categories,
+        data = wallupCategories,
         columnCount = 2,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(horizontal = 16.dp)
@@ -46,7 +44,7 @@ fun LazyListScope.categoriesSection(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun SingleCategoryItem(item: Category, onClickCategory: (Category) -> Unit) {
+private fun SingleCategoryItem(item: WallupCategory, onClickCategory: (WallupCategory) -> Unit) {
     Surface(
         onClick = { onClickCategory(item) },
         modifier = Modifier

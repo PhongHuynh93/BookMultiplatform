@@ -7,9 +7,9 @@ import com.wind.book.domain.usecase.wallup.home.GetColorListUseCase
 import com.wind.book.domain.usecase.wallup.home.GetUnsplashPhotoListParam
 import com.wind.book.domain.usecase.wallup.home.GetUnsplashPhotoListUseCase
 import com.wind.book.log
-import com.wind.book.model.wallup.Category
 import com.wind.book.model.wallup.ColorItem
 import com.wind.book.model.wallup.UnsplashPhoto
+import com.wind.book.model.wallup.WallupCategory
 import com.wind.book.viewmodel.BaseEffect
 import com.wind.book.viewmodel.LoadingEvent
 import com.wind.book.viewmodel.LoadingVM
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 interface HomeEvent : LoadingEvent {
     fun onClickPhoto(photo: UnsplashPhoto)
     fun onClickColor(colorItem: ColorItem)
-    fun onClickCategory(category: Category)
+    fun onClickCategory(wallupCategory: WallupCategory)
     fun onShake()
 }
 
@@ -45,7 +45,7 @@ class HomeViewModel(
     override fun onClickColor(colorItem: ColorItem) {
     }
 
-    override fun onClickCategory(category: Category) {
+    override fun onClickCategory(wallupCategory: WallupCategory) {
     }
 
     override fun onShake() {

@@ -35,10 +35,10 @@ import com.wind.wallup.ui.SectionTitle
 import com.wind.wallup.ui.theme.PreviewAppTheme
 
 fun LazyListScope.suggestedSection(
-    data: List<UnsplashPhoto>?,
+    data: List<UnsplashPhoto>,
     onClickPhoto: (UnsplashPhoto) -> Unit
 ) {
-    if (data != null) item(key = "suggested_section") {
+    item(key = "suggested_section") {
         SuggestedSection(data, onClickPhoto)
     }
 }

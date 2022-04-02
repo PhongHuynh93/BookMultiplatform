@@ -67,7 +67,7 @@ fun HomeScreen(
                     colorSection((data[0] as Home.ColorList).colorList) {
                         // TODO: on click color
                     }
-                    categoriesSection((data[1] as Home.CategoryList).categoryList) {
+                    categoriesSection((data[1] as Home.CategoryList).wallupCategoryList) {
                         // TODO: on click category
                     }
                 }

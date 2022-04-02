@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7100A87927F6F88600E01553 /* WallupHomeObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100A87827F6F88600E01553 /* WallupHomeObservable.swift */; };
+		7106219327F7E47E00B3AF51 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7106219227F7E47E00B3AF51 /* Color.swift */; };
 		7107F843277D543700301B4B /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107F842277D543700301B4B /* ErrorView.swift */; };
 		7107F845277D550E00301B4B /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107F844277D550E00301B4B /* LoadMoreView.swift */; };
 		7107F847277D5DDA00301B4B /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107F846277D5DDA00301B4B /* NoDataView.swift */; };
@@ -39,6 +40,7 @@
 		18DA7756FA6AEA148CE0A49F /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7100A87827F6F88600E01553 /* WallupHomeObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallupHomeObservable.swift; sourceTree = "<group>"; };
+		7106219227F7E47E00B3AF51 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Color.swift; path = iosApp/view/wallup/Color.swift; sourceTree = SOURCE_ROOT; };
 		7107F842277D543700301B4B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		7107F844277D550E00301B4B /* LoadMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		7107F846277D5DDA00301B4B /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				71287504271AD04A00D3B3D9 /* ImageExtension.swift */,
+				7106219227F7E47E00B3AF51 /* Color.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				71514E2826F6ED72009B5C67 /* Koin.swift in Sources */,
 				7100A87927F6F88600E01553 /* WallupHomeObservable.swift in Sources */,
 				7107F845277D550E00301B4B /* LoadMoreView.swift in Sources */,
+				7106219327F7E47E00B3AF51 /* Color.swift in Sources */,
 				71FA47B126FA40E300F174F3 /* Constant.swift in Sources */,
 				7155D01D2718902C0094E238 /* GenreView.swift in Sources */,
 				71A013F326F70A590016F5E6 /* HomeView.swift in Sources */,

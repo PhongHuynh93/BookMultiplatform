@@ -1,6 +1,6 @@
 package com.wind.book.model.wallup
 
-enum class Category(val title: String) {
+enum class WallupCategory(val title: String) {
     Abstract(title = "Abstract"),
     Animals(title = "Animals"),
     Anime(title = "Anime"),
