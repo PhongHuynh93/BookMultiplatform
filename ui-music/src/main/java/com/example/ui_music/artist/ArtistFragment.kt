@@ -14,10 +14,8 @@ import com.example.common_ui_view.extension.spaceNormal
 import com.example.common_ui_view.util.GridItemDecoration
 import com.example.common_ui_view.util.tryCast
 import com.example.common_ui_view.util.viewBinding
-import com.example.ui_music.R
 import com.wind.book.model.music.Artist
 import com.wind.book.viewmodel.LoadingScreen
-import com.wind.book.viewmodel.music.artist.ArtistEffect
 import com.wind.book.viewmodel.music.artist.ArtistEvent
 import com.wind.book.viewmodel.music.artist.ArtistViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -66,7 +64,7 @@ class ArtistFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list
                     )
                 )
                 handleLoadMore {
-                    event.loadMore(it)
+                    event.loadData(it)
                 }
             }
             swipeRefresh.apply {
@@ -91,12 +89,6 @@ class ArtistFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list
                 }
                 list.setScreen(screen)
                 footerLoadingAdapter.loadState = screen
-            }
-            artistEffect.launchAndCollectIn(viewLifecycleOwner) {
-                when (it) {
-                    is ArtistEffect.LoadMoreEffect -> {
-                    }
-                }
             }
         }
     }

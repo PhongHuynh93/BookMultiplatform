@@ -28,7 +28,7 @@ struct GenreView: View {
       case let error as LoadingScreen.Error:
         ErrorView(
           errorMessage: error.errorMessage,
-          loadMoreEvent: observable.event
+          loadingEvent: observable.event
         )
       case let data as LoadingScreenData<Genre>:
         ScrollView {
@@ -60,17 +60,6 @@ struct GenreView: View {
 
   private func onEffect(effect: GenreEffect) {
     KoinKt.log.d(message: { "Effect \(effect)" })
-    switch effect {
-    case let lmEffect as GenreEffect.LoadMoreEffect:
-      switch lmEffect.loadMoreEffect {
-      case is LoadMoreEffect.ScrollToTop:
-        KoinKt.log.d(message: { "Scroll to top" })
-      default:
-        KoinKt.log.d(message: { "Unknown effect" })
-      }
-    default:
-      KoinKt.log.d(message: { "Unknown effect" })
-    }
   }
 }
 

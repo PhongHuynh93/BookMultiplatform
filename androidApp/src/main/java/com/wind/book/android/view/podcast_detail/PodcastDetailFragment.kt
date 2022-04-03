@@ -17,10 +17,8 @@ import com.example.common_ui_view.extension.handleLoadMore
 import com.example.common_ui_view.extension.launchAndCollectIn
 import com.example.common_ui_view.util.viewBinding
 import com.google.android.material.appbar.AppBarLayout
-import com.wind.book.android.R
 import com.wind.book.model.Episode
 import com.wind.book.model.Podcast
-import com.wind.book.viewmodel.LoadMoreEffect
 import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailEffect
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailEvent
@@ -77,9 +75,10 @@ class PodcastDetailFragment : Fragment(com.example.common_ui_view.R.layout.toolb
                 adapter = concatAdapter
                 addItemDecoration(PodcastItemDecoration(context))
                 handleLoadMore {
-                    event.loadMore(it)
+                    event.loadData(it)
                 }
-                val toolbarElevation = resources.getDimension(com.example.common_ui_view.R.dimen.toolbar_elevation)
+                val toolbarElevation =
+                    resources.getDimension(com.example.common_ui_view.R.dimen.toolbar_elevation)
                 addOnScrollListener(object : RecyclerView.OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)
@@ -119,13 +118,8 @@ class PodcastDetailFragment : Fragment(com.example.common_ui_view.R.layout.toolb
                 list.setScreen(screen)
                 loadingAdapter.loadState = screen
             }
-            podcastDetailEffect.launchAndCollectIn(viewLifecycleOwner) {
+            effect.launchAndCollectIn(viewLifecycleOwner) {
                 when (it) {
-                    is PodcastDetailEffect.LMEffect -> {
-                        when (it.loadMoreEffect) {
-                            LoadMoreEffect.ScrollToTop -> list.binding.rcv.scrollToPosition(0)
-                        }
-                    }
                     is PodcastDetailEffect.OpenLink -> {
                         startActivity(
                             Intent(

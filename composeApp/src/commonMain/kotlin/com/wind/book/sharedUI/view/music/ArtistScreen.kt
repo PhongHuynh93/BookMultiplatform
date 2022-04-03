@@ -78,7 +78,7 @@ data class ArtistScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentPaddingValue = contentPaddingValue,
                     onLoadMore = {
-                        vm.loadMore(it)
+                        vm.loadData(it)
                     }
                 )
             }

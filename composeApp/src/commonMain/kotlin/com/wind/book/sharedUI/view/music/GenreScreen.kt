@@ -79,7 +79,7 @@ data class GenreScreen(private val onClickGenre: (Genre) -> Unit) : Screen, Koin
                     contentPaddingValue = contentPaddingValue,
                     onClick = onClickGenre,
                     onLoadMore = {
-                        vm.loadMore(it)
+                        vm.loadData(it)
                     }
                 )
             }

@@ -25,7 +25,7 @@ struct BookView: View {
             case let error as LoadingScreen.Error:
                 Text(error.errorMessage)
             case let data as LoadingScreenData<Book>:
-                NavigationLink(destination: LazyView(IABView(iabNav: self.$iabNav)), isActive: self.$navIAB) {}
+                NavigationLink(destination: IABView(iabNav: self.$iabNav), isActive: self.$navIAB) {}
                 List(data.data as! [Book], id: \.id) { book in
                     HStack(alignment: .top) {
                         KFImage(URL(string: book.thumb.url))
@@ -67,13 +67,6 @@ struct BookView: View {
     private func onEffect(effect: BookEffect) {
         KoinKt.log.d(message: { "Effect \(effect)" })
         switch effect {
-        case let lmEffect as BookEffect.LMEffect:
-            switch lmEffect.loadMoreEffect {
-            case is LoadMoreEffect.ScrollToTop:
-                KoinKt.log.d(message: { "Scroll to top" })
-            default:
-                KoinKt.log.d(message: { "Unknown effect" })
-            }
         case let nav as BookEffect.NavToIAB:
             iabNav = nav.iabNav
             navIAB = true

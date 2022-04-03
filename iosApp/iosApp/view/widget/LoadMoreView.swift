@@ -21,11 +21,11 @@ struct LoadMoreView: View {
       if let message = errorMessage {
         ErrorView(
           errorMessage: message,
-          loadMoreEvent: loadMoreEvent
+          loadingEvent: loadMoreEvent
         )
       } else if !isEndPage {
         LoadingView {
-          loadMoreEvent.loadMore(isRefresh: false)
+          loadMoreEvent.loadData()
         }
       }
     }
