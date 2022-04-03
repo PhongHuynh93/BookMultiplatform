@@ -6,9 +6,6 @@ import com.wind.book.model.music.Genre
 import com.wind.book.viewmodel.BaseEffect
 import com.wind.book.viewmodel.LoadMoreEvent
 import com.wind.book.viewmodel.LoadMoreVM
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 interface GenreEvent : LoadMoreEvent {
@@ -16,31 +13,22 @@ interface GenreEvent : LoadMoreEvent {
 }
 
 sealed class GenreEffect : BaseEffect() {
-    class LoadMoreEffect(val loadMoreEffect: com.wind.book.viewmodel.LoadMoreEffect) : GenreEffect()
     class NavToArtist(val genre: Genre) : GenreEffect()
 }
 
 class GenreViewModel(
     private val getGenreListUseCase: GetGenreListUseCase
-) : LoadMoreVM<Genre>(), GenreEvent {
+) : LoadMoreVM<Genre, GenreEffect>(), GenreEvent {
 
-    private val _genreEffect = MutableSharedFlow<GenreEffect>()
-    val genreEffect = _genreEffect.asSharedFlow()
     override val event = this as GenreEvent
 
     init {
-        loadMore()
-        // capture the base effect and emit again
-        clientScope.launch {
-            effect.collectLatest {
-                _genreEffect.emit(GenreEffect.LoadMoreEffect(it))
-            }
-        }
+        loadData()
     }
 
     override fun onClickGenre(genre: Genre) {
         clientScope.launch {
-            _genreEffect.emit(GenreEffect.NavToArtist(genre))
+            _effect.emit(GenreEffect.NavToArtist(genre))
         }
     }
 

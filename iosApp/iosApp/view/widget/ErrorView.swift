@@ -11,13 +11,13 @@ import shared
 
 struct ErrorView: View {
   let errorMessage: String
-  let loadMoreEvent: LoadMoreEvent
+  let loadingEvent: LoadingEvent
 
   var body: some View {
     VStack {
       Text(errorMessage)
       Button("Retry") {
-        loadMoreEvent.retry()
+        loadingEvent.retry()
       }
     }
   }

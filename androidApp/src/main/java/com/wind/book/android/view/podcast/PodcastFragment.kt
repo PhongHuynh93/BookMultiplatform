@@ -15,7 +15,6 @@ import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Podcast
-import com.wind.book.viewmodel.LoadMoreEffect
 import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.podcast.PodcastEffect
 import com.wind.book.viewmodel.podcast.PodcastEvent
@@ -66,7 +65,7 @@ class PodcastFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_lis
                 adapter = concatAdapter
                 addItemDecoration(PodcastDecoration(context, spanCount))
                 handleLoadMore {
-                    event.loadMore(it)
+                    event.loadData(it)
                 }
             }
             swipeRefresh.apply {
@@ -94,13 +93,8 @@ class PodcastFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_lis
                 list.setScreen(screen)
                 footerLoadingAdapter.loadState = screen
             }
-            podcastEffect.launchAndCollectIn(viewLifecycleOwner) {
+            effect.launchAndCollectIn(viewLifecycleOwner) {
                 when (it) {
-                    is PodcastEffect.LMEffect -> {
-                        when (it.loadMoreEffect) {
-                            LoadMoreEffect.ScrollToTop -> list.binding.rcv.scrollToPosition(0)
-                        }
-                    }
                     is PodcastEffect.NavToDetail -> {
                         findNavController().safeNavigate(
                             HomeFragmentDirections.actionHomeFragmentToPodcastDetailFragment(

@@ -48,6 +48,10 @@ extension Koin_coreKoin {
         return koin.getDependency(objCClass: ArtistViewModel.self) as! ArtistViewModel
     }
 
+  func get() -> HomeViewModel {
+      return koin.getDependency(objCClass: HomeViewModel.self) as! HomeViewModel
+  }
+
     // Observable
     func get() -> BookObservable {
         return BookObservable(viewModel: get())
@@ -64,4 +68,8 @@ extension Koin_coreKoin {
     func get() -> ArtistObservable {
         return ArtistObservable(viewModel: get())
     }
+
+  func get() -> WallupObservable {
+      return WallupObservable(viewModel: get())
+  }
 }

@@ -34,7 +34,7 @@ final class ArtistObservable: ObservableObject {
         stateCloseable = artistVM.observe(artistVM.state, onChange: {
             self.state = $0 as! LoadingState
         })
-        effectCloseable = artistVM.observe(artistVM.artistEffect, onChange: {
+        effectCloseable = artistVM.observe(artistVM.effect, onChange: {
             self.effect.send($0 as! ArtistEffect)
         })
     }
