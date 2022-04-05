@@ -4,18 +4,7 @@ plugins {
     id(Plugins.kotlinParcel)
     id("org.jetbrains.compose")
     kotlin(Plugins.kapt)
-    id("com.google.devtools.ksp") version "1.6.10-1.0.4"
-}
-
-kotlin {
-    sourceSets {
-        debug {
-            kotlin.srcDir("build/generated/ksp/debug/kotlin")
-        }
-        release {
-            kotlin.srcDir("build/generated/ksp/release/kotlin")
-        }
-    }
+    id("kotlinx-serialization")
 }
 
 android {
@@ -37,12 +26,13 @@ android {
         compose = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
         freeCompilerArgs = listOf(
             *freeCompilerArgs.toTypedArray(),
+            "-opt-in=kotlin.RequiresOptIn",
             "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-opt-in=kotlinx.coroutines.FlowPreview",
             "-opt-in=kotlin.Experimental",
@@ -51,7 +41,7 @@ android {
             "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
             "-opt-in=androidx.compose.ui.unit.ExperimentalUnitApi",
             "-opt-in=coil.annotation.ExperimentalCoilApi",
-            "-opt-in=com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi",
+            "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi",
         )
     }
 }
@@ -76,15 +66,14 @@ dependencies {
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.swiperefresh)
     implementation(libs.accompanist.insetsui)
+    implementation(libs.accompanist.pager.pager)
+    implementation(libs.accompanist.pager.indicators)
     implementation(libs.androidX.material)
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     // DI
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-    // Nav Host
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.23.1")
-    implementation("io.github.raamcosta.compose-destinations:animations-core:1.3.4-beta")
-    implementation("io.github.raamcosta.compose-destinations:core:1.3.4-beta")
-    ksp("io.github.raamcosta.compose-destinations:ksp:1.3.4-beta")
+    // other
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 }
