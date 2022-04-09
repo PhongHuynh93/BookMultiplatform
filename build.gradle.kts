@@ -48,14 +48,11 @@ subprojects {
             // Treat all Kotlin warnings as errors
             allWarningsAsErrors = true
 
-            // Set JVM target to 1.8
-            jvmTarget = "1.8"
-
             freeCompilerArgs = freeCompilerArgs + listOf(
-                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xopt-in=kotlinx.coroutines.FlowPreview",
-                "-Xopt-in=kotlin.Experimental",
-                "-Xopt-in=kotlin.RequiresOptIn"
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-opt-in=kotlinx.coroutines.FlowPreview",
+                "-opt-in=kotlin.Experimental",
+                "-opt-in=kotlin.RequiresOptIn"
             )
         }
     }
