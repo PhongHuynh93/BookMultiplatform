@@ -11,8 +11,11 @@ struct iOSApp: App {
   var body: some Scene {
     WindowGroup {
 //            ContentView()
-      TouchDownHomeView()
-        .environmentObject(Shop())
+//      TouchDownHomeView()
+//        .environmentObject(Shop())
+      RepositoryListView(
+        viewModel: RepositoryListViewModel(mainScheduler: DispatchQueue.main)
+      )
     }
   }
 }
