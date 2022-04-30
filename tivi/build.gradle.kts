@@ -54,6 +54,7 @@ dependencies {
     implementation(projects.shared)
     implementation(projects.base)
     implementation(projects.tiviUiSettings)
+    implementation(projects.baseAndroid)
     // Compose UI
     implementation(compose.runtime)
     implementation(compose.foundation)

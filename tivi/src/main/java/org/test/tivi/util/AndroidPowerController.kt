@@ -15,6 +15,7 @@ import org.test.base.settings.TiviPreferences
 import org.test.base.util.PowerController
 import org.test.base.util.SaveData
 import org.test.base.util.SaveDataReason
+import org.test.base_android.util.flowBroadcasts
 
 internal class AndroidPowerController constructor(
     private val context: Context,
