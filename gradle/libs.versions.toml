@@ -61,8 +61,11 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
 ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 
-#compose
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+coil-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
+
+#compose
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 icon-compose = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icon" }
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
