@@ -31,5 +31,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.base)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidX.core)
 }
