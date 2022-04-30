@@ -33,6 +33,7 @@ android {
 dependencies {
     implementation(projects.tmdb)
     implementation(projects.shared)
+    implementation(projects.base)
 
     implementation(libs.bundles.androidX)
     api(libs.coil.coil)

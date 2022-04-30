@@ -16,13 +16,13 @@ nav = "2.4.1"
 koin = "3.1.5"
 voyager = "1.0.0-beta14"
 kotlinx-coroutines = "1.6.0"
-coil = "1.4.0"
+coil = "2.0.0-alpha06"
 activity-compose = "1.4.0"
 work-runtime-ktx = "2.7.1"
 accompanist = "0.23.1"
 ktor = "2.0.0-beta-1"
 material-icon = "1.1.0"
-okhttp = "4.9.3"
+threetenbp = "1.6.0"
 
 [libraries]
 androidX-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "supportLibrary" }
@@ -82,8 +82,7 @@ test-compose-ui = { module = "androidx.compose.ui:ui-test", version.ref = "plugi
 test-compose-ui-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "plugin-multiplatform-compose" }
 test-compose-ui-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "plugin-multiplatform-compose" }
 
-okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
-okhttp-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+tmdbJava = "com.uwetrottmann.tmdb2:tmdb-java:2.7.0"
 
 [bundles]
 androidX = [

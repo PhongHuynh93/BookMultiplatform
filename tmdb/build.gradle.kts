@@ -31,5 +31,10 @@ android {
 }
 
 dependencies {
-    implementation(libs.okhttp.okhttp)
+    implementation(libs.kotlinx.coroutines.core)
+
+    api(libs.tmdbJava) {
+        exclude(group = "org.threeten", module = "threetenbp")
+    }
+    api("org.threeten:threetenbp:${libs.versions.threetenbp.get()}:no-tzdb")
 }
