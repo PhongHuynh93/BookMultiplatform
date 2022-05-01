@@ -39,10 +39,10 @@ import com.wind.book.sharedUI.normalSpace
 import com.wind.book.sharedUI.util.tryCast
 import com.wind.book.sharedUI.view.CocaTopAppBar
 import com.wind.book.sharedUI.view.LoadingItem
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.LoadingState
 import com.wind.book.viewmodel.music.genre.GenreViewModel
 import org.koin.core.component.KoinComponent
+import org.test.common_model.LoadingScreen
 
 data class GenreScreen(private val onClickGenre: (Genre) -> Unit) : Screen, KoinComponent {
 

@@ -49,8 +49,6 @@ subprojects {
             allWarningsAsErrors = true
 
             freeCompilerArgs = freeCompilerArgs + listOf(
-                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-opt-in=kotlinx.coroutines.FlowPreview",
                 "-opt-in=kotlin.Experimental",
                 "-opt-in=kotlin.RequiresOptIn"
             )

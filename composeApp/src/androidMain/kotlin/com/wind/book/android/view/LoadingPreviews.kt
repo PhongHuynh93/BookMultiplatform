@@ -6,8 +6,8 @@ import com.wind.book.data.util.FakeData
 import com.wind.book.sharedUI.PreviewAppTheme
 import com.wind.book.sharedUI.view.LoadingItem
 import com.wind.book.sharedUI.view.music.GenreFeed
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.LoadingState
+import org.test.common_model.LoadingScreen
 
 @Preview
 @Composable

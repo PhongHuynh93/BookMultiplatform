@@ -9,8 +9,8 @@ import com.wind.book.sharedUI.view.music.ArtistFeed
 import com.wind.book.sharedUI.view.music.ArtistItem
 import com.wind.book.sharedUI.view.music.GenreFeed
 import com.wind.book.sharedUI.view.music.GenreItem
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.LoadingState
+import org.test.common_model.LoadingScreen
 
 @Preview
 @Composable

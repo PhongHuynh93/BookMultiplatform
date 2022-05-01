@@ -17,11 +17,11 @@ import com.wind.book.android.databinding.ListViewBinding
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Book
 import com.wind.book.model.BookName
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.book.BookEffect
 import com.wind.book.viewmodel.book.BookEvent
 import com.wind.book.viewmodel.book.BookViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.test.common_model.LoadingScreen
 
 class BookFragment : Fragment(R.layout.list_view) {
     companion object {

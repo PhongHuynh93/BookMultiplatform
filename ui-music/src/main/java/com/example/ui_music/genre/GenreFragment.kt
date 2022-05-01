@@ -11,16 +11,15 @@ import com.example.common_ui_view.extension.handleLoadMore
 import com.example.common_ui_view.extension.launchAndCollectIn
 import com.example.common_ui_view.extension.spaceNormal
 import com.example.common_ui_view.util.GridItemDecoration
-import com.example.common_ui_view.util.openArtist
 import com.example.common_ui_view.util.tryCast
 import com.example.common_ui_view.util.viewBinding
 import com.example.ui_music.R
 import com.wind.book.model.music.Genre
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.music.genre.GenreEffect
 import com.wind.book.viewmodel.music.genre.GenreEvent
 import com.wind.book.viewmodel.music.genre.GenreViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.test.common_model.LoadingScreen
 
 private const val SPAN_COUNT = 2
 
@@ -106,7 +105,7 @@ class GenreFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_
             effect.launchAndCollectIn(viewLifecycleOwner) {
                 when (it) {
                     is GenreEffect.NavToArtist -> {
-                        openArtist.emit(it.genre)
+//                        openArtist.emit(it.genre)
                     }
                 }
             }

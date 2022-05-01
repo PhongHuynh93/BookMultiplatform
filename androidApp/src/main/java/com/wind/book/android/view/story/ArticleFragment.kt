@@ -13,10 +13,10 @@ import com.wind.book.android.R
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Article
 import com.wind.book.viewmodel.LoadingEvent
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.home.StoryViewModel
 import com.wind.book.viewmodel.model.IABNav
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.test.common_model.LoadingScreen
 
 class ArticleFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val vm: StoryViewModel by viewModel()

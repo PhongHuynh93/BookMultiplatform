@@ -15,11 +15,11 @@ import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
 import com.wind.book.android.view.home.HomeFragmentDirections
 import com.wind.book.model.Podcast
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.podcast.PodcastEffect
 import com.wind.book.viewmodel.podcast.PodcastEvent
 import com.wind.book.viewmodel.podcast.PodcastViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.test.common_model.LoadingScreen
 
 class PodcastFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val vm: PodcastViewModel by viewModel()

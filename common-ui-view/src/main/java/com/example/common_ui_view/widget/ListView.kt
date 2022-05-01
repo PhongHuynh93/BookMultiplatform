@@ -2,6 +2,7 @@ package com.example.common_ui_view.widget
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.content.res.use
@@ -12,8 +13,7 @@ import com.example.common_ui_view.binding.defaultVerList
 import com.example.common_ui_view.databinding.ListBinding
 import com.example.common_ui_view.extension.getColorAttr
 import com.example.common_ui_view.extension.inflater
-import com.wind.book.log
-import com.wind.book.viewmodel.LoadingScreen
+import org.test.common_model.LoadingScreen
 
 private val TAG = ListView::class.simpleName
 
@@ -50,7 +50,7 @@ class ListView @JvmOverloads constructor(
     }
 
     fun setScreen(screen: LoadingScreen) {
-        log.e { "$TAG screenxxx $screen" }
+        Log.e(TAG, "screenxxx $screen")
         var isListEmpty = false
         var isLoading = false
         var isError = false

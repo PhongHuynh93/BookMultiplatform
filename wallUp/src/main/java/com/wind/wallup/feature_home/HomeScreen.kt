@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.wind.book.log
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.model.wallup.Home
 import com.wind.book.viewmodel.wallup.home.HomeEffect
 import com.wind.book.viewmodel.wallup.home.HomeViewModel
@@ -26,6 +25,7 @@ import com.wind.wallup.utils.ShakeManager
 import com.wind.wallup.utils.tryCast
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.getViewModel
+import org.test.common_model.LoadingScreen
 
 @Destination(
     style = ScreensAnim::class

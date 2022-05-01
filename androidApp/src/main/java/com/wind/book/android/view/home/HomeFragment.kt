@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.common_ui_view.extension.launchAndRepeatCollectInResume
 import com.example.common_ui_view.extension.safeNavigate
-import com.example.common_ui_view.util.openArtist
 import com.example.common_ui_view.util.viewBinding
 import com.wind.book.android.R
 import com.wind.book.android.databinding.HomeBinding
+import com.wind.book.android.util.openArtist
 
 class HomeFragment : Fragment(R.layout.home) {
     private val binding by viewBinding(HomeBinding::bind)

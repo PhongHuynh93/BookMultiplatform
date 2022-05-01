@@ -39,10 +39,10 @@ import com.wind.book.sharedUI.tinySpace
 import com.wind.book.sharedUI.util.tryCast
 import com.wind.book.sharedUI.view.CocaTopAppBar
 import com.wind.book.sharedUI.view.LoadingItem
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.LoadingState
 import com.wind.book.viewmodel.music.artist.ArtistViewModel
 import org.koin.core.component.KoinComponent
+import org.test.common_model.LoadingScreen
 
 data class ArtistScreen(
     private val genre: Genre,

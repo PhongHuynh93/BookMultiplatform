@@ -1,13 +1,13 @@
 package com.example.common_ui_view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.common_ui_view.R
 import com.example.common_ui_view.databinding.LoadMoreItemBinding
-import com.wind.book.log
-import com.wind.book.viewmodel.LoadingScreen
+import org.test.common_model.LoadingScreen
 
 private val TAG = LoadingAdapter::class.simpleName
 
@@ -22,7 +22,7 @@ class LoadingAdapter(private val callback: Callback) :
      */
     var loadState: LoadingScreen? = null
         set(loadState) {
-            log.v { "$TAG screen=$loadState field=$field" }
+            Log.e(TAG, "screen=$loadState field=$field")
             if (field != loadState) {
                 val displayOldItem = displayLoadStateAsItem(field)
                 val displayNewItem = displayLoadStateAsItem(loadState)

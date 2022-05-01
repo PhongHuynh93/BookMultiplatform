@@ -27,6 +27,10 @@ kotlin {
         homepage = "https://github.com/PhongHuynh93/BookMultiplatform"
         ios.deploymentTarget = "14.1"
         podfile = project.file("../iosApp/Podfile")
+        framework {
+            isStatic = false
+            export(projects.commonModel)
+        }
     }
 
     sourceSets {
@@ -43,6 +47,7 @@ kotlin {
                 implementation(Deps.Ktor.commonJson)
                 implementation(Deps.Ktor.commonLogging)
                 implementation(Deps.Ktor.negotiation)
+                api(projects.commonModel)
 
                 // Coroutines
                 implementation(Deps.Coroutines.common)

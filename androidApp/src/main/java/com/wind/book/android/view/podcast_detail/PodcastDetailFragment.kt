@@ -19,11 +19,11 @@ import com.example.common_ui_view.util.viewBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.wind.book.model.Episode
 import com.wind.book.model.Podcast
-import com.wind.book.viewmodel.LoadingScreen
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailEffect
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailEvent
 import com.wind.book.viewmodel.podcast_detail.PodcastDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.test.common_model.LoadingScreen
 
 class PodcastDetailFragment : Fragment(com.example.common_ui_view.R.layout.toolbar_list_view) {
     private val binding by viewBinding(ToolbarListViewBinding::bind)
