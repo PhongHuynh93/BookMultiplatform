@@ -16,5 +16,8 @@
   -->
 
 <resources>
-    <style name="Platform.Theme.Tivi" parent="android:Theme.Material" />
+    <style name="Theme.Tivi.Immerse" parent="Theme.Tivi.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
 </resources>

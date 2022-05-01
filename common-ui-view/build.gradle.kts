@@ -36,7 +36,8 @@ android {
 
 dependencies {
     implementation(libs.bundles.androidX)
-    implementation(projects.shared)
+    api(projects.commonUiResources)
+    api(projects.commonModel)
 
     // Image load
     implementation(Deps.ImageLoader.core)
