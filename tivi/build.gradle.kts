@@ -36,10 +36,8 @@ android {
     kotlinOptions {
         freeCompilerArgs = listOf(
             *freeCompilerArgs.toTypedArray(),
-            "-opt-in=kotlin.RequiresOptIn",
             "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-opt-in=kotlinx.coroutines.FlowPreview",
-            "-opt-in=kotlin.Experimental",
             "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
             "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
             "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
@@ -57,6 +55,7 @@ dependencies {
     implementation(projects.baseAndroid)
     implementation(projects.tmdb)
     implementation(projects.commonUiView)
+    implementation(projects.commonUiCompose)
 
     // Compose UI
     implementation(compose.runtime)
@@ -64,7 +63,7 @@ dependencies {
     implementation(compose.material)
     implementation(compose.ui)
     implementation(compose.uiTooling)
-    implementation(compose.uiTooling)
+
     // DI
     implementation(libs.koin.core)
     // Coroutines
