@@ -24,6 +24,7 @@ accompanist = "0.23.1"
 ktor = "2.0.0-beta-1"
 material-icon = "1.1.0"
 threetenbp = "1.6.0"
+kotlinxDateTime = "0.3.2"
 
 [libraries]
 androidX-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "supportLibrary" }
@@ -41,16 +42,16 @@ androidX-lifeCycleCommon = { module = "androidx.lifecycle:lifecycle-common-java8
 androidX-navFragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "nav" }
 androidX-navUI = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "nav" }
 
-navPlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "nav"}
-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin"}
+navPlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "nav" }
+gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 serializationPlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 plugin-multiplatform-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "plugin-multiplatform-compose" }
 
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
-koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin"}
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-transition = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
@@ -86,6 +87,10 @@ test-compose-ui-manifest = { module = "androidx.compose.ui:ui-test-manifest", ve
 
 tmdbJava = "com.uwetrottmann.tmdb2:tmdb-java:2.7.0"
 
+threeTenAbp = "com.jakewharton.threetenabp:threetenabp:1.3.1"
+
+kotlinxDateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDateTime" }
+
 [bundles]
 androidX = [
     "androidX-appCompat",
@@ -109,6 +114,6 @@ koin = [
     "koin-test",
     "koin-compose",
 ]
-plugins = ["gradlePlugin", "kotlinPlugin",  "navPlugin", "plugin-multiplatform-compose", "serializationPlugin"]
+plugins = ["gradlePlugin", "kotlinPlugin", "navPlugin", "plugin-multiplatform-compose", "serializationPlugin"]
 
 testCompose = ["test-compose-ui", "test-compose-ui-junit", "test-compose-ui-manifest"]

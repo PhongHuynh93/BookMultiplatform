@@ -6,6 +6,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import com.example.common_ui_view.injection.commonUIModule
 import com.wind.book.AppInfo
 import com.wind.book.initKoin
 import com.wind.book.util.AppContext
@@ -13,6 +14,8 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import org.test.base.settings.TiviPreferences
 import org.test.base.util.PowerController
+import org.test.base_android.injection.baseAndroidModule
+import org.test.tivi.inject.dateModule
 import org.test.tivi.util.AndroidPowerController
 import org.test.tivi_ui_settings.TiviPreferencesImpl
 
@@ -21,6 +24,9 @@ class TiviApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initKoin(
+            dateModule,
+            commonUIModule,
+            baseAndroidModule,
             module {
                 single<AppContext> { this@TiviApplication }
                 single<Context> { this@TiviApplication }
@@ -32,7 +38,7 @@ class TiviApplication : Application() {
                     )
                 }
                 single<TiviPreferences> { TiviPreferencesImpl(get(), get(named("app"))) }
-            },
+            }
         )
     }
 }

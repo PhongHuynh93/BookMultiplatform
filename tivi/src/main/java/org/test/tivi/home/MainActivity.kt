@@ -11,9 +11,14 @@ import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import androidx.savedstate.ViewTreeSavedStateRegistryOwner
 import com.example.common_ui_view.BaseActivity
+import org.koin.android.ext.android.inject
+import org.shared.common_ui_compose.LocalTiviDateFormatter
+import org.shared.common_ui_compose.LocalTiviTextCreator
 import org.shared.common_ui_compose.theme.TiviTheme
+import org.test.base_android.util.TiviDateFormatter
 
 class MainActivity : BaseActivity() {
+    internal val tiviDateFormatter: TiviDateFormatter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

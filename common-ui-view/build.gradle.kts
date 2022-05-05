@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -38,7 +38,10 @@ dependencies {
     implementation(libs.bundles.androidX)
     api(projects.commonUiResources)
     api(projects.commonModel)
+    implementation(projects.baseAndroid)
+    implementation(projects.sharedTivi)
 
-    // Image load
     implementation(Deps.ImageLoader.core)
+    implementation(libs.kotlinxDateTime)
+    implementation(libs.koin.core)
 }

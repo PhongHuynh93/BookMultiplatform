@@ -48,6 +48,7 @@ android {
 
 dependencies {
     api(projects.commonUiView)
+    api(projects.baseAndroid)
 
     // Compose UI
     implementation(compose.runtime)

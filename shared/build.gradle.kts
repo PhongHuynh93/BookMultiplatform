@@ -58,7 +58,7 @@ kotlin {
                 // Injection
                 implementation(libs.koin.core)
                 // Date-time
-                implementation(Deps.kotlinxDateTime)
+                implementation(libs.kotlinxDateTime)
                 // uuid
                 implementation(Deps.uuid)
             }

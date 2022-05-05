@@ -37,10 +37,10 @@ lateinit var koin: Koin
 lateinit var log: Kermit
 lateinit var httpClient: HttpClient
 lateinit var observeConnectionState: ObserveConnectionState
-fun initKoin(appModule: Module): KoinApplication {
+fun initKoin(vararg appModule: Module): KoinApplication {
     val koinApplication = startKoin {
         modules(
-            appModule,
+            *appModule,
             platformModule,
             coreModule,
             domainModule,
