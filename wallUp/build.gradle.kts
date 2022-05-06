@@ -3,7 +3,6 @@ plugins {
     kotlin(Plugins.kotlinAndroid)
     id(Plugins.kotlinParcel)
     id("org.jetbrains.compose")
-    kotlin(Plugins.kapt)
     id("com.google.devtools.ksp") version "1.6.10-1.0.4"
 }
 

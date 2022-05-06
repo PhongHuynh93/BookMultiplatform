@@ -29,7 +29,7 @@ class GenreViewModelTest : BaseVMUnitTest() {
     fun `when click genre then nav to artist page`() = runTest(testDispatcher) {
         val vm = createVM()
         val job = launch {
-            vm.genreEffect.collectLatest {
+            vm.effect.collectLatest {
                 when (it) {
                     is GenreEffect.NavToArtist -> {
                         assertThat(it.genre).isEqualTo(FakeData.genre)

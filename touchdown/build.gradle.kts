@@ -3,7 +3,6 @@ plugins {
     kotlin(Plugins.kotlinAndroid)
     id(Plugins.kotlinParcel)
     id("org.jetbrains.compose")
-    kotlin(Plugins.kapt)
     id("kotlinx-serialization")
 }
 
@@ -54,7 +53,6 @@ dependencies {
     implementation(compose.material)
     implementation(compose.ui)
     implementation(compose.uiTooling)
-    implementation(compose.uiTooling)
     // DI
     implementation(libs.koin.core)
     // Coroutines
@@ -68,7 +66,6 @@ dependencies {
     implementation(libs.accompanist.insetsui)
     implementation(libs.accompanist.pager.pager)
     implementation(libs.accompanist.pager.indicators)
-    implementation(libs.androidX.material)
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     // DI

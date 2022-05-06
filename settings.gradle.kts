@@ -1,3 +1,6 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview("VERSION_CATALOGS")
+
 pluginManagement {
     repositories {
         google()
@@ -7,12 +10,14 @@ pluginManagement {
 }
 
 rootProject.name = "BookMultiplatform"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-enableFeaturePreview("VERSION_CATALOGS")
-include(":androidApp")
-include(":composeApp")
-include(":shared")
-include(":ui-music")
-include(":common-ui-view")
-include(":wallUp")
-include(":touchdown")
+
+// include(":androidApp")
+// include(":composeApp")
+// include(":shared")
+// include(":ui-music")
+// include(":common-ui-view")
+// include(":wallUp")
+// include(":touchdown")
+include(":tvManiacAndroidApp:app")
+include(":tvManiacAndroidApp:common:compose")
+include(":tvManiacAndroidApp:common:resources")
