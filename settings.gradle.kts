@@ -21,3 +21,6 @@ rootProject.name = "BookMultiplatform"
 include(":tvManiacAndroidApp:app")
 include(":tvManiacAndroidApp:common:compose")
 include(":tvManiacAndroidApp:common:resources")
+include(":tvManiacShared:domain:persistence")
+include(":tvManiacShared:core:ui")
+include(":tvManiacShared:core:util")

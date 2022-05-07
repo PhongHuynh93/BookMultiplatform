@@ -25,6 +25,9 @@ activity-compose = "1.4.0"
 work-runtime-ktx = "2.7.1"
 accompanist = "0.23.1"
 ktor = "2.0.0-beta-1"
+androidx-datastore = "1.0.0"
+kotlinx-datetime = "0.3.1"
+kermit = "0.3.0-m1"
 
 [libraries]
 androidX-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "supportLibrary" }
@@ -41,22 +44,25 @@ androidX-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", ve
 androidX-lifeCycleCommon = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifeCycleKtx" }
 androidX-navFragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "nav" }
 androidX-navUI = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "nav" }
+androidX-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
 
-navPlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "nav"}
-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin"}
+navPlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "nav" }
+gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 serializationPlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 plugin-multiplatform-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "plugin-multiplatform-compose" }
 
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
-koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin"}
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-transition = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
@@ -82,6 +88,8 @@ test-compose-ui = { module = "androidx.compose.ui:ui-test", version.ref = "plugi
 test-compose-ui-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "plugin-multiplatform-compose" }
 test-compose-ui-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "plugin-multiplatform-compose" }
 
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+
 [bundles]
 androidX = [
     "androidX-appCompat",
@@ -105,7 +113,7 @@ koin = [
     "koin-test",
     "koin-compose",
 ]
-plugins = ["gradlePlugin", "kotlinPlugin",  "plugin-multiplatform-compose"]
+plugins = ["gradlePlugin", "kotlinPlugin", "plugin-multiplatform-compose"]
 
 testCompose = ["test-compose-ui", "test-compose-ui-junit", "test-compose-ui-manifest"]
 
