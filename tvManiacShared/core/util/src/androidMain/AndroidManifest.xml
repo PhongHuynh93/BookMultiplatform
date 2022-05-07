@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="org.shared.util" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.shared.util">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>

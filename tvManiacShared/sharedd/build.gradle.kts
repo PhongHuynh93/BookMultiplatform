@@ -11,6 +11,10 @@ plugins {
     id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
 }
 
+android {
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+}
+
 version = libs.versions.shared.module.version.get()
 
 kotlin {
@@ -76,6 +80,7 @@ dependencies {
 
     commonMainImplementation(libs.koin.core)
     commonMainImplementation(libs.kotlinx.coroutines.core)
+    commonMainImplementation(libs.kermit)
 }
 
 multiplatformSwiftPackage {
