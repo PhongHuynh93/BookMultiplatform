@@ -2,11 +2,8 @@ plugins {
     `android-app-plugin`
 }
 
-android {
-    namespace = "org.shared.tvmaniac"
-}
-
 dependencies {
     implementation(projects.tvManiacAndroidApp.common.compose)
+    implementation(projects.tvManiacShared.domain.persistence)
     implementation(libs.compose.activity)
 }

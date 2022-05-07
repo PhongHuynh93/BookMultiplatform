@@ -6,7 +6,6 @@ plugins {
 
 android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    namespace = "org.shared.tvmaniac.tvManiacShared.core.util"
 }
 
 dependencies {

@@ -15,10 +15,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ProvideWindowInsets(consumeWindowInsets = false) {
-//                TvManiacTheme(darkTheme = themePreference.shouldUseDarkColors()) {
+                TvManiacTheme() {
 //                    SetupTheme()
 //                    HomeScreen(composeNavigationFactories)
-//                }
+                }
             }
 
 //            ConnectivityStatus(observeNetwork)

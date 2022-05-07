@@ -1,6 +1,8 @@
 [versions]
 plugin-multiplatform-compose = "1.1.0"
 
+shared-module-version = "0.4.0"
+
 android-compile = "31"
 android-target = "31"
 android-min = "23"
@@ -49,7 +51,7 @@ androidX-datastore = { module = "androidx.datastore:datastore-preferences", vers
 navPlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "nav" }
 gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-serializationPlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+#serializationPlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 plugin-multiplatform-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "plugin-multiplatform-compose" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }

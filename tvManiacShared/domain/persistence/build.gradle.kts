@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "org.shared.tvmaniac.tvManiacShared.domain.persistence"
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 }
 
 dependencies {
@@ -13,4 +13,5 @@ dependencies {
 
     commonMainImplementation(projects.tvManiacShared.core.ui)
     commonMainImplementation(libs.kotlinx.coroutines.core)
+    commonMainImplementation(libs.koin.core)
 }
