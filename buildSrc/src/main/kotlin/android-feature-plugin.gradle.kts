@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import gradle.kotlin.dsl.accessors._f4957b8d8477a91d10b51f0c4822df8b.kotlinOptions
 import org.gradle.api.JavaVersion
 import util.libs
 
@@ -48,4 +47,6 @@ tasks.withType<Test>().configureEach {
 
 dependencies {
     implementation(project(":tvManiacAndroidApp:common:resources"))
+    api(project(":tvManiacAndroidApp:common:navigation"))
+    implementation(libs.bundles.coroutinesAndroid)
 }

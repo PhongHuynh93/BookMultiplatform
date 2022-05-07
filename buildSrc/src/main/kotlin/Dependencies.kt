@@ -92,7 +92,6 @@ object Plugins {
     const val kotlinParcel = "kotlin-parcelize"
     const val kapt = "kapt"
     const val serialization = "kotlinx-serialization"
-    const val safeArgs = "androidx.navigation.safeargs.kotlin"
     const val googleService = "com.google.gms.google-services"
     const val crashlytics = "com.google.firebase.crashlytics"
 }

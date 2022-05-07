@@ -14,7 +14,7 @@ android {
     compileSdk = libs.versions.android.compile.get().toInt()
 
     defaultConfig {
-        applicationId = "com.thomaskioko.tvmaniac"
+        applicationId = "org.shared.tvmaniac"
         minSdk = libs.versions.android.min.get().toInt()
         targetSdk = libs.versions.android.target.get().toInt()
         versionCode = 1
@@ -26,7 +26,8 @@ android {
         variant.outputs
             .map { it as BaseVariantOutputImpl }
             .forEach { output ->
-                output.outputFileName = "app-${variant.baseName}-${variant.buildType.name}-${variant.versionName}.apk"
+                output.outputFileName =
+                    "app-${variant.baseName}-${variant.buildType.name}-${variant.versionName}.apk"
             }
     }
 
@@ -41,6 +42,10 @@ android {
 
     kotlinOptions {
         jvmTarget = "11"
+
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+        )
     }
 
     composeOptions {

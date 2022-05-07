@@ -12,7 +12,8 @@ lateinit var log: Kermit
 fun initKoin(vararg appModule: Module): KoinApplication {
     val koinApplication = startKoin {
         modules(
-            *appModule
+            *appModule,
+            platformModule
         )
     }
 
@@ -23,3 +24,5 @@ fun initKoin(vararg appModule: Module): KoinApplication {
 //    log.v { "App Id ${appInfo.appId}" }
     return koinApplication
 }
+
+expect val platformModule: Module

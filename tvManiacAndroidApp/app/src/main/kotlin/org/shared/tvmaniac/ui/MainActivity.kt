@@ -31,12 +31,12 @@ import org.shared.compose.components.ConnectionStatus
 import org.shared.compose.theme.DarkColors
 import org.shared.compose.theme.LightColors
 import org.shared.compose.theme.TvManiacTheme
+import org.shared.home.HomeScreen
 import org.shared.util.network.ConnectionState
 import org.shared.util.network.ObserveConnectionState
 
 class MainActivity : ComponentActivity() {
 
-    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
             ProvideWindowInsets(consumeWindowInsets = false) {
                 TvManiacTheme() {
                     SetupTheme()
-                    HomeScreen(composeNavigationFactories)
+                    HomeScreen()
                 }
             }
 
@@ -83,8 +83,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @ExperimentalAnimationApi
-    @ExperimentalCoroutinesApi
     @Composable
     fun ConnectivityStatus(observeNetwork: ObserveConnectionState) {
         val connection by connectivityState(observeNetwork)
@@ -111,7 +109,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@ExperimentalCoroutinesApi
 @Composable
 fun connectivityState(observeNetwork: ObserveConnectionState): State<ConnectionState> {
     return produceState(initialValue = observeNetwork.currentConnectivityState) {

@@ -1,5 +1,6 @@
 package org.shared.home
 
+import android.util.Log
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -13,110 +14,114 @@ import androidx.compose.material.icons.outlined.Movie
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.insets.navigationBarsPadding
-import org.shared.navigation.ComposeNavigationFactory
-import org.shared.navigation.NavigationScreen
-import org.shared.navigation.addNavigation
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.launch
 import org.shared.tvmaniac.resources.R
 
-@Composable
-fun HomeScreen(
-    composeNavigationFactories: Set<ComposeNavigationFactory>
-) {
+private const val TAB_DISCOVER = 0
+private const val TAB_SEARCH = 1
+private const val TAB_WATCH_LIST = 2
+private const val TAB_SETTING = 3
 
-    val navController = rememberNavController()
-    val route = currentRoute(navController)
+@Composable
+fun HomeScreen() {
+
+    val mapTab = mapOf<Int, @Composable () -> Unit>(
+        TAB_DISCOVER to { DiscoverScreen() },
+        TAB_SEARCH to { SearchScreen() },
+        TAB_WATCH_LIST to { FollowingContent() },
+        TAB_SETTING to { SettingsScreen() },
+    )
+
+    val pagerState = rememberPagerState()
+
+    val scope = rememberCoroutineScope()
 
     Scaffold(
         modifier = Modifier
             .navigationBarsPadding(),
         bottomBar = {
-            val currentSelectedItem by navController.currentScreenAsState()
-            when {
-                !route.contains(NavigationScreen.ShowDetailsNavScreen.route) &&
-                    !route.contains(NavigationScreen.ShowGridNavScreen.route) &&
-                    !route.contains(NavigationScreen.SeasonsNavScreen.route)
-                -> {
-                    TvManiacBottomNavigation(
-                        onNavigationSelected = { selected ->
-                            navController.navigate(selected.route) {
-                                launchSingleTop = true
-                                restoreState = true
-
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                            }
-                        },
-                        currentSelectedItem = currentSelectedItem
-                    )
-                }
-            }
+            TvManiacBottomNavigation(
+                onNavigationSelected = {
+                    scope.launch {
+                        pagerState.scrollToPage(page = it)
+                    }
+                },
+                currentSelectedItem = pagerState.currentPage
+            )
         }
     ) {
-        NavHost(
-            navController = navController,
-            startDestination = NavigationScreen.DiscoverNavScreen.route
-        ) {
-            composeNavigationFactories.addNavigation(this, navController)
+        HorizontalPager(count = mapTab.size, state = pagerState) { page ->
+            // Our page content
+            mapTab[page]!!.invoke()
         }
     }
 }
 
 @Composable
+fun DiscoverScreen() {
+    Text(text = "Discover")
+}
+
+@Composable
+fun SearchScreen() {
+    Text(text = "Search")
+}
+
+@Composable
+fun FollowingContent() {
+    Text(text = "Following")
+}
+
+@Composable
+fun SettingsScreen() {
+    Text(text = "Setting")
+}
+
+@Composable
 private fun TvManiacBottomNavigation(
-    onNavigationSelected: (NavigationScreen) -> Unit,
-    currentSelectedItem: NavigationScreen
+    onNavigationSelected: (Int) -> Unit,
+    currentSelectedItem: Int
 ) {
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.primary
     ) {
 
         TvManiacBottomNavigationItem(
-            screen = NavigationScreen.DiscoverNavScreen,
+            screen = TAB_DISCOVER,
             imageVector = Icons.Outlined.Movie,
             title = stringResource(id = R.string.menu_item_discover),
-            selected = currentSelectedItem == NavigationScreen.DiscoverNavScreen,
+            selected = currentSelectedItem == TAB_DISCOVER,
             onNavigationSelected = onNavigationSelected
         )
 
         TvManiacBottomNavigationItem(
-            screen = NavigationScreen.SearchNavScreen,
+            screen = TAB_SEARCH,
             imageVector = Icons.Outlined.Search,
             title = stringResource(id = R.string.menu_item_search),
-            selected = currentSelectedItem == NavigationScreen.SearchNavScreen,
+            selected = currentSelectedItem == TAB_SEARCH,
             onNavigationSelected = onNavigationSelected
         )
 
         TvManiacBottomNavigationItem(
-            screen = NavigationScreen.WatchlistNavScreen,
+            screen = TAB_WATCH_LIST,
             imageVector = Icons.Outlined.Star,
             title = stringResource(id = R.string.menu_item_follow),
-            selected = currentSelectedItem == NavigationScreen.WatchlistNavScreen,
+            selected = currentSelectedItem == TAB_WATCH_LIST,
             onNavigationSelected = onNavigationSelected
         )
 
         TvManiacBottomNavigationItem(
-            screen = NavigationScreen.SettingsScreen,
+            screen = TAB_SETTING,
             imageVector = Icons.Outlined.MoreVert,
             title = stringResource(id = R.string.menu_item_more),
-            selected = currentSelectedItem == NavigationScreen.SettingsScreen,
+            selected = currentSelectedItem == TAB_SETTING,
             onNavigationSelected = onNavigationSelected
         )
     }
@@ -124,11 +129,11 @@ private fun TvManiacBottomNavigation(
 
 @Composable
 fun RowScope.TvManiacBottomNavigationItem(
-    screen: NavigationScreen,
+    screen: Int,
     imageVector: ImageVector,
     title: String,
     selected: Boolean,
-    onNavigationSelected: (NavigationScreen) -> Unit
+    onNavigationSelected: (Int) -> Unit
 ) {
     BottomNavigationItem(
         icon = {
@@ -144,47 +149,4 @@ fun RowScope.TvManiacBottomNavigationItem(
         unselectedContentColor = MaterialTheme.colors.onSurface,
         onClick = { onNavigationSelected(screen) }
     )
-}
-
-@Composable
-private fun currentRoute(navController: NavHostController): String {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    return navBackStackEntry?.destination?.route ?: NavigationScreen.DiscoverNavScreen.route
-}
-
-/**
- * Adds an [NavController.OnDestinationChangedListener] to this [NavController] and updates the
- * returned [State] which is updated as the destination changes.
- */
-@Stable
-@Composable
-private fun NavController.currentScreenAsState(): State<NavigationScreen> {
-    val selectedItem =
-        remember { mutableStateOf<NavigationScreen>(NavigationScreen.DiscoverNavScreen) }
-
-    DisposableEffect(this) {
-        val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
-            when {
-                destination.hierarchy.any { it.route == NavigationScreen.DiscoverNavScreen.route } -> {
-                    selectedItem.value = NavigationScreen.DiscoverNavScreen
-                }
-                destination.hierarchy.any { it.route == NavigationScreen.SearchNavScreen.route } -> {
-                    selectedItem.value = NavigationScreen.SearchNavScreen
-                }
-                destination.hierarchy.any { it.route == NavigationScreen.WatchlistNavScreen.route } -> {
-                    selectedItem.value = NavigationScreen.WatchlistNavScreen
-                }
-                destination.hierarchy.any { it.route == NavigationScreen.SettingsScreen.route } -> {
-                    selectedItem.value = NavigationScreen.SettingsScreen
-                }
-            }
-        }
-        addOnDestinationChangedListener(listener)
-
-        onDispose {
-            removeOnDestinationChangedListener(listener)
-        }
-    }
-
-    return selectedItem
 }

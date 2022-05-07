@@ -27,6 +27,10 @@ android {
 
     kotlinOptions {
         jvmTarget = "11"
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi",
+            "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
+        )
     }
 
     composeOptions {
