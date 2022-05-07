@@ -7,21 +7,29 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.core.view.WindowCompat
 import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.androidx.compose.get
 import org.shared.compose.components.ConnectionStatus
+import org.shared.compose.theme.DarkColors
+import org.shared.compose.theme.LightColors
 import org.shared.compose.theme.TvManiacTheme
 import org.shared.util.network.ConnectionState
 import org.shared.util.network.ObserveConnectionState
@@ -36,12 +44,42 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProvideWindowInsets(consumeWindowInsets = false) {
                 TvManiacTheme() {
-//                    SetupTheme()
+                    SetupTheme()
 //                    HomeScreen(composeNavigationFactories)
                 }
             }
 
             ConnectivityStatus(get())
+        }
+    }
+
+    @Composable
+    private fun SetupTheme() {
+        val systemUiController = rememberSystemUiController()
+        val isLightTheme = !isSystemInDarkTheme()
+
+        val systemBarColor = MaterialTheme.colors.surface.copy(alpha = 0.0f)
+        val transparentColor: (Color) -> Color = { original ->
+            systemBarColor.compositeOver(original)
+        }
+        SideEffect {
+            systemUiController.setSystemBarsColor(
+                color = Color.Transparent,
+                darkIcons = isLightTheme
+            )
+
+            systemUiController.setStatusBarColor(
+                color = Color.Transparent,
+                darkIcons = isLightTheme,
+                transformColorForLightContent = transparentColor
+            )
+
+            systemUiController.setNavigationBarColor(
+                color = if (isLightTheme) LightColors.surface else DarkColors.primary,
+                darkIcons = isLightTheme,
+                navigationBarContrastEnforced = false,
+                transformColorForLightContent = transparentColor
+            )
         }
     }
 
